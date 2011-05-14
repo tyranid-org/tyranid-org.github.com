@@ -5,7 +5,11 @@
  <link href='http://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
  <style>
  body { font-family: 'Metrophobic', arial, serif; }
- h1 { font-family: 'Megrim', arial, serif; }
+ h1 {
+  font-size:36px;
+  font-family: 'Megrim', arial, serif;
+  text-shadow: 2px 2px #bbb;
+ }
  pre { font-family: 'Lekton', courier, serif; }
  .content {
    border:1px solid #000;
@@ -13,13 +17,18 @@
    background:#eee;
    margin:0 auto;
    width:1024px;
+   -webkit-box-shadow:2px 2px 2px #aaa;
+ }
+ .foo {
+  font-family: 'Megrim', arial, serif;
+  font-size:10px;
  }
  </style>
 </head>
 <body>
  <div class="content">
   <h1>Tyranid</h1>
-  <p>Tyranid is a free, open-source framework designed to help process and collect information using strong run-time typing using the Scala language.</p>
+  <p><b>Tyranid</b> is a free, open-source framework designed to help process and collect information using strong run-time typing using the Scala language.</p>
 
   <p>The library is currently in its early stages and the API will likely change frequently until version 1.0 is reached.</p>
 
