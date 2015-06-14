@@ -52,6 +52,18 @@
    <pre>
 var Tyr = require('tyranid');
 
+<i>// You can define your own types.  Types can specify code to serialize to/from the browser, validation code, and so on</i>
+new Type({
+  name: 'ssn',
+  notes: 'Defines a U.S. Social Security Number',
+  <i>// SSNs will not be sent down to the browser by default for security reasons.</i>
+  client: false,
+  validate: function(value) {
+    return !!value.match(/^\d{3}-\d{2}-\d{4}$/);
+  }
+});
+
+<i>// Metadata describing nested structures can be either placed inline or defined separately and reused.</i>
 var RoleEntry = {
   type: 'object',
   fields: {
@@ -66,17 +78,23 @@ var User = new Tyr.Collection({
   name: 'user',
   dbName: 'users', // defaults to value for "name"
   fields: {
+    <i>// Types like "email", "mongoid", "password", etc. are built in to Tyranid but can be overridden.</i>
     _id:        { type: 'mongoid' },
     email:      { type: 'email' },
     password:   { type: 'password' },
     firstName:  { type: 'string' },
     lastName:   { type: 'string' },
     canLogIn:   { type: 'boolean' },
+    ssn:        { type: 'ssn' },
     <i>// "org" links to another collection "organization".  The datatype of "org" will be set to the data type
     // of the _id field in "organization".</i>
     org:        { link: 'organization' },
     inactive:   { type: 'boolean' },
-    comments:   { type: 'string' },
+    comments:   { type: 'string',
+                  <i>// <b>help</b> contains user-facing documentation that could be used in, for example, a tool tip.</i>
+                  help: 'Place any public comments you would like to make here.',
+                  <i>// <b>notes</b> contains internal, developer documentation.</i>
+                  notes: 'Used for various notes that the user sets themselves.' },
     roles:      { type: 'array', of: RoleEntry }
   }
 });
@@ -94,9 +112,20 @@ user.$save();
 <i>// returns "u00AF8...123" if _id is "AF8...123"</i>
 user.$uid()
 
-<i>// <b>collection</b>.db is an instance of a <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a> collection</i>
+<i>// <b>collection</b>.db is an instance of a <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a> collection for when it is easier to just work directly with mongo.</i>
 User.db.find({ ... }).then(function(users) {
 });
+
+<i>// Returns a <b>User</b> instance while also performing security checks, converting the _id to a MongoId, validating data,
+// and so on.</i>
+User.fromClient({ _id: 'AF8...123', firstName: 'Jack', ... })
+
+<i>// Returns a "Plain Old JavaScript Object" (POJO)/JSON object that is suitable for sending down to client while also
+// performing security checks.</i>
+res.json(user.toClient())
+
+<i>// Translates an existing object to the client when the object is not an instance of <b>User</b> (i.e. came directly from Mongo).</i>
+res.json(User.toClient(obj))
    </pre>
 
    <h2>License</h2>
