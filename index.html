@@ -15,6 +15,7 @@
   font-family: 'Megrim', arial, serif;
  }
  pre { font-family: 'Lekton', courier, serif; }
+ pre i { color: #888; }
  .content {
    border:1px solid #000;
    padding:0 24px;
@@ -28,7 +29,7 @@
  <body>
   <div class="content">
    <h1>Tyranid</h1>
-   <p><b>Tyranid</b> is a free, open-source ODM for MongoDB with a strong emphasis on metadata.</p>
+   <p><b>Tyranid</b> is a free, open-source, promise-based ODM for MongoDB with a strong emphasis on metadata.</p>
 
    <h2>Status</h2>
 
@@ -43,6 +44,60 @@
    <p>NPM:</p>
 
    <pre>npm install tyranid</pre>
+
+   <h2>API</h2>
+
+   <h3>Example</h3>
+
+   <pre>
+var Tyr = require('tyranid');
+
+var RoleEntry = {
+  type: 'object',
+  fields: {
+    network: { link: 'network' },
+    role:    { link: 'role' }
+  }
+};
+
+var User = new Tyr.Collection({
+  <i>// Collections also have an id which is used to construct <b>universal ids</b> and other metadata purposes.</i>
+  id: 'u00',                             
+  name: 'user',
+  dbName: 'users', // defaults to value for "name"
+  fields: {
+    _id:        { type: 'mongoid' },
+    email:      { type: 'email' },
+    password:   { type: 'password' },
+    firstName:  { type: 'string' },
+    lastName:   { type: 'string' },
+    canLogIn:   { type: 'boolean' },
+    <i>// "org" links to another collection "organization".  The datatype of "org" will be set to the data type
+    // of the _id field in "organization".</i>
+    org:        { link: 'organization' },
+    inactive:   { type: 'boolean' },
+    comments:   { type: 'string' },
+    roles:      { type: 'array', of: RoleEntry }
+  }
+});
+
+User.myStaticMethod = function() { ... };
+
+User.prototype.fullName = function {
+  return this.firstName + ' ' + this.lastName;
+};
+
+var user = new User();
+user.firstName = 'David';
+user.$save();
+
+<i>// returns "u00AF8...123" if _id is "AF8...123"</i>
+user.$uid()
+
+<i>// <b>collection</b>.db is an instance of a <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a> collection</i>
+User.db.find({ ... }).then(function(users) {
+});
+   </pre>
 
    <h2>License</h2>
 
