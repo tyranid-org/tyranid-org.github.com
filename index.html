@@ -28,8 +28,8 @@
  </head>
  <body>
   <div class="content">
-   <h1>Tyranid</h1>
-   <p><b>Tyranid</b> is a free, open-source, promise-based ODM for MongoDB with a strong emphasis on metadata.</p>
+   <h1>Tyranid.js</h1>
+   <p><b>Tyranid</b> is a free, open-source, promise-based ODM for MongoDB and JavaScript with a strong emphasis on metadata.</p>
 
    <h2>Status</h2>
 
@@ -81,13 +81,15 @@ var User = new Tyr.Collection({
     <i>// Types like "email", "mongoid", "password", etc. are built in to Tyranid but can be overridden.</i>
     _id:        { type: 'mongoid' },
     email:      { type: 'email' },
-    password:   { type: 'password' },
+    <i>// Shorthand:  "'password'" is equivalent to "{ type: 'password' }"
+    password:   'password',
     firstName:  { type: 'string' },
     lastName:   { type: 'string' },
     canLogIn:   { type: 'boolean' },
     ssn:        { type: 'ssn' },
-    <i>// "org" links to another collection "organization".  The datatype of "org" will be set to the data type
-    // of the _id field in "organization".</i>
+    <i>// "org" links to another collection "organization".  <b>type</b> does not need to be specified -- Tyranid will infer
+    // it based on the data type of the _id field in "organization".  Tyranid will also validate the schema and ensure that
+    // it knows what "organization" is and update the reference with the Organization instance.</i>
     org:        { link: 'organization' },
     inactive:   { type: 'boolean' },
     comments:   { type: 'string',
@@ -116,6 +118,10 @@ user.$uid()
 User.db.find({ ... }).then(function(users) {
 });
 
+<i>// Similar to the previous line except that users are wrapped as User objects.</i>
+User.find({ ... }).then(function(users) {
+});
+
 <i>// Returns a <b>User</b> instance while also performing security checks, converting the _id to a MongoId, validating data,
 // and so on.</i>
 User.fromClient({ _id: 'AF8...123', firstName: 'Jack', ... })
@@ -126,6 +132,29 @@ res.json(user.toClient())
 
 <i>// Translates an existing object to the client when the object is not an instance of <b>User</b> (i.e. came directly from Mongo).</i>
 res.json(User.toClient(obj))
+
+<i>// Tyranid supports creating static collections as well.  This is good for modeling enumerations and linking to them.</i>
+var Continent = new tyr.Collection({
+  name: 'continent',
+  dbName: 'continents',
+  fields: {
+    _id:        { type: 'integer' },
+    name:       { type: 'string' },
+    code:       { type: 'string' },
+    pcmName:    { type: 'string' }
+  },
+  values: [
+    [ '_id', 'name',       'code', 'pcmName' ],
+
+    [ 4328, 'Africa',        'AF', 'Africa'  ],
+    [ 4329, 'Antartica',     'AN', null      ],
+    [ 4330, 'Asia',          'AS', 'Europe'  ],
+    [ 4331, 'Europe',        'EU', 'Europe'  ],
+    [ 4332, 'North America', 'NA', 'NA'      ],
+    [ 4333, 'Oceania',       'OC', 'Oceania' ],
+    [ 4334, 'South America', 'SA', 'SA'      ]
+  ]
+});
    </pre>
 
    <h2>License</h2>
