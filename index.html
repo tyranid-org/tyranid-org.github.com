@@ -109,9 +109,12 @@ User.prototype.fullName = function {
 
 var user = new User();
 user.firstName = 'David';
+
+<i>// Built-in document methods start with $ to avoid collisions with actual document property names.</i>
 user.$save();
 
-<i>// returns "u00AF8...123" if _id is "AF8...123"</i>
+<i>// returns "u00AF8...123" if _id is "AF8...123".  Universal IDs are a way of polymorphically working with data.
+// For example, if you need to have an array of IDs from multiple collections UIDs will let you do this.</i>
 user.$uid()
 
 <i>// <b>collection</b>.db is an instance of a <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a> collection for when it is easier to just work directly with mongo.</i>
@@ -133,7 +136,8 @@ res.json(user.toClient())
 <i>// Translates an existing object to the client when the object is not an instance of <b>User</b> (i.e. came directly from Mongo).</i>
 res.json(User.toClient(obj))
 
-<i>// Tyranid supports efficiently modeling static data as well.  This is good for modeling enumerations and linking to them.</i>
+<i>// Tyranid supports efficiently modeling static data as well.  This is good for modeling enumerations and linking to them.
+//It also allows you to work with static and non-static data in an isomorphic way.</i>
 var Continent = new Tyr.Collection({
   name: 'continent',
   dbName: 'continents',
