@@ -14,8 +14,12 @@
   font-size:24px;
   font-family: 'Megrim', arial, serif;
  }
- pre { font-family: 'Lekton', courier, serif; }
+ pre {
+   font-family: 'Lekton', courier, serif;
+   color: #000;
+ }
  pre i { color: #888; }
+ pre b { color: #444; }
  .content {
    border:1px solid #000;
    padding:0 24px;
@@ -45,15 +49,22 @@
 
    <pre>npm install tyranid</pre>
 
-   <h2>API</h2>
+   <h2>Guide</h2>
 
    <h3>Example</h3>
 
    <pre>
-var Tyr = require('tyranid');
+var pmongo = require('promised-mongo'),
+    Tyr    = require('tyranid');
 
-<i>// You can define your own types.  Types can specify code to serialize to/from the browser, validation code, and so on</i>
-new Type({
+
+<i>// Initialize Tyranid with a <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a> instance.</i>
+Tyr.config({
+  db: pmongo(myDatabaseUrl)
+});
+
+<i>// You can define your own types.  Types can specify code to serialize to/from the browser, validation code, and so on.</i>
+new Tyr.Type({
   name: 'ssn',
   notes: 'Defines a U.S. Social Security Number',
   <i>// SSNs will not be sent down to the browser by default for security reasons.</i>
@@ -65,7 +76,7 @@ new Type({
 
 <i>// Metadata describing nested structures can be either placed inline or defined separately and reused.</i>
 var RoleEntry = {
-  type: 'object',
+  is: 'object',
   fields: {
     network: { link: 'network' },
     role:    { link: 'role' }
@@ -76,28 +87,28 @@ var User = new Tyr.Collection({
   <i>// Collections also have an id which is used to construct <b>universal ids</b> and other metadata purposes.</i>
   id: 'u00',                             
   name: 'user',
-  dbName: 'users', // defaults to value for "name"
+  dbName: 'users', <i>// defaults to value for "name"</i>
   fields: {
     <i>// Types like "email", "mongoid", "password", etc. are built in to Tyranid but can be overridden.</i>
-    _id:        { type: 'mongoid' },
-    email:      { type: 'email' },
-    <i>// Shorthand:  "'password'" is equivalent to "{ type: 'password' }"</i>
+    _id:        { is: 'mongoid' },
+    email:      { is: 'email' },
+    <i>// Shorthand:  "'password'" is equivalent to "{ is: 'password' }"</i>
     password:   'password',
-    firstName:  { type: 'string' },
-    lastName:   { type: 'string' },
-    canLogIn:   { type: 'boolean' },
-    ssn:        { type: 'ssn' },
-    <i>// "org" links to another collection "organization".  <b>type</b> does not need to be specified -- Tyranid will infer
+    firstName:  { is: 'string' },
+    lastName:   { is: 'string' },
+    canLogIn:   { is: 'boolean' },
+    ssn:        { is: 'ssn' },
+    <i>// "org" links to another collection "organization".  <b>is</b> does not need to be specified -- Tyranid will infer
     // it based on the data type of the _id field in "organization".  Tyranid will also validate the schema and ensure that
     // it knows what "organization" is and update the reference with the Organization instance.</i>
     org:        { link: 'organization' },
-    inactive:   { type: 'boolean' },
-    comments:   { type: 'string',
+    inactive:   { is: 'boolean' },
+    comments:   { is: 'string',
                   <i>// <b>help</b> contains user-facing documentation that could be used in, for example, a tool tip.</i>
                   help: 'Place any public comments you would like to make here.',
                   <i>// <b>notes</b> contains internal, developer documentation.</i>
                   notes: 'Used for various notes that the user sets themselves.' },
-    roles:      { type: 'array', of: RoleEntry }
+    roles:      { is: 'array', of: RoleEntry }
   }
 });
 
@@ -137,15 +148,15 @@ res.json(user.toClient())
 res.json(User.toClient(obj))
 
 <i>// Tyranid supports efficiently modeling static data as well.  This is good for modeling enumerations and linking to them.
-//It also allows you to work with static and non-static data in an isomorphic way.</i>
+// It also allows you to work with static and non-static data in an isomorphic way.</i>
 var Continent = new Tyr.Collection({
   name: 'continent',
   dbName: 'continents',
   fields: {
-    _id:        { type: 'integer' },
-    name:       { type: 'string' },
-    code:       { type: 'string' },
-    pcmName:    { type: 'string' }
+    _id:        { is: 'integer' },
+    name:       { is: 'string' },
+    code:       { is: 'string' },
+    pcmName:    { is: 'string' }
   },
   values: [
     [ '_id', 'name',       'code', 'pcmName' ],
