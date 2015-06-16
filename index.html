@@ -151,6 +151,7 @@ res.json(User.toClient(obj))
 <i>// Tyranid supports efficiently modeling static data as well.  This is good for modeling enumerations and linking to them.
 // It also allows you to work with static and non-static data in an isomorphic way.</i>
 var Continent = new Tyr.Collection({
+  id: 'c0a',
   name: 'continent',
   dbName: 'continents',
   <i>// This causes enumeration constants to be defined on the collection for each of the enumerated values.</i>
@@ -177,13 +178,13 @@ var Continent = new Tyr.Collection({
 
 Continent.prototype.isContinent = function() {
   return true;
-}
+};
 
 <i>// This evaluates to true since the <b>enum</b> flag was turned on.</i>
-Continent.NORTH_AMERICA._id === 4332;
+Continent.NORTH_AMERICA._id === 4332
 
 <i>// The static data instances are also instances of the collection so methods and behaviors are available.</i>
-Continent.NORTH_AMERICA.isContinent();
+Continent.NORTH_AMERICA.isContinent()
    </pre>
 
    <h2>License</h2>
