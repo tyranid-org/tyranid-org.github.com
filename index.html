@@ -97,6 +97,7 @@ var User = new Tyr.Collection({
     firstName:  { is: 'string' },
     lastName:   { is: 'string' },
     canLogIn:   { is: 'boolean' },
+    birthDate:  { is: 'date' },
     ssn:        { is: 'ssn' },
     <i>// "org" links to another collection "organization".  <b>is</b> does not need to be specified -- Tyranid will infer
     // it based on the data type of the _id field in "organization".  Tyranid will also validate the schema and ensure that
@@ -152,9 +153,12 @@ res.json(User.toClient(obj))
 var Continent = new Tyr.Collection({
   name: 'continent',
   dbName: 'continents',
+  <i>// This causes enumeration constants to be defined on the collection for each of the enumerated values.</i>
+  enum: true,
   fields: {
     _id:        { is: 'integer' },
-    name:       { is: 'string' },
+    <i>// <b>label</b> indicates that this field is the label value for this collection.</i>
+    name:       { is: 'string', label: true },
     code:       { is: 'string' },
     pcmName:    { is: 'string' }
   },
@@ -170,6 +174,16 @@ var Continent = new Tyr.Collection({
     [ 4334, 'South America', 'SA', 'SA'      ]
   ]
 });
+
+Continent.prototype.isContinent = function() {
+  return true;
+}
+
+<i>// This evaluates to true since the <b>enum</b> flag was turned on.</i>
+Continent.NORTH_AMERICA._id === 4332;
+
+<i>// The static data instances are also instances of the collection so methods and behaviors are available.</i>
+Continent.NORTH_AMERICA.isContinent();
    </pre>
 
    <h2>License</h2>
