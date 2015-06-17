@@ -224,7 +224,7 @@ User.fromClient({ _id: 'AF8...123', firstName: 'Jack', ... })
 
 <i>// Returns a "Plain Old JavaScript Object" (POJO)/JSON object that is suitable for sending down to client while also
 // performing security checks.</i>
-res.json(user.toClient())
+res.json(user.$toClient())
 
 <i>// Translates an existing object to the client when the object is not an instance of <b>User</b> (i.e. came directly from Mongo).</i>
 res.json(User.toClient(obj))
