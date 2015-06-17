@@ -197,6 +197,10 @@ User.populate({ fields: 'org' }, users).then(function(users) {
 // that can be inserted into a find promise chain.</i>
 User.find({ ... }).then(User.populate('org'));
 
+<i>// Tyranid can also populate a single object from the instance</i>
+user.$populate({ fields : 'org' });
+
+
     <h3>Universal IDs (UIDs)</h3>
 
 <i>// Universal IDs are a way of polymorphically working with data.  For example, if you need to have an array of IDs
