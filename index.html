@@ -13,6 +13,16 @@
  h2 {
   font-size:24px;
   font-family: 'Megrim', arial, serif;
+  text-shadow: 2px 2px #bbb;
+  border-left: 5px solid #f70;
+  padding-left: 8px;
+ }
+ h3 {
+  font-size:20px;
+  font-family: 'Megrim', arial, serif;
+  color: #f70;//#6666aa;
+  //text-shadow: 2px 2px #bbb;
+  margin: 0;
  }
  pre {
    font-family: 'Lekton', courier, serif;
@@ -33,7 +43,8 @@
  <body>
   <div class="content">
    <h1>Tyranid.js</h1>
-   <p><b>Tyranid</b> is a free, open-source, promise-based ODM for MongoDB and JavaScript with a <b>strong emphasis on metadata</b>.</p>
+   <p><b>Tyranid</b> is a JavaScript-based, free, open-source, promise-based <b>metadata</b> library for generically working with data.</p>
+   <p>Tyranid currently works primarily with MongoDB and can act as an ODM for MongoDB.</p>
 
    <h2>Status</h2>
 
@@ -51,7 +62,7 @@
 
    <h2>Guide</h2>
 
-   <h3>Example</h3>
+   <h3>Setup</h3>
 
    <pre>
 var pmongo = require('promised-mongo'),
@@ -63,6 +74,15 @@ Tyr.config({
   db: pmongo(myDatabaseUrl)
 });
 
+... import/require all types and schemas ...
+
+<i>// Once all the types and schemas have been processed, invoke <b>Tyr.validate()</b> to have Tyranid link and validate
+// all the references between the types and schemas.</i>
+tyr.validate();
+
+
+   <h3>Types</h3>
+
 <i>// You can define your own types.  Types can specify code to serialize to/from the browser, validation code, and so on.</i>
 new Tyr.Type({
   name: 'ssn',
@@ -73,6 +93,8 @@ new Tyr.Type({
     return !!value.match(/^\d{3}-\d{2}-\d{4}$/);
   }
 });
+
+   <h3>Schemas</h3>
 
 <i>// Metadata describing nested structures can be either placed inline or defined separately and reused.</i>
 var RoleEntry = {
@@ -102,7 +124,10 @@ var User = new Tyr.Collection({
     <i>// "org" links to another collection "organization".  <b>is</b> does not need to be specified -- Tyranid will infer
     // it based on the data type of the _id field in "organization".  Tyranid will also validate the schema and ensure that
     // it knows what "organization" is and update the reference with the Organization instance.</i>
-    org:        { link: 'organization' },
+    org:        { link: 'organization',
+                  <i>// <b>as</b> can be applied to fields or collections to give a human-readable name suitable for using in a UI.</i>
+                  as: 'Organization'
+                },
     inactive:   { is: 'boolean' },
     comments:   { is: 'string',
                   <i>// <b>help</b> contains user-facing documentation that could be used in, for example, a tool tip.</i>
@@ -119,15 +144,14 @@ User.prototype.fullName = function {
   return this.firstName + ' ' + this.lastName;
 };
 
+    <h3>Finding & Saving</h3>
+
 var user = new User();
 user.firstName = 'David';
 
-<i>// Built-in document methods start with $ to avoid collisions with actual document property names.</i>
+<i>// Built-in document methods and properties start with $ to avoid collisions with actual document property names.
+// (It is illegal to have properties that start with $ in MongoDB.)</i>
 user.$save();
-
-<i>// returns "u00AF8...123" if _id is "AF8...123".  Universal IDs are a way of polymorphically working with data.
-// For example, if you need to have an array of IDs from multiple collections UIDs will let you do this.</i>
-user.$uid()
 
 <i>// <b>collection</b>.db is an instance of a <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a> collection for when it is easier to just work directly with mongo.</i>
 User.db.find({ ... }).then(function(users) {
@@ -136,6 +160,46 @@ User.db.find({ ... }).then(function(users) {
 <i>// Similar to the previous line except that users are wrapped as User objects.</i>
 User.find({ ... }).then(function(users) {
 });
+
+<i>// Returns a single user wrapped as a User object.  Parameters are the same as MongoDB's findOne() API.</i>
+User.findOne({ ... }).then(function(users) {
+});
+
+<i>// Returns the user with ObjectId('AF8...123') wrapped as a User objects.  <b>byId()</b> is a shortcut for User.find({ _id: id }).</i>
+User.byId(ObjectId('AF8...123')).then(function(user) {
+});
+
+    <h3>Population</h3>
+
+<i>// Tyranid can traverse links and provide join-like functionality.  <b>fields</b> can also be an array of property names to populate.</i>
+User.populate({ fields: 'org' }, users).then(function(users) {
+  <i>// The <b>org</b> property on each user will be replaced with an actual organization document rather than just an id to a document.</i>
+});
+
+<i>// If you leave off the second array of documents parameter to <b>populate()</b> it will return a curried version of itself
+// that can be inserted into a find promise chain.</i>
+User.find({ ... }).then(User.populate('org'));
+
+    <h3>Universal IDs (UIDs)</h3>
+
+<i>// Universal IDs are a way of polymorphically working with data.  For example, if you need to have an array of IDs
+// from multiple collections UIDs will let you do this.
+
+// Returns "u00AF8...123".  <b>u00</b> was specified as the collection ID for User.</i>
+User.idToUid(ObjectId('AF8...123'))
+
+<i>// returns "u00AF8...123" if user._id is "AF8...123".</i>
+user.$uid()
+
+<i>// returns { collection: User, id: ObjectId('AF8...123') }</i>
+Tyr.parseUid('u00AF8...123')
+
+<i>// Tyranid can fetch documents by UID without having to specify the collection for code that generically works with data.</i>
+Tyr.byUid('u00AF8...123').then(function(user) {
+  <i>// <b>user</b> is a User instance with mongo ID ObjectId('AF8...123').</i>
+});
+
+    <h3>Browser Serialization</h3>
 
 <i>// Returns a <b>User</b> instance while also performing security checks, converting the _id to a MongoId, validating data,
 // and so on.</i>
@@ -147,6 +211,8 @@ res.json(user.toClient())
 
 <i>// Translates an existing object to the client when the object is not an instance of <b>User</b> (i.e. came directly from Mongo).</i>
 res.json(User.toClient(obj))
+
+    <h3>Static Data</h3>
 
 <i>// Tyranid supports efficiently modeling static data as well.  This is good for modeling enumerations and linking to them.
 // It also allows you to work with static and non-static data in an isomorphic way.</i>
@@ -180,7 +246,8 @@ Continent.prototype.isContinent = function() {
   return true;
 };
 
-<i>// This evaluates to true since the <b>enum</b> flag was turned on.</i>
+<i>// This evaluates to true since the <b>enum</b> flag was turned on.  "NORTH_AMERICA" is derived from the name "North America"
+// since the <b>name</b> field was marked as the <b>label</b> for the Continent collection.</i>
 Continent.NORTH_AMERICA._id === 4332
 
 <i>// The static data instances are also instances of the collection so methods and behaviors are available.</i>
