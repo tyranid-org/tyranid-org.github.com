@@ -151,7 +151,9 @@ user.firstName = 'David';
 
 <i>// Built-in document methods and properties start with $ to avoid collisions with actual document property names.
 // (It is illegal to have properties that start with $ in MongoDB.)</i>
-user.$save();
+user.$save().then(function() {
+  <i>// save is complete</i>
+});
 
 <i>// <b>collection</b>.db is an instance of a <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a> collection for when it is easier to just work directly with mongo.</i>
 User.db.find({ ... }).then(function(users) {
@@ -165,7 +167,8 @@ User.find({ ... }).then(function(users) {
 User.findOne({ ... }).then(function(users) {
 });
 
-<i>// Returns the user with ObjectId('AF8...123') wrapped as a User objects.  <b>byId()</b> is a shortcut for User.find({ _id: id }).</i>
+<i>// Returns the user with ObjectId('AF8...123') wrapped as a User object.  <b>byId(id)</b> is a shortcut for
+// User.findOne({ _id: id }).</i>
 User.byId(ObjectId('AF8...123')).then(function(user) {
 });
 
@@ -188,7 +191,7 @@ User.find({ ... }).then(User.populate('org'));
 // Returns "u00AF8...123".  <b>u00</b> was specified as the collection ID for User.</i>
 User.idToUid(ObjectId('AF8...123'))
 
-<i>// returns "u00AF8...123" if user._id is "AF8...123".</i>
+<i>// returns "u00AF8...123" if user._id is ObjectId("AF8...123").</i>
 user.$uid()
 
 <i>// returns { collection: User, id: ObjectId('AF8...123') }</i>
