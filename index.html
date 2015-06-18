@@ -178,6 +178,16 @@ user.$save().then(function() {
   <i>// save is complete</i>
 });
 
+<i>// Document level update, but only saves the shallow properties of the object, if the properties are set in the object.</i>
+user.$update().then(function() {
+  <i>// update is complete</i>
+});
+
+<i>// Collection level update, same as above.</i>
+User.update({ ... }).then(function() {
+  <i>// update is complete</i>
+});
+
 <i>// <b>collection</b>.db is an instance of a <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a> collection for when it is easier to just work directly with mongo.</i>
 User.db.find({ ... }).then(function(users) {
 });
