@@ -179,6 +179,10 @@ User.prototype.fullName = function {
   return this.firstName + ' ' + this.lastName;
 };
 
+<i>// Tyranid can fetch collections by name.</i>
+(Tyr.byName('user') instanceof Tyr.Collection) === true
+
+
     <h3>Finding & Saving</h3>
 
 var user = new User();
@@ -254,9 +258,6 @@ Tyr.parseUid('u00AF8...123')
 Tyr.byUid('u00AF8...123').then(function(user) {
   <i>// <b>user</b> is a User instance with mongo ID ObjectId('AF8...123').</i>
 });
-
-<i>// Tyranid can fetch collections by name.</i>
-(Tyr.byName('person') instanceof Tyr.Collection) === true
 
     <h3>Browser Serialization</h3>
 
