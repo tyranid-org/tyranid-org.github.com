@@ -103,6 +103,18 @@ Tyr.config({
 // all the references between the types and schemas.</i>
 tyr.validate();
 
+<i>// Optionally, you can pass in array of directory and filename regex match to Tyranid config to load the models and validate all at once.</i>
+Tyr.config({
+  db: pmongo(myDatabaseUrl),
+  validate: [{ dir: './app/models' }] // all files in directory
+});
+
+-- or, with fileMatch --
+
+Tyr.config({
+  db: pmongo(myDatabaseUrl),
+  validate: [{ dir: './app/models', fileMatch : '^tyr.*' }] // all files in directory that start with 'tyr'
+});
 
    <h3>Types</h3>
 
@@ -242,6 +254,9 @@ Tyr.parseUid('u00AF8...123')
 Tyr.byUid('u00AF8...123').then(function(user) {
   <i>// <b>user</b> is a User instance with mongo ID ObjectId('AF8...123').</i>
 });
+
+<i>// Tyranid can fetch collections by name.</i>
+(Tyr.byName('person') instanceof Tyr.Collection) === true
 
     <h3>Browser Serialization</h3>
 
