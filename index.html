@@ -252,16 +252,6 @@ user.$populate({ fields: 'roles.role' });
 user.$validate();
 
 
-<i>// If you leave off the second array of documents parameter to <b>populate()</b> it will return a curried version of itself
-// that can be inserted into a find promise chain.</i>
-User.find({ ... }).then(User.populate('org'));
-
-<i>// Tyranid can also populate a single object from the instance</i>
-user.$populate({ fields: 'org' });
-
-<i>// You can also pass in pathnames to populate.  Arrays will also be populated as well.</i>
-user.$populate({ fields: 'roles.role' });
-
     <h3>Universal IDs (UIDs)</h3>
 
 <i>// Universal IDs are a way of polymorphically working with data.  For example, if you need to have an array of IDs
