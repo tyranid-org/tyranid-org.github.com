@@ -103,7 +103,8 @@ Tyr.config({
 // all the references between the types and schemas.</i>
 tyr.validate();
 
-<i>// Optionally, you can pass in array of directory and filename regex match to Tyranid config to load the models and validate all at once.</i>
+<i>// Optionally, you can pass in array of directory and filename regex match to Tyranid config to load the models and
+// validate all at once.</i>
 Tyr.config({
   db: pmongo(myDatabaseUrl),
   validate: [{ dir: './app/models' }] // all files in directory
@@ -239,6 +240,8 @@ User.find({ ... }).then(User.populate('org'));
 <i>// Tyranid can also populate a single object from the instance</i>
 user.$populate({ fields : 'org' });
 
+<i>// You can also pass in pathnames to populate.  Arrays will also be populated as well.</i>
+user.$populate({ fields : 'roles.role' });
 
     <h3>Universal IDs (UIDs)</h3>
 
