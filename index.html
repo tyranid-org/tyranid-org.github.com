@@ -125,8 +125,10 @@ new Tyr.Type({
   notes: 'Defines a U.S. Social Security Number',
   <i>// SSNs will not be sent down to the browser by default for security reasons.</i>
   client: false,
-  validate: function(value) {
-    return !!value.match(/^\d{3}-\d{2}-\d{4}$/);
+  validate: function(path, field, value) {
+    if (!!value.match(/^\d{3}-\d{2}-\d{4}$/)) {
+      return new Tyr.ValidationError(path, 'is not a valid SSN.');
+    }
   }
 });
 
@@ -152,7 +154,8 @@ var User = new Tyr.Collection({
     email:      { is: 'email' },
     <i>// Shorthand:  "'password'" is equivalent to "{ is: 'password' }"</i>
     password:   'password',
-    firstName:  { is: 'string' },
+    <i>// <b>required: true</b> will make this field required during validation.</i>
+    firstName:  { is: 'string', required: true },
     lastName:   { is: 'string' },
     canLogIn:   { is: 'boolean' },
     birthDate:  { is: 'date' },
@@ -238,10 +241,26 @@ User.populate({ fields: 'org' }, users).then(function(users) {
 User.find({ ... }).then(User.populate('org'));
 
 <i>// Tyranid can also populate a single object from the instance</i>
-user.$populate({ fields : 'org' });
+user.$populate({ fields: 'org' });
 
 <i>// You can also pass in pathnames to populate.  Arrays will also be populated as well.</i>
-user.$populate({ fields : 'roles.role' });
+user.$populate({ fields: 'roles.role' });
+
+    <h3>Validation</h3>
+
+<i>// The following will run validations on the object and return an array of <b>ValidationError</b>s.</i>
+user.$validate();
+
+
+<i>// If you leave off the second array of documents parameter to <b>populate()</b> it will return a curried version of itself
+// that can be inserted into a find promise chain.</i>
+User.find({ ... }).then(User.populate('org'));
+
+<i>// Tyranid can also populate a single object from the instance</i>
+user.$populate({ fields: 'org' });
+
+<i>// You can also pass in pathnames to populate.  Arrays will also be populated as well.</i>
+user.$populate({ fields: 'roles.role' });
 
     <h3>Universal IDs (UIDs)</h3>
 
