@@ -4,42 +4,51 @@
   <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
   <style>
- body { font-family: 'Metrophobic', arial, serif; }
- h1 {
+body { font-family: 'Metrophobic', arial, serif; }
+h1 {
   font-size:60px;
   font-family: 'Megrim', arial, serif;
   text-shadow: 8px 8px #ddd;
   margin: 8px 0 0 0;
   border-bottom: 5px solid #f70;
  }
- h2 {
+h2 {
   font-size:24px;
   font-family: 'Megrim', arial, serif;
   text-shadow: 2px 2px #bbb;
   border-left: 5px solid #f70;
   padding-left: 8px;
  }
- h3 {
+h3 {
   font-size:20px;
   font-family: 'Megrim', arial, serif;
   color: #f70;//#6666aa;
   //text-shadow: 2px 2px #bbb;
   margin: 0;
  }
- pre {
-   font-family: 'Lekton', courier, serif;
-   color: #000;
- }
- pre i { color: #888; }
- pre b { color: #444; }
- .content {
-   border:1px solid #000;
-   padding:0 24px;
-   background:#eee;
-   margin:0 auto;
-   width:1024px;
-   -webkit-box-shadow:2px 2px 2px #aaa;
- }
+h4 {
+  font-size:18px;
+  font-family: 'Megrim', arial, serif;
+  color: #a50;//#6666aa;
+  margin: 0;
+}
+pre {
+  font-family: 'Lekton', courier, serif;
+  color: #000;
+}
+pre i { color: #888; }
+pre b { color: #444; }
+.content {
+  border:1px solid #000;
+  padding:0 24px;
+  background:#eee;
+  margin:0 auto;
+  width:1024px;
+  -webkit-box-shadow:2px 2px 2px #aaa;
+}
+table {
+  margin: 0;
+}
 
 a {
   color: #a50;
@@ -51,7 +60,6 @@ a:hover {
 a:visited {
   color: #630;
 }
-
   </style>
  </head>
  <body>
@@ -231,9 +239,15 @@ User.byId(ObjectId('AF8...123')).then(function(user) {
 
     <h3>Population</h3>
 
-<i>// Tyranid can traverse links and provide join-like functionality.  <b>fields</b> can also be an array of property names to populate.</i>
+<i>// Tyranid can traverse links and provide join-like functionality.</i>
 User.populate({ fields: 'org' }, users).then(function(users) {
-  <i>// The <b>org</b> property on each user will be replaced with an actual organization document rather than just an id to a document.</i>
+  <i>// An <b>org$</b> property on each user will be added with an actual organization document.</i>
+});
+
+<i>// If your field that you are populating ends with "Id", the populated field will be the same name with the "Id" removed
+// instead of a "$" appended.</i>
+User.populate({ fields: 'orgId' }, users).then(function(users) {
+  <i>// An <b>org</b> property on each user will be added with an actual organization document.</i>
 });
 
 <i>// If you leave off the second array of documents parameter to <b>populate()</b> it will return a curried version of itself
@@ -245,6 +259,40 @@ user.$populate({ fields: 'org' });
 
 <i>// You can also pass in pathnames to populate.  Arrays will also be populated as well.</i>
 user.$populate({ fields: 'roles.role' });
+
+<i>// <b>fields</b> can also be an array of property names to populate.</i>
+user.$populate({ fields: [ 'org', 'roles.role' ] });
+
+    <h4>Advanced Population</h4>
+<i>// The advanced form of population allows you to perform nested populations and specify the projections of populations.</i>
+
+<i>// Population often uses an "$all" constant.  "Tyr.$all" is defined as "Tyr.$all = '$all'".  You might want to do the following:</i>
+var Tyr  = require('tyranid'),
+    $all = Tyr.$all;
+
+<i>// The following says to populate the <b>org</b> field and also populate the "_id", "name", and "network" properties from <b>role</b>.
+// Additionally, the <b>network$</b> property on roles will also be populated, but only the names will be retrieved, not the _id's
+// (or any other properties ... _id's are included by default in projections according to MongoDB conventions).</i>
+user.$populate({ fields: { org: $all, 'roles.role': { name: 1, network: { _id: 0, name: 1 } } } });
+
+<i>// The following says to grab all the properties off of <b>role</b> and to also populate the <b>network</b> property.</i>
+user.$populate({ fields: { 'roles.role': { $all: 1, network: $all } } } });
+
+<i>// "$all: 1" can also be written "$all: $all".  If using ES6, this means it can be written as just "$all".
+// For example the previous can be written as:</i>
+user.$populate({ fields: { 'roles.role': { $all, network: $all } } } });
+
+<i>// In general the values that can follow a property name are:</i>
+
+<table>
+ <tr><td style="width:70px">0</td><td><i>Means exclude this property.  Similar to MongoDB's projection.</i></td></tr>
+ <tr><td>1</td><td><i>Means include this property.  Similar to MongoDB's projection.</i></td></tr>
+ <tr><td>$all</td><td><i>Means to populate the field and grab all the properties.  Can only be specified on a link.</i></td></tr>
+ <tr><td>{ <i>...</i> }</td><td><i>Recursively list properties to populate.  Can only be specified on a link.</i></td></tr>
+</table>
+<i>// In general, population will not query the same document more than once.  If the document shows up in multiple places
+// with different projections all locations will contain the same document which will contain a superset of the projections.
+// This also means that population can be used to populate relationships with cycles.</i>
 
     <h3>Validation</h3>
 
