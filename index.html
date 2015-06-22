@@ -254,7 +254,7 @@ User.populate('orgId', users).then(function(users) {
 // that can be inserted into a find promise chain.</i>
 User.find({ ... }).then(User.populate('org'));
 
-<i>// Tyranid can also populate a single object from the instance</i>
+<i>// You can also populate a single instance:</i>
 user.$populate('org');
 
 <i>// You can also pass in pathnames to populate.  Arrays will also be populated as well.</i>
@@ -276,11 +276,11 @@ var Tyr  = require('tyranid'),
 user.$populate({ org: $all, 'roles.role': { name: 1, network: { _id: 0, name: 1 } } });
 
 <i>// The following says to grab all the properties off of <b>role</b> and to also populate the <b>network</b> property.</i>
-user.$populate({ 'roles.role': { $all: 1, network: $all } } });
+user.$populate({ 'roles.role': { $all: 1, network: $all } });
 
 <i>// "$all: 1" can also be written "$all: $all".  If using ES6, this means it can be written as just "$all".
 // For example the previous can be written as:</i>
-user.$populate({ 'roles.role': { $all, network: $all } } });
+user.$populate({ 'roles.role': { $all, network: $all } });
 
 <i>// In general the values that can follow a property name are:</i>
 
