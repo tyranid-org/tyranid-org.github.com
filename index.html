@@ -240,13 +240,13 @@ User.byId(ObjectId('AF8...123')).then(function(user) {
     <h3>Population</h3>
 
 <i>// Tyranid can traverse links and provide join-like functionality.</i>
-User.populate({ fields: 'org' }, users).then(function(users) {
+User.populate('org', users).then(function(users) {
   <i>// An <b>org$</b> property on each user will be added with an actual organization document.</i>
 });
 
 <i>// If your field that you are populating ends with "Id", the populated field will be the same name with the "Id" removed
 // instead of a "$" appended.</i>
-User.populate({ fields: 'orgId' }, users).then(function(users) {
+User.populate('orgId', users).then(function(users) {
   <i>// An <b>org</b> property on each user will be added with an actual organization document.</i>
 });
 
@@ -255,13 +255,13 @@ User.populate({ fields: 'orgId' }, users).then(function(users) {
 User.find({ ... }).then(User.populate('org'));
 
 <i>// Tyranid can also populate a single object from the instance</i>
-user.$populate({ fields: 'org' });
+user.$populate('org');
 
 <i>// You can also pass in pathnames to populate.  Arrays will also be populated as well.</i>
-user.$populate({ fields: 'roles.role' });
+user.$populate('roles.role');
 
-<i>// <b>fields</b> can also be an array of property names to populate.</i>
-user.$populate({ fields: [ 'org', 'roles.role' ] });
+<i>// You can also pass in an array of property names to populate.</i>
+user.$populate([ 'org', 'roles.role' ]);
 
     <h4>Advanced Population</h4>
 <i>// The advanced form of population allows you to perform nested populations and specify the projections of populations.</i>
@@ -273,14 +273,14 @@ var Tyr  = require('tyranid'),
 <i>// The following says to populate the <b>org</b> field and also populate the "_id", "name", and "network" properties from <b>role</b>.
 // Additionally, the <b>network$</b> property on roles will also be populated, but only the names will be retrieved, not the _id's
 // (or any other properties ... _id's are included by default in projections according to MongoDB conventions).</i>
-user.$populate({ fields: { org: $all, 'roles.role': { name: 1, network: { _id: 0, name: 1 } } } });
+user.$populate({ org: $all, 'roles.role': { name: 1, network: { _id: 0, name: 1 } } });
 
 <i>// The following says to grab all the properties off of <b>role</b> and to also populate the <b>network</b> property.</i>
-user.$populate({ fields: { 'roles.role': { $all: 1, network: $all } } } });
+user.$populate({ 'roles.role': { $all: 1, network: $all } } });
 
 <i>// "$all: 1" can also be written "$all: $all".  If using ES6, this means it can be written as just "$all".
 // For example the previous can be written as:</i>
-user.$populate({ fields: { 'roles.role': { $all, network: $all } } } });
+user.$populate({ 'roles.role': { $all, network: $all } } });
 
 <i>// In general the values that can follow a property name are:</i>
 
