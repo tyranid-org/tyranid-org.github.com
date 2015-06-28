@@ -228,6 +228,11 @@ User.find({ ... }).then(function(users) {
 User.findOne({ ... }).then(function(users) {
 });
 
+<i>// Behaves the same as MongoDB's findAndModify() API.  If using <b>timestamps</b> and the <b>update</b> option, Tyranid will add in
+// an <b>updatedAt</b> update as well.</i>
+User.findAndModify({ ... }).then(function(users) {
+});
+
 <i>// Returns the user with ObjectId('AF8...123') wrapped as a User object.  <b>byId(id)</b> is a shortcut for
 // User.findOne({ _id: id }).</i>
 User.byId(ObjectId('AF8...123')).then(function(user) {
