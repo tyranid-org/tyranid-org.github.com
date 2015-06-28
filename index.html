@@ -282,7 +282,7 @@ user.$populate({ 'roles.role': { $all: 1, network: $all } });
 // For example the previous can be written as:</i>
 user.$populate({ 'roles.role': { $all, network: $all } });
 
-<i>// In general the values that can follow a property name are:</i>
+<i>// In general the values that can follow a property pathname are:</i>
 
 <table>
  <tr><td style="width:70px">0</td><td><i>Means exclude this property.  Similar to MongoDB's projection.</i></td></tr>
@@ -299,6 +299,17 @@ user.$populate({ 'roles.role': { $all, network: $all } });
 <i>// The following will run validations on the object and return an array of <b>ValidationError</b>s.</i>
 user.$validate();
 
+
+    <h3>Timestamps</h3>
+
+<i>// If you set <b>timestamps: true</b> when defining your collection then Tyranid will update the timestamps <b>createdAt</b> and
+// <b>updatedAt</b> when you create a new object using Tyranid's save() or insert() methods and it will update <b>updatedAt</b> when
+// you use Tyranid's update() methods.</i>
+var MyCollection = new Tyr.Collection({
+  <i>...</i>
+  timestamps: true,
+  <i>...</i>
+});
 
     <h3>Universal IDs (UIDs)</h3>
 
