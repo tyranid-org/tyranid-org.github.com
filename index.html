@@ -153,7 +153,7 @@ var RoleEntry = {
 
 var User = new Tyr.Collection({
   <i>// Collections also have an id which is used to construct <b>universal ids</b> and other metadata purposes.</i>
-  id: 'u00',                             
+  id: 'u00',
   name: 'user',
   dbName: 'users', <i>// defaults to value for "name"</i>
   fields: {
@@ -238,8 +238,16 @@ User.findAndModify({ ... }).then(function(users) {
 User.byId(ObjectId('AF8...123')).then(function(user) {
 });
 
+    <h3>Labels</h3>
+
 <i>// Finds the document in an emum collection where the label is equal to the given label.</i>
-// Country.byLabel('Germany')._id === 20
+let country = Country.byLabel('Germany');
+
+<i>// Returns the value of the label field for the document.  The following would output "Germany" if it was the record for Germany.</i>
+Country.labelFor(country)
+
+<i>// The same method is available on document instances as well:</i>
+country.$label()
 
 
     <h3>Population</h3>
@@ -395,7 +403,7 @@ Continent.NORTH_AMERICA.isContinent()
    <p>The project is licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a>.
 
    <p>Patches are gladly accepted from their original author.  Along with any patches, please state that the patch is your original work and that you license the work to the Tyranid project under the Apache License, Version 2.0 open-source license.</p>
- 
+
    <h2>Further Information</h2>
 
    <p>If you have any questions, please send email to <a href="mailto:info@tyranid.org">info@tyranid.org</a>.</p>
