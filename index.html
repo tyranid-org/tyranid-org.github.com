@@ -246,8 +246,8 @@ let country = Country.byLabel('Germany');
 <i>// Returns the value of the label field for the document.  The following would output "Germany" if it was the record for Germany.</i>
 Country.labelFor(country)
 
-<i>// The same method is available on document instances as well:</i>
-country.$label()
+<i>// The same method is available on document instances as a dynamic property as well:</i>
+country.$label
 
 
     <h3>Population</h3>
@@ -333,7 +333,7 @@ var MyCollection = new Tyr.Collection({
 User.idToUid(ObjectId('AF8...123'))
 
 <i>// returns "u00AF8...123" if user._id is ObjectId("AF8...123").</i>
-user.$uid()
+user.$uid
 
 <i>// returns { collection: User, id: ObjectId('AF8...123') }</i>
 Tyr.parseUid('u00AF8...123')
