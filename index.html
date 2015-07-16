@@ -250,6 +250,22 @@ Country.labelFor(country)
 country.$label
 
 
+    <h3>Computed Values</h3>
+
+<i>// Computed values can be created by specifying a <b>get</b> option on a property.  By default computed values will:
+//  (a) not be stored in the database unless the <b>db</b> property is set to true, and
+//  (b) not be sent down to the client with toClient() unless the <b>client</b> property is set to true.</i>
+var User = new Tyr.Collection({
+  <i>...</i>
+  fields: {
+    <i>...</i>
+    firstName:  { is: 'string' },
+    lastName:   { is: 'string' },
+    fullName:   { is: 'string', get: function() { return this.firstName + ' ' + this.lastName; }, db: true, client: true },
+    <i>...</i>
+  }
+});
+
     <h3>Population</h3>
 
 <i>// Tyranid can traverse links and provide join-like functionality.</i>
