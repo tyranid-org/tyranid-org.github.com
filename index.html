@@ -132,6 +132,9 @@ new Tyr.Type({
   name: 'ssn',
   notes: 'Defines a U.S. Social Security Number',
   <i>// SSNs will not be sent down to the browser by default for security reasons.</i>
+  <i>// client can also be a function... </i>
+  <i>// --> client : function(value) { return this.security === 'low' } </i>
+  <i>// this will pass 'ssn' to the client if the value of 'security' in the containing document is 'low'</i>
   client: false,
   validate: function(path, field, value) {
     if (!!value.match(/^\d{3}-\d{2}-\d{4}$/)) {
