@@ -164,6 +164,7 @@ var User = new Tyr.Collection({
   fields: {
     <i>// Types like "email", "mongoid", "password", etc. are built in to Tyranid but can be overridden.</i>
     _id:        { is: 'mongoid' },
+    userId:     { is: 'mongoid' },
     email:      { is: 'email' },
     <i>// Shorthand:  "'password'" is equivalent to "{ is: 'password' }"</i>
     password:   'password',
@@ -187,7 +188,12 @@ var User = new Tyr.Collection({
                   <i>// <b>notes</b> contains internal, developer documentation.</i>
                   notes: 'Used for various notes that the user sets themselves.' },
     roles:      { is: 'array', of: RoleEntry }
-  }
+  },
+  <i>// Can optionally specify a field to act as this collection's primary key, defaulting to <b>_id</b>.
+  // This field will be used for document retrieval, validation, and, most importantly, links and population.
+  // Setting <b>defaultMatchIdOnInsert</b> will cause Tyranid to match <b>_id</b> to this field's value on 
+  // insert (instead of generating a new ObjectId).</i>
+  primaryKey: { field: 'userId', defaultMatchIdOnInsert: true }
 });
 
 User.myStaticMethod = function() { ... };
