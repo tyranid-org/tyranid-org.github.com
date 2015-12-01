@@ -329,11 +329,10 @@ user.$populate({ 'roles.role': { $all, network: $all } });
 // This also means that population can be used to populate relationships with cycles.</i>
 
     <h4>Denormalization</h4>
-
 <i>// Tyranid can also store populations when a document is saved or updated.  For example, this can be useful for cases where
 // you need a a few properties redundantly stored in a collection so you have more indexing options.</i>
 
-<i>// This option shows up as a <b>denormal</b> option when defining a field.  For example, the following would store a
+<i>// This capability shows up as a <b>denormal</b> option when defining a field.  For example, the following would store a
 // copy of the Organization's name field redundantly on the User collection.  Similar to how population would store populated
 // org data under a variable "org$", denormalized data will get stored as "org_".  In the following example, the org link would
 // be available as "user.org" while the denormalized name would be available as "user.org_.name".</i>
