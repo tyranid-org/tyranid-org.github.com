@@ -191,7 +191,7 @@ var User = new Tyr.Collection({
   },
   <i>// Can optionally specify a field to act as this collection's primary key, defaulting to <b>_id</b>.
   // This field will be used for document retrieval, validation, and, most importantly, links and population.
-  // Setting <b>defaultMatchIdOnInsert</b> will cause Tyranid to match <b>_id</b> to this field's value on 
+  // Setting <b>defaultMatchIdOnInsert</b> will cause Tyranid to match <b>_id</b> to this field's value on
   // insert (instead of generating a new ObjectId).</i>
   primaryKey: { field: 'userId', defaultMatchIdOnInsert: true }
 });
@@ -204,6 +204,28 @@ User.prototype.fullName = function {
 
 <i>// Tyranid can fetch collections by name.</i>
 (Tyr.byName('user') instanceof Tyr.Collection) === true
+
+
+     <h4>Dynamic Schemas</h4>
+<i>// Tyranid also supports <b>dynamic schemas</b> that can be added at runtime via storing metadata in the database.
+// The following adds a "westTotal" property to User but only for users that belong to Organization 1:</i>
+
+Tyr.byName('tyrSchema').save({
+  collection: User.id,
+  match: {
+    org: 1
+  },
+  type: Tyr.byName('tyrSchemaType').PARTIAL._id,
+  def: {
+    fields: {
+      westTotal: { is: 'integer' }
+    }
+  }
+});
+
+<i>// You can get a list of fields that apply to a specific document using <b>fieldsFor</b>:</i>
+
+const fields = await User.fieldsFor({ org: 1 });
 
 
     <h3>Finding & Saving</h3>
