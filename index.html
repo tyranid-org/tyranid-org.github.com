@@ -244,8 +244,8 @@ user.$update().then(function() {
   <i>// update is complete</i>
 });
 
-<i>// Collection level update, same as above.</i>
-User.update({ ... }).then(function() {
+<i>// Collection level update, same API as promised-mongo/mongo shell update().</i>
+User.update(query, update, opts).then(function() {
   <i>// update is complete</i>
 });
 
@@ -270,6 +270,9 @@ User.findAndModify({ ... }).then(function(users) {
 // User.findOne({ _id: id }).</i>
 User.byId(ObjectId('AF8...123')).then(function(user) {
 });
+
+<i>// Same as User.db.remove()</i>
+User.remove({ _id: id });
 
     <h3>Labels</h3>
 
