@@ -147,7 +147,7 @@ new Tyr.Type({
 
    <h3>Schemas</h3>
 
-<i>// Metadata describing nested structures can be either placed inline or defined separately and reused.</i>
+<i>// Metadata describing nested structures can be either placed inline or defined separately.</i>
 var RoleEntry = {
   is: 'object',
   fields: {
@@ -187,7 +187,7 @@ var User = new Tyr.Collection({
                   help: 'Place any public comments you would like to make here.',
                   <i>// <b>notes</b> contains internal, developer documentation.</i>
                   notes: 'Used for various notes that the user sets themselves.' },
-    roles:      { is: 'array', of: RoleEntry }
+    roles:      { is: 'array', of: _.cloneDeep(RoleEntry) }
   },
   <i>// Can optionally specify a field to act as this collection's primary key, defaulting to <b>_id</b>.
   // This field will be used for document retrieval, validation, and, most importantly, links and population.
@@ -289,6 +289,15 @@ country.$label
 User.label                    <i>=> 'User'</i>
 User.def.fields.userId.label  <i>=> 'User ID'</i>
 User.def.fields.email.label   <i>=> 'Email'</i>
+
+
+    <h3>Fields</h3>
+
+<i>// Fields support a <b>name</b> property.</i>
+User.def.fields.email.name <i>=> 'email'</i>
+
+<i>// Fields also support a <b>path</b> property.</i>
+User.def.fields.roles.def.of.def.network.path <i>=> 'roles.network'</i>
 
 
     <h3>Computed Values</h3>
