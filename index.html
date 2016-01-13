@@ -164,7 +164,7 @@ var User = new Tyr.Collection({
   fields: {
     <i>// Types like "email", "mongoid", "password", etc. are built in to Tyranid but can be overridden.</i>
     _id:        { is: 'mongoid' },
-    userId:     { is: 'mongoid' },
+    userId:     { is: 'mongoid', label: 'User ID' },
     email:      { is: 'email' },
     <i>// Shorthand:  "'password'" is equivalent to "{ is: 'password' }"</i>
     password:   'password',
@@ -284,6 +284,11 @@ Country.labelFor(country)
 
 <i>// The same method is available on document instances as a dynamic property as well:</i>
 country.$label
+
+<i>// Collections and Fields also support a <b>label</b> property.  If no label is provided one will be generated from the <b>name</b>.</i>
+User.label              <i>=> 'User'</i>
+User.def.fields.userId  <i>=> 'User ID'</i>
+User.def.fields.email   <i>=> 'Email'</i>
 
 
     <h3>Computed Values</h3>
@@ -437,20 +442,20 @@ var Continent = new Tyr.Collection({
   enum: true,
   fields: {
     _id:        { is: 'integer' },
-    <i>// <b>label</b> indicates that this field is the label value for this collection.</i>
-    name:       { is: 'string', label: true },
+    <i>// <b>labelField</b> indicates that this field is the label value for this collection.</i>
+    name:       { is: 'string', labelField: true },
     code:       { is: 'string' },
-    pcmName:    { is: 'string' }
+    altName:    { is: 'string', label: 'Alternate Name' }
   },
   values: [
-    [ '_id', 'name',       'code', 'pcmName' ],
+    [ '_id', 'name',       'code', 'altName' ],
 
-    [ 4328, 'Africa',        'AF', 'Africa'  ],
+    [ 4328, 'Africa',        'AF', null      ],
     [ 4329, 'Antartica',     'AN', null      ],
-    [ 4330, 'Asia',          'AS', 'Europe'  ],
-    [ 4331, 'Europe',        'EU', 'Europe'  ],
+    [ 4330, 'Asia',          'AS', null      ],
+    [ 4331, 'Europe',        'EU', null      ],
     [ 4332, 'North America', 'NA', 'NA'      ],
-    [ 4333, 'Oceania',       'OC', 'Oceania' ],
+    [ 4333, 'Oceania',       'OC', null      ],
     [ 4334, 'South America', 'SA', 'SA'      ]
   ]
 });
