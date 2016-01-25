@@ -1,0 +1,291 @@
+<html>
+ <head>
+  <link href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
+  <link href="tyranid.css" rel='stylesheet' type='text/css'>
+ </head>
+ <body>
+   <div class="sidebar">
+    <section>
+     <h3>Overview</h3>
+     <span><a href="index.html">Guide</a></span>
+    </section>
+
+    <section>
+     <h3>API</h3>
+     <span><a href="collection.html">Collection</a></span>
+     <div>|</div>
+     <span><a href="document.html">Document</a></span>
+     <div>|</div>
+     <span><a href="field.html">Field</a></span>
+     <div>|</div>
+     <span><a href="type.html">Type</a></span>
+     <div>|</div>
+     <span><a href="tyr.html">Tyr</a></span>
+    </section>
+   </div>
+
+  <div class="content">
+    <h1>Collection</h1>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">byId(id): <a href="document.html">Document</a></span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">byIds(ids: [ <i>id</i> ] ): [ <a href="document.html">Document</a> ]</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">byLabel(label: String): <a href="document.html">Document</a></span>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">def</span>
+     </article>
+
+     <article>
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">fake()</span>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">fields: { <i>field path name</i>: <a href="field.html">Field</a> }</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">fieldsBy(comparable)</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">find(query: MongoDB Query): [ <a href="document.html">Document</a> ]</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">findOne(query: MongoDB Query): <a href="document.html">Document</a></span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">findAndModify(opts)</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">findLabels(text: String): [ { _id, <i>label field</i>: String } ]</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">fromClient(doc: Object, path: String): <a href="document.html">Document</a></span>
+       <p>
+        This creates a new record instance out of a POJO.  Values are copied by reference (not deep-cloned!).
+      </p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">idToUid(id): String</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">insert(doc: <a href="document.html">Document</a> | Object)</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">isStatic(): Boolean</span>
+       <p>
+        This returns true if the collection's data is defined statically in its def.values field.  Enumerations are a common example
+        of static collections.
+       </p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">label: String</span>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">labelField: String</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">labelFor(doc: <a href="document.html">Document</a> | Object)</span>
+     </article>
+
+     <article id="populate">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">populate(fields, documents: [ <a href="document.html">Document</a> ], denormal: Boolean)</span>
+       <p>
+        Fields can take one of the following three forms:
+        <ul>
+         <li>String -- the name of a field to populate.
+         <li>[ String ] -- an array of names of fields to populate.
+         <li>Object -- object population syntax.
+        </ul>
+      </p>
+      <p>
+        If <b>documents</b> is not provided, this function will return a curried version of this function that takes a single array
+        of documents.  This allows populate to be fed into a promise chain.
+      </p>
+      <p>
+        See <a href="index.html#population">Population</a> for more information and examples.
+      </p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">remove(id | query: Object, justOne: Boolean)</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">save(doc: <a href="document.html">Document</a> | Object): <a href="document.html">Document</a></span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">toClient(doc: <a href="document.html">Document</a>): Object</span>
+       <p>
+        This creates a new POJO out of a record instance.  Values are copied by reference (not deep-cloned!).
+       </p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">update(query, update, opts)</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">updateDoc(doc: <a href="document.html">Document</a> | Object)</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">valuesFor(fieldNames: [ String ])</span>
+     </article>
+
+     <h2>Hooks</h2>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">plugin(fn: Function, opts): this</span>
+       <p>
+        Register a plugin for this Collection. Similar API to <a href="http://mongoosejs.com/docs/plugins.html">Mongoose plugins</a>.
+        Note that the hooks API *does* differ from Mongoose's.
+      </p>
+     </article>
+
+     <article>
+      <b class="method"></b>
+      <b class="server"></b>
+      <span class="sig">pre(methods: String | [ String ], cb: Function): this</span>
+      <ul>
+        <li>methods: String | [ String ] -- methods method name or array of method names to add pre hook.
+        <li>cb: Function(next, ...args) -- hook callback
+        <li>cb.next: Function -- if modifying arguments, return next(modifiedArgs)
+        <li>cb.args: [ Function ] -- original method args
+      </ul>
+      <p>
+       Add a pre hook
+      </p>
+     </article>
+
+     <article>
+      <b class="method"></b>
+      <b class="server"></b>
+      <span class="sig">post(methods, cb): this</span>
+      <ul>
+       <li>methods: String | [ String ] -- method name or array of method names to add post hook
+       <li>cb: Function(next, result) -- hook callback
+       <li>cb.next: Function -- if modifying result, return next(modifiedResult)
+       <li>cb.result: [ Function ] -- original method result
+      </ul>
+      <p>
+       Add a post hook
+
+      </p>
+     </article>
+
+     <article>
+      <b class="method"></b>
+      <b class="server"></b>
+      <span class="sig">unhook(methods): this</span>
+      <ul>
+       <li>methods: String | [ String ] -- Method or methods. Unhooks all methods if unspecified.
+      </ul>
+      <p>
+       Remove hooks for a particular method. Needs to be called once per pre/post() call.
+      </p>
+     </article>
+
+  </div>
+ </body>
+</html>

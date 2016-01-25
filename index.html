@@ -3,67 +3,33 @@
   <link href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
-  <style>
-body { font-family: 'Metrophobic', arial, serif; }
-h1 {
-  font-size:60px;
-  font-family: 'Megrim', arial, serif;
-  text-shadow: 8px 8px #ddd;
-  margin: 8px 0 0 0;
-  border-bottom: 5px solid #f70;
- }
-h2 {
-  font-size:24px;
-  font-family: 'Megrim', arial, serif;
-  text-shadow: 2px 2px #bbb;
-  border-left: 5px solid #f70;
-  padding-left: 8px;
- }
-h3 {
-  font-size:20px;
-  font-family: 'Megrim', arial, serif;
-  color: #f70;//#6666aa;
-  //text-shadow: 2px 2px #bbb;
-  margin: 0;
- }
-h4 {
-  font-size:18px;
-  font-family: 'Megrim', arial, serif;
-  color: #a50;//#6666aa;
-  margin: 0;
-}
-pre {
-  font-family: 'Lekton', courier, serif;
-  color: #000;
-}
-pre i { color: #888; }
-pre b { color: #444; }
-.content {
-  border:1px solid #000;
-  padding:0 24px;
-  background:#eee;
-  margin:0 auto;
-  width:1024px;
-  -webkit-box-shadow:2px 2px 2px #aaa;
-}
-table {
-  margin: 0;
-}
-
-a {
-  color: #a50;
-  text-decoration: none;
-}
-a:hover {
-  border-bottom: 1px solid #f70;
-}
-a:visited {
-  color: #630;
-}
-  </style>
+  <link href="tyranid.css" rel='stylesheet' type='text/css'>
  </head>
  <body>
   <a href="https://github.com/tyranid-org/tyranid"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+
+  <div class="sidebar">
+   <section>
+    <h3>Overview</h3>
+    <span><a href="index.html">Guide</a></span>
+   </section>
+
+   <section>
+    <h3>API</h3>
+    <span><a href="collection.html">Collection</a></span>
+    <div>|</div>
+    <span><a href="document.html">Document</a></span>
+    <div>|</div>
+    <span><a href="field.html">Field</a></span>
+    <div>|</div>
+    <span><a href="type.html">Type</a></span>
+    <div>|</div>
+    <span><a href="tyr.html">Tyr</a></span>
+   </section>
+  </div>
+
+  </div>
+
   <div class="content">
    <h1>Tyranid.js</h1>
    <p><b>Tyranid</b> is a JavaScript-based, free, open-source, promise-based <b>metadata</b> library for generically working with data.</p>
@@ -111,7 +77,7 @@ Tyr.config({
 
 <i>// Once all the types and schemas have been processed, invoke <b>Tyr.validate()</b> to have Tyranid link and validate
 // all the references between the types and schemas.</i>
-tyr.validate();
+Tyr.validate();
 
 <i>// Optionally, you can pass in array of directory and filename regex match to Tyranid config to load the models and
 // validate all at once.</i>
@@ -316,7 +282,7 @@ var User = new Tyr.Collection({
   }
 });
 
-    <h3>Population</h3>
+    <h3 id="population">Population</h3>
 
 <i>// Tyranid can traverse links and provide join-like functionality.</i>
 User.populate('org', users).then(function(users) {
@@ -342,7 +308,7 @@ user.$populate('roles.role');
 <i>// You can also pass in an array of property names to populate.</i>
 user.$populate([ 'org', 'roles.role' ]);
 
-    <h4>Advanced Population</h4>
+    <h4 id="advancedPopulation">Advanced Population</h4>
 <i>// The advanced form of population allows you to perform nested populations and specify the projections of populations.</i>
 
 <i>// Population often uses an "$all" constant.  "Tyr.$all" is defined as "Tyr.$all = '$all'".  You might want to do the following:</i>
@@ -407,7 +373,7 @@ var MyCollection = new Tyr.Collection({
   <i>...</i>
 });
 
-    <h3>Universal IDs (UIDs)</h3>
+    <h3 id="uids">Universal IDs (UIDs)</h3>
 
 <i>// Universal IDs are a way of polymorphically working with data.  For example, if you need to have an array of IDs
 // from multiple collections UIDs will let you do this.

@@ -1,0 +1,97 @@
+<html>
+ <head>
+  <link href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
+  <link href="tyranid.css" rel='stylesheet' type='text/css'>
+ </head>
+ <body>
+   <div class="sidebar">
+    <section>
+     <h3>Overview</h3>
+     <span><a href="index.html">Guide</a></span>
+    </section>
+
+    <section>
+     <h3>API</h3>
+     <span><a href="collection.html">Collection</a></span>
+     <div>|</div>
+     <span><a href="document.html">Document</a></span>
+     <div>|</div>
+     <span><a href="field.html">Field</a></span>
+     <div>|</div>
+     <span><a href="type.html">Type</a></span>
+     <div>|</div>
+     <span><a href="tyr.html">Tyr</a></span>
+    </section>
+   </div>
+
+  <div class="content">
+    <h1>Type</h1>
+
+     <div class="desc">
+      <p>
+       Also known as "Domain".
+      </p>
+      <p>
+       The default built-in types are:
+       <ul>
+        <li>array
+        <li>boolean
+        <li>date
+        <li>double
+        <li>email
+        <li>image
+        <li>integer
+        <li>link
+        <li>mongoid
+        <li>object
+        <li>password
+        <li>string
+        <li>uid
+        <li>url
+       </ul>
+     </p>
+     </div>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">compile(compiler, path, field)</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">fromString(str)</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">fromClient(field, value)</span>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">name</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">toClient(field, value)</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">validate(path, field, value)</span>
+     </article>
+  </div>
+ </body>
+</html>

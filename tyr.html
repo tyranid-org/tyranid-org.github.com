@@ -1,0 +1,164 @@
+<html>
+ <head>
+  <link href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
+  <link href="tyranid.css" rel='stylesheet' type='text/css'>
+ </head>
+ <body>
+   <div class="sidebar">
+    <section>
+     <h3>Overview</h3>
+     <span><a href="index.html">Guide</a></span>
+    </section>
+
+    <section>
+     <h3>API</h3>
+     <span><a href="collection.html">Collection</a></span>
+     <div>|</div>
+     <span><a href="document.html">Document</a></span>
+     <div>|</div>
+     <span><a href="field.html">Field</a></span>
+     <div>|</div>
+     <span><a href="type.html">Type</a></span>
+     <div>|</div>
+     <span><a href="tyr.html">Tyr</a></span>
+    </section>
+   </div>
+
+  <div class="content">
+    <h1>Tyr</h1>
+
+     <p>
+      The Tyr object, available on the client as "window.Tyr", and usually imported on the server as "Tyr" contains
+      the namespace for Tyranid.
+     </p>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">$all</span>
+       <p>
+        This is a constant used with <a href="index.html#advancedPopulation">Advanced Population</a> that means to populate
+        the field and grab all the properties. It can only be specified on a link.
+       </p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">byId: { <i>collection id</i>: <a href="collection.html">Collection</a> }</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">byName: { <i>collection name</i>: <a href="collection.html">Collection</a> }</span>
+     </article>
+
+     <article>
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">byUid(uid: String): <a href="document.html">Document</a></span>
+       <p>
+        This will find a document by its <a href="index.html#uids">UID</a>.
+       </p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig"><a href="collection.html">Collection</a></span>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">collections: [ <a href="collection.html">Collection</a> ]</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">config(opts)</span>
+     </article>
+
+     <article>
+      <b class="property"></b>
+      <b class="server"></b>
+      <b class="client"></b>
+      <span class="sig">documentPrototype: Object</span>
+
+      <p>
+       All <a href="document.html">Document</a> instances inherit from this object.  Add methods and properties to this
+       object that you want to be available on all document instances.  It's recommended that all fields added to this
+       object start with a '$' character and are Object.defineProperty()'ed to be non-enumerable.
+      </p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig"><a href="field.html">Field</a></span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">parseUid(uid): { collection: <a href="collection.html">Collection</a>, id: <i>collection id type</i> }</span>
+       <p>
+        This will parse a <a href="index.html#uids">UID</a> into the collection and id that the uid refers to.
+       </p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">reset()</span>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig"><a href="type.html">Type</a></span>
+     </article>
+
+     <article>
+      <b class="method"></b>
+      <b class="server"></b>
+      <span class="sig">validate(opts)</span>
+
+      <p>
+       Call this method once all of the collections and types have been imported and you want the entire metadata model
+       compiled and linked (validated).
+     </p>
+
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">ValidationError</span>
+     </article>
+
+     <article>
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">valuesBy(comparable)</span>
+     </article>
+
+  </div>
+ </body>
+</html>

@@ -1,0 +1,112 @@
+<html>
+ <head>
+  <link href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
+  <link href="tyranid.css" rel='stylesheet' type='text/css'>
+ </head>
+ <body>
+   <div class="sidebar">
+    <section>
+     <h3>Overview</h3>
+     <span><a href="index.html">Guide</a></span>
+    </section>
+
+    <section>
+     <h3>API</h3>
+     <span><a href="collection.html">Collection</a></span>
+     <div>|</div>
+     <span><a href="document.html">Document</a></span>
+     <div>|</div>
+     <span><a href="field.html">Field</a></span>
+     <div>|</div>
+     <span><a href="type.html">Type</a></span>
+     <div>|</div>
+     <span><a href="tyr.html">Tyr</a></span>
+    </section>
+   </div>
+
+  <div class="content">
+    <h1>Document</h1>
+
+     <div class="desc">
+      <p>
+       Documents are instances of <a href="collection.html">Collections</a>.
+     </p>
+    </div>
+
+     <div class="note">
+      Document fields usually start with a '$' so that the Tyranid fields do not conflict with the underlying data being modeled.
+    </div>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">$insert(): <a href="document.html">Document</a></span>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">$label: String</span>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">$model: <a href="collection.html">Collection</a></span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">$populate(fields, denormal)</span>
+       <p>
+         This is equivalent to doc.$model.<a href="collection.html#populate">populate(fields, doc, denormal)</a>.
+       </p>
+       <p>
+        Also see <a href="index.html#population">Population</a> for more information and examples.
+      </p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">$save(): <a href="document.html">Document</a></span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">$toClient(): POJO</span>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">$uid: String</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">$update()</span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">$validate()</span>
+     </article>
+
+  </div>
+ </body>
+</html>

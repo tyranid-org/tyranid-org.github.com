@@ -1,0 +1,189 @@
+body { font-family: 'Metrophobic', arial, serif; }
+
+.sidebar {
+  border: 1px solid #000;
+  margin: 0px;
+  padding: 8px;
+  background: #eee;
+  position: fixed;
+  left: calc((100% - 1024px) / 2 - 190px);
+  top: 8px;
+  width: 140px;
+  -webkit-box-shadow:2px 2px 2px #aaa;
+}
+
+.sidebar span {
+  display: block;
+}
+.sidebar div {
+  display: none;
+}
+.sidebar section {
+  margin-top: 16px;
+}
+.sidebar section:nth-child(1) {
+  margin-top: 0;
+}
+
+@media (max-width:1400px) {
+  .sidebar {
+    position: static;
+    padding:8px 24px;
+    width: 1024px;
+    margin: 0 auto 8px;
+    left: auto;
+  }
+  .sidebar div {
+    display: inline-block;
+  }
+  .sidebar hr::before {
+    display: inline-block;
+    margin: 0 6px 0 6px;
+    content: '|';
+  }
+  .sidebar section {
+    display: inline-block;
+    margin: 0 0 0 16px;
+  }
+  .sidebar section:nth-child(1) {
+    margin-left: 0;
+  }
+  .sidebar h3 {
+    display: inline-block;
+  }
+  .sidebar span {
+    display: inline-block;
+  }
+}
+
+h1 {
+  font-size:60px;
+  font-family: 'Megrim', arial, serif;
+  text-shadow: 8px 8px #ddd;
+  margin: 8px 0 0 0;
+  border-bottom: 5px solid #f70;
+ }
+h2 {
+  font-size:24px;
+  font-family: 'Megrim', arial, serif;
+  text-shadow: 2px 2px #bbb;
+  border-left: 5px solid #f70;
+  padding-left: 8px;
+ }
+h3 {
+  font-size:20px;
+  font-family: 'Megrim', arial, serif;
+  color: #f70;//#6666aa;
+  //text-shadow: 2px 2px #bbb;
+  margin: 0;
+ }
+h4 {
+  font-size:18px;
+  font-family: 'Megrim', arial, serif;
+  color: #a50;//#6666aa;
+  margin: 0;
+}
+pre {
+  font-family: 'Lekton', courier, serif;
+  color: #000;
+}
+pre i { color: #888; }
+pre b { color: #444; }
+.content {
+  border:1px solid #000;
+  padding:0 24px;
+  background:#eee;
+  margin:0 auto;
+  width:1024px;
+  -webkit-box-shadow:2px 2px 2px #aaa;
+}
+table {
+  margin: 0;
+}
+
+a {
+  color: #a50;
+  text-decoration: none;
+}
+a:hover {
+  border-bottom: 1px solid #f70;
+}
+a:visited {
+  color: #630;
+}
+
+.note {
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid #666;
+  border-top: 4px solid #000;
+  background: #fff;
+}
+
+.desc {
+  margin-top: 16px;
+}
+
+article {
+  border-top: 2px solid #ccc;
+  margin: 16px 0;
+  padding: 4px 0;
+}
+
+article i {
+  color: #666;
+}
+
+.sig {
+  font-size: 24px;
+  color: #000;
+  font-weight: bold;
+}
+
+.async::after, .method::after, .property::after, .client::after, .server::after {
+  display: block;
+  float: right;
+  margin: 4px 0 0 8px;
+  padding: 0 4px 4px;
+  height: 18px;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.async {
+}
+.async::after {
+  content: 'async';
+  background: #800;
+  float: left;
+  margin-left: 0;
+  margin-right: 8px;
+}
+
+.method {
+}
+.method::after {
+  content: 'method';
+  background: #808;
+}
+
+.property {
+}
+.property::after {
+  content: 'property';
+  background: #880;
+}
+
+.client {
+}
+.client::after {
+  content: 'client';
+  background: #088;
+}
+
+.server {
+}
+.server::after {
+  content: 'server';
+  background: #008;
+}
