@@ -1,3 +1,4 @@
+
 body { font-family: 'Metrophobic', arial, serif; }
 
 .sidebar {
@@ -11,7 +12,9 @@ body { font-family: 'Metrophobic', arial, serif; }
   width: 140px;
   -webkit-box-shadow:2px 2px 2px #aaa;
 }
-
+.sidebar h3 {
+  margin-top: 0;
+}
 .sidebar span {
   display: block;
 }
@@ -75,7 +78,8 @@ h3 {
   font-family: 'Megrim', arial, serif;
   color: #f70;//#6666aa;
   //text-shadow: 2px 2px #bbb;
-  margin: 0;
+  margin: 42px 0 0;
+  border-top: 1px solid #f70;
  }
 h4 {
   font-size:18px;
@@ -86,8 +90,17 @@ h4 {
 pre {
   font-family: 'Lekton', courier, serif;
   color: #000;
+  background:#f8f8f8;
+  padding: 4px;
+  -webkit-box-shadow:2px 2px 2px #aaa;
 }
-pre i { color: #888; }
+p {
+  font-family: 'Metrophobic', arial, serif;
+}
+pre i {
+  font-style: normal;
+  color: #888;
+}
 pre b { color: #444; }
 .content {
   border:1px solid #000;
@@ -99,6 +112,18 @@ pre b { color: #444; }
 }
 table {
   margin: 0;
+  background: #ddd;
+  -webkit-box-shadow:2px 2px 2px #aaa;
+}
+
+tr:nth-child(odd) {
+  background: #fff;
+}
+tr:nth-child(even) {
+  background: #eee;
+}
+td {
+  padding: 6px 12px;
 }
 
 a {

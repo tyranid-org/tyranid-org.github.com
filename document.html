@@ -23,6 +23,8 @@
      <span><a href="type.html">Type</a></span>
      <div>|</div>
      <span><a href="tyr.html">Tyr</a></span>
+     <div>|</div>
+     <span><a href="validationError.html">ValidationError</a></span>
     </section>
    </div>
 
@@ -58,13 +60,14 @@
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">$model: <a href="collection.html">Collection</a></span>
+       <p>This is a reference to the collection of this document.  "this.$model" is equivalent to "this.constructor".
      </article>
 
      <article>
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">$populate(fields, denormal)</span>
+       <span class="sig">$populate(fields, <a href="index.html#denormalization">denormal</a>: Boolean)</span>
        <p>
          This is equivalent to doc.$model.<a href="collection.html#populate">populate(fields, doc, denormal)</a>.
        </p>
@@ -92,6 +95,7 @@
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">$uid: String</span>
+       <p>This returns the <a href="index.html#uids">UID</a> for this document.</p>
      </article>
 
      <article>
@@ -104,7 +108,8 @@
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">$validate()</span>
+       <span class="sig">$validate(): [ <a href="validationError.html">ValidationError</a> ]</span>
+       <p>This validates the current document according to the validation rules specified by the metadata for this collection.</p>
      </article>
 
   </div>

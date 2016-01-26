@@ -23,6 +23,8 @@
      <span><a href="type.html">Type</a></span>
      <div>|</div>
      <span><a href="tyr.html">Tyr</a></span>
+     <div>|</div>
+     <span><a href="validationError.html">ValidationError</a></span>
     </section>
    </div>
 
@@ -43,11 +45,30 @@
        <span class="sig">label: String</span>
      </article>
 
-     <article>
+     <article id="labels">
        <b class="async"></b>
        <b class="method"></b>
        <b class="client"></b>
        <span class="sig">labels(text: String?): [ { <i>_id</i>, <i>label field</i>: String } ]</span>
+       <p>This generates a list of label objects that can be used to populate a typeahead dropdown.  This method is only available when the field is a <b>link</b>
+       field.</p>
+       <p>This method also takes into account the <b>where</b> property on links when generating the list of labels.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">name: String</span>
+       <p>This contains the name of this field.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig"><a href="index.html#paths">path</a>: String</span>
+       <p>This contains the <a href="index.html#paths">path</a> of this field.</p>
      </article>
 
   </div>
