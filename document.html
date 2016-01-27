@@ -38,7 +38,7 @@
     </div>
 
      <div class="note">
-      Document fields usually start with a '$' so that the Tyranid fields do not conflict with the underlying data being modeled.
+      Document fields usually start with a "<u>$</u>" so that the Tyranid fields do not conflict with the underlying data being modeled.
     </div>
 
      <article>
@@ -60,7 +60,7 @@
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">$model: <a href="collection.html">Collection</a></span>
-       <p>This is a reference to the collection of this document.  "this.$model" is equivalent to "this.constructor".
+       <p>This is a reference to the collection of this document.  <u>this.$model</u> is equivalent to <u>this.constructor</u>.
      </article>
 
      <article>
@@ -69,7 +69,7 @@
        <b class="async"></b>
        <span class="sig">$populate(fields, <a href="index.html#denormalization">denormal</a>: Boolean)</span>
        <p>
-         This is equivalent to doc.$model.<a href="collection.html#populate">populate(fields, doc, denormal)</a>.
+         This is equivalent to <u>doc.$model.<a href="collection.html#populate">populate(fields, doc, denormal)</a></u>.
        </p>
        <p>
         Also see <a href="index.html#population">Population</a> for more information and examples.

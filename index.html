@@ -4,6 +4,7 @@
   <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
   <link href="tyranid.css" rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="tyranid_highlightjs.css">
  </head>
  <body>
   <a href="https://github.com/tyranid-org/tyranid"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
@@ -65,8 +66,7 @@
 
    <h3>Setup</h3>
 
-   <pre>
-var pmongo = require('promised-mongo'),
+   <pre><code class="js">var pmongo = require('promised-mongo'),
     Tyr    = require('tyranid');
 
 <i>// Initialize Tyranid with a <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a> instance.</i>
@@ -89,13 +89,11 @@ Tyr.config({
   db: pmongo(myDatabaseUrl),
   validate: [{ dir: './app/models', fileMatch : '^tyr.*' }] <i>// all files in directory that start with 'tyr'</i>
 });
-</pre>
+</code></pre>
 
    <h3>Types</h3>
-
-<pre>
-<i>// You can define your own types.  Types can specify code to serialize to/from the browser, validation code, and so on.</i>
-new Tyr.Type({
+<p>You can define your own types.  Types can specify code to serialize to/from the browser, validation code, and so on.</p>
+<pre><code class="js">new Tyr.Type({
   name: 'ssn',
   notes: 'Defines a U.S. Social Security Number',
   <i>// SSNs will not be sent down to the browser by default for security reasons.</i>
@@ -109,12 +107,11 @@ new Tyr.Type({
     }
   }
 });
-</pre>
+</code></pre>
 
    <h3>Schemas</h3>
 
-<pre>
-<i>// Metadata describing nested structures can be either placed inline or defined separately.</i>
+<pre><code class="js"><i>// Metadata describing nested structures can be either placed inline or defined separately.</i>
 var RoleEntry = {
   is: 'object',
   fields: {
@@ -171,13 +168,12 @@ User.prototype.fullName = function {
 
 <i>// Tyranid can fetch collections by name.</i>
 (Tyr.byName('user') instanceof Tyr.Collection) === true
-</pre>
+</code></pre>
 
      <h4>Dynamic Schemas</h4>
 <p>Tyranid also supports <b>dynamic schemas</b> that can be added at runtime via storing metadata in the database.
 The following adds a "westTotal" property to User but only for users that belong to Organization 1:</p>
-<pre>
-Tyr.byName('tyrSchema').save({
+<pre><code class="js">Tyr.byName('tyrSchema').save({
   collection: User.id,
   match: {
     org: 1
@@ -189,15 +185,13 @@ Tyr.byName('tyrSchema').save({
     }
   }
 });
-</pre>
+</code></pre>
 <p>You can get a list of fields that apply to a specific document using <b>fieldsFor</b>:</p>
-<pre>
-const fields = await User.fieldsFor({ org: 1 });
-</pre>
+<pre><code class="js">const fields = await User.fieldsFor({ org: 1 });
+</code></pre>
 
     <h3>Finding & Saving</h3>
-<pre>
-var user = new User();
+<pre><code class="js">var user = new User();
 user.firstName = 'David';
 
 <i>// Built-in document methods and properties start with $ to avoid collisions with actual document property names.
@@ -240,13 +234,12 @@ User.byId(ObjectId('AF8...123')).then(function(user) {
 
 <i>// Same as User.db.remove()</i>
 User.remove({ _id: id });
-</pre>
+</code></pre>
     <h3>Labels</h3>
-<pre>
-<i>// Finds the document in an emum collection where the label is equal to the given label.</i>
+<pre><code class="js"><i>// Finds the document in an emum collection where the label is equal to the given label.</i>
 let country = Country.byLabel('Germany');
 
-<i>// Returns the value of the label field for the document.  The following would output "Germany" if it was the record for Germany.</i>
+<i>// Returns the value of the label field for the document.  The following would output "Germany":</i>
 Country.labelFor(country)
 
 <i>// The same method is available on document instances as a dynamic property as well:</i>
@@ -256,23 +249,24 @@ country.$label
 User.label                    <i>=> 'User'</i>
 User.def.fields.userId.label  <i>=> 'User ID'</i>
 User.def.fields.email.label   <i>=> 'Email'</i>
-</pre>
+</code></pre>
 
     <h3>Fields</h3>
-<pre>
-<i>// Fields support a <b>name</b> property.</i>
+<pre><code class="js"><i>// Fields support a <b>name</b> property.</i>
 User.def.fields.email.name <i>=> 'email'</i>
 
 <i>// Fields also support a <b>path</b> property.</i>
 User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
-</pre>
+</code></pre>
 
     <h3>Computed Values</h3>
-<pre>
-<i>// Computed values can be created by specifying a <b>get</b> option on a property.  By default computed values will:
-//  (a) not be stored in the database unless the <b>db</b> property is set to true, and
-//  (b) not be sent down to the client with toClient() unless the <b>client</b> property is set to true.</i>
-var User = new Tyr.Collection({
+<p>Computed values can be created by specifying a <u>get</u> option on a property.  By default computed values will:
+  <ol>
+    <li>not be stored in the database unless the <u>db</u> property is set to true, and
+    <li>not be sent down to the client with <u>toClient()</u> unless the <u>client</u> property is set to true.
+  </ol>
+</p>
+<pre><code class="js">var User = new Tyr.Collection({
   <i>...</i>
   fields: {
     <i>...</i>
@@ -282,10 +276,9 @@ var User = new Tyr.Collection({
     <i>...</i>
   }
 });
-</pre>
+</code></pre>
     <h3 id="population">Population</h3>
-<pre>
-<i>// Tyranid can traverse links and provide join-like functionality.</i>
+<pre><code class="js"><i>// Tyranid can traverse links and provide join-like functionality.</i>
 User.populate('org', users).then(function(users) {
   <i>// An <b>org$</b> property on each user will be added with an actual organization document.</i>
 });
@@ -308,11 +301,10 @@ user.$populate('roles.role');
 
 <i>// You can also pass in an array of property names to populate.</i>
 user.$populate([ 'org', 'roles.role' ]);
-</pre>
+</code></pre>
     <h4 id="advancedPopulation">Advanced Population</h4>
 <p>The advanced form of population allows you to perform nested populations and specify the projections of populations.</p>
-<pre>
-<i>// Population often uses an "$all" constant.  "Tyr.$all" is defined as "Tyr.$all = '$all'".  You might want to do the following:</i>
+<pre><code class="js"><i>// Population often uses an "$all" constant.  "Tyr.$all" is defined as "Tyr.$all = '$all'".</i>
 var Tyr  = require('tyranid'),
     $all = Tyr.$all;
 
@@ -327,8 +319,8 @@ user.$populate({ 'roles.role': { $all: 1, network: $all } });
 <i>// "$all: 1" can also be written "$all: $all".  If using ES6, this means it can be written as just "$all".
 // For example the previous can be written as:</i>
 user.$populate({ 'roles.role': { $all, network: $all } });
-</pre>
-<p>In general the values that can follow a property pathname are:</p>
+</code></pre>
+<p>The values that can follow a property pathname are:</p>
 <table>
  <tr><td style="width:70px">0</td><td><i>Means exclude this property.  Similar to MongoDB's projection.</i></td></tr>
  <tr><td>1</td><td><i>Means include this property.  Similar to MongoDB's projection.</i></td></tr>
@@ -345,8 +337,7 @@ you need a a few properties redundantly stored in a collection so you have more 
 copy of the Organization's name field redundantly on the User collection.  Similar to how population would store populated
 org data under a variable "org$", denormalized data will get stored as "org_".  In the following example, the org link would
 be available as "user.org" while the denormalized name would be available as "user.org_.name".</p>
-<pre>
-var User = new Tyr.Collection({
+<pre><code class="js">var User = new Tyr.Collection({
   <i>...</i>
   fields: {
     <i>...</i>
@@ -354,29 +345,26 @@ var User = new Tyr.Collection({
     <i>...</i>
   }
 });
-</pre>
+</code></pre>
     <h3>Validation</h3>
 <p>The following will run validations on the object and return an array of <a href="validationError.html">ValidationError</a>s:</p>
-<pre>
-user.$validate();
-</pre>
+<pre><code class="js">user.$validate();
+</code></pre>
 
     <h3 id="timestamps">Timestamps</h3>
 <p>If you set <b>timestamps: true</b> when defining your collection then Tyranid will update the timestamps <b>createdAt</b> and
 <b>updatedAt</b> when you create a new object using Tyranid's save() or insert() methods and it will update <b>updatedAt</b> when
 you use Tyranid's update() methods.</p>
-<pre>
-var MyCollection = new Tyr.Collection({
+<pre><code class="js">var MyCollection = new Tyr.Collection({
   <i>...</i>
   timestamps: true,
   <i>...</i>
 });
-</pre>
+</code></pre>
     <h3 id="uids">Universal IDs (UIDs)</h3>
 <p>Universal IDs are a way of polymorphically working with data.  For example, if you need to have an array of IDs
 from multiple collections UIDs will let you do this.</p>
-<pre>
-<i>// Returns "u00AF8...123".  <b>u00</b> was specified as the collection ID for User.</i>
+<pre><code class="js"><i>// Returns "u00AF8...123".  <b>u00</b> was specified as the collection ID for User.</i>
 User.idToUid(ObjectId('AF8...123'))
 
 <i>// returns "u00AF8...123" if user._id is ObjectId("AF8...123").</i>
@@ -389,10 +377,9 @@ Tyr.parseUid('u00AF8...123')
 Tyr.byUid('u00AF8...123').then(function(user) {
   <i>// <b>user</b> is a User instance with mongo ID ObjectId('AF8...123').</i>
 });
-</pre>
+</code></pre>
     <h3>Browser Serialization</h3>
-<pre>
-<i>// Returns a <b>User</b> instance while also performing security checks, converting the _id to a MongoId, validating data,
+<pre><code class="js"><i>// Returns a <b>User</b> instance while also performing security checks, converting the _id to a MongoId, validating data,
 // and so on.</i>
 User.fromClient({ _id: 'AF8...123', firstName: 'Jack', ... })
 
@@ -402,11 +389,10 @@ res.json(user.$toClient())
 
 <i>// Translates an existing object to the client when the object is not an instance of <b>User</b> (i.e. came directly from Mongo).</i>
 res.json(User.toClient(obj))
-</pre>
+</code></pre>
     <h3 id="paths">Paths</h3>
 <p><b>Paths</b> are a string-based syntax for referencing fields inside documents.  For example, the following structure:</p>
-<pre>
-{
+<pre><code class="js">{
   name: 'Jack',
   siblings: [
     { name: 'Jill' },
@@ -416,7 +402,7 @@ res.json(User.toClient(obj))
     state: 'WI'
   }
 }
-</pre>
+</code></pre>
 <p>has the following paths:</p>
 <table>
   <tr><td>name</td><td>'Jack'</td></tr>
@@ -425,16 +411,18 @@ res.json(User.toClient(obj))
   <tr><td>address.state</td><td>'WI'</td></tr>
 </table>
 </p>
-<p>Arrays have a special syntax.  When referring to the contents of an array in a generic sense, you use "._".  When referring to a
-particular element you use ".<i>array index</i>".</p>
-<p>For example, <b>siblings</b> refers to an array, <b>siblings._</b> refers to the type of contents of the array (an object), and
-<b>siblings._.name</b> refers to a specific property inside that object that is inside the array.</p>
-<p>Collections also contain a <a href="collection.html#fields">fields</a> hash which make it easier to work with paths.</p>
+<p>Collections contain a <a href="collection.html#fields"><u>fields</u></a> hash which make it easier to work with paths.</p>
+    <h4>Arrays</h4>
+<p>Arrays have a special syntax.  When referring to the contents of an array in a generic sense, you use "<u>._</u>".  When referring to a
+particular element you use "<u>.<i>array index</i></u>".</p>
+<p>For example, <u>siblings</u> refers to an array, <u>siblings._</u> refers to the type of contents of the array (an object), and
+<u>siblings._.name</u> refers to a specific property inside that object that is inside the array.</p>
+<p>This array syntax can be simplified (i.e. <u>siblings._.name</u> => <u>siblings.name</u>) in certain circumstances,
+for example when used inside MongoDB queries.</p>
     <h3>Static Data</h3>
 <p>Tyranid supports efficiently modeling static data as well.  This is good for modeling enumerations and linking to them.
 It also allows you to work with static and non-static data in an isomorphic way.</p>
-<pre>
-var Continent = new Tyr.Collection({
+<pre><code class="js">var Continent = new Tyr.Collection({
   id: 'c0a',
   name: 'continent',
   dbName: 'continents',
@@ -465,12 +453,12 @@ Continent.prototype.isContinent = function() {
 };
 
 <i>// This evaluates to true since the <b>enum</b> flag was turned on.  "NORTH_AMERICA" is derived from the name "North America"
-// since the <b>name</b> field was marked as the <b>label</b> for the Continent collection.</i>
+// since the <b>name</b> field was marked as the <b>labelField</b> for the Continent collection.</i>
 Continent.NORTH_AMERICA._id === 4332
 
 <i>// The static data instances are also instances of the collection so methods and behaviors are available.</i>
 Continent.NORTH_AMERICA.isContinent()
-</pre>
+</code></pre>
    <h2>License</h2>
 
    <p>The project is licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a>.
@@ -481,5 +469,8 @@ Continent.NORTH_AMERICA.isContinent()
 
    <p>If you have any questions, please send email to <a href="mailto:info@tyranid.org">info@tyranid.org</a>.</p>
   </div>
+
+  <script src="lib/highlightjs/highlight.pack.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
  </body>
 </html>

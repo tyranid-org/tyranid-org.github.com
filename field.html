@@ -35,6 +35,14 @@
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
+       <span class="sig">collection: <a href="collection.html">Collection</a></span>
+       <p>The collection that this field belongs to.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">def</span>
      </article>
 
@@ -43,6 +51,7 @@
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">label: String</span>
+       <p>This returns a label, or display name, for the field.</p>
      </article>
 
      <article id="labels">
@@ -52,7 +61,7 @@
        <span class="sig">labels(text: String?): [ { <i>_id</i>, <i>label field</i>: String } ]</span>
        <p>This generates a list of label objects that can be used to populate a typeahead dropdown.  This method is only available when the field is a <b>link</b>
        field.</p>
-       <p>This method also takes into account the <b>where</b> property on links when generating the list of labels.</p>
+       <p>This method also takes into account the <u>where</u> property on links when generating the list of labels.</p>
      </article>
 
      <article>

@@ -54,18 +54,38 @@
        <span class="sig">byLabel(label: String): <a href="document.html">Document</a></span>
      </article>
 
-     <article>
+     <article id="def">
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">def</span>
+       <pre>
+{
+  id: String,
+  name: String,
+  dbName<em>?</em>: String = name,
+  label<em>?</em>: String = labelize(name),
+  fields: {
+    <em>fieldName</em>: <a href="field.html#def">Field Def</a>,
+    <em>...</em>
+  },
+  methods<em>?</em>: {
+    <em>methodName</em>: {
+      fn<em>?</em>(<em>method parameters</em>) { <em>...</em> }       <i>// a single function for both client and server</i>
+      clientFn<em>?</em>(<em>method parameters</em>) { <em>...</em> } <i>// the function to use on the client</i>
+      serverFn<em>?</em>(<em>method parameters</em>) { <em>...</em> } <i>// the function to use on the server</i>
+    },
+    <em>...</em>
+  }
+}</pre>
      </article>
 
      <article>
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">fake()</span>
+       <span class="sig">fake({ n, schemaOpts, seed } = {}): n > 1 ? [ <a href="document.html">Document</a> ] : <a href="document.html">Document</a></span>
+       <p>This creates <u>n</u> fake documents (default is 1) for fields matching <u>schemaOpts</u> using the given <u>seed</u>.</p>
      </article>
 
      <article id="fields">
@@ -89,7 +109,7 @@
        <b class="async"></b>
        <span class="sig">find(...): Cursor&lt;<a href="document.html">Document</a>&gt;</span>
        <p>
-        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s find() method with the addition that results are wrapped in this
+        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>find()</u> method with the addition that results are wrapped in this
         collection's document type.
        </p>
      </article>
@@ -107,7 +127,7 @@
        <b class="async"></b>
        <span class="sig">findOne(...): <a href="document.html">Document</a></span>
        <p>
-        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s findOne() method except that the results are wrapped in this collection's
+        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>findOne()</u> method except that the results are wrapped in this collection's
         document type.
        </p>
      </article>
@@ -118,7 +138,7 @@
        <b class="async"></b>
        <span class="sig">findAndModify(...)</span>
        <p>
-        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s findAndModify() method except that the results are wrapped in this collection's
+        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>findAndModify()</u> method except that the results are wrapped in this collection's
         document type.
        </p>
      </article>
@@ -149,7 +169,7 @@
        <b class="client"></b>
        <span class="sig">insert(doc: <a href="document.html">Document</a> | Object)</span>
        <p>
-        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s insert() method but also
+        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>insert()</u> method but also
         does things like <a href="index.html#timestamps">timestamps</a>, <a href="index.html#denormalization">denormalization</a>, and so on.
        </p>
      </article>
@@ -178,7 +198,7 @@
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">labelField: <a href="field.html">Field</a></span>
-       <p>If this collection has a field that is marked with <b>labelField</b> this returns the that field.</p>
+       <p>If this collection has a field that is marked with <u>labelField</u> this returns the that field.</p>
      </article>
 
      <article>
@@ -186,7 +206,7 @@
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">labelFor(doc: <a href="document.html">Document</a> | Object)</span>
-       <p>This returns the label for the specified document.  If <b>doc</b> is a Document, then this is equivalent to "doc.$label".
+       <p>This returns the label for the specified document.  If <b>doc</b> is a Document, then this is equivalent to <u>doc.$label</u>.
         This method is mostly useful for when you have a raw Object that you want to get the label for.</p>
      </article>
 
@@ -197,7 +217,7 @@
        <b class="async"></b>
        <span class="sig">labels(text: String): [ { _id, <i>label field</i>: String } ]</span>
        <p>This generates a list of label objects that can be used to populate a typeahead dropdown.</p>
-       <p>Generally prefer to use <a href="field.html#labels">Field.labels()</a> over this as it can take advantage of the <b>where</b> property on link fields.</p>
+       <p>Generally prefer to use <a href="field.html#labels"><u>Field.labels()</u></a> over this as it can take advantage of the <u>where</u> property on link fields.</p>
      </article>
 
      <article id="populate">
@@ -229,7 +249,7 @@
        <b class="async"></b>
        <span class="sig">remove(id | query: Object, justOne: Boolean?)</span>
        <p>
-        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s remove() method.
+        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>remove()</u> method.
        </p>
      </article>
 
@@ -240,7 +260,7 @@
        <b class="async"></b>
        <span class="sig">save(doc: <a href="document.html">Document</a> | Object | [ <a href="document.html">Document</a> | Object ] ): <a href="document.html">Document</a></span>
        <p>
-         This method will either update or save object based on whether it has an _id.
+         This method will either update or insert the object based on whether it has an _id.
        </p>
        <p>
          When updating, only fields present in the updating <b>doc</b> are altered.  Existing properties that are not present in <thead>
@@ -263,7 +283,7 @@
        <b class="async"></b>
        <span class="sig">update(query, update, opts)</span>
        <p>
-        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s update() method.  It also will
+        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>update()</u> method.  It also will
         update timestamps if this collection is configured to use them.
       </p>
      </article>
@@ -299,10 +319,10 @@
       <b class="server"></b>
       <span class="sig">pre(methods: String | [ String ], cb: Function): this</span>
       <ul>
-        <li>methods: String | [ String ] -- methods method name or array of method names to add pre hook.
-        <li>cb: Function(next, ...args) -- hook callback
-        <li>cb.next: Function -- if modifying arguments, return next(modifiedArgs)
-        <li>cb.args: [ Function ] -- original method args
+        <li><u>methods</u>: String | [ String ] -- methods method name or array of method names to add pre hook.
+        <li><u>cb</u>: Function(next, ...args) -- hook callback
+        <li><u>cb.next</u>: Function -- if modifying arguments, return next(modifiedArgs)
+        <li><u>cb.args</u>: [ Function ] -- original method args
       </ul>
       <p>
        Add a pre hook
@@ -314,10 +334,10 @@
       <b class="server"></b>
       <span class="sig">post(methods, cb): this</span>
       <ul>
-       <li>methods: String | [ String ] -- method name or array of method names to add post hook
-       <li>cb: Function(next, result) -- hook callback
-       <li>cb.next: Function -- if modifying result, return next(modifiedResult)
-       <li>cb.result: [ Function ] -- original method result
+       <li><u>methods</u>: String | [ String ] -- method name or array of method names to add post hook
+       <li><u>cb</u>: Function(next, result) -- hook callback
+       <li><u>cb.next</u>: Function -- if modifying result, return next(modifiedResult)
+       <li><u>cb.result</u>: [ Function ] -- original method result
       </ul>
       <p>
        Add a post hook
@@ -330,7 +350,7 @@
       <b class="server"></b>
       <span class="sig">unhook(methods): this</span>
       <ul>
-       <li>methods: String | [ String ] -- Method or methods. Unhooks all methods if unspecified.
+       <li><u>methods</u>: String | [ String ] -- Method or methods. Unhooks all methods if unspecified.
       </ul>
       <p>
        Remove hooks for a particular method. Needs to be called once per pre/post() call.

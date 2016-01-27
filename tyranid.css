@@ -79,7 +79,7 @@ h3 {
   color: #f70;//#6666aa;
   //text-shadow: 2px 2px #bbb;
   margin: 42px 0 0;
-  border-top: 1px solid #f70;
+  border-top: 1px solid #830;
  }
 h4 {
   font-size:18px;
@@ -87,18 +87,28 @@ h4 {
   color: #a50;//#6666aa;
   margin: 0;
 }
-pre {
+pre, code {
   font-family: 'Lekton', courier, serif;
+  font-size: 16px;
   color: #000;
+}
+pre {
   background:#f8f8f8;
   padding: 4px;
   -webkit-box-shadow:2px 2px 2px #aaa;
+}
+pre em {
+  color: #F70;
+}
+u {
+  font-family: 'Lekton', courier, serif;
+  text-decoration: none;
 }
 p {
   font-family: 'Metrophobic', arial, serif;
 }
 pre i {
-  font-style: normal;
+  //font-style: normal;
   color: #888;
 }
 pre b { color: #444; }
@@ -127,14 +137,14 @@ td {
 }
 
 a {
-  color: #a50;
+  color: #c60;
   text-decoration: none;
 }
 a:hover {
   border-bottom: 1px solid #f70;
 }
 a:visited {
-  color: #630;
+  color: #840;
 }
 
 .note {
@@ -165,7 +175,7 @@ article i {
   font-weight: bold;
 }
 
-.async::after, .method::after, .property::after, .client::after, .server::after {
+.async::after, .class::after, .method::after, .property::after, .client::after, .server::after {
   display: block;
   float: right;
   margin: 4px 0 0 8px;
@@ -190,6 +200,13 @@ article i {
 .method::after {
   content: 'method';
   background: #808;
+}
+
+.class {
+}
+.class::after {
+  content: 'class';
+  background: #C08;
 }
 
 .property {
