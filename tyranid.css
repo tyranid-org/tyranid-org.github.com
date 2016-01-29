@@ -98,7 +98,8 @@ pre {
   -webkit-box-shadow:2px 2px 2px #aaa;
 }
 pre em {
-  color: #F70;
+  font-weight: bold;
+  color: #000;
 }
 u {
   font-family: 'Lekton', courier, serif;
@@ -120,21 +121,50 @@ pre b { color: #444; }
   width:1024px;
   -webkit-box-shadow:2px 2px 2px #aaa;
 }
+
+/*
+ * Tables
+ */
+
 table {
   margin: 0;
-  background: #ddd;
+  background: #eee;
   -webkit-box-shadow:2px 2px 2px #aaa;
 }
-
+table th {
+  background: #ddd;
+  border-bottom: 2px solid #000;
+  padding: 6px 12px;
+}
 tr:nth-child(odd) {
   background: #fff;
 }
 tr:nth-child(even) {
-  background: #eee;
+  background: #fcfcfc;
 }
 td {
   padding: 6px 12px;
 }
+
+/*
+ * .def Tables
+ */
+
+table.def {
+  width: 100%;
+}
+table.def tr td:nth-child(1) {
+  white-space: pre;
+  font-family: 'Lekton', courier, serif;
+}
+table.def td {
+  padding: 0 8px;
+}
+table.def tr td.subtitle {
+  font-family: 'Metrophobic', arial, serif;
+  background: #eee;
+}
+
 
 a {
   color: #c60;
@@ -173,6 +203,9 @@ article i {
   font-size: 24px;
   color: #000;
   font-weight: bold;
+  font-family: 'Lekton', courier, serif;
+  position: relative;
+  top: 4px;
 }
 
 .async::after, .class::after, .method::after, .property::after, .client::after, .server::after {

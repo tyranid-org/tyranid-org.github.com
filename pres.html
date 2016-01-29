@@ -13,7 +13,7 @@
 
     <section>
       <h1>Tyranid</h1>
-      <h3>Metadata Library</h3>
+      <h3>Metadata Framework</h3>
     </section>
 
     <section>
@@ -34,10 +34,11 @@
 
     <section>
       <img style="width:200px;float:left;" src="http://resizing.flixster.com/yszvPthlkrX45eftLPJUgCcPzTo=/800x1200/dkpu1ddg7pbsk.cloudfront.net/movie/11/18/07/11180795_ori.jpg">
+      <img style="width:200px;float:right;" src="http://cdn.collider.com/wp-content/uploads/aliens-movie-image.jpeg">
       <h4>Alien</h6>
       <div>Directed by Ridley Scott</div>
       <div style="margin-bottom:32px;">Released 1979.</div>
-      <ul>
+      <ul style="width:400px;">
         <li>Xenomorph spiritual descendents of "The Bugs"
         <li>Actors were required to read "Starship Troopers"
       </ul>
@@ -46,6 +47,7 @@
 
     <section>
       <img style="width:200px;float:left;" src="https://upload.wikimedia.org/wikipedia/en/b/b8/Rogue_trader_cover.jpg">
+      <img style="width:200px;float:right;" src="http://vignette2.wikia.nocookie.net/warhammer40k/images/5/57/Tyrant.JPG/revision/latest?cb=20080610113817">
       <h4>Warhammer 4o,ooo</h6>
       <div>Created by Rick Priestley</div>
       <div style="margin-bottom:32px;">Released 1987.</div>
@@ -75,11 +77,18 @@
     <section>
       <h3>Different Types of Intelligence</h3>
 
-      <ul>
-        <li>Vertebrate (humans, mammals, reptiles, ...)
-        <li>Invertebrate (ants, bees, ...)
-        <li>Cephalopod (octopus)
-      </ul>
+      <div style="margin-bottom:16px;">Vertebrate
+       <div style="height:200px;position:relative;top:-12px;">
+        <img style="height:200px;" src="http://www.scoopify.org/wp-content/uploads/2015/08/Facts-About-Dolphin-4.jpg">
+        <div style="height:190px;position:relative;top:-15px;width:300px;display:inline-block;border:4px solid #000;background:url(http://watchdogwire.wpengine.netdna-cdn.com/florida/files/2013/07/dumb-and-bumber-630x286.jpg) no-repeat 50% 50%"></div>
+       </div>
+      </div>
+      <div style="float:right;">Cephalopod
+       <img style="height:200px;display:block;margin:8px auto;" src="https://i.ytimg.com/vi/SQvNFt2cHys/maxresdefault.jpg">
+      </div>
+      <div>Invertebrate
+       <img style="height:200px;display:block;margin:8px auto;" src="http://goodnewsfl.org/wp-content/uploads/2012/07/390_ants.jpg">
+      </div>
     </section>
 
     <section>
@@ -92,7 +101,20 @@
     <section>
       <h3>Most Software is Clockwork</h3>
       <img style="height:300px" src="http://a.rgbimg.com/cache1so8Gd/users/x/xy/xymonau/300/nvTlYMm.jpg">
-      <h3>Tyranid tries to make it more like a Hive Mind</h3>
+      <h3>Tyranid tries to make it more like a <strike>Hive Mind</strike></h3>
+      <h3>Collective Intelligence</h3>
+    </section>
+
+    <section>
+      <div style="float:left">
+       <h3>More Like</h3>
+       <img style="height:250px" src="http://vignette2.wikia.nocookie.net/memoryalpha/images/e/e6/Sensor_activity_063268.jpg/revision/latest?cb=20100118182542&path-prefix=en">
+     </div>
+
+      <div style="float:right">
+       <h3>Than</h3>
+       <img style="height:250px" src="http://img08.deviantart.net/371d/i/2013/025/1/3/hal_9000_wall2013_by_vectorgeek-d5sp2sr.jpg">
+     </div>
     </section>
 
     <section>
@@ -106,40 +128,56 @@
       </ul>
     </section>
 
-    <section>
-   database as a series of logical assertions
-    </section>
+    <!--section>
+      <h3>Database as a series of logical assertions</h3>
 
-    <section>
+      <table style="margin-top:64px;">
+        <tr>
+          <th>Name<th>Age<th>Location
+        <tr>
+          <td>Amy<td>33<td>Austin, TX
+      </table>
+      <hr>
+
+      <pre style="width:auto;display:inline;padding:8px;margin-top:160px;">( name = 'Amy' &#8743; age = 33 &#8743; location = Austin, TX ) = true</pre>
+
+      <div style="display:none;margin-top:16px;">Horn Clauses</div>
+    </section-->
+
+    <!--section>
    tyranid as a form of limited AI
 
       /. typical imperative programming computer doesn't know what it's doing,
          mostly still the same case with tyranid but slightly less so
-    </section>
+    </section-->
 
-    <section>
+    <!--section>
    SQL databases had this idea but never went very far with it
 
+    </section-->
+
+    <section>
+      <h4>Information Management System (IMS)</h4>
+        <div style="font-size:20px;margin-top:-16px;">vs.</div>
+      <h4>Database Management System (DBMS)</h4>
+
+      <div style="margin-top:-80px;height:500px;width:900px;display:inline-block;background:url(img/IMS.png) no-repeat 50% 50%"></div>
+
+      <div>This problem is best solved in a layer outside of a DBMS because the ultimate answer
+         spans multiple types of DBMSes, search engines, applications, etc.</div>
+
     </section>
 
     <section>
-   DBMS => IMS
-
-      /. data -> information -> etc. graph
-
-      /. diagram showing IMS containing multiple DBMS
-
-      /. this problem is best solved in a layer outside of a DBMS because the ultimate answer
-         spans multiple types of DBMSes, search engines, applications, etc.
-
+      <img style="background:none;border:none;height:500px;box-shadow:none;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DIKW_Pyramid.svg/2000px-DIKW_Pyramid.svg.png">
     </section>
 
     <section>
      <h2>Philosophy</h2>
 
      <ul>
-       <li>a framework designed to be used like a library
-       <li>incremental building of features as needed
+       <li>data-first framework (tyranid) vs. ui-first framework (angular, ember, meteor, etc.)
+       <li>pragmatism:  incremental building of features as needed
      </ul>
 
     </section>
@@ -149,12 +187,46 @@
     </section>
 
     <section>
-      updated documentation
+      <h3>Updated documentation</h3>
+
+      <a href="http://tyranid.org">http://tyranid.org</a>
     </section>
 
     <section>
-   discussion of express/client-side use
+      <h3>Client Support</h3>
 
+      <ul style="font-size:24px;">
+        <li>Client-side versions of classes are generated automatically from metadata.
+        <li>Supports client-side, server-side, and isomorphic properties and methods
+        <li>Automatic route handlers to enable methods like <u>$save()</u> on the client.
+      </ul>
+
+      <div><a href="index.html#client">more information</a></div>
+    </section>
+
+    <section>
+      <h3>Link Constraints</h3>
+
+<pre style="margin-top:36px;width:95%;"><code class="js">var User = new Tyr.Collection({
+  <i>...</i>
+  fields: {
+    <i>...</i>
+    // Managers have to be in the same organization as the user.
+    manager:   { link: 'user', where: { organizationId: $this.organizationId } },
+    <i>...</i>
+  }
+});</code></pre>
+      <a href="index.html#links">more information</a>
+    </section>
+
+    <section>
+      <h3>Paths and Fields</h3>
+
+      <ul style="font-size:24px;">
+        <li>Field object allows an API at the Field level.  For example, <a href="field.html#labels"><u>Field.labels()</u></a> method provides automated type-ahead dropdown support.
+        <li>Available on client making it easier to write automated UI.
+        <li>Paths make it easier to work with form UI controls.
+      </ul>
     </section>
 
     <section>
@@ -162,27 +234,51 @@
     </section>
 
     <section>
-   programmatic security
+      <h3>Declarative Security</h3>
+    </section>
+
     </section>
 
     <section>
-   client-side validation
+      <h3>Client-side validation</h3>
+
+      <p>(implement <u>doc.$validate()</u>)</p>
     </section>
 
     <section>
-   angular directives
+      <h3>Angular Directives</h3>
+      <pre><code class="js">&lt;tyr-input doc="user" field="organizationId">&lt;/tyr-input></code></pre>
+      <ul style="font-size:20px;">
+        <li>Knows to render as dropdown because of link metadata.
+        <li>Filters dropdown according to declarative security.
+      </ul>
+      <pre><code class="js">&lt;tyr-field doc="user" field="organizationId">&lt;/tyr-field></code></pre>
+      <div style="font-size:20px;">All the above plus:</div>
+      <ul style="font-size:20px;">
+        <li>Provides correct label based on metadata.
+        <li>Generates automatic tooltip based on metadata.
+      </ul>
+      <pre><code class="js">&lt;tyr-form doc="user">&lt;/tyr-form></code></pre>
+      <div style="font-size:20px;">Generates an entire form using series of &lt;tyr-field>s.</div>
     </section>
 
     <section>
-      /. rich types
+      <h3>More Types</h3>
 
-         /. 'address' / 'latLong' that automatically integrates google maps / provides addresses / etc.
-
-         /. 'image' that automatically deals with S3 uploads
+      <ul>
+        <li>'address' / 'latLong' types that automatically integrates google maps / provides addresses / etc.
+        <li>'image' that automatically deals with S3 uploads
+        <li>...
+      </ul>
     </section>
 
     <section>
-      more hooks into user management/authentication
+      <h3>More Testing</h3>
+
+      <ul>
+        <li>Rest API
+        <li>Client
+      </ul>
     </section>
 
     <section>
@@ -191,135 +287,159 @@
 
     <section>
       <h3>Live Data</h3>
-      /. use pubnub to keep data automatically updated
+
+      <p>Leverage client-side metadata, declarative security, and a service like PubNub to enable eas<strike>y</strike>ier "Live Data".
+
+      <p>Enable something like the following, where a client-side document can register to get updates on itself:
+
+      <pre><code class="js">user.$live(...);</code></pre>
     </section>
 
     <section>
-      /. automated ui generation
+      <h3>More Automated UI Generation</h3>
 
-         /. ben's charting is an example of this
+      <p>Ben's charting is a great example of this.</p>
     </section>
 
     <section>
-      "smart" logging system
+      <h3>"Smart" Logging System</h3>
     </section>
 
     <section>
-      manage sessions
+      <h3>Session management</h3>
     </section>
 
     <section>
-      /. track usage by monitoring routes
+      <h3>Usage Tracking</h3>
 
-         /. since routes are associated with data, tyranid can capture not only what
-            parts of the app are being used, but what parts of the database
+      <p>Since Tyranid has more context, it can do better usage tracking.</p>
 
-         /. what users have viewed this document?
+      <p>Since routes are associated with data, Tyranid can capture not only what
+            parts of the app are being used, but what parts of the database.</p>
+
+        <p>"what users have viewed this document?"</p>
     </section>
 
     <section>
-      /. auditing ... with smart logging, sessions, and usage tracking auditing becomes possible
+      <h3>Auditing</h3>
+
+      <p>With (1) smart logging, (2) sessions, and (3) usage tracking automated Auditing becomes possible.</p>
     </section>
 
     <section>
-      /. automatic population, ETL, and synchronization of a data warehouse & hadoop cluster & summary/rollup collections, etc.
-         based on metadata
+      <h3>Warehousing</h3>
+
+      <p>Perform
+      <ul>
+        <li>automatic population, ETL, and synchronization of a data warehouse
+        <li>... hadoop cluster
+        <li>... summary/rollup collections, etc.
+        <li>... Spark
+      </ul>
+      automatically based on metadata
     </section>
 
     <section>
-      /. automatic management and integration with search subsystem (amazon search or elasticsearch, etc.)
+      <h3>Search</h3>
+
+      <p>Automatic management and integration with search subsystem (amazon search or elasticsearch, etc.)
     </section>
 
     <section>
-      /. deeper integration with temporal mongo
+      <h3>Temporal Mongo</h3>
+
+      <p>Deeper integration with temporal-mongo
     </section>
 
     <section>
-      /. database refactoring / migration
+      <h3>Database Refactoring / Migration Operations</h3>
+
+      <p>An example is "intelligent deletion"
     </section>
 
     <section>
-      /. intelligent deletion
+      <h3>More Constraints and Rules Metadata</h3>
+
+      <p>Have some of this already with validation and link constraints.
     </section>
 
     <section>
-      /. constraints / rules
+      <h3>Automatic Archival</h3>
+      <p>Automatic archival of old data (i.e. into a separate cluster, then maybe into amazon glacier)
     </section>
 
     <section>
-      /. automatic archival of old data (i.e. into a separate cluster, then maybe into amazon glacier)
+      <h3>Database Deployment Management</h3>
+
+      <p>This enables advanced database refactoring operations.
+
+      <p>i.e. "move this collection onto its own cluster".
     </section>
 
     <section>
-      /. database deployment management
-    </section>
+      <h3>Query Optimization</h3>
 
-    <section>
-      /. query optimization
+      <ul>
+        <img style="float:right;height:300px;" src="http://akamaicovers.oreilly.com/images/9780596005733/lrg.jpg">
+        <li>Using logging, keep a log of queries against mongo and suggest/manage indices that should be created/removed.
 
-         /. keep a log of queries against mongo and suggest/manage indices
-            that should be created/removed
+        <li>Cross referencing of query timings with route logging is powerful ...
 
-         /. http://shop.oreilly.com/product/9780596005733.do
+            i.e. "What are the top 10 slowest high traffic api links and why are they slow?"
 
-         /. cross referencing of query timings with route logging is powerful ...
+         <li>Ability to create data warehouses/summary collections automatically provides enhanced optimization
+            possibilities ... if a query is super high traffic and can be queried lots of different ways might
+            be better to create a summary table on it than 15 different indices.
 
-            /. "what are the top 10 slowest high traffic api links and why are they slow"
-
-         /. ability to create data warehouses/summary collections automatically provides enhanced optimization
-            possibilities ... if a query is super high traffic and can be queries lots of different ways might
-            be better to create a summary table on it than 15 different indices
-
-         /. if database deployment management is integrated, solution might also be to allocate a larger cluster, etc.
+         <li>If database deployment management is integrated, solution might also be to allocate a larger cluster, etc.
 
     </section>
 
     <section>
-      /. smart grid / tables
+      <h3>Smart Grid / Tables</h3>
 
-         /. handle paging/slicing & dicing/aggregation/query optimization automatically
+      <ul>
+        <li>Automatic Paging
+        <li>Pivot Tables, Slicing & Dicing
+        <li>Multi-column Support
+        <li>Export (and Import)
+        <li>Save Table/Queries (similar to Jira's smart table UI)
+        <li>Automatic Query Optimization
+      </ul>
     </section>
 
     <section>
-      /. data analysis automation/assistance of tyranid data; maybe spark integration
-    </section>
+      <h3>Tyranid Console</h3>
 
-    <section>
-      /. tyranid console
-         /. show who's online, what routes they are using, etc.
-
-         /. online automated documentation that contains live statistics
-
-         /. data browser
-
-            /. what links to this documentPrototype?  ability to surf links
-
-            /. who has access to read/write this document?
-
-            /. edit data directly
-
-            /. user A was hacked, what all did they look at?
-
-            /. query data directly
-
-               /. similar to a mongo api but with incorporation of all the metadata,
+      <ul>
+        <li>Show who's online, what routes they are using, etc.
+        <li>Online automated documentation that contains live statistics
+        <li>Data Browser
+          <ul>
+            <li>What links to this document?  Ability to surf links.
+            <li>Who has access to read/write this document?
+            <li>Edit data directly
+            <li>User A was hacked, what all did they look at?
+            <li>Query data directly -- similar to a mongo api but with incorporation of all the metadata,
                   knowledge of UIDs, etc.
+            <li>Show how data changed -- with temporal, session, user, logging, etc. data tyranid can build
+                  up a complete picture of how a piece of data came to be the way it is ...
 
-            /. show how data changed
-
-               /. with temporal, session, user, logging, etc. data tyranid can build
-                  up a complete picture of how a piece of data came to be the way it is
-
-                  i.e. "document was created by user _ at _ via the _ application"
+                  i.e. "document was created by user X at Y via the Z application"
+          </ul>
+      </ul>
     </section>
 
     <section>
-         /. "admin UI" can basically be automated
+      <h3>Jarvis for your data</h3>
     </section>
 
     <section>
-         /. jarvis for your data
+      <h5>Roadmap</h5>
+      <img style="border:none;box-shadow:none;background:none;" src="img/Roadmap.png">
     </section>
+
+    <!-- users being able to add fields by themselves -->
 
     <section>
       <h1>Thank you</h1>
@@ -330,7 +450,9 @@
   </div>
   <script src="lib/reveal.js/js/reveal.js"></script>
   <script>
-    Reveal.initialize();
+    Reveal.initialize({
+      history: true
+    });
   </script>
  </body>
 </html>

@@ -52,7 +52,8 @@
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">$label: String</span>
+       <span class="sig">$label: string</span>
+       <p>This returns the label for this document.  See <a href="index.html#labels">labels</a>.
      </article>
 
      <article>
@@ -67,7 +68,7 @@
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">$populate(fields, <a href="index.html#denormalization">denormal</a>: Boolean)</span>
+       <span class="sig">$populate(fields, <a href="index.html#denormalization">denormal</a>: boolean): this</span>
        <p>
          This is equivalent to <u>doc.$model.<a href="collection.html#populate">populate(fields, doc, denormal)</a></u>.
        </p>
@@ -82,19 +83,28 @@
        <b class="client"></b>
        <b class="async"></b>
        <span class="sig">$save(): <a href="document.html">Document</a></span>
+       <p>
+         This method will either update or insert the object based on whether it has an _id.
+         When updating, only fields present in the updating doc are altered. Existing properties that are not present
+         in update object will not be removed (i.e. $save() does not do a replace).
+       </p>
+       <p>If the document ends up being inserted, the document returned by this method will have its <u>_id</u> set.
      </article>
 
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">$toClient(): POJO</span>
+       <span class="sig">$toClient(): object</span>
+       <p>
+        This creates a new POJO out of this document.  Values are copied by reference (not deep-cloned!).
+       </p>
      </article>
 
      <article>
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">$uid: String</span>
+       <span class="sig">$uid: string</span>
        <p>This returns the <a href="index.html#uids">UID</a> for this document.</p>
      </article>
 
@@ -108,7 +118,7 @@
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">$validate(): [ <a href="validationError.html">ValidationError</a> ]</span>
+       <span class="sig">$validate(): <a href="validationError.html">ValidationError</a>[]</span>
        <p>This validates the current document according to the validation rules specified by the metadata for this collection.</p>
      </article>
 

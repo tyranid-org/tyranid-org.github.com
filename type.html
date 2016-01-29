@@ -54,45 +54,54 @@
         <li>url
        </ul>
      </p>
+     <p>See <a href="field.html#def">Field.def</a> for information on type-specific Field options.</p>
+     <p>When creating your own types, they will get automatically registered with Tyranid via the new <u>Tyr.Type()</u> constructor.</p>
      </div>
 
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <b class="client"></b>
-       <span class="sig">compile(compiler, <a href="index.html#paths">path</a>, field)</span>
+       <span class="sig">compile(compiler: Compiler, <a href="index.html#paths">path</a>: string, field: <a href="field.html">Field</a>): void</span>
+       <p>
+         Any schema validation can be done inside this method.  For example, ArrayTypes verify that the field has a valid "of" property.
+       </p>
      </article>
 
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">fromString(str)</span>
+       <span class="sig">fromString(str: string): any</span>
+       <p>This method will be used by Tyranid to coerce strings to this data type.</p>
      </article>
 
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">fromClient(field, value)</span>
+       <span class="sig">fromClient(field: <a href="field.html">Field</a>, value: any): any</span>
+       <p>This method will be used by Tyranid to convert incoming data from the client into server objects.  For example, MongoId types will
+         convert client-side MongoID strings into server-side <u>ObjectId</u> objects.</p>
      </article>
 
      <article>
        <b class="property"></b>
        <b class="server"></b>
-       <b class="client"></b>
-       <span class="sig">name</span>
+       <span class="sig">name: string</span>
+       <p>Contains the name of this type.</p>
      </article>
 
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">toClient(field, value)</span>
+       <span class="sig">toClient(field: <a href="field.html">Field</a>, value: any): any</span>
+       <p>This method will be used by Tyranid to convert server data into JSON suitable for the client.  For example, MongoId types will
+         convert server-side <u>ObjectId</u>s into client-side MongoID strings.</p>
      </article>
 
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <b class="client"></b>
-       <span class="sig">validate(<a href="index.html#paths">path</a>, field, value)</span>
+       <span class="sig">validate(field: <a href="field.html">Field</a>, value: any): <a href="validationError.html">ValidationError</a></span>
+       <p>This is used by Tyranid to validate fields of this type.</p>
      </article>
   </div>
  </body>

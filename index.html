@@ -35,7 +35,7 @@
 
   <div class="content">
    <h1>Tyranid.js</h1>
-   <p><b>Tyranid</b> is a JavaScript-based, free, open-source, promise-based <b>metadata</b> library for generically working with data.</p>
+   <p><b>Tyranid</b> is a JavaScript-based, free, open-source, promise-based <b>metadata framework</b> for generically working with data.</p>
    <p>Tyranid currently works primarily with MongoDB and can act as an ODM for MongoDB.</p>
 
    <h2>Status</h2>
@@ -64,6 +64,9 @@
 
    <h2>Guide</h2>
 
+
+
+
    <h3>Setup</h3>
 
    <pre><code class="js">var pmongo = require('promised-mongo'),
@@ -91,6 +94,9 @@ Tyr.config({
 });
 </code></pre>
 
+
+
+
    <h3>Types</h3>
 <p>You can define your own types.  Types can specify code to serialize to/from the browser, validation code, and so on.</p>
 <pre><code class="js">new Tyr.Type({
@@ -108,6 +114,9 @@ Tyr.config({
   }
 });
 </code></pre>
+
+
+
 
    <h3>Schemas</h3>
 
@@ -149,7 +158,7 @@ var User = new Tyr.Collection({
     comments:   { is: 'string',
                   <i>// <b>help</b> contains user-facing documentation that could be used in, for example, a tool tip.</i>
                   help: 'Place any public comments you would like to make here.',
-                  <i>// <b>notes</b> contains internal, developer documentation.</i>
+                  <i>// <b>note</b> contains internal, developer documentation.</i>
                   notes: 'Used for various notes that the user sets themselves.' },
     roles:      { is: 'array', of: _.cloneDeep(RoleEntry) }
   },
@@ -170,7 +179,7 @@ User.prototype.fullName = function {
 (Tyr.byName('user') instanceof Tyr.Collection) === true
 </code></pre>
 
-     <h4>Dynamic Schemas</h4>
+     <h4 id="dynamicSchemas">Dynamic Schemas</h4>
 <p>Tyranid also supports <b>dynamic schemas</b> that can be added at runtime via storing metadata in the database.
 The following adds a "westTotal" property to User but only for users that belong to Organization 1:</p>
 <pre><code class="js">Tyr.byName('tyrSchema').save({
@@ -189,6 +198,9 @@ The following adds a "westTotal" property to User but only for users that belong
 <p>You can get a list of fields that apply to a specific document using <b>fieldsFor</b>:</p>
 <pre><code class="js">const fields = await User.fieldsFor({ org: 1 });
 </code></pre>
+
+
+
 
     <h3>Finding & Saving</h3>
 <pre><code class="js">var user = new User();
@@ -235,7 +247,28 @@ User.byId(ObjectId('AF8...123')).then(function(user) {
 <i>// Same as User.db.remove()</i>
 User.remove({ _id: id });
 </code></pre>
-    <h3>Labels</h3>
+
+
+
+
+
+    <h3 id="labels">Labels</h3>
+
+<p>Labels can be defined for documents using the <u>labelField</u> option:</p>
+
+<pre><code class="js">var Continent = new Tyr.Collection({
+  <i>...</i>
+  fields: {
+    <i>...</i>
+    <i>// <b>labelField</b> indicates that this field is the label value for this collection.</i>
+    name:       { is: 'string', labelField: true },
+    <i>...</i>
+  }
+});
+</code></pre>
+
+<p>Examples using labels are:</p>
+
 <pre><code class="js"><i>// Finds the document in an emum collection where the label is equal to the given label.</i>
 let country = Country.byLabel('Germany');
 
@@ -244,12 +277,16 @@ Country.labelFor(country)
 
 <i>// The same method is available on document instances as a dynamic property as well:</i>
 country.$label
+</code></pre>
 
-<i>// Collections and Fields also support a <b>label</b> property.  If no label is provided one will be generated from the <b>name</b>.</i>
-User.label                    <i>=> 'User'</i>
+<p>Collections and Fields also support a <b>label</b> property.  If no label is provided one will be generated from the <b>name</b>.</p>
+<pre><code class="js">User.label                    <i>=> 'User'</i>
 User.def.fields.userId.label  <i>=> 'User ID'</i>
 User.def.fields.email.label   <i>=> 'Email'</i>
 </code></pre>
+
+
+
 
     <h3>Fields</h3>
 <pre><code class="js"><i>// Fields support a <b>name</b> property.</i>
@@ -259,7 +296,47 @@ User.def.fields.email.name <i>=> 'email'</i>
 User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
 </code></pre>
 
-    <h3>Computed Values</h3>
+
+
+
+    <h3 id="links">Links</h3>
+
+<p>Fields of type <u>link</u> support a <u>where</u> property.  For example:</p>
+
+<pre><code class="js">var User = new Tyr.Collection({
+  id : 'u00',
+  name: 'user',
+  fields: {
+    <i>...</i>
+    <i>// Managers have to be in the same organization as the user.</i>
+    manager:   { link: 'user', where: { organizationId: $this.organizationId } },
+    <i>...</i>
+  }
+});
+</code></pre>
+
+
+
+
+    <h3 id="client">Client</h3>
+<p>Tyranid will automatically generate collections, fields, and so on for use on the client based upon the server metadata.</p>
+<p>Only collections that have <u>client: true</u> will have their metadata sent to the client.  By default collections are server-only.</p>
+<p>Client-side Tyranid is enabled by the following two steps:</p>
+<ol>
+  <li>Initialize routing.  <u>express</u> is the instance returned by <u>express()</u>.  <u>auth</u> is a callback that will be placed ahead
+    of all routes (you can do additional authorization in this function).
+<pre><code class="js">Tyr.express(express, auth);</code></pre>
+  <li>Import client-side code into your browser session:
+<pre>&lt;script src="/api/tyranid">&lt;/script></pre>
+</ol>
+
+<p>The Tyranid namespace is available on the client as <u>window.Tyr</u>.</p>
+<p style="width:904px;"><b class="client"></b>Methods, properties, and classes that are available on the client are identified in the documentation by the client tag:</p>
+
+
+
+
+    <h3 id="computedProperties">Computed Properties</h3>
 <p>Computed values can be created by specifying a <u>get</u> option on a property.  By default computed values will:
   <ol>
     <li>not be stored in the database unless the <u>db</u> property is set to true, and
@@ -277,6 +354,34 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
   }
 });
 </code></pre>
+<p>By default <u>get</u> methods are isomorphic if <a href="#client">client-side functionality</a> is enabled.  If you want the function to only appear
+on the server you can use <u>serverGet</u> instead.  You can also optionally specify a client-specific version using <u>clientGet</u>.
+
+<h4>Set</h4>
+
+<p><u>set</u>, <u>clientSet</u>, <u>serverSet</u> also exist to provide a programmatic setter for properties as well.</p>
+
+
+
+    <h3 id="methods">Methods</h3>
+<p>Tyranid supports defining methods in metadata.</p>
+
+<pre><code class="js">var User = new Tyr.Collection({
+  <i>...</i>
+  methods: {
+    <i>methodName</i>: {
+      fn(<i>parameters</i>) { <i>...</i> },
+    },
+    <i>...</i>
+  },
+  <i>...</i>
+});
+</code></pre>
+
+<p>By default <u>fn</u> methods are isomorphic if <a href="#client">client-side functionality</a> is enabled.  If you want the method to only appear
+on the server you can use <u>serverFn</u> instead.  You can also optionally specify a client-specific version using <u>clientFn</u>.
+
+
     <h3 id="population">Population</h3>
 <pre><code class="js"><i>// Tyranid can traverse links and provide join-like functionality.</i>
 User.populate('org', users).then(function(users) {
@@ -346,10 +451,16 @@ be available as "user.org" while the denormalized name would be available as "us
   }
 });
 </code></pre>
+
+
+
+
     <h3>Validation</h3>
 <p>The following will run validations on the object and return an array of <a href="validationError.html">ValidationError</a>s:</p>
 <pre><code class="js">user.$validate();
 </code></pre>
+
+
 
     <h3 id="timestamps">Timestamps</h3>
 <p>If you set <b>timestamps: true</b> when defining your collection then Tyranid will update the timestamps <b>createdAt</b> and
@@ -361,7 +472,12 @@ you use Tyranid's update() methods.</p>
   <i>...</i>
 });
 </code></pre>
+
+
+
+
     <h3 id="uids">Universal IDs (UIDs)</h3>
+<p>A UID is a string formed by concatenating a collection ID with a document ID.</p>
 <p>Universal IDs are a way of polymorphically working with data.  For example, if you need to have an array of IDs
 from multiple collections UIDs will let you do this.</p>
 <pre><code class="js"><i>// Returns "u00AF8...123".  <b>u00</b> was specified as the collection ID for User.</i>
@@ -378,6 +494,11 @@ Tyr.byUid('u00AF8...123').then(function(user) {
   <i>// <b>user</b> is a User instance with mongo ID ObjectId('AF8...123').</i>
 });
 </code></pre>
+
+
+
+
+
     <h3>Browser Serialization</h3>
 <pre><code class="js"><i>// Returns a <b>User</b> instance while also performing security checks, converting the _id to a MongoId, validating data,
 // and so on.</i>
@@ -390,6 +511,11 @@ res.json(user.$toClient())
 <i>// Translates an existing object to the client when the object is not an instance of <b>User</b> (i.e. came directly from Mongo).</i>
 res.json(User.toClient(obj))
 </code></pre>
+
+
+
+
+
     <h3 id="paths">Paths</h3>
 <p><b>Paths</b> are a string-based syntax for referencing fields inside documents.  For example, the following structure:</p>
 <pre><code class="js">{
@@ -418,8 +544,13 @@ particular element you use "<u>.<i>array index</i></u>".</p>
 <p>For example, <u>siblings</u> refers to an array, <u>siblings._</u> refers to the type of contents of the array (an object), and
 <u>siblings._.name</u> refers to a specific property inside that object that is inside the array.</p>
 <p>This array syntax can be simplified (i.e. <u>siblings._.name</u> => <u>siblings.name</u>) in certain circumstances,
-for example when used inside MongoDB queries.</p>
-    <h3>Static Data</h3>
+for example when used inside MongoDB queries.  This is called a <i>simplified path</i> and is available as
+<a href="field.html#spath"><u>Field.spath</u></a>.</p>
+
+
+
+
+    <h3 id="staticData">Static Data</h3>
 <p>Tyranid supports efficiently modeling static data as well.  This is good for modeling enumerations and linking to them.
 It also allows you to work with static and non-static data in an isomorphic way.</p>
 <pre><code class="js">var Continent = new Tyr.Collection({

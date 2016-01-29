@@ -35,28 +35,32 @@
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">reason: String</span>
+       <span class="sig">reason: string</span>
+       <p>This contains a text description of the validation error.</p>
      </article>
 
      <article>
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig"><a href="index.html#paths">path</a>: String</span>
+       <span class="sig">field: <a href="field.html">Field</a></span>
+       <p>This contains the <a href="field.html">Field</a> that the validation error occurred on.</p>
      </article>
 
      <article>
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">message: String</span>
+       <span class="sig">message: string</span>
+       <p>This contains a longer text description of the validation error that takes both <u>field</u> and <u>reason</u> into account.</p>
      </article>
 
      <article>
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">toString(): String</span>
+       <span class="sig">toString(): string</span>
+       <p>This returns <u>message</u>.</p>
      </article>
 
   </div>

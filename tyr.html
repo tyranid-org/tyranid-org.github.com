@@ -52,6 +52,7 @@
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">byId: { <i>collection id</i>: <a href="collection.html">Collection</a> }</span>
+       <p>This is an hash of collections that Tyranid knows about indexed by collection id.</p>
      </article>
 
      <article>
@@ -59,13 +60,14 @@
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">byName: { <i>collection name</i>: <a href="collection.html">Collection</a> }</span>
+       <p>This is an hash of collections that Tyranid knows about indexed by collection name.</p>
      </article>
 
      <article>
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">byUid(uid: String): <a href="document.html">Document</a></span>
+       <span class="sig">byUid(uid: string): <a href="document.html">Document</a></span>
        <p>
         This will find a document by its <a href="index.html#uids">UID</a>.
        </p>
@@ -82,20 +84,30 @@
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">collections: [ <a href="collection.html">Collection</a> ]</span>
+       <span class="sig">collections: <a href="collection.html">Collection</a>[]</span>
+       <p>This is a list of all the collections that Tyranid knows about.</p>
      </article>
 
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">config(opts)</span>
+       <span class="sig">config(opts: object): void</span>
      </article>
+       <p>This initializes Tyranid.  <u>opts</u> are as follows:</p>
+       <pre>
+{
+  db: pmongo(myDatabaseUrl),
+  validate: <i>validateOpts</i>
+}</pre>
+      <p>If the <u>validate</u> option is not used, be sure to call <u>Tyr.validate()</u> once all of the collections
+        have been imported.  See <a href="tyr.html#validate">Tyr.validate()</a> for an explanation of <u>validateOpts</u>.
+      </p>
 
      <article>
       <b class="property"></b>
       <b class="server"></b>
       <b class="client"></b>
-      <span class="sig">documentPrototype: Object</span>
+      <span class="sig">documentPrototype: object</span>
 
       <p>
        All <a href="document.html">Document</a> instances inherit from this object.  Add methods and properties to this
@@ -105,10 +117,37 @@
      </article>
 
      <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">express(app: Express, auth: (req, res, next) => {}?): void</span>
+       <p>
+         This connects Tyranid to Express and enables Tyranid's routing functionality.
+       </p>
+       <p><u>app</u> is the instance of express to connect to returned by <u>express()</u>.</p>
+       <p><u>auth</u> is an optional callback that will be passed to all Tyranid routes via <u>.all(app)</u> before
+        Tyranid routes are processed.  You can do additional validation and authorization here.</p>
+       <p>See <a href="index.html#client">Client</a> for more information.</p>
+     </article>
+
+     <article>
        <b class="class"></b>
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig"><a href="field.html">Field</a></span>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">labelize(name: string): string</span>
+       <p>This generates a humanized version of a camel-case name.  For example:<p>
+       <table>
+         <thead>
+           <tr><th><i>name</i><th>labelize(<i>name</i>)
+         </thead>
+         <tr><td>age<td>Age
+         <tr><td>firstName<td>First Name
+       </table>
      </article>
 
      <article>
@@ -122,27 +161,26 @@
      </article>
 
      <article>
-       <b class="method"></b>
-       <b class="server"></b>
-       <span class="sig">reset()</span>
-     </article>
-
-     <article>
        <b class="class"></b>
        <b class="server"></b>
-       <b class="client"></b>
        <span class="sig"><a href="type.html">Type</a></span>
      </article>
 
-     <article>
+     <article id="validate">
       <b class="method"></b>
       <b class="server"></b>
-      <span class="sig">validate(opts)</span>
+      <span class="sig">validate( dirOpts | dirOpts[] ): void</span>
 
       <p>
-       Call this method once all of the collections and types have been imported and you want the entire metadata model
-       compiled and linked (validated).
+       If you did not specify the <u>validate</u> option in the <u>Tyr.config()</u> call, call this method once all of the collections and
+       types have been imported and you want the entire metadata model compiled and linked (validated).  <u>dirOpts</u> are:
      </p>
+<pre>{
+  dir: './app/models',        <i>// All files in directory.</i>
+  fileMatch<em>?</em>: '^tyr.*'       <i>// Provides a regex that files in the dir need to match.</i>
+}</pre>
+     <p><u>validate()</u> can optionally take an array of <u>dirOpts</u> so that you can specify multiple directories.</p>
+     <p>If you are manually importing corrections then you do not need to pass in dirOpts.</p>
 
      </article>
 
@@ -156,7 +194,10 @@
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">valuesBy(comparable)</span>
+       <span class="sig">valuesBy(filter: Field => boolean): any[]</span>
+       <p>This returns a unique list of all values that appear in any collection in the database for any field that matches the filter.</p>
+       <p>For example, the following returns a list of all of the strings that occur in the database in any string field in any collection.</p>
+       <pre>Tyr.valuesFor(field => field.def.is.def.name === 'string')</pre>
      </article>
 
   </div>

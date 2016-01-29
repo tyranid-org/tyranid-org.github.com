@@ -36,14 +36,16 @@
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">byId(id): <a href="document.html">Document</a></span>
+       <span class="sig">byId(id: <i>id type</i>): <a href="document.html">Document</a></span>
+       <p>This retrieves a document by its id.</p>
      </article>
 
      <article>
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">byIds(ids: [ <i>id</i> ] ): [ <a href="document.html">Document</a> ]</span>
+       <span class="sig">byIds(ids: <i>id type</i>[] ): <a href="document.html">Document</a>[]</span>
+       <p>This retrieves a list of documents by their ids.</p>
      </article>
 
      <article>
@@ -51,7 +53,8 @@
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">byLabel(label: String): <a href="document.html">Document</a></span>
+       <span class="sig">byLabel(label: string): <a href="document.html">Document</a></span>
+       <p>This retrieves the first document it finds matching the given <u>label</u> using a case-insensitive search.</p>
      </article>
 
      <article id="def">
@@ -59,32 +62,57 @@
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">def</span>
-       <pre>
-{
-  id: String,
-  name: String,
-  dbName<em>?</em>: String = name,
-  label<em>?</em>: String = labelize(name),
-  fields: {
-    <em>fieldName</em>: <a href="field.html#def">Field Def</a>,
-    <em>...</em>
-  },
-  methods<em>?</em>: {
-    <em>methodName</em>: {
-      fn<em>?</em>(<em>method parameters</em>) { <em>...</em> }       <i>// a single function for both client and server</i>
-      clientFn<em>?</em>(<em>method parameters</em>) { <em>...</em> } <i>// the function to use on the client</i>
-      serverFn<em>?</em>(<em>method parameters</em>) { <em>...</em> } <i>// the function to use on the server</i>
-    },
-    <em>...</em>
-  }
-}</pre>
+       <p>This defines the structure of a collection and is the argument that is passed into the Collection constructor.</p>
+       <table class="def">
+<thead>
+  <tr><th>Object Structure<th>Type<th>Default<th>Notes
+</thead>
+<tr><td>{</td>
+<tr><td>  id:<td>string<td><i>required</i><td>3 character alphanumeric code, must be unique, see <a href="index.html#uids">UIDs</a>.
+<tr><td>  name:<td>string<td><i>required</i>
+<tr><td>  dbName:<td>string<td><i>name</i></td>
+<tr><td>  label:<td>string<td>labelize(<i>name</i>)<td>The human-readable <a href="index.html#labels">label</a> for this collection.
+<tr><td>  help:<td>string<td>none<td>Contains brief user-facing documentation about this collection.
+<tr><td>  note:<td>string<td>none<td>Contains developer-facing documentation about this collection (only visible in the Tyranid console).
+<tr><td>  enum:<td>boolean<td>false<td>Generates <a href="index.html#staticData">enumeration</a> support for this collection.
+<tr><td>  client:<td>boolean<td>true<td>If this is false, client-side classes for this collection will not be generated.
+<tr><td>  primaryKey: {<td><td>none
+<tr><td>    field:<td><i>fieldName</i><td><i>required</i>
+<tr><td>    defaultMatchIdOnInsert:<td>boolean<td>false
+<tr><td>  },</td>
+<tr><td>  timestamps:<td>boolean<td>false<td>Enables <a href="index.html#timestamps">timestamps</a> on this collection.
+<tr><td>  <span style="color:#ccc">express: {<td><td><td><span style="color:#f00">Under construction ... disregard for now.</span>
+<tr><td>    rest:<td>boolean<td>false<td>Activates all REST API endpoints.</td>
+<tr><td>    get:<td>boolean<td>false
+<tr><td>    post:<td>boolean<td>false
+<tr><td>    put:<td>boolean<td>false
+<tr><td>  },</span></td>
+<tr><td>  fields: {</td>
+<tr><td>    <i>fieldName</i>:<td><a href="field.html#def">Field Def</a></td>
+<tr><td>    <i>...</i></td>
+<tr><td>  },</td>
+<tr><td>  methods: {<td><td><td>Define <a href="document.html">Document</a> methods for this collection.  See <a href="index.html#methods">Methods</a>.
+<tr><td>    <i>methodName</i>: {</td>
+<tr><td>      fn(<i>method parameters</i>) { <i>...</i> }<td>function<td>none<td>A single isomorphic function for both client and server.</td>
+<tr><td>      clientFn(<i>method parameters</i>) { <i>...</i> }<td>function<td>none<td>The function to use on the client.</td>
+<tr><td>      serverFn(<i>method parameters</i>) { <i>...</i> }<td>function<td>none<td>The function to use on the server.</td>
+<tr><td>    },</td>
+<tr><td>    <i>...</i></td>
+<tr><td>  },</td>
+<tr><td>  values: {<td><td>none<td>This allows you to define <a href="index.html#staticData">static data</a> in a tabular format.</td>
+<tr><td>    [ '_id', '<i>fieldName1</i>', ... ],<td><td><td>The first row is a header row which contains field names.</td>
+<tr><td>    [ <i>id1</i>,   <i>value1</i>,       ... ],<td><td><td>The following rows are data rows.</td>
+<tr><td>    ...</td>
+<tr><td>  }</td>
+<tr><td>}</td>
+</table>
      </article>
 
      <article>
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">fake({ n, schemaOpts, seed } = {}): n > 1 ? [ <a href="document.html">Document</a> ] : <a href="document.html">Document</a></span>
+       <span class="sig">fake({ n, schemaOpts, seed } = {}): n > 1 ? <a href="document.html">Document</a>[] : <a href="document.html">Document</a></span>
        <p>This creates <u>n</u> fake documents (default is 1) for fields matching <u>schemaOpts</u> using the given <u>seed</u>.</p>
      </article>
 
@@ -100,7 +128,18 @@
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">fieldsBy(comparable)</span>
+       <span class="sig">fieldsBy(filter: Field => boolean): <a href="field.html">Field</a>[]</span>
+       <p>This returns an array of <a href="field.html"</a>Field</a>s that match the given filter.<p>
+       <p>For example, following returns a list of all of the fields in the User collection that are of type string.</p>
+       <pre>User.fieldsBy(field => field.def.is.def.name === 'string')</pre>
+     </article>
+
+     <article>
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">fieldsFor(obj): <a href="field.html">Field</a>[]</span>
+       <p>This is similar to <u>def.fields</u> except that it also returns all fields from <a href="index.html#dynamicSchemas">Dynamic Schemas</a> as well.</p>
      </article>
 
      <article>
@@ -118,7 +157,7 @@
        <b class="method"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">find(query: MongoDBQuery): [ <a href="document.html">Document</a> ]</span>
+       <span class="sig">find(query: MongoDBQuery): <a href="document.html">Document</a>[]</span>
      </article>
 
      <article>
@@ -146,9 +185,9 @@
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">fromClient(doc: Object, <a href="index.html#paths">path</a>: String?): <a href="document.html">Document</a></span>
+       <span class="sig">fromClient(doc: object, <a href="index.html#paths">path</a>: string?): <a href="document.html">Document</a></span>
        <p>
-        This creates a new record instance out of a POJO.  Values are copied by reference (not deep-cloned!).
+        This creates a new document instance out of a POJO.  Values are copied by reference (not deep-cloned!).
       </p>
      </article>
 
@@ -156,7 +195,7 @@
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">idToUid(id): String</span>
+       <span class="sig">idToUid(id: <i>id type</i>): string</span>
        <p>
         This generates a <a href="index.html#uids">UID</a> from an id.
        </p>
@@ -167,7 +206,7 @@
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">insert(doc: <a href="document.html">Document</a> | Object)</span>
+       <span class="sig">insert(doc: <a href="document.html">Document</a> | object)</span>
        <p>
         This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>insert()</u> method but also
         does things like <a href="index.html#timestamps">timestamps</a>, <a href="index.html#denormalization">denormalization</a>, and so on.
@@ -178,7 +217,7 @@
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">isStatic(): Boolean</span>
+       <span class="sig">isStatic(): boolean</span>
        <p>
         This returns true if the collection's data is defined statically in its def.values field.  Enumerations are a common example
         of static collections.
@@ -189,7 +228,7 @@
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">label: String</span>
+       <span class="sig">label: string</span>
        <p>This returns a label, or display name, for the collection itself.</p>
      </article>
 
@@ -205,9 +244,9 @@
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">labelFor(doc: <a href="document.html">Document</a> | Object)</span>
+       <span class="sig">labelFor(doc: <a href="document.html">Document</a> | object)</span>
        <p>This returns the label for the specified document.  If <b>doc</b> is a Document, then this is equivalent to <u>doc.$label</u>.
-        This method is mostly useful for when you have a raw Object that you want to get the label for.</p>
+        This method is mostly useful for when you have a raw object that you want to get the label for.</p>
      </article>
 
      <article>
@@ -215,7 +254,7 @@
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">labels(text: String): [ { _id, <i>label field</i>: String } ]</span>
+       <span class="sig">labels(text: string): { _id: <i>id type</i>, <i>label field</i>: string }[]</span>
        <p>This generates a list of label objects that can be used to populate a typeahead dropdown.</p>
        <p>Generally prefer to use <a href="field.html#labels"><u>Field.labels()</u></a> over this as it can take advantage of the <u>where</u> property on link fields.</p>
      </article>
@@ -224,13 +263,13 @@
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">populate(fields, documents: <a href="document.html">Document</a> | [ <a href="document.html">Document</a> ], <a href="index.html#denormalization">denormal</a>: Boolean)</span>
+       <span class="sig">populate(fields, documents: <a href="document.html">Document</a> | <a href="document.html">Document</a>[], <a href="index.html#denormalization">denormal</a>: boolean)</span>
        <p>
         Fields can take one of the following three forms:
         <ul>
-         <li>String -- the name of a field to populate.
-         <li>[ String ] -- an array of names of fields to populate.
-         <li>Object -- object population syntax (<a href="index.html#advancedPopulation">Advanced Population</a> syntax).
+         <li>string -- the name of a field to populate.
+         <li>string[] -- an array of names of fields to populate.
+         <li>object -- object population syntax (<a href="index.html#advancedPopulation">Advanced Population</a> syntax).
         </ul>
       </p>
       <p>
@@ -247,7 +286,7 @@
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">remove(id | query: Object, justOne: Boolean?)</span>
+       <span class="sig">remove(id: <i>id type</i> | query: object, justOne: boolean?)</span>
        <p>
         This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>remove()</u> method.
        </p>
@@ -258,7 +297,7 @@
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">save(doc: <a href="document.html">Document</a> | Object | [ <a href="document.html">Document</a> | Object ] ): <a href="document.html">Document</a></span>
+       <span class="sig">save(doc: <a href="document.html">Document</a> | object | <a href="document.html">Document</a>[] | object[] ): <a href="document.html">Document</a></span>
        <p>
          This method will either update or insert the object based on whether it has an _id.
        </p>
@@ -271,9 +310,9 @@
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">toClient(doc: <a href="document.html">Document</a>): Object</span>
+       <span class="sig">toClient(doc: <a href="document.html">Document</a>): object</span>
        <p>
-        This creates a new POJO out of a record instance.  Values are copied by reference (not deep-cloned!).
+        This creates a new POJO out of a document instance.  Values are copied by reference (not deep-cloned!).
        </p>
      </article>
 
@@ -281,7 +320,7 @@
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">update(query, update, opts)</span>
+       <span class="sig">update(query: object, update: object, opts: object)</span>
        <p>
         This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>update()</u> method.  It also will
         update timestamps if this collection is configured to use them.
@@ -292,14 +331,17 @@
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">updateDoc(doc: <a href="document.html">Document</a> | Object)</span>
+       <span class="sig">updateDoc(doc: <a href="document.html">Document</a> | object)</span>
      </article>
 
      <article>
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">valuesFor(fieldNames: [ String ])</span>
+       <span class="sig">valuesFor(fields: Field[]): any[]</span>
+       <p>
+         This method returns all of the unique values that appear for the given fields in the collection.
+       </p>
      </article>
 
      <h2>Hooks</h2>
@@ -307,7 +349,7 @@
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">plugin(fn: Function, opts): this</span>
+       <span class="sig">plugin(fn: function, opts): this</span>
        <p>
         Register a plugin for this Collection. Similar API to <a href="http://mongoosejs.com/docs/plugins.html">Mongoose plugins</a>.
         Note that the hooks API *does* differ from Mongoose's.
@@ -317,12 +359,12 @@
      <article>
       <b class="method"></b>
       <b class="server"></b>
-      <span class="sig">pre(methods: String | [ String ], cb: Function): this</span>
+      <span class="sig">pre(methods: string | string[], cb: function): this</span>
       <ul>
-        <li><u>methods</u>: String | [ String ] -- methods method name or array of method names to add pre hook.
-        <li><u>cb</u>: Function(next, ...args) -- hook callback
-        <li><u>cb.next</u>: Function -- if modifying arguments, return next(modifiedArgs)
-        <li><u>cb.args</u>: [ Function ] -- original method args
+        <li><u>methods</u>: string | string[] -- methods method name or array of method names to add pre hook.
+        <li><u>cb</u>: function(next, ...args) -- hook callback
+        <li><u>cb.next</u>: function -- if modifying arguments, return next(modifiedArgs)
+        <li><u>cb.args</u>: function[] -- original method args
       </ul>
       <p>
        Add a pre hook
@@ -334,10 +376,10 @@
       <b class="server"></b>
       <span class="sig">post(methods, cb): this</span>
       <ul>
-       <li><u>methods</u>: String | [ String ] -- method name or array of method names to add post hook
-       <li><u>cb</u>: Function(next, result) -- hook callback
-       <li><u>cb.next</u>: Function -- if modifying result, return next(modifiedResult)
-       <li><u>cb.result</u>: [ Function ] -- original method result
+       <li><u>methods</u>: string | string[] -- method name or array of method names to add post hook
+       <li><u>cb</u>: function(next, result) -- hook callback
+       <li><u>cb.next</u>: function -- if modifying result, return next(modifiedResult)
+       <li><u>cb.result</u>: function[] -- original method result
       </ul>
       <p>
        Add a post hook
@@ -350,7 +392,7 @@
       <b class="server"></b>
       <span class="sig">unhook(methods): this</span>
       <ul>
-       <li><u>methods</u>: String | [ String ] -- Method or methods. Unhooks all methods if unspecified.
+       <li><u>methods</u>: string | string[] -- Method or methods. Unhooks all methods if unspecified.
       </ul>
       <p>
        Remove hooks for a particular method. Needs to be called once per pre/post() call.
