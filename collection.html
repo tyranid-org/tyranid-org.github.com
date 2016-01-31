@@ -20,6 +20,8 @@
      <div>|</div>
      <span><a href="field.html">Field</a></span>
      <div>|</div>
+     <span><a href="namePath.html">NamePath</a></span>
+     <div>|</div>
      <span><a href="type.html">Type</a></span>
      <div>|</div>
      <span><a href="tyr.html">Tyr</a></span>
@@ -257,6 +259,13 @@
        <span class="sig">labels(text: string): { _id: <i>id type</i>, <i>label field</i>: string }[]</span>
        <p>This generates a list of label objects that can be used to populate a typeahead dropdown.</p>
        <p>Generally prefer to use <a href="field.html#labels"><u>Field.labels()</u></a> over this as it can take advantage of the <u>where</u> property on link fields.</p>
+     </article>
+
+     <article id="parsePath">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">parsePath(text: string): <a href="namePath.html">NamePath</a></span>
+       <p>This parses a <a href="index.html#paths">path</a> into a <a href="namePath.html">NamePath</a> object.</p>
      </article>
 
      <article id="populate">

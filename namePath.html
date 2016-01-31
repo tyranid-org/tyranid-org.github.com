@@ -1,0 +1,109 @@
+<html>
+ <head>
+  <link href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
+  <link href="tyranid.css" rel='stylesheet' type='text/css'>
+ </head>
+ <body>
+   <div class="sidebar">
+    <section>
+     <h3>Overview</h3>
+     <span><a href="index.html">Guide</a></span>
+    </section>
+
+    <section>
+     <h3>API</h3>
+     <span><a href="collection.html">Collection</a></span>
+     <div>|</div>
+     <span><a href="document.html">Document</a></span>
+     <div>|</div>
+     <span><a href="field.html">Field</a></span>
+     <div>|</div>
+     <span><a href="namePath.html">NamePath</a></span>
+     <div>|</div>
+     <span><a href="type.html">Type</a></span>
+     <div>|</div>
+     <span><a href="tyr.html">Tyr</a></span>
+     <div>|</div>
+     <span><a href="validationError.html">ValidationError</a></span>
+    </section>
+   </div>
+
+  <div class="content">
+    <h1>NamePath</h1>
+
+     <div class="desc">
+      <p>
+       NamePaths are returned by <a href="collection.html#parsePath"><i>collection</i>.parsePath(<i>path</i>)</a>.  They are used to make writing
+       generic metadata-based code easier.
+     </p>
+     <p>
+       NamePath is also able to deal with <a href="index.html#denormalization">denormalized paths</a> as well.
+     </p>
+     <p>See <a href="index.html#paths">paths</a> for more information.</p>
+    </div>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">get(obj: object): any</span>
+       <p>This walks the <u>obj</u> according to this path and returns the values at this path.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">name: string</span>
+       <p>This contains the full, unparsed path that was passed into the constructor.</p>
+     </article>
+
+     <article id="path">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">path: string[]</span>
+       <p>This contains the path split up into individual strings for steps on the path.</p>
+       <table>
+         <tr><td><u>'name'</u><td><u>[ 'name' ]</u>
+         <tr><td><u>'name.first'</u><td><u>[ 'name', 'first' ]</u>
+         <tr><td><u>'organization_.owner_.name.first'</u><td><u>[ 'organization_', 'owner_', 'name', 'first' ]</u>
+       </table>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">pathFields: <a href="field.html">Field</a>[]</span>
+       <p>
+         This array contains the <a href="field.html">Field</a> for each step along the path.  This is a parallel array to <a href="namePath.html#path">path</a>.
+       </p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">pathName(idx: integer): string</span>
+       <p>This returns a verbose description of the path at position <u>idx</u> along the path.  This is useful for error messages in parsing.</p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">tail(): <a href="field.html">Field</a></span>
+       <p>
+         This is a shortcut for <u>pathFields[pathFields.length-1]</u>.  Often you are only interested in the end of the path which has
+         the <a href="type.html">Type</a> of the path you are working with.
+       </p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">uniq(obj: object): any[]</span>
+       <p>This walks the <u>obj</u> according to this path and returns the uniq values at this path it finds.  (There can be multiple
+       values if the path points to an array.)</p>
+     </article>
+
+  </div>
+ </body>
+</html>
