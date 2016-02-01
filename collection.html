@@ -165,6 +165,32 @@ layout: default
       </p>
      </article>
 
+     <article id="fromClientQuery">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">fromClientQuery(query: object): object</span>
+       <p>This converts a MongoDB-style query created on the client into one suitable to be used on the server.  For example:</p>
+       <table>
+         <tr><th>Client<th>Server
+         <tr>
+           <td><pre>{
+  isbn: {
+    $in: [
+      '5614c2f00000000000000000',
+      '5614c2f00000000000000001'
+    ]
+  }
+}</pre><td><pre>{
+  isbn: {
+    $in: [
+      ObjectId('5614c2f00000000000000000'),
+      ObjectId('5614c2f00000000000000001')
+    ]
+  }
+}</pre>
+       </table>
+     </article>
+
      <article id="idToLabel">
        <b class="async"></b>
        <b class="method"></b>
