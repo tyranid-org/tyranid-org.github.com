@@ -1,3 +1,6 @@
+---
+# front matter comment to make sure jekyll reads file
+---
 
 body { font-family: 'Metrophobic', arial, serif; }
 
@@ -197,6 +200,34 @@ article {
 
 article i {
   color: #666;
+}
+
+article .date, article .version {
+  display: block;
+  float: left;
+  margin: 4px 0 0 8px;
+  padding: 0 4px 4px;
+  height: 18px;
+  color: #fff;
+  border-radius: 4px;
+  float: right;
+}
+
+article .date {
+  background: #804;
+}
+
+article .version {
+  background: #408;
+}
+
+article h1 {
+  font-size:24px;
+  font-family: 'Metrophobic', arial, serif;
+  color: #a50;//#6666aa;
+  margin: 0;
+  border: none;
+  text-shadow: none;
 }
 
 .sig {

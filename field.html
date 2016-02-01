@@ -1,34 +1,6 @@
-<html>
- <head>
-  <link href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
-  <link href="tyranid.css" rel='stylesheet' type='text/css'>
- </head>
- <body>
-   <div class="sidebar">
-    <section>
-     <h3>Overview</h3>
-     <span><a href="index.html">Guide</a></span>
-    </section>
-
-    <section>
-     <h3>API</h3>
-     <span><a href="collection.html">Collection</a></span>
-     <div>|</div>
-     <span><a href="document.html">Document</a></span>
-     <div>|</div>
-     <span><a href="field.html">Field</a></span>
-     <div>|</div>
-     <span><a href="namePath.html">NamePath</a></span>
-     <div>|</div>
-     <span><a href="type.html">Type</a></span>
-     <div>|</div>
-     <span><a href="tyr.html">Tyr</a></span>
-     <div>|</div>
-     <span><a href="validationError.html">ValidationError</a></span>
-    </section>
-   </div>
+---
+layout: default
+---
 
   <div class="content">
     <h1>Field</h1>
@@ -37,7 +9,7 @@
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">collection: <a href="collection.html">Collection</a></span>
+       <span class="sig">collection: <a href="collection">Collection</a></span>
        <p>The collection that this field belongs to.</p>
      </article>
 
@@ -57,31 +29,31 @@
   <tr><th>Object Structure<th>Type<th>Default<th>Notes
 </thead>
 <tr><td>{</td>
-<tr><td>  is:<td>string<td><i>required</i>*<td>The name of the <a href="type.html">Type</a> of this Field.
+<tr><td>  is:<td>string<td><i>required</i>*<td>The name of the <a href="type">Type</a> of this Field.
 <tr><td>  client:<td>boolean<td>true**<td>Indicates if this field should be serialized in <u>toClient()</u>/<u>fromClient()</u> calls.
 <tr><td>  db:<td>boolean<td>true**<td>Indicates if this field should be stored in the database.
-<tr><td>  label:<td>string<td>labelize(<i>name</i>)<td>The human-readable <a href="index.html#labels">label</a> for this field.
+<tr><td>  label:<td>string<td>labelize(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this field.
 <tr><td>  help:<td>string<td>none<td>Contains brief user-facing documentation about this field (suitable for a tooltip).
 <tr><td>  note:<td>string<td>none<td>Contains developer-facing documentation about this field (only visible in the Tyranid console).
 <tr><td>  required:<td>boolean<td>false<td>Indicates that this field is required.
 <tr><td>  defaultValue:<td>any<td>none<td>Specifies a default value for this field.
 <tr><td colspan="4" class="subtitle">Arrays (<u>is == 'array'</u>)
-<tr><td>  of:<td><a href="field.html#def">Field Def</a><td>none<td>Indicates the type of the array.
-<tr><td>  denormal:<td>object<td>none<td>A <a href="index.html#denormalization">Denormalization</a> expression to populate when saving this field.
+<tr><td>  of:<td><a href="field#def">Field Def</a><td>none<td>Indicates the type of the array.
+<tr><td>  denormal:<td>object<td>none<td>A <a href="/#denormalization">Denormalization</a> expression to populate when saving this field.
 <tr><td colspan="4" class="subtitle">Objects (<u>is == 'object'</u>)
 <tr><td>  fields: {</td><td><td><td>Specifies the structure of a nested object.
-<tr><td>    <i>fieldName</i>:<td><a href="field.html#def">Field Def</a></td>
+<tr><td>    <i>fieldName</i>:<td><a href="field#def">Field Def</a></td>
 <tr><td>    <i>...</i></td>
 <tr><td>  },</td>
-<tr><td colspan="4" class="subtitle"><a href="index.html#links">Links</a> (<u>is == 'link'</u>)
+<tr><td colspan="4" class="subtitle"><a href="/#links">Links</a> (<u>is == 'link'</u>)
 <tr><td>  link:<td><i>collection name</i><td>none<td>Indicates that this field contains foreign keys to the given collection.
-<tr><td>  where:<td>object<td>none<td>Contains additional constraints on the links -- see <a href="index.html#links">links</a>.
+<tr><td>  where:<td>object<td>none<td>Contains additional constraints on the links -- see <a href="/#links">links</a>.
 <tr><td colspan="4" class="subtitle">Strings (<u>is == 'string'</u>)
-<tr><td>  labelField:<td>boolean<td>false<td>Set to true if this field contains the <a href="index.html#labels">label</a> for this collection.
-<tr><td colspan="4" class="subtitle"><a href="index.html#uids">UIDs</a> (<u>is == 'uid'</u>)
-<tr><td>  of:<td><i>collection names</i><td><td>Constrains the type of <a href="index.html#uids">UIDs</a> that can be stored in this UID field.  Collection names can be an array of names or a single name.
-<tr><td colspan="4" class="subtitle"><a href="index.html#computedProperties">Computed Properties</a>
-<tr><td>  get:<td>function<td>none<td>Indicates this is a <a href="index.html#computedProperties">computed property</a>.  Isomorphic <u>get</u>.
+<tr><td>  labelField:<td>boolean<td>false<td>Set to true if this field contains the <a href="/#labels">label</a> for this collection.
+<tr><td colspan="4" class="subtitle"><a href="/#uids">UIDs</a> (<u>is == 'uid'</u>)
+<tr><td>  of:<td><i>collection names</i><td><td>Constrains the type of <a href="/#uids">UIDs</a> that can be stored in this UID field.  Collection names can be an array of names or a single name.
+<tr><td colspan="4" class="subtitle"><a href="/#computedProperties">Computed Properties</a>
+<tr><td>  get:<td>function<td>none<td>Indicates this is a <a href="/#computedProperties">computed property</a>.  Isomorphic <u>get</u>.
 <tr><td>  clientGet:<td>function<td>none<td>A client-specific <u>get</u> function.
 <tr><td>  serverGet:<td>function<td>none<td>A server-specific <u>get</u> function.
 <tr><td>  set:<td>function<td>none<td>Specifies a <u>set</u> function for this field.  Isomorphic <u>set</u>.
@@ -90,7 +62,7 @@
 <tr><td>}</td>
 </table>
       <div><u>*</u> <u>is</u> is not required if <u>link</u> is specified -- the type is inferred to be <u>link</u> in that case.</div>
-      <div><u>**</u> <u>client</u> and <u>db</u> usually defaults to true except for <a href="index.html#computedProperties">computed properties</a>
+      <div><u>**</u> <u>client</u> and <u>db</u> usually defaults to true except for <a href="/#computedProperties">computed properties</a>
         (you can still set <u>client: true</u> and/or <u>db: true</u> for computed properties, they just don't default to true).</div>
      </article>
 
@@ -124,15 +96,15 @@
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig"><a href="index.html#paths">path</a>: String</span>
-       <p>This contains the <a href="index.html#paths">path</a> of this field.</p>
+       <span class="sig"><a href="/#paths">path</a>: String</span>
+       <p>This contains the <a href="/#paths">path</a> of this field.</p>
      </article>
 
      <article id="spath">
        <b class="property"></b>
        <b class="server"></b>
-       <span class="sig"><a href="index.html#paths">spath</a>: String</span>
-       <p>This contains the <a href="index.html#paths">simplified path</a> of this field.</p>
+       <span class="sig"><a href="/#paths">spath</a>: String</span>
+       <p>This contains the <a href="/#paths">simplified path</a> of this field.</p>
        <p>Simplified paths remove the array contents reference and are useful when working with MongoDB projections.
         For example:</p>
        <table>
@@ -141,9 +113,7 @@
          <tr><td>name.first</td><td>name.first</td></tr>
          <tr><td>age</td><td>age</td></tr>
        </table>
-       <p>See <a href="index.html#paths">Paths</a> for more information.</p>
+       <p>See <a href="/#paths">Paths</a> for more information.</p>
      </article>
 
   </div>
- </body>
-</html>

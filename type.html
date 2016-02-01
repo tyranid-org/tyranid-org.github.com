@@ -1,34 +1,6 @@
-<html>
- <head>
-  <link href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
-  <link href="tyranid.css" rel='stylesheet' type='text/css'>
- </head>
- <body>
-   <div class="sidebar">
-    <section>
-     <h3>Overview</h3>
-     <span><a href="index.html">Guide</a></span>
-    </section>
-
-    <section>
-     <h3>API</h3>
-     <span><a href="collection.html">Collection</a></span>
-     <div>|</div>
-     <span><a href="document.html">Document</a></span>
-     <div>|</div>
-     <span><a href="field.html">Field</a></span>
-     <div>|</div>
-     <span><a href="namePath.html">NamePath</a></span>
-     <div>|</div>
-     <span><a href="type.html">Type</a></span>
-     <div>|</div>
-     <span><a href="tyr.html">Tyr</a></span>
-     <div>|</div>
-     <span><a href="validationError.html">ValidationError</a></span>
-    </section>
-   </div>
+---
+layout: default
+---
 
   <div class="content">
     <h1>Type</h1>
@@ -56,14 +28,14 @@
         <li>url
        </ul>
      </p>
-     <p>See <a href="field.html#def">Field.def</a> for information on type-specific Field options.</p>
+     <p>See <a href="field#def">Field.def</a> for information on type-specific Field options.</p>
      <p>When creating your own types, they will get automatically registered with Tyranid via the new <u>Tyr.Type()</u> constructor.</p>
      </div>
 
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">compile(compiler: Compiler, <a href="index.html#paths">path</a>: string, field: <a href="field.html">Field</a>): void</span>
+       <span class="sig">compile(compiler: Compiler, <a href="/#paths">path</a>: string, field: <a href="field">Field</a>): void</span>
        <p>
          Any schema validation can be done inside this method.  For example, ArrayTypes verify that the field has a valid "of" property.
        </p>
@@ -79,7 +51,7 @@
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">fromClient(field: <a href="field.html">Field</a>, value: any): any</span>
+       <span class="sig">fromClient(field: <a href="field">Field</a>, value: any): any</span>
        <p>This method will be used by Tyranid to convert incoming data from the client into server objects.  For example, MongoId types will
          convert client-side MongoID strings into server-side <u>ObjectId</u> objects.</p>
      </article>
@@ -94,7 +66,7 @@
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">toClient(field: <a href="field.html">Field</a>, value: any): any</span>
+       <span class="sig">toClient(field: <a href="field">Field</a>, value: any): any</span>
        <p>This method will be used by Tyranid to convert server data into JSON suitable for the client.  For example, MongoId types will
          convert server-side <u>ObjectId</u>s into client-side MongoID strings.</p>
      </article>
@@ -102,9 +74,7 @@
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">validate(field: <a href="field.html">Field</a>, value: any): <a href="validationError.html">ValidationError</a></span>
+       <span class="sig">validate(field: <a href="field">Field</a>, value: any): <a href="validationError">ValidationError</a></span>
        <p>This is used by Tyranid to validate fields of this type.</p>
      </article>
   </div>
- </body>
-</html>

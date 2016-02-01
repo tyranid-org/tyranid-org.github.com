@@ -1,41 +1,13 @@
-<html>
- <head>
-  <link href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Metrophobic' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Lekton' rel='stylesheet' type='text/css'>
-  <link href="tyranid.css" rel='stylesheet' type='text/css'>
- </head>
- <body>
-   <div class="sidebar">
-    <section>
-     <h3>Overview</h3>
-     <span><a href="index.html">Guide</a></span>
-    </section>
-
-    <section>
-     <h3>API</h3>
-     <span><a href="collection.html">Collection</a></span>
-     <div>|</div>
-     <span><a href="document.html">Document</a></span>
-     <div>|</div>
-     <span><a href="field.html">Field</a></span>
-     <div>|</div>
-     <span><a href="namePath.html">NamePath</a></span>
-     <div>|</div>
-     <span><a href="type.html">Type</a></span>
-     <div>|</div>
-     <span><a href="tyr.html">Tyr</a></span>
-     <div>|</div>
-     <span><a href="validationError.html">ValidationError</a></span>
-    </section>
-   </div>
+---
+layout: default
+---
 
   <div class="content">
     <h1>Document</h1>
 
      <div class="desc">
       <p>
-       Documents are instances of <a href="collection.html">Collections</a>.
+       Documents are instances of <a href="collection">Collections</a>.
      </p>
     </div>
 
@@ -47,7 +19,7 @@
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">$insert(): <a href="document.html">Document</a></span>
+       <span class="sig">$insert(): <a href="document">Document</a></span>
      </article>
 
      <article>
@@ -55,14 +27,14 @@
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">$label: string</span>
-       <p>This returns the label for this document.  See <a href="index.html#labels">labels</a>.
+       <p>This returns the label for this document.  See <a href="/#labels">labels</a>.
      </article>
 
      <article>
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">$model: <a href="collection.html">Collection</a></span>
+       <span class="sig">$model: <a href="collection">Collection</a></span>
        <p>This is a reference to the collection of this document.  <u>this.$model</u> is equivalent to <u>this.constructor</u>.
      </article>
 
@@ -70,12 +42,12 @@
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">$populate(fields, <a href="index.html#denormalization">denormal</a>: boolean): this</span>
+       <span class="sig">$populate(fields, <a href="/#denormalization">denormal</a>: boolean): this</span>
        <p>
-         This is equivalent to <u>doc.$model.<a href="collection.html#populate">populate(fields, doc, denormal)</a></u>.
+         This is equivalent to <u>doc.$model.<a href="collection#populate">populate(fields, doc, denormal)</a></u>.
        </p>
        <p>
-        Also see <a href="index.html#population">Population</a> for more information and examples.
+        Also see <a href="/#population">Population</a> for more information and examples.
       </p>
      </article>
 
@@ -84,7 +56,7 @@
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">$save(): <a href="document.html">Document</a></span>
+       <span class="sig">$save(): <a href="document">Document</a></span>
        <p>
          This method will either update or insert the object based on whether it has an _id.
          When updating, only fields present in the updating doc are altered. Existing properties that are not present
@@ -107,7 +79,7 @@
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">$uid: string</span>
-       <p>This returns the <a href="index.html#uids">UID</a> for this document.</p>
+       <p>This returns the <a href="/#uids">UID</a> for this document.</p>
      </article>
 
      <article>
@@ -120,10 +92,8 @@
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">$validate(): <a href="validationError.html">ValidationError</a>[]</span>
+       <span class="sig">$validate(): <a href="validationError">ValidationError</a>[]</span>
        <p>This validates the current document according to the validation rules specified by the metadata for this collection.</p>
      </article>
 
   </div>
- </body>
-</html>
