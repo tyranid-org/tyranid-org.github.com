@@ -13,6 +13,14 @@ layout: default
        <p>The collection that this field belongs to.</p>
      </article>
 
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">db: boolean</span>
+       <p>This returns true if this field is persisted in the database.</p>
+     </article>
+
      <article id="def">
        <b class="property"></b>
        <b class="server"></b>
@@ -36,7 +44,7 @@ layout: default
 <tr><td>  help:<td>string<td>none<td>Contains brief user-facing documentation about this field (suitable for a tooltip).
 <tr><td>  note:<td>string<td>none<td>Contains developer-facing documentation about this field (only visible in the Tyranid console).
 <tr><td>  required:<td>boolean<td>false<td>Indicates that this field is required.
-<tr><td>  defaultValue:<td>any<td>none<td>Specifies a default value for this field.
+<tr><td>  defaultValue:<td>any<td>none<td>Default value for this field.  If a function, the default will be the return value of the function.
 <tr><td colspan="4" class="subtitle">Arrays (<u>is == 'array'</u>)
 <tr><td>  of:<td><a href="field#def">Field Def</a><td>none<td>Indicates the type of the array.
 <tr><td>  denormal:<td>object<td>none<td>A <a href="/#denormalization">Denormalization</a> expression to populate when saving this field.
