@@ -125,7 +125,7 @@ var User = new Tyr.Collection({
     <i>// it knows what "organization" is and update the reference with the Organization instance.</i>
     org:        { link: 'organization',
                   <i>// <b>as</b> can be applied to fields or collections to give a human-readable name suitable for using in a UI.</i>
-                  as: 'Organization'
+                  label: 'Organization'
                 },
     inactive:   { is: 'boolean' },
     comments:   { is: 'string',
@@ -522,6 +522,15 @@ for example when used inside MongoDB queries.  This is called a <i>simplified pa
     <h4><a href="namePath">NamePath</a></h4>
 <p>The <a href="collection#parsePath"><i>collection</i>.parsePath(<i>path</i>)</a> method can be used to create <a href="namePath">NamePath</a>
   objects which are useful for parsing paths.</p>
+    <h4 id="pathLabels">Path Labels</h4>
+<p><a href="field">Field</a>s have a <a href="field#def"><u>pathLabel</u></a> property which can be used to specify an abbreviated label a
+field when it is used as part of a full-path label.  For example, if your path was <u>name.first</u>, you could set the <u>pathLabel</u> on <u>name</u>
+to be blank and set the <u>pathLabel</u> to "First Name" on <u>name.first</u>.  This would cause <u>name.first</u> to have a full path label of "First Name"
+instead of "Name First".  This property can also be used to set abbreviated names for path nodes so that the overall path label is not too long.</p>
+
+</form>
+
+</form>
 
 
 
