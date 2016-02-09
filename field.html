@@ -57,6 +57,8 @@ layout: default
 <tr><td colspan="4" class="subtitle"><a href="/#links">Links</a> (<u>is == 'link'</u>)
 <tr><td>  link:<td><i>collection name</i><td>none<td>Indicates that this field contains foreign keys to the given collection.
 <tr><td>  where:<td>object<td>none<td>Contains additional constraints on the links -- see <a href="/#links">links</a>.
+<tr><td colspan="4" class="subtitle">Numbers (<u>is == 'double' || is == 'integer'</u>)
+<tr><td>  in:<td>string<td>none<td>Sets the units for this field (i.e. <u>in: 'km'</u>)  See <a href="units#parse"><u>Units.parse</u></a>.
 <tr><td colspan="4" class="subtitle">Strings (<u>is == 'string'</u>)
 <tr><td>  labelField:<td>boolean<td>false<td>Set to true if this field contains the <a href="/#labels">label</a> for this collection.
 <tr><td colspan="4" class="subtitle"><a href="/#uids">UIDs</a> (<u>is == 'uid'</u>)
@@ -75,6 +77,13 @@ layout: default
         (you can still set <u>client: true</u> and/or <u>db: true</u> for computed properties, they just don't default to true).</div>
      </article>
 
+     <article id="in">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">in: <a href="units">Units</a></span>
+       <p>This returns the <a href="units">Units</a> for this field if they were specified.</p>
+     </article>
+
      <article>
        <b class="property"></b>
        <b class="server"></b>
@@ -91,6 +100,13 @@ layout: default
        <p>This generates a list of label objects that can be used to populate a typeahead dropdown.  This method is only available when the field is a <b>link</b>
        field.</p>
        <p>This method also takes into account the <u>where</u> property on links when generating the list of labels.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">link: <a href="collection">Collection</a></span>
+       <p>This returns the <a href="collection">Collection</a> for this field if it is of type link.</p>
      </article>
 
      <article>
@@ -139,6 +155,13 @@ layout: default
          <tr><td>age</td><td>age</td></tr>
        </table>
        <p>See <a href="/#paths">Paths</a> for more information.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">type: <a href="type">Type</a></span>
+       <p>This returns the <a href="type">Type</a> for this field.</p>
      </article>
 
   </div>

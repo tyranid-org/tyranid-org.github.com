@@ -10,9 +10,9 @@ body { font-family: 'Metrophobic', arial, serif; }
   padding: 8px;
   background: #eee;
   position: fixed;
-  left: calc((100% - 1024px) / 2 - 190px);
+  left: calc((100% - 1024px) / 2 - 200px);
   top: 8px;
-  width: 140px;
+  width: 150px;
   -webkit-box-shadow:2px 2px 2px #aaa;
 }
 .sidebar h3 {
@@ -31,7 +31,7 @@ body { font-family: 'Metrophobic', arial, serif; }
   margin-top: 0;
 }
 
-@media (max-width:1400px) {
+@media (max-width:1410px) {
   .sidebar {
     position: static;
     padding:8px 24px;
@@ -68,7 +68,17 @@ h1 {
   text-shadow: 8px 8px #ddd;
   margin: 8px 0 0 0;
   border-bottom: 5px solid #f70;
- }
+
+  .extends {
+    font-size: 20px;
+    vertical-align: top;
+
+    a {
+      font-size: 30px;
+      vertical-align: top;
+    }
+  }
+}
 h2 {
   font-size:24px;
   font-family: 'Megrim', arial, serif;

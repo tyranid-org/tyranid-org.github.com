@@ -575,6 +575,64 @@ Continent.NORTH_AMERICA._id === 4332
 <i>// The static data instances are also instances of the collection so methods and behaviors are available.</i>
 Continent.NORTH_AMERICA.isContinent()
 </code></pre>
+  <p>If your static data has fields which link to another static collection, you can use labels in the values as the foreign key
+to make the data more readable (they will be converted to ids when the collection is validated).</p>
+
+
+    <h3 id="units">Units</h3>
+<p>Units of Measurement are an important piece of metadata that Tyranid tracks.  In addition, Tyranid has a lot of
+  knowledge around how to manipulate and do arithmetic with units.</p>
+<p>You can associate units with a field using the <u>in</u> option:
+<pre><code class="js">var Widget = new Tyr.Collection({
+  id: 'w00',
+  name: 'widget',
+  <i>...</i>
+  fields: {
+    <i>...</i>
+    <i>// <b>m^3</b> means <b>m<sup>3</sup></b> or <b>meters cubed</b> and indicates a volume tracked in meters.  Can also be written as "m3".</i>
+    volume: { is: 'double', in: 'm^3' }
+    <i>...</i>
+  },
+  <i>...</i>
+});
+</code></pre>
+<p>The <a href="units"><u>Units</u></a> for fields are accessible on the <a href="fields"><u>Field</u></a> objects:</p>
+<pre><code class="js">var units = Widget.fields.volume.in;</code></pre>
+<p>You can also create your own <a href="units"><u>Units</u></a> instances using <a href="units#parse"><u>Units.parse()</u></a> or <a href="tyr#u"><u>Tyr.U</u></a>.
+<pre><code class="js">const U = Tyr.U;
+
+kg = U('kg');
+
+<i>// The parsing functions can also be used as <b>tagged template strings</b>:</i>
+kg = U`kg`;
+
+<i>// Tyranid also supports composite units:</i>
+mph = U`mi/h`;
+
+<i>// Units can infer information about types and systems:</i>
+U`m/s`.type.name === 'velocity'
+U`m/s`.system.name === 'metric'
+U`m/s2`.type.name === 'acceleration'
+U`m*kg/s2`.type.name === 'force'
+U`mP`.system.name === 'planck'
+U`ft`.system.name === 'english'
+
+<i>// Units can do conversions:</i>
+U`in`.convert(12, U`ft`) === 1
+
+<i>// Units can do addition and subtraction:</i>
+U`in`.add(5, U`ft`, 1) === 17
+U`in`.subtract(12, U`ft`, 1) === 0
+
+<i>// Units can do multiplication, division, and inversions:</i>
+U`m`.multiply(U`m*s-1`) === U`m2/s`
+U`m`.divide(U`s2`) === U`m/s2`
+U`m/s`.invert() === U`s/m`
+</code></pre>
+
+<p>See <a href="units">Units</a> and <a href="unit">Unit</a> for more information.</p>
+
+
    <h2>License</h2>
 
    <p>The project is licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a>.

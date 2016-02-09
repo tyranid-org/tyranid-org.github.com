@@ -5,13 +5,36 @@ layout: default
   <div class="content">
     <h1>Blog & Release Notes</h1>
 
+
+    <article>
+      <div class="date">2016.2.9</div>
+      <div class="version">0.0.111</div>
+      <h1>Units</h1>
+      <p>Tyranid now supports units of measure.  Units of measure are an important piece of metadata to keep track of.
+       For example, knowing that a field is a double containing kilometers has a lot more meaning than simply knowing it is a double.</p>
+      <p>Please see the <a href="index#units">Units Guide</a>, <a href="units">Units</a>, and <a href="unit">Unit</a> for more information.</p>
+    </article>
+
+    <article>
+      <div class="date">2016.2.5</div>
+      <div class="version">0.0.110</div>
+      <h1><i>collection</i>.boot()</h1>
+      <p><a href="collection">Collection</a>s have a new <a href="collection#boot"><u>boot()</u></a> hook method
+       can be used to bootstrap your collection.</p>
+    </article>
+
     <article>
       <div class="date">2016.2.3</div>
       <div class="version">0.0.108</div>
-      <h1><i>field</i>.parent, <i>field</i>.pathLabel</h1>
+      <h1><i>field</i>.parent, <i>field</i>.pathLabel, <i>namePath</i>.pathLabel</h1>
       <p><a href="field">Field</a> objects now have
         <ul>
           <li>a <u>parent</u> property that points to their parent field and
+          <li>a <u>pathLabel</u> property that contains their <a href="/#pathLabels">path label</a>.</p>
+        </ul>
+      </p>
+      <p><a href="namePath">NamePath</a> objects now have
+        <ul>
           <li>a <u>pathLabel</u> property that contains their <a href="/#pathLabels">path label</a>.</p>
         </ul>
       </p>

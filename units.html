@@ -1,0 +1,156 @@
+---
+layout: default
+---
+
+  <div class="content">
+    <h1>Units</h1>
+
+     <div class="desc">
+       <p>A <u>Units</u> represents a set of units (it can also represent a single unit).</p>
+       <p><u>Units</u> is the primarily interface for using units within Tyranid (you do not usually need to interact
+        directly with the other <u>Unit*</u> classes but might want to occassionally).</p>
+
+       <p><u>Units</u> are <i>immutable</i> and globally shared.</p>
+
+       <p>See <a href="field#in"><u>Field.in</u></a> for how to associate units to fields.</p>
+
+       <p>Also see the <a href="index#units">Units Guide</a> for more explanation and examples.</p>
+     </div>
+
+    <h2>static</h2>
+
+     <article id="parse">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">parse(text: string): <a href="units">Units</a></span>
+       <p>This method is used to create new <u>Units</u> instances.<p>
+       <p><a href="tyr#u"><u>Tyr.U</u></a> is aliased to this method.  For example:</p>
+       <pre><code class="javascript">const U = Tyr.U;
+
+<i>// U() can be used as a function:</i>
+kg = Units.parse('kg/s');
+kg = U('kg/s');
+
+<i>// U() can also be used as a tagged template string:</i>
+kg = Units.parse`kg/s`;
+kg = U`kg/s`;
+</code></pre>
+     </article>
+
+
+
+    <h2>instance</h2>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig"><i>symbol</i>: number</span>
+       <p><u>Units</u> instances store their components in two ways:  <ol><li>in the <a href="units#components"><u>components</u></a> property and as<li>each unit symbol stored
+        with its associated degree.</ol></p>
+       <p>These "<i>symbol</i>: <i>degree</i>" properties are the only enumerable properties on <u>Units</u> instances.  This means that if you output the <u>Units</u> instance associated
+        with <b>m/s<sup>2</sup></b> you will get:
+         <pre>{
+  m: 1,
+  s: -2
+}</pre>
+     </article>
+
+     <article id="add">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">add(value: number, addUnits: <a href="units">Units</a>, addValue: number): value</span>
+       <p>This adds two values from two units.  The units do not need to be the same, but they need to be compatible.
+        If the units are not compatible, a <a href="unitConversionError"><u>UnitConversionError</u></a> will be thrown.</p>
+       <p>For example, <u>U`in`.add(1, U`ft`, 1)</u> returns <u>13</u>.</p>
+     </article>
+
+     <article id="components">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">components: <a href="unitDegree">UnitDegree</a>[]</span>
+       <p>This contains the components for this Units.  For example, <b>m/s<sup>2</sup></b> has two components:  <b>meters</b> with degree 1 and <b>seconds</b> with degree -2.</p>
+     </article>
+
+     <article id="convert">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">convert(value: number, to: <a href="units">Units</a>): value</span>
+       <p>This converts values from this units to the target units.  If the units are not compatible, a <a href="unitConversionError"><u>UnitConversionError</u></a> will be thrown.</p>
+       <p>For example, <u>U`ft`.convert(1, U`in`)</u> returns <u>12</u>.</p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">divide(by: <a href="units">Units</a>): <a href="units">Units</a></span>
+       <p>This divides this instance of units by the <u>by</u> units and returns a new <u>Units</u> type.  Values are not passed in because values can be simply divided
+        together normally.</p>
+       <p>For example, <u>U`m`.divide(U`s2`)</u> yields <u>U`m/s2`</u>.</p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">invert(): <a href="units">Units</a></span>
+       <p>This returns the the <i>inversion</i> of this set of units.</p>
+       <p>For example, <u>U`ft`.invert()</u> yields <u>U`ft-1`</u> while <u>U`m/s`.invert()</u> yields <u>U`s/m`</u>.</p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">isCompatibleWith(units: <a href="units">Units</a>): boolean</span>
+       <p>This examines the two sets of units and if they are the same type (i.e. they can be added and subtracted) this method will return true.</p>
+       <p>For example, <b>ft</b> is compatible with <b>m</b>, but not <b>m<sup>2</b> or <b>s</b>.
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">multiply(by: <a href="units">Units</a>): <a href="units">Units</a></span>
+       <p>This multiplies this instance of units by the <u>by</u> units and returns a new <u>Units</u> type.  Values are not passed in because values can be simply multiplied
+        together normally.</p>
+       <p>For example, <u>U`m`.multiply(U`s`)</u> yields <u>U`m*s`</u>.</p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">normal(): <a href="units">Units</a></span>
+       <p>This returns the the <i>normalized</i> units for this set of units.  The "normalized unit" is determined by the <a href="unitType#normal">UnitType.normal</a>
+        property.</p>
+       <p>For example, <u>U`ft/ton`.normal()</u> yields <u>U`m/kg`</u>.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">sid: string</span>
+       <p>This is the primary key for units.  <u>sid</u> stands for "string ID".</p>
+     </article>
+
+     <article id="add">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">subtract(value: number, subUnits: <a href="units">Units</a>, subValue: number): value</span>
+       <p>This subtracts <u>subValue</u> from <u>value</u>.  The units do not need to be the same, but they need to be compatible.
+        If the units are not compatible, a <a href="unitConversionError"><u>UnitConversionError</u></a> will be thrown.</p>
+       <p>For example, <u>U`in`.subtract(14, U`ft`, 1)</u> returns <u>2</u>.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">type: <a href="unitType">UnitType</a></span>
+       <p>This contains the type for this <u>Units</u> instance.  If the units for this instance are recognized they will map to pre-defined type with a name (i.e. <b>m/s<sup>2</sup></b>
+        will map to "acceleration"); otherwise a units type will be generated for the combination of units (i.e. <b>m<sup>333</sup></b> will get a custom unit type).</p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">toString(): string</span>
+       <p>This returns a simplified display of the units.  For example, <u>U('m-2W1s-1r-1')</u> returns <u>"W/r1s1m2"</u>.</p>
+     </article>
+
+  </div>
