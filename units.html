@@ -7,7 +7,7 @@ layout: default
 
      <div class="desc">
        <p>A <u>Units</u> represents a set of units (it can also represent a single unit).</p>
-       <p><u>Units</u> is the primarily interface for using units within Tyranid (you do not usually need to interact
+       <p><u>Units</u> is the primary interface for using units within Tyranid (you do not usually need to interact
         directly with the other <u>Unit*</u> classes but might want to occassionally).</p>
 
        <p><u>Units</u> are <i>immutable</i> and globally shared.</p>
@@ -58,7 +58,7 @@ kg = U`kg/s`;
      <article id="add">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">add(value: number, addUnits: <a href="units">Units</a>, addValue: number): value</span>
+       <span class="sig">add(value: number, addUnits: <a href="units">Units</a>, addValue: number): number</span>
        <p>This adds two values from two units.  The units do not need to be the same, but they need to be compatible.
         If the units are not compatible, a <a href="unitConversionError"><u>UnitConversionError</u></a> will be thrown.</p>
        <p>For example, <u>U`in`.add(1, U`ft`, 1)</u> returns <u>13</u>.</p>
@@ -74,7 +74,7 @@ kg = U`kg/s`;
      <article id="convert">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">convert(value: number, to: <a href="units">Units</a>): value</span>
+       <span class="sig">convert(value: number, to: <a href="units">Units</a>): number</span>
        <p>This converts values from this units to the target units.  If the units are not compatible, a <a href="unitConversionError"><u>UnitConversionError</u></a> will be thrown.</p>
        <p>For example, <u>U`ft`.convert(1, U`in`)</u> returns <u>12</u>.</p>
      </article>
@@ -132,7 +132,7 @@ kg = U`kg/s`;
      <article id="add">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">subtract(value: number, subUnits: <a href="units">Units</a>, subValue: number): value</span>
+       <span class="sig">subtract(value: number, subUnits: <a href="units">Units</a>, subValue: number): number</span>
        <p>This subtracts <u>subValue</u> from <u>value</u>.  The units do not need to be the same, but they need to be compatible.
         If the units are not compatible, a <a href="unitConversionError"><u>UnitConversionError</u></a> will be thrown.</p>
        <p>For example, <u>U`in`.subtract(14, U`ft`, 1)</u> returns <u>2</u>.</p>
@@ -143,7 +143,8 @@ kg = U`kg/s`;
        <b class="server"></b>
        <span class="sig">type: <a href="unitType">UnitType</a></span>
        <p>This contains the type for this <u>Units</u> instance.  If the units for this instance are recognized they will map to pre-defined type with a name (i.e. <b>m/s<sup>2</sup></b>
-        will map to "acceleration"); otherwise a units type will be generated for the combination of units (i.e. <b>m<sup>333</sup></b> will get a custom unit type).</p>
+        will map to "acceleration"); otherwise a units type will be generated for the combination of units (i.e. <b>m<sup>333</sup></b> will get a custom unit type -- that it 
+        would share with <b>ft<sup>333</sup></b> if that units was created).</p>
      </article>
 
      <article>
