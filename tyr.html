@@ -232,7 +232,7 @@ layout: default
        <span class="sig">valuesBy(filter: Field => boolean): any[]</span>
        <p>This returns a unique list of all values that appear in any collection in the database for any field that matches the filter.</p>
        <p>For example, the following returns a list of all of the strings that occur in the database in any string field in any collection.</p>
-       <pre>Tyr.valuesFor(field => field.def.is.def.name === 'string')</pre>
+       <pre>Tyr.valuesFor(field => field.type.def.name === 'string')</pre>
      </article>
 
   </div>
