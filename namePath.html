@@ -16,6 +16,17 @@ layout: default
      <p>See <a href="/#paths">paths</a> for more information.</p>
     </div>
 
+     <article id="detail">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">detail: <a href="field">Field</a></span>
+       <p>This is a more detailed version of <a href="namePath#tail"><u>tail</u></a>.</p>
+       <p>Often you are only interested in the end of the path which has the <a href="type">Type</a> of the path you are working with.</p>
+       <p>This is a shortcut for <u><i>skipArrays</i>(this.pathFields[this.pathFields.length-1])</u>.</p>
+       <p>If the path <u>parent.children</u> refers to a an array of string, the <u>tail</u> points at the array but <u>detail</u> points
+         at the contents of the array -- i.e. the string field.</p>
+     </article>
+
      <article>
        <b class="method"></b>
        <b class="server"></b>
@@ -67,14 +78,14 @@ layout: default
        <p>This returns a verbose description of the path at position <u>idx</u> along the path.  This is useful for error messages in parsing.</p>
      </article>
 
-     <article>
+     <article id="tail">
        <b class="property"></b>
        <b class="server"></b>
        <span class="sig">tail: <a href="field">Field</a></span>
-       <p>
-         This is a shortcut for <u>this.pathFields[this.pathFields.length-1]</u>.  Often you are only interested in the end of the path which has
-         the <a href="type">Type</a> of the path you are working with.
-       </p>
+       <p>This is a shortcut for <u>this.pathFields[this.pathFields.length-1]</u>.  Often you are only interested in the end of the path which has
+         the <a href="type">Type</a> of the path you are working with.</p>
+       <p>This property is related to <a href="namePath#detail"><u>detail</u></a>.  If the path <u>parent.children</u> refers to a an array of string,
+         the <u>tail</u> points at the array but <u>detail</u> points at the contents of the array -- i.e. the string field.</p>
      </article>
 
      <article id="uniq">

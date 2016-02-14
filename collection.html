@@ -68,8 +68,8 @@ layout: default
 <tr><td>  methods: {<td><td><td>Define <a href="document">Document</a> methods for this collection.  See <a href="/#methods">Methods</a>.
 <tr><td>    <i>methodName</i>: {</td>
 <tr><td>      fn(<i>method parameters</i>) { <i>...</i> }<td>function<td>none<td>A single isomorphic function for both client and server.</td>
-<tr><td>      clientFn(<i>method parameters</i>) { <i>...</i> }<td>function<td>none<td>The function to use on the client.</td>
-<tr><td>      serverFn(<i>method parameters</i>) { <i>...</i> }<td>function<td>none<td>The function to use on the server.</td>
+<tr><td>      fnClient(<i>method parameters</i>) { <i>...</i> }<td>function<td>none<td>The function to use on the client.</td>
+<tr><td>      fnServer(<i>method parameters</i>) { <i>...</i> }<td>function<td>none<td>The function to use on the server.</td>
 <tr><td>    },</td>
 <tr><td>    <i>...</i></td>
 <tr><td>  },</td>
@@ -366,15 +366,15 @@ layout: default
      <article id="boot">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">boot(stage: string, pass: number): boolean</span>
-       <p>Tyranid will call collection <u>boot()</u> methods once all collections have passed compilation and and then again after linking/validation.  Return true from
-        this method if you need bootstrapping to continue.</p>
-       <p>Tyranid will keep calling <u>boot()</u> methods until all boot methods that exist return false or until 100 passes have occured, in which
+       <span class="sig">boot(stage: string, pass: number): string | string[]</span>
+       <p>Tyranid will call collection <u>boot()</u> methods once all collections have passed compilation and and then again after linking/validation.  Return a string
+         (or an array of strings) listing human-readable reasons for dependencies that you are waiting for.</p>
+       <p>Tyranid will keep calling <u>boot()</u> methods until all boot methods that exist return false/an empty array or until 100 passes have occured, in which
          case it will give up and throw an exception (a deadlock).</p>
        <p><u>stage</u> is either <u>'compile'</u> or <u>'link'</u>.</p>
        <p><u>pass</u> starts at 1 and increases after each pass through all the collections by one up to a maximum of 100.</p>
-       <p>In general your boot hook should get everything accomplished it can before returning true.  It should only return true if it is waiting on
-         another collection to do something in its boot method.</p>
+       <p>In general your boot hook should get everything accomplished it can before returning dependencies.  It should only return dependencies if it is waiting on
+         another collection or component to do something in its boot method.</p>
        <p><b>Your <u>boot()</u> should be <i>idempotent</i> since it may be called multiple times.</b></p>
      </article>
 

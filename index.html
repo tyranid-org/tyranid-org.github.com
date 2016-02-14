@@ -328,11 +328,11 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
 });
 </code></pre>
 <p>By default <u>get</u> methods are isomorphic if <a href="#client">client-side functionality</a> is enabled.  If you want the function to only appear
-on the server you can use <u>serverGet</u> instead.  You can also optionally specify a client-specific version using <u>clientGet</u>.
+on the server you can use <u>getServer</u> instead.  You can also optionally specify a client-specific version using <u>getClient</u>.
 
 <h4>Set</h4>
 
-<p><u>set</u>, <u>clientSet</u>, <u>serverSet</u> also exist to provide a programmatic setter for properties as well.</p>
+<p><u>set</u>, <u>setClient</u>, <u>setServer</u> also exist to provide a programmatic setter for properties as well.</p>
 
 
 
@@ -352,7 +352,7 @@ on the server you can use <u>serverGet</u> instead.  You can also optionally spe
 </code></pre>
 
 <p>By default <u>fn</u> methods are isomorphic if <a href="#client">client-side functionality</a> is enabled.  If you want the method to only appear
-on the server you can use <u>serverFn</u> instead.  You can also optionally specify a client-specific version using <u>clientFn</u>.
+on the server you can use <u>fnServer</u> instead.  You can also optionally specify a client-specific version using <u>fnClient</u>.
 
 
     <h3 id="population">Population</h3>
