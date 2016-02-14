@@ -23,6 +23,9 @@ layout: default
       <div class="date">2016.2.9</div>
       <div class="version">0.0.112</div>
       <h1>Access to Of, Type, and Link moved to Field</h1>
+      <p>The general strategy going forward is to try to leave <u>def</u> untouched and to store compiled <u>def</u>
+        information on the containing class (i.e. <u>Collection</u>, <u>Field</u>, <u>Type</u>.  This is easier to use
+        (field.X instead of field.def.X) and also keeps the original unprocessed raw def value around for later inspection.</p>
       <ul>
         <li><u>field.def.is</u> &#10140; <u>field.type</u>
         <li><u>field.def.link</u> &#10140; <u>field.link</u>
