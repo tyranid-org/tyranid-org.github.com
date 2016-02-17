@@ -48,13 +48,13 @@ layout: default
 <tr><td>  defaultValue:<td>any<td>none<td>Default value for this field.  If a function, the default will be the return value of the function.
 <tr><td colspan="4" class="subtitle">Arrays (<u>is == 'array'</u>)
 <tr><td>  of:<td><a href="field#def">Field Def</a><td>none<td>Indicates the type of the array.
-<tr><td>  denormal:<td>object<td>none<td>A <a href="/#denormalization">Denormalization</a> expression to populate when saving this field.
 <tr><td colspan="4" class="subtitle">Objects (<u>is == 'object'</u>)
 <tr><td>  fields: {</td><td><td><td>Specifies the structure of a nested object.
 <tr><td>    <i>fieldName</i>:<td><a href="field#def">Field Def</a></td>
 <tr><td>    <i>...</i></td>
 <tr><td>  },</td>
 <tr><td colspan="4" class="subtitle"><a href="/#links">Links</a> (<u>is == 'link'</u>)
+<tr><td>  denormal:<td>object<td>none<td>A <a href="/#denormalization">Denormalization</a> expression to populate when saving this field.
 <tr><td>  link:<td><i>collection name</i><td>none<td>Indicates that this field contains foreign keys to the given collection.
 <tr><td>  where:<td>object<td>none<td>Contains additional constraints on the links -- see <a href="/#links">links</a>.
 <tr><td colspan="4" class="subtitle">Numbers (<u>is == 'double' || is == 'integer'</u>)
@@ -105,6 +105,7 @@ layout: default
      <article>
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">link: <a href="collection">Collection</a></span>
        <p>This returns the <a href="collection">Collection</a> for this field if it is of type link.</p>
      </article>
@@ -115,6 +116,14 @@ layout: default
        <b class="client"></b>
        <span class="sig">name: String</span>
        <p>This contains the name of this field.</p>
+     </article>
+
+     <article id="namePath">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">namePath: <a href="namePath">NamePath</a></span>
+       <p>This returns a NamePath for this field.</p>
      </article>
 
      <article>
@@ -167,6 +176,7 @@ layout: default
      <article>
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">type: <a href="type">Type</a></span>
        <p>This returns the <a href="type">Type</a> for this field.</p>
      </article>

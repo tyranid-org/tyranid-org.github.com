@@ -19,6 +19,7 @@ layout: default
      <article id="detail">
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">detail: <a href="field">Field</a></span>
        <p>This is a more detailed version of <a href="namePath#tail"><u>tail</u></a>.</p>
        <p>Often you are only interested in the end of the path which has the <a href="type">Type</a> of the path you are working with.</p>
@@ -30,6 +31,7 @@ layout: default
      <article>
        <b class="method"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">get(obj: object): any</span>
        <p>This walks the <u>obj</u> according to this path and returns the values at this path.  (There can be multiple values if the path crosses
        any arrays.  If so, this method will return duplicate values if values occur more than once.  See <a href="namePath#uniq"><u><i>NamePath</i>.uniq()</u></a>.)</p>
@@ -38,6 +40,7 @@ layout: default
      <article>
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">name: string</span>
        <p>This contains the full, unparsed path that was passed into the constructor.</p>
      </article>
@@ -45,6 +48,7 @@ layout: default
      <article id="path">
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">path: string[]</span>
        <p>This contains the path split up into individual strings for steps on the path.</p>
        <table>
@@ -58,6 +62,7 @@ layout: default
      <article>
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">fields: <a href="field">Field</a>[]</span>
        <p>
          This array contains the <a href="field">Field</a> for each step along the path.  This is a parallel array to <a href="namePath#path">path</a>.
@@ -67,6 +72,7 @@ layout: default
      <article>
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig"><a href="/#paths">pathLabel</a>: String</span>
        <p>This contains the full <a href="/#pathLabels">path label</a> for this name path.
      </article>
@@ -74,6 +80,7 @@ layout: default
      <article>
        <b class="method"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">pathName(idx: integer): string</span>
        <p>This returns a verbose description of the path at position <u>idx</u> along the path.  This is useful for error messages in parsing.</p>
      </article>
@@ -81,6 +88,7 @@ layout: default
      <article id="tail">
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">tail: <a href="field">Field</a></span>
        <p>This is a shortcut for <u>this.pathFields[this.pathFields.length-1]</u>.  Often you are only interested in the end of the path which has
          the <a href="type">Type</a> of the path you are working with.</p>
@@ -91,6 +99,7 @@ layout: default
      <article id="uniq">
        <b class="method"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">uniq(obj: object): any[]</span>
        <p>This walks the <u>obj</u> according to this path and returns the uniq values at this path it finds.  (There can be multiple
        values if the path crosses any arrays.)</p>

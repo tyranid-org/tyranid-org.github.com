@@ -32,6 +32,20 @@ layout: default
      <p>When creating your own types, they will get automatically registered with Tyranid via the new <u>Tyr.Type()</u> constructor.</p>
      </div>
 
+    <h2>static</h2>
+
+     <article id="byName">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">byName: { <i>type name</i>: <a href="type">Type</a> }</span>
+       <p>This contains a dictionary of the supported Tyranid types.
+       </p>
+     </article>
+
+
+    <h2>instance</h2>
+
      <article>
        <b class="method"></b>
        <b class="server"></b>
@@ -56,11 +70,42 @@ layout: default
          convert client-side MongoID strings into server-side <u>ObjectId</u> objects.</p>
      </article>
 
+     <article id="format">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">format(field: <a href="field">Field</a>, value: any): string</span>
+       <p>This returns a formatted version of this value for display.</p>
+     </article>
+
+     <article id="matches">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">matches(namePath: <a href="namePath">NamePath</a>, where: any, doc: <a href="document">Document</a> | object): boolean</span>
+       <p>This returns true if the given <u>doc</u>'s property given by <u>namePath</u> matches the <u>where</u>.</p>
+     </article>
+
      <article>
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">name: string</span>
        <p>Contains the name of this type.</p>
+     </article>
+
+     <article id="query">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">query(namePath: <a href="namePath">NamePath</a>, where: any, query: object): void</span>
+       <p>This updates the passed in MongoDB-style <u>query</u> with the given <u>where</u>.</p>
+     </article>
+
+     <article id="sortValue">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">sortValue(namePath: <a href="namePath">NamePath</a>, value: any): any</span>
+       <p>This returns the sortValue to use in sorting comparisons.</p>
      </article>
 
      <article>
