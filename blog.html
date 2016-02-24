@@ -5,6 +5,24 @@ layout: default
   <div class="content">
     <h1>Blog & Release Notes</h1>
 
+    <div class="legend">
+      <div class="break">indicates a breaking change</div>
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <article>
+      <div class="date">2016.2.24</div>
+      <div class="version">0.0.119</div>
+      <h1>Maps</h1>
+      <p>In addition to specifying a <u>fields</u> property on objects, you can now also specify a <u>keys</u> and <u>of</u> property
+         for them as well to indicate that the object is a <i>map</i>.  See <a href="index#maps">Maps</a> for more information.</p>
+      <ul>
+        <li>added <a href="field#keys"><u>Field.keys</u></a>
+        <li><a href="field#of"><u>Field.of</u></a> is now supported on objects
+        <li><a href="namePath">NamePath</a>s updated to understand maps
+      </ul>
+    </article>
 
     <article>
       <div class="date">2016.2.16</div>
@@ -28,7 +46,7 @@ layout: default
       <h1>NamePaths updated to deal with arrays better; document.$id</h1>
       <ul>
         <li>NamePath parsing now understands the <u>._</u> "contents of array syntax".
-        <li><u>namePath.tail</u> &#10140; <a href="namePath#detail"><u>namePath.detail</u></a>
+        <li><div class="break"><u>namePath.tail</u> &#10140; <a href="namePath#detail"><u>namePath.detail</u></a></div>
         <li><a href="namePath#tail"><u>namePath.tail</u></a> added
         <li><a href="document#$id"><u><i>document</i>.$id</u></a> added
       </ul>
@@ -43,9 +61,9 @@ layout: default
         information on the containing class (i.e. <u>Collection</u>, <u>Field</u>, <u>Type</u>.  This is easier to use
         (field.X instead of field.def.X) and also keeps the original unprocessed raw def value around for later inspection.</p>
       <ul>
-        <li><u>field.def.is</u> &#10140; <u>field.type</u>
-        <li><u>field.def.link</u> &#10140; <u>field.link</u>
-        <li><u>field.def.of</u> &#10140; <u>field.of</u>
+        <li><div class="break"><u>field.def.is</u> &#10140; <u>field.type</u></div>
+        <li><div class="break"><u>field.def.link</u> &#10140; <u>field.link</u></div>
+        <li><div class="break"><u>field.def.of</u> &#10140; <u>field.of</u></div>
       </ul>
 
     </article>

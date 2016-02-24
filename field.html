@@ -49,10 +49,14 @@ layout: default
 <tr><td colspan="4" class="subtitle">Arrays (<u>is == 'array'</u>)
 <tr><td>  of:<td><a href="field#def">Field Def</a><td>none<td>Indicates the type of the array.
 <tr><td colspan="4" class="subtitle">Objects (<u>is == 'object'</u>)
+<tr><td colspan="4" class="subtype">Structured Object</td>
 <tr><td>  fields: {</td><td><td><td>Specifies the structure of a nested object.
 <tr><td>    <i>fieldName</i>:<td><a href="field#def">Field Def</a></td>
 <tr><td>    <i>...</i></td>
 <tr><td>  },</td>
+<tr><td colspan="4" class="subtype"><a href="index#maps">Map Object</a></td>
+<tr><td>  keys:<td><a href="field#def">Field Def</a><td><td>Specifies the type of the keys for this <a href="index#maps">map</a>.
+<tr><td>  of:<td><a href="field#def">Field Def</a><td><i>required</i>***<td>Indicates the type of the object's contents.
 <tr><td colspan="4" class="subtitle"><a href="/#links">Links</a> (<u>is == 'link'</u>)
 <tr><td>  denormal:<td>object<td>none<td>A <a href="/#denormalization">Denormalization</a> expression to populate when saving this field.
 <tr><td>  link:<td><i>collection name</i><td>none<td>Indicates that this field contains foreign keys to the given collection.
@@ -75,6 +79,7 @@ layout: default
       <div><u>*</u> <u>is</u> is not required if <u>link</u> is specified -- the type is inferred to be <u>link</u> in that case.</div>
       <div><u>**</u> <u>client</u> and <u>db</u> usually defaults to true except for <a href="/#computedProperties">computed properties</a>
         (you can still set <u>client: true</u> and/or <u>db: true</u> for computed properties, they just don't default to true).</div>
+      <div><u>***</u> <u>of</u> is required if <u>keys</u> is specified.</div>
      </article>
 
      <article id="in">
@@ -82,6 +87,23 @@ layout: default
        <b class="server"></b>
        <span class="sig">in: <a href="units">Units</a></span>
        <p>This returns the <a href="units">Units</a> for this field if they were specified.</p>
+     </article>
+
+     <article id="keys">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">keys: <a href="field">Field</a></span>
+       <p>This is only valid on objects and it indicates that the object is a key/value map rather than an object with predefined <u>fields</u>.</p>
+       <p><u>keys</u> specifies the type of the keys (usually a <u>string</u> or <u>uid</u> type).</p>
+       <p>If <u>keys</u> is present, then <a href="#of"><u>of</u></a> must be specified as well to define the contents of the map.
+       <p>For example, the following defines an object with <u>string</u> keys and <u>integer</u> values:</p>
+       <pre><code class="js">{
+  is: 'object',
+  keys: 'string',
+  of: 'integer'
+}</code></pre>
+       <p>See <a href="index#maps">Maps</a> for more information.
      </article>
 
      <article>
@@ -126,11 +148,12 @@ layout: default
        <p>This returns a NamePath for this field.</p>
      </article>
 
-     <article>
+     <article id="of">
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">of: <a href="field">Field</a></span>
-       <p>This returns the <a href="field"><u>Field</u></a> for the contents of this array field if it is of type array.</p>
+       <p>This returns the <a href="field"><u>Field</u></a> for the contents of this array or <a href="index#maps">map object</a>.</p>
      </article>
 
      <article>

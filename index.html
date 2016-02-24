@@ -447,6 +447,38 @@ you use Tyranid's update() methods.</p>
 </code></pre>
 
 
+    <h3 id="maps">Maps</h3>
+<p>You can define your objects to be <i>maps</i> using the <a href="field#keys"><u>keys</u></a> and <a href="field#of"><u>of</u></a>
+  field properties.</p>
+<p>For example, the following defines a map of strings to integers.</p>
+<pre><code class="js">{
+  is: 'object',
+  keys: 'string',
+  of: 'integer'
+}</code></pre>
+<p>As another more complex example, the following defines a map of UIDs to objects.</p>
+<pre><code class="js">{
+  is: 'object',
+  keys: {
+    is: 'uid',
+    of: [ 'user', 'group' ]
+  },
+  of: {
+    is: 'array',
+    of: 'string'
+  }
+}</code></pre>
+
+<p>You can also combine <u>fields</u> and <u>keys</u>/<u>of</u> -- for example, the following defines a simple named array-like object of strings:</p>
+<pre><code class="js">{
+  is: 'object',
+  fields: {
+    name:   { is: 'string', fieldLabel: true },
+    length: { is: 'integer' }
+  },
+  keys: 'number',
+  of: 'string'
+}</code></pre>
 
 
     <h3 id="uids">Universal IDs (UIDs)</h3>
@@ -511,9 +543,9 @@ res.json(User.toClient(obj))
 </table>
 </p>
 <p>Collections contain a <a href="collection#fields"><u>fields</u></a> hash which make it easier to work with paths.</p>
-    <h4>Arrays</h4>
-<p>Arrays have a special syntax.  When referring to the contents of an array in a generic sense, you use "<u>._</u>".  When referring to a
-particular element you use "<u>.<i>array index</i></u>".</p>
+    <h4>Arrays and Maps</h4>
+<p>Arrays and <a href="index#maps">maps</a> have a special syntax.  When referring to the contents of an array or map in a generic sense, you use "<u>._</u>".
+When referring to a particular element you use "<u>.<i>array index | map key</i></u>".</p>
 <p>For example, <u>siblings</u> refers to an array, <u>siblings._</u> refers to the type of contents of the array (an object), and
 <u>siblings._.name</u> refers to a specific property inside that object that is inside the array.</p>
 <p>This array syntax can be simplified (i.e. <u>siblings._.name</u> => <u>siblings.name</u>) in certain circumstances,
