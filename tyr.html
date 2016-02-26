@@ -37,7 +37,7 @@ layout: default
        <p>This is an hash of collections that Tyranid knows about indexed by collection name.</p>
      </article>
 
-     <article>
+     <article id="byUid">
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
@@ -45,6 +45,17 @@ layout: default
        <p>
         This will find a document by its <a href="/#uids">UID</a>.
        </p>
+     </article>
+
+     <article id="byUids">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">byUids(uid: string:[]): <a href="document">Document[]</a></span>
+       <p>
+        This will find an array of documents by their <a href="/#uids">UID</a>.</p>
+       <p>The UIDs do not need to be from the same collection and this method is optimized
+         to only query from each collection once.</p>
      </article>
 
      <article>
