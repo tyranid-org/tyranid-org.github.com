@@ -498,6 +498,11 @@ Tyr.parseUid('u00AF8...123')
 Tyr.byUid('u00AF8...123').then(function(user) {
   <i>// <b>user</b> is a User instance with mongo ID ObjectId('AF8...123').</i>
 });
+
+<i>// Tyranid also efficiently fetch an array of documents by UIDs as well:</i>
+Tyr.byUids(['u00AF8...123', 'g00FDC...321', ...]).then(function(docs) {
+  <i>...</i>
+});
 </code></pre>
 
 

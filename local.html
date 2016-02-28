@@ -1,0 +1,62 @@
+---
+layout: default
+---
+
+  <div class="content">
+    <h1>Local Storage</h1>
+
+     <div class="desc">
+      <p>
+       <u>Tyr.local</u> provides <i>continuation local storage</i> functionality to Tyranid.  Continuation local storage is roughly
+       analogous to <i>thread local storage</i> seen in threaded systems.  A sequence of callbacks can be thought of as being roughly
+       similar to a green thread.
+      </p>
+      <p>Tyranid's local storage is currently built on top of <a href="https://github.com/othiym23/node-continuation-local-storage">continuation-local-storage</a> (CLP).
+       However, this might change to support zones, asyncWrap, domains, etc. as this functionality will probably be migrated to node.js core.  As a result, Tyranid
+       provides a lightweight wrapper around CLP so that if the underlying implementation changes your code should remain as is.
+      </p>
+      <p>
+       For example, if you wanted to keep track of whether the current user was on a mobile device, you could do:
+      <p>
+
+      <p><i>in startup:</i>
+      <pre><code class="js">Tyr.local.define('onMobile');</code></pre>
+
+      <p><i>in an Express middleware you provide:</i>
+      <pre><code class="js">Tyr.local.onMobile = myIsOnMobileFunction();</code></pre>
+
+      <p><i>later on in some code that doesn't have access to the request:</i>
+      <pre><code class="js">if (Tyr.local.onMobile) { ... }</code></pre>
+
+
+    </div>
+
+     <article id="detail">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">define(propertyName: string): void</span>
+       <p>This method defines a binding for a property that you wish to track across async code.</p>
+     </article>
+
+     <article id="detail">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">user: User</span>
+       <p>This returns a reference to the currently-logged-in user if you have a "user" collection defined.</p>
+     </article>
+
+     <article id="detail">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">req: <a href="http://expressjs.com/en/4x/api.html#req">Req</a></span>
+       <p>This returns a reference to the current Express Request object.</p>
+     </article>
+
+     <article id="detail">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">req: <a href="http://expressjs.com/en/4x/api.html#res">Res</a></span>
+       <p>This returns a reference to the current Express Response object.</p>
+     </article>
+
+  </div>
