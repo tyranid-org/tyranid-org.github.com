@@ -94,9 +94,8 @@ layout: default
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">fields: { <i><a href="/#paths">field path name</a></i>: <a href="field">Field</a> }</span>
-       <p>This is a hash of all the fields inside a collection by their <a href="/#paths">path names</a>.  Paths are often more
-        convenient to work with than recursively walking the def.fields.* structure.</p>
+       <span class="sig">fields: { <i>field name</a></i>: <a href="field">Field</a> }</span>
+       <p>This is a parallel hash to <u>def.fields</u> that contains the generated <a href="field"><u>Field</u></a> objects.</p>
      </article>
 
      <article>
@@ -269,11 +268,30 @@ layout: default
        <p>Generally prefer to use <a href="field#labels"><u>Field.labels()</u></a> over this as it can take advantage of the <u>where</u> property on link fields.</p>
      </article>
 
+     <article id="mixin">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">mixin(def: <a href="#def">def Object</a>): void</span>
+       <p>This allows you to mixin additional metadata (like additional fields) to an existing collection.  This is useful for adding additional metadata to built-in
+         Tyranid or third-party collections.  See <a href="index#mixinSchemas">Mixins</a> for more information.</p>
+     </article>
+
      <article id="parsePath">
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">parsePath(text: string): <a href="namePath">NamePath</a></span>
        <p>This parses a <a href="/#paths">path</a> into a <a href="namePath">NamePath</a> object.</p>
+     </article>
+
+     <article id="paths">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">paths: { <i><a href="/#paths">field path name</a></i>: <a href="field">Field</a> }</span>
+       <p>This is a hash of all the fields inside a collection by their <a href="/#paths">path names</a>.  Paths are often more
+        convenient to work with than recursively walking the def.fields.* structure.</p>
+       <p>Note that unlike <a href="collection#fields"><u>Collection.fields</u></a> which just has the top-level fields, <u>paths</u> contains
+        nested fields as well.</p>
      </article>
 
      <article id="populate">

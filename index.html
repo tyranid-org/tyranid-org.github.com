@@ -152,9 +152,24 @@ User.prototype.fullName = function {
 (Tyr.byName('user') instanceof Tyr.Collection) === true
 </code></pre>
 
+     <h4 id="mixinSchemas">Mixin Schemas</h4>
+<p>Tyranid also supports <b>mixin schemas</b> via the <a href="collection#mixin"><u>Collection.mixin()</u></a> method
+that can statically add metadata to an existing collection.  This is useful for extending built-in Tyranid collection
+with additional metadata to suit your needs.</p>
+</form>
+The following adds a "westTotal" property to User:</p>
+<pre><code class="js">User.mixin({
+  def: {
+    fields: {
+      westTotal: { is: 'integer' }
+    }
+  }
+});
+</code></pre>
      <h4 id="dynamicSchemas">Dynamic Schemas</h4>
 <p>Tyranid also supports <b>dynamic schemas</b> that can be added at runtime via storing metadata in the database.
-The following adds a "westTotal" property to User but only for users that belong to Organization 1:</p>
+Dynamic schemas differ from Mixin Schemas in that they are <i>conditionally applied</i> based on the match rules.</p>
+<p>The following adds a "westTotal" property to User but only for users that belong to Organization 1:</p>
 <pre><code class="js">Tyr.byName('tyrSchema').save({
   collection: User.id,
   match: {
@@ -547,7 +562,7 @@ res.json(User.toClient(obj))
   <tr><td>address.state</td><td>'WI'</td></tr>
 </table>
 </p>
-<p>Collections contain a <a href="collection#fields"><u>fields</u></a> hash which make it easier to work with paths.</p>
+<p>Collections contain a <a href="collection#paths"><u>paths</u></a> hash which make it easier to work with paths.</p>
     <h4>Arrays and Maps</h4>
 <p>Arrays and <a href="index#maps">maps</a> have a special syntax.  When referring to the contents of an array or map in a generic sense, you use "<u>._</u>".
 When referring to a particular element you use "<u>.<i>array index | map key</i></u>".</p>
