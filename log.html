@@ -46,6 +46,8 @@ layout: default
 
        <p>Tyranid will automatically log the timestamp, details about the request (method, path, query string, duration, user agent, ...), and so on.</p>
 
+       <p>Use <a href="collection#mixin"><u>Log.mixin()</u></a> to add custom <u>Log</u> fields that you would like to record.</p>
+
        <p>Examples:</p>
        <pre><code class="js">Tyr.info('a test message')
 Tyr.warn({ e: 'http', m: 'a log message' });
