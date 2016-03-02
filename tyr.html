@@ -73,7 +73,7 @@ layout: default
        <p>This is a list of all the collections that Tyranid knows about.</p>
      </article>
 
-     <article>
+     <article id="config">
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">config(opts: object): void</span>
@@ -82,11 +82,16 @@ layout: default
        <pre>
 {
   db: pmongo(myDatabaseUrl),
+  logLevel: 'info',
+  clientLogLevel: 'error',
+  consoleLogLevel: 'info',
+  dbLogLevel: 'info',
   validate: <i>validateOpts</i>
 }</pre>
       <p>If the <u>validate</u> option is not used, be sure to call <u>Tyr.validate()</u> once all of the collections
         have been imported.  See <a href="tyr#validate">Tyr.validate()</a> for an explanation of <u>validateOpts</u>.
       </p>
+      <p>See <a href="log"><u>Log</u><a> for an explanation of the log level options.</p>
 
      <article>
       <b class="property"></b>
@@ -140,6 +145,20 @@ layout: default
        <b class="server"></b>
        <span class="sig"><a href="local">local</a></span>
        <p>This provides access to Tyranid's <i>continuation local storage</i> capability.</p>
+     </article>
+
+     <article id="log">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">trace|log|info|warn|error|fatal(opts): void</span><br>
+       <p>This are aliases to the logging methods in <u>Log</u>, see <a href="log#log"><u>Log.log</u></a>.</p>
+     </article>
+
+     <article id="config">
+       <b class="class"></b>
+       <b class="server"></b>
+       <span class="sig"><a href="log">Log</a></span>
      </article>
 
      <article>

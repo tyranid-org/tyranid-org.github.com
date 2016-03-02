@@ -1,0 +1,65 @@
+---
+layout: default
+---
+
+  <div class="content">
+    <h1>Log</h1>
+
+     <div class="desc">
+      <p>
+       <u>Log</u> provides basic isomorphic logging capability that can log to all of the server console, the client console, and/or to a database log.
+      </p>
+
+      <p>The log levels are:</p>
+       {% include logLevel-table.html %}
+
+      <p><a href="tyr#config"><u>Tyr.config()</u></a> takes the following log level options:</p>
+       <table>
+         <thead>
+           <tr><th>Option<th>Default<th>notes
+         <tbody>
+           <tr><td><u>logLevel</u><td><u>'info'</u><td>Sets the default logging threshold.
+           <tr><td><u>clientLogLevel</u><td><u>logLevel || 'error'</u><td>A log's level must be >= this to be logged to the client console.
+           <tr><td><u>consoleLogLevel</u><td><u>logLevel || 'info'</u><td>A log's level must be >= this to be logged to the server console.
+           <tr><td><u>dbLogLevel</u><td><u>logLevel || 'info'</u><td>A log's level must be >= this to be logged to the database <u>tyrLog</u> collection.
+       </table>
+
+
+    </div>
+
+     <article id="log">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">trace|log|info|warn|error|fatal(opts): void</span>
+       <p>These are the basic logging methods.  These are all available directly on <a href="tyr"><u>Tyr</u></a> as well.</p>
+       <p>Opts is a list of the following:</p>
+
+       <table>
+         <thead>
+           <tr><th>Option<th>Notes
+         <tbody>
+           <tr><td>string<td>The log message.
+           <tr><td>Error<td>An Error or its subclasses.  The stack trace will be logged as well.  The log message will default to this unless a message is provided directly.
+           <tr><td>object<td>An object which can contain any of the fields in the <u>Log</u> collection.
+       </table>
+
+       <p>Tyranid will automatically log the timestamp, details about the request (method, path, query string, duration, user agent, ...), and so on.</p>
+
+       <p>Examples:</p>
+       <pre><code class="js">Tyr.info('a test message')
+Tyr.warn({ e: 'http', m: 'a log message' });
+Tyr.fatal({ e: 'http', m: 'a log message' }, new Error())</code></pre>
+     </article>
+
+     <article id="log">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">addEvent(name, label, notes): void</span>
+       <p>This allows you to define additional event types for log messages so that you can categorize them.</p>
+
+       <p>Tyranid provides the following default event types:<p>
+       {% include logEvent-table.html %}
+     </article>
+
+  </div>
