@@ -16,7 +16,7 @@ layout: default
       <p><a href="tyr#config"><u>Tyr.config()</u></a> takes the following log level options:</p>
        <table>
          <thead>
-           <tr><th>Option<th>Default<th>notes
+           <tr><th>Option<th>Default<th>Notes
          <tbody>
            <tr><td><u>logLevel</u><td><u>'info'</u><td>Sets the default logging threshold.
            <tr><td><u>clientLogLevel</u><td><u>logLevel || 'error'</u><td>A log's level must be >= this to be logged to the client console.
@@ -33,7 +33,7 @@ layout: default
        <b class="client"></b>
        <span class="sig">trace|log|info|warn|error|fatal(opts): void</span>
        <p>These are the basic logging methods.  These are all available directly on <a href="tyr"><u>Tyr</u></a> as well.</p>
-       <p>Opts is a list of the following:</p>
+       <p><u>opts</u> is a list of the following:</p>
 
        <table>
          <thead>
@@ -46,12 +46,23 @@ layout: default
 
        <p>Tyranid will automatically log the timestamp, details about the request (method, path, query string, duration, user agent, ...), and so on.</p>
 
-       <p>Use <a href="collection#mixin"><u>Log.mixin()</u></a> to add custom <u>Log</u> fields that you would like to record.</p>
-
        <p>Examples:</p>
        <pre><code class="js">Tyr.info('a test message')
+Tyr.warn('a log message', { e: 'http' });
 Tyr.warn({ e: 'http', m: 'a log message' });
 Tyr.fatal({ e: 'http', m: 'a log message' }, new Error())</code></pre>
+
+       <p>Use <a href="collection#mixin"><u>Log.mixin()</u></a> to add custom <u>Log</u> fields that you would like to record.</p>
+
+       <p>For example, say you wanted to store a "zone" property on log messages that was a link to a "Zone" collection:</p>
+       <pre><code class="js">Tyr.Log.mixin({
+  fields: {
+    zone: { link: 'zone' }
+  }
+});</code></pre>
+
+       <p>You could then make log() calls referencing the new property:</p>
+       <pre><code class="js">Tyr.log({ m: 'my log message', zone: myZone })</code></pre>
      </article>
 
      <article id="log">

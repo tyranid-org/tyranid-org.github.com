@@ -3,7 +3,7 @@ layout: default
 ---
 
   <div class="content">
-    <h1>Collection</h1>
+    <h1>Collection <span class="extends">mixins <a href="component">Component</a></span></h1>
 
      <article>
        <b class="method"></b>
@@ -380,21 +380,6 @@ layout: default
      </article>
 
      <h2>Hooks</h2>
-
-     <article id="boot">
-       <b class="method"></b>
-       <b class="server"></b>
-       <span class="sig">boot(stage: string, pass: number): string | string[]</span>
-       <p>Tyranid will call collection <u>boot()</u> methods once all collections have passed compilation and and then again after linking/validation.  Return a string
-         (or an array of strings) listing human-readable reasons for dependencies that you are waiting for.</p>
-       <p>Tyranid will keep calling <u>boot()</u> methods until all boot methods that exist return false/an empty array or until 100 passes have occured, in which
-         case it will give up and throw an exception (a deadlock).</p>
-       <p><u>stage</u> is either <u>'compile'</u> or <u>'link'</u>.</p>
-       <p><u>pass</u> starts at 1 and increases after each pass through all the collections by one up to a maximum of 100.</p>
-       <p>In general your boot hook should get everything accomplished it can before returning dependencies.  It should only return dependencies if it is waiting on
-         another collection or component to do something in its boot method.</p>
-       <p><b>Your <u>boot()</u> should be <i>idempotent</i> since it may be called multiple times.</b></p>
-     </article>
 
      <article>
        <b class="method"></b>

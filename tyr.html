@@ -66,6 +66,12 @@ layout: default
      </article>
 
      <article>
+       <b class="mixin"></b>
+       <b class="server"></b>
+       <span class="sig"><a href="component">Component</a></span>
+     </article>
+
+     <article>
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
@@ -77,7 +83,6 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">config(opts: object): void</span>
-     </article>
        <p>This initializes Tyranid.  <u>opts</u> are as follows:</p>
        <pre>
 {
@@ -86,12 +91,16 @@ layout: default
   clientLogLevel: 'error',
   consoleLogLevel: 'info',
   dbLogLevel: 'info',
+  secure: <a href="secure">Secure</a>,
   validate: <i>validateOpts</i>
 }</pre>
       <p>If the <u>validate</u> option is not used, be sure to call <u>Tyr.validate()</u> once all of the collections
         have been imported.  See <a href="tyr#validate">Tyr.validate()</a> for an explanation of <u>validateOpts</u>.
       </p>
-      <p>See <a href="log"><u>Log</u><a> for an explanation of the log level options.</p>
+      <p>See <a href="log"><u>Log</u></a> for an explanation of the log level options.</p>
+
+      <p>See <a href="secure"><u>Secure</u></a> for an explanation of the <u>secure</u> option.</p>
+     </article>
 
      <article>
       <b class="property"></b>
@@ -161,6 +170,13 @@ layout: default
        <span class="sig"><a href="log">Log</a></span>
      </article>
 
+     <article id="mixin">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">mixin(target: object, mixin: object): void</span><br>
+       <p>This mixes in a <b>mixin</b> into a target object.  Both regular and prototype methods and properties are mixed.</p>
+     </article>
+
      <article>
        <b class="class"></b>
        <b class="server"></b>
@@ -176,6 +192,12 @@ layout: default
        <p>
         This will parse a <a href="/#uids">UID</a> into the collection and id that the uid refers to.
        </p>
+     </article>
+
+     <article>
+       <b class="mixin"></b>
+       <b class="server"></b>
+       <span class="sig"><a href="secure">Secure</a></span>
      </article>
 
      <article>

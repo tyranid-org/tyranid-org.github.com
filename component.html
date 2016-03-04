@@ -1,0 +1,56 @@
+---
+layout: default
+---
+
+  <div class="content">
+    <h1>Component <span class="extends">mixin</span></h1>
+
+     <p><u>Component</u> is a mixin that classes that extend Tyranid mixin.</p>
+     <p>Tyranid <a href="collection"><u>Collection</u></a>s are also <u>Component</u>s.</p>
+
+     <article id="boot">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">boot(stage: string, pass: number): string | string[]</span>
+       <p>Tyranid will call components <u>boot()</u> methods once all collections have passed compilation and and then again after linking/validation.  Return a string
+         (or an array of strings) listing human-readable reasons for dependencies that you are waiting for.</p>
+       <p>Tyranid will keep calling <u>boot()</u> methods until all boot methods that exist return false/an empty array or until 100 passes have occured, in which
+         case it will give up and throw an exception (a deadlock).</p>
+       <p><u>stage</u> is either <u>'compile'</u> or <u>'link'</u>.</p>
+       <p><u>pass</u> starts at 1 and increases after each pass through all the collections by one up to a maximum of 100.</p>
+       <p>In general your boot hook should get everything accomplished it can before returning dependencies.  It should only return dependencies if it is waiting on
+         another collection or component to do something in its boot method.</p>
+       <p><b>Your <u>boot()</u> should be <i>idempotent</i> since it may be called multiple times.</b></p>
+     </article>
+
+     <article id="clientCode">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">clientCode(code: string): string</span>
+       <p>Implementing this method allows you to generate client javascript code for your component.</p>
+     </article>
+
+     <article id="compileCollection">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">compileCollection(compiler, field: <a href="collection">Collection</a>): void</span>
+       <p>Implement this method to get a hook into the Tyranid compilation and linking process for <u>Collection</u>s.</p>
+     </article>
+
+     <article id="compileField">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">compileField(compiler, field: <a href="field">Field</a>): void</span>
+       <p>Implement this method to get a hook into the Tyranid compilation and linking process for <u>Field</u>s.</p>
+     </article>
+
+     <article id="routes">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">routes(app: <a href="http://expressjs.com/en/4x/api.html#app">Application</a>,<br>
+<div style="padding-left:84px;">auth: function(req: <a href="http://expressjs.com/en/4x/api.html#req">Request</a>, res: <a href="http://expressjs.com/en/4x/api.html#res">Response</a>, next)): void</div></span>
+       <p>If present, this method can be used to register Express routes for your component.</p>
+       <p>You should register the <u>auth()</u> function under <u>app.all(auth)</u> when creating routes.</p>
+     </article>
+
+  </div>

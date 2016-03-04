@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+  <div class="content">
+    <h1>Secure <span class="extends">mixin, mixins <a href="component">Component</a></span></h1>
+
+    <p><u>Secure</u> is a mixin interface that Tyranid users can implement to secure Tyranid queries, updates, and REST endpoints.</p>
+
+    <p>Call <u><a href="tyr#mixin">Tyr.mixin</a>(<i>your class</i>, Tyr.Secure)</u> on your class to mix in the security functionality.</p>
+
+    <p>Register your <u>Secure</u> implementation with Tyranid by passing it into the <a href="tyr#config"><u>Tyr.config()</u></a> call.</p>
+
+     <article id="query">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">query(collection: <a href="collection">Collection</a>): <i>MongoDB query object</i></span>
+       <p>If a <u>Secure</u> component is registered with Tyranid, Tyranid will invoke the <u>query()</u> method to add additional
+        restrictions to its find methods when working with data.</p>
+     </article>
+
+  </div>

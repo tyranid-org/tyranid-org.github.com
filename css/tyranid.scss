@@ -259,7 +259,7 @@ article h1 {
   top: 4px;
 }
 
-.async::after, .class::after, .method::after, .property::after, .client::after, .server::after {
+.async::after, .class::after, .mixin::after, .method::after, .property::after, .client::after, .server::after {
   display: block;
   float: right;
   margin: 4px 0 0 8px;
@@ -291,6 +291,13 @@ article h1 {
 .class::after {
   content: 'class';
   background: #C08;
+}
+
+.mixin {
+}
+.mixin::after {
+  content: 'mixin';
+  background: #80C;
 }
 
 .property {
