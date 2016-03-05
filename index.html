@@ -289,7 +289,31 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
 
     <h3 id="links">Links</h3>
 
-<p>Fields of type <u>link</u> support a <u>where</u> property.  For example:</p>
+<p>Fields of type <u>link</u> support a <u>where</u> property.  The valid values for relate are:</p>
+<table>
+  <thead>
+    <tr><th>Value<th>Notes
+  <tbody>
+    <tr><td><u>associate</u><td>The default.  Indicates a regular associative link.
+    <tr><td><u>owns</u><td>Indicates that the linked-to document is "owned" or "composed in" the linking document.
+    <tr><td><u>ownedBy</u><td>Indicates that the linked-to document is "owns" or "is composed of" the linking document.
+</table>
+
+<p>For example:</p>
+
+<pre><code class="js">var Department = new Tyr.Collection({
+  id: 'd00',
+  name: 'department',
+  fields: {
+    <i>...</i>
+    <i>// This ties departments to the lifecycle of their organization.</i>
+    organization:   { link: 'organization', relate: 'ownedBy' },
+    <i>...</i>
+  }
+});
+</code></pre>
+
+<p><u>link</u> Fields also support a <u>where</u> property.  For example:</p>
 
 <pre><code class="js">var User = new Tyr.Collection({
   id : 'u00',
