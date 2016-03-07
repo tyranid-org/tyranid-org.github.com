@@ -268,6 +268,33 @@ layout: default
        <p>Generally prefer to use <a href="field#labels"><u>Field.labels()</u></a> over this as it can take advantage of the <u>where</u> property on link fields.</p>
      </article>
 
+     <article id="links">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">links(opts): <a href="field">Field</a>[]</span>
+       <p>This generates a list of links between this collection and other collections.</p>
+       <p><u>opts</u> are:
+       <ul>
+         <li><u>relate</u>:
+           <table>
+             <thead>
+               <tr><th>Value<th>Notes
+             <tbody>
+               <tr><td>'associate'<td>Indicates an associative link (the default).
+               <tr><td>'owns'<td>Indicates that this collection owns (or is composed of / aggregated of) the collection instance referred to by this link.
+               <tr><td>'ownedBy'<td>Indicates that this collection is owned by the collection instance referred to by this link.
+           </table>
+         <li><u>direction</u>:
+           <table>
+             <thead>
+               <tr><th>Value<th>Notes
+             <tbody>
+               <tr><td>'incoming'<td>Only look at incoming links.
+               <tr><td>'outgoing'<td>Only look at outgoing links.
+           </table>
+       </ul>
+     </article>
+
      <article id="mixin">
        <b class="method"></b>
        <b class="server"></b>
