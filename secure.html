@@ -12,9 +12,12 @@ layout: default
     <p>Register your <u>Secure</u> implementation with Tyranid by passing it into the <a href="tyr#config"><u>Tyr.config()</u></a> call.</p>
 
      <article id="query">
+       <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">query(collection: <a href="collection">Collection</a>): <i>MongoDB query object</i></span>
+       <span class="sig">query(collection: <a href="collection">Collection</a>,<br>
+          <div style="padding-left:134px;">method: 'view' | 'update' | 'insert' | 'delete'):</div>
+          <div style="padding-left:80px;"><i>MongoDB query object</i></div></span>
        <p>If a <u>Secure</u> component is registered with Tyranid, Tyranid will invoke the <u>query()</u> method to add additional
         restrictions to its find methods when working with data.</p>
      </article>

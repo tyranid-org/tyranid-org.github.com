@@ -16,7 +16,7 @@ layout: default
          (or an array of strings) listing human-readable reasons for dependencies that you are waiting for.</p>
        <p>Tyranid will keep calling <u>boot()</u> methods until all boot methods that exist return false/an empty array or until 100 passes have occured, in which
          case it will give up and throw an exception (a deadlock).</p>
-       <p><u>stage</u> is either <u>'compile'</u> or <u>'link'</u>.</p>
+       <p><u>stage</u> is either <u>'compile'</u>, <u>'link'</u>, or <u>'post-link'</u>.</p>
        <p><u>pass</u> starts at 1 and increases after each pass through all the collections by one up to a maximum of 100.</p>
        <p>In general your boot hook should get everything accomplished it can before returning dependencies.  It should only return dependencies if it is waiting on
          another collection or component to do something in its boot method.</p>

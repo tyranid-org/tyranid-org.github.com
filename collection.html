@@ -31,6 +31,14 @@ layout: default
        <p>This retrieves the first document it finds matching the given <u>label</u> using a case-insensitive search.</p>
      </article>
 
+     <article>
+      <b class="property"></b>
+      <b class="server"></b>
+      <span class="sig">db: <a href="https://github.com/gordonmleigh/promised-mongo/blob/master/lib/Collection.js">promised-mongo Collection</a></span>
+
+      <p>This contains a reference to the underlying promised-mongo <u>Collection</u> instance.</p>
+     </article>
+
      <article id="def">
        <b class="property"></b>
        <b class="server"></b>
@@ -272,7 +280,8 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">links(opts): <a href="field">Field</a>[]</span>
-       <p>This generates a list of links between this collection and other collections.</p>
+       <p>This generates a list of links between this collection and other collections.  By default this will find both outgoing links <i>and incoming links</i>
+        from other collections to this one.</p>
        <p><u>opts</u> are:
        <ul>
          <li><u>relate</u>:
@@ -280,9 +289,9 @@ layout: default
              <thead>
                <tr><th>Value<th>Notes
              <tbody>
-               <tr><td>'associate'<td>Indicates an associative link (the default).
-               <tr><td>'owns'<td>Indicates that this collection owns (or is composed of / aggregated of) the collection instance referred to by this link.
-               <tr><td>'ownedBy'<td>Indicates that this collection is owned by the collection instance referred to by this link.
+               <tr><td>'associate'<td>Only look at "associate" links.
+               <tr><td>'owns'<td>Only look at "owns" links.
+               <tr><td>'ownedBy'<td>Only look at "ownedBy" links.
            </table>
          <li><u>direction</u>:
            <table>
