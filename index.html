@@ -42,12 +42,12 @@ layout: default
 
    <h3>Setup</h3>
 
-   <pre><code class="js">var pmongo = require('promised-mongo'),
-    Tyr    = require('tyranid');
+   <pre><code class="js">var mongodb = require('mongodb'),
+    Tyr     = require('tyranid');
 
-<i>// Initialize Tyranid with a <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a> instance.</i>
+<i>// Initialize Tyranid with a <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB driver</a> instance.</i>
 Tyr.config({
-  db: pmongo(myDatabaseUrl)
+  db: await mongodb.MongoClient.connect(myDatabaseUrl)
 });
 <p>... import/require all types and schemas:</p>
 <i>// Once all the types and schemas have been processed, invoke <b>Tyr.validate()</b> to have Tyranid link and validate
@@ -205,12 +205,12 @@ user.$update().then(function() {
   <i>// update is complete</i>
 });
 
-<i>// Collection level update, same API as promised-mongo/mongo shell update().</i>
+<i>// Collection level update, same API as mongo shell update().</i>
 User.update(query, update, opts).then(function() {
   <i>// update is complete</i>
 });
 
-<i>// <b>collection</b>.db is an instance of a <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a> collection for when it is easier to just work directly with mongo.</i>
+<i>// <b>collection</b>.db is an instance of a <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB</a> collection for when it is easier to just work directly with mongo.</i>
 User.db.find({ ... }).then(function(users) {
 });
 

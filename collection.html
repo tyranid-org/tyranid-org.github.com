@@ -34,9 +34,9 @@ layout: default
      <article>
       <b class="property"></b>
       <b class="server"></b>
-      <span class="sig">db: <a href="https://github.com/gordonmleigh/promised-mongo/blob/master/lib/Collection.js">promised-mongo Collection</a></span>
+      <span class="sig">db: <a href="http://mongodb.github.io/node-mongodb-native/2.1/api/Collection">native MongoDB Collection</a></span>
 
-      <p>This contains a reference to the underlying promised-mongo <u>Collection</u> instance.</p>
+      <p>This contains a reference to the underlying native MongoDB <u>Collection</u> instance.</p>
      </article>
 
      <article id="def">
@@ -167,7 +167,7 @@ layout: default
        <b class="async"></b>
        <span class="sig">findOne(...): <a href="document">Document</a></span>
        <p>
-        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>findOne()</u> method except that the results are wrapped in this collection's
+        This behaves like <a href="http://mongodb.github.io/node-mongodb-native">native MongoDB</a>'s <u>findOne()</u> method except that the results are wrapped in this collection's
         document type.
        </p>
      </article>
@@ -178,7 +178,7 @@ layout: default
        <b class="async"></b>
        <span class="sig">findAndModify(...)</span>
        <p>
-        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>findAndModify()</u> method except that the results are wrapped in this collection's
+        This behaves like <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB</a>'s <u>findAndModify()</u> method except that the results are wrapped in this collection's
         document type.
        </p>
      </article>
@@ -245,7 +245,7 @@ layout: default
        <b class="client"></b>
        <span class="sig">insert(doc: <a href="document">Document</a> | object)</span>
        <p>
-        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>insert()</u> method but also
+        This behaves like <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB</a>'s <u>insert()</u> method but also
         does things like <a href="/#timestamps">timestamps</a>, <a href="/#denormalization">denormalization</a>, and so on.
        </p>
      </article>
@@ -379,7 +379,7 @@ layout: default
        <b class="async"></b>
        <span class="sig">remove(id: <i>id type</i> | query: object, justOne: boolean?)</span>
        <p>
-        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>remove()</u> method.
+        This behaves like <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB</a>'s <u>remove()</u> method.
        </p>
      </article>
 
@@ -413,7 +413,7 @@ layout: default
        <b class="async"></b>
        <span class="sig">update(query: object, update: object, opts: object)</span>
        <p>
-        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>update()</u> method.  It also will
+        This behaves like <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB</a>'s <u>update()</u> method.  It also will
         update timestamps if this collection is configured to use them.
       </p>
      </article>
