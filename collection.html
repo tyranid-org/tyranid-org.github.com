@@ -129,16 +129,36 @@ layout: default
        <b class="async"></b>
        <span class="sig">find(...): Cursor&lt;<a href="document">Document</a>&gt;</span>
        <p>
-        This behaves like <a href="https://github.com/gordonmleigh/promised-mongo">promised-mongo</a>'s <u>find()</u> method with the addition that results are wrapped in this
+        This behaves like the <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB driver</a>'s <u>find()</u> method with the addition that results are wrapped in this
         collection's document type.
        </p>
      </article>
 
-     <article>
+     <article id="findAll">
        <b class="method"></b>
+       <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">find(query: MongoDBQuery): <a href="document">Document</a>[]</span>
+       <span class="sig">findAll(<i>opts</i>): <a href="document">Document</a>[]</span>
+       <p>This behaves like <a href="#find"><u>find()</u></a> except that returns an array of <a href="document">Document</a>s instead of a cursor.</p>
+       <p><u><i>opts</i></u> can be one of two styles:</p>
+       <ul>
+         <li>the normal MongoDB find() parameters: <u>(query, projection, opts)</u>
+         <li>or a single options object:
+           <table class="def">
+             <thead>
+               <tr><th>Option<th>Notes
+             <tbody>
+               <tr><td>{</td>
+               <tr><td>  query:<td>A MongoDB-style query object.
+               <tr><td>  project:<td>A MongoDB-style projection object.
+               <tr><td>  skip:<td>An integer skip value.
+               <tr><td>  limit:<td>An integer limit value.
+               <tr><td>  sort:<td>A MongoDB-style sort object.
+               <tr><td>  auth:<td>An authorization object (a user, group, role, etc.) to pass to a <a href="secure">Secure</a> plug-in.  Can also be "true" to auto-detect the current user.
+               <tr><td>}</td>
+           </table>
+       </ul>
      </article>
 
      <article>
