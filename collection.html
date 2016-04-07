@@ -5,12 +5,36 @@ layout: default
   <div class="content">
     <h1>Collection <span class="extends">mixins <a href="component">Component</a></span></h1>
 
+    <article id="options">
+      <span class="sig">Options</span>
+      <p>A lot of <u>Collection</u> methods take an <u>options</u> parameter.  The options available are:</p>
+
+
+       <table class="def">
+         <thead>
+           <tr><th>Option<th>Type<th>Notes
+         <tbody>
+           <tr><td>{
+           <tr><td>  query:<td>MongoDB query</td>The standard MongoDB-style query object.
+           <tr><td>  fields:<td>MongoDB fields<td>The standard MongoDB-style fields object that specifies the projection.
+           <tr><td>  limit:<td><u>integer</u><td>The maximum number of documents to retrieve.
+           <tr><td>  skip:<td><u>integer</u><td>The number of documents to skip.
+           <tr><td>  sort:<td><u>MongoDB sort</u><td>The standard MongoDB-style sort object.
+           <tr><td>  auth:<td>Auth Object<td>An authorization object (a user, group, role, etc.) to pass to a <a href="secure">Secure</a> plug-in.  Can also be "true" to auto-detect the current user.
+           <tr><td>  perm:<td>string<td>The permission to use when an <u>auth</u> object is specified.  Usually <u>perm</u> is inferred ('view' for <i>finds</i>,
+             'insert' for <i>inserts</i>, etc.) but you can override it with this option.
+           <tr><td>}
+       </table>
+    </article>
+
+    <h2>instance</h2>
+
      <article>
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">byId(id: <i>id type</i>, options: <i>MongoFindOptions</i>): <a href="document">Document</a></span>
+       <span class="sig">byId(id: <i>id type</i>, options: <a href="#options">Options</a>): <a href="document">Document</a></span>
        <p>This retrieves a document by its id.</p>
      </article>
 
@@ -18,7 +42,7 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">byIds(ids: <i>id type</i>[], projection: <i>MongoProjection</i>, options: <i>MongoFindOptions</i>): <a href="document">Document</a>[]</span>
+       <span class="sig">byIds(ids: <i>id type</i>[], options: <a href="#options">Options</a>): <a href="document">Document</a>[]</span>
        <p>This retrieves a list of documents by their ids.</p>
      </article>
 
@@ -144,20 +168,7 @@ layout: default
        <p><u><i>opts</i></u> can be one of two styles:</p>
        <ul>
          <li>the normal MongoDB find() parameters: <u>(query, projection, opts)</u>
-         <li>or a single options object:
-           <table class="def">
-             <thead>
-               <tr><th>Option<th>Notes
-             <tbody>
-               <tr><td>{</td>
-               <tr><td>  query:<td>A MongoDB-style query object.
-               <tr><td>  project:<td>A MongoDB-style projection object.
-               <tr><td>  skip:<td>An integer skip value.
-               <tr><td>  limit:<td>An integer limit value.
-               <tr><td>  sort:<td>A MongoDB-style sort object.
-               <tr><td>  auth:<td>An authorization object (a user, group, role, etc.) to pass to a <a href="secure">Secure</a> plug-in.  Can also be "true" to auto-detect the current user.
-               <tr><td>}</td>
-           </table>
+         <li>or a single <a href="#options">Options</a> object
        </ul>
      </article>
 
@@ -165,10 +176,10 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">findOne(...): <a href="document">Document</a></span>
+       <span class="sig">findOne(query?, options: <a href="#options">Options</a>): <a href="document">Document</a></span>
        <p>
         This behaves like <a href="http://mongodb.github.io/node-mongodb-native">native MongoDB</a>'s <u>findOne()</u> method except that the results are wrapped in this collection's
-        document type.
+        document type.  You can also just pass in a single options object and specify the query on the options object directory.
        </p>
      </article>
 
@@ -228,11 +239,11 @@ layout: default
        <p>This method will return an empty string if it is given a non-truthy <u>id</u> (i.e. if the id is not defined).</p>
      </article>
 
-     <article>
+     <article id="idToUid">
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">idToUid(id: <i>id type</i>): string</span>
+       <span class="sig">idToUid(id: <i>id type</i>): <a href="/#uids">UID string</a></span>
        <p>
         This generates a <a href="/#uids">UID</a> from an id.
        </p>
@@ -259,6 +270,14 @@ layout: default
         This returns true if the collection's data is defined statically in its def.values field.  Enumerations are a common example
         of static collections.
        </p>
+     </article>
+
+     <article id="isUid">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">isUid(uid: <a href="/#uids">UID string</a>): boolean</span>
+       <p>This returns true if the given UID refers to a document in this collection.</p>
      </article>
 
      <article>
@@ -396,6 +415,30 @@ layout: default
          When updating, only fields present in the updating <b>doc</b> are altered.  Existing properties that are not present in <thead>
          update object will not be removed (i.e. save() does not do a replace).
        </p>
+     </article>
+
+     <article id="secureQuery">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">secureQuery(query: <i>MongoDB Query</i>, perm: string, auth: authObject): <i>MongoDB Query</i> | boolean</span>
+       <p>If a <a href="secure"><u>Secure</u></a> component is registered with Tyranid, this method will update the query with security restrictions
+         the secure component mandates relative to the <u>authObject</u> (usually an instance of a user document).</p>
+       <p><b>Warning:  This method will return <u>false</u> if the query is categorically rejected so it is important that the results of this
+         are not immediately passed into a subsequent query.  You need to look at the result and if it is <u>false</u> short-circuit the query.</b>
+         See <a href="collection#secureFindQuery"><u>secureFindQuery()</u></a>.</p>
+       <p>Most Tyranid methods use <u>secureQuery</u> internally when an <u>auth</u> option is used and end-users will not normally need to
+         directly use this method.</p>
+     </article>
+
+     <article id="secureFindQuery">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">secureFindQuery(query: <i>MongoDB Query</i>, perm: string, auth: authObject): <i>MongoDB Query</i></span>
+       <p>This method behaves like <a href="collection#secureQuery"><u>secureQuery()</u></a> except that this method will not ever return a <u>boolean</u>.
+         If the security component detects that a query is categorically rejected, this method will return a valid MongoDB query object that is guaranteed
+         to fail-fast (something like <u>{ _id: null }</u>).</p>
      </article>
 
      <article>

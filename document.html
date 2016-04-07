@@ -31,14 +31,14 @@ layout: default
        <p>This returns the id for this document.  This is usually (but not always) the contents of <u>_id</u>.
      </article>
 
-     <article>
+     <article id="$insert">
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">$insert(): <a href="document">Document</a></span>
+       <span class="sig">$insert(options?: <a href="collection#options">): <a href="document">Document</a></span>
      </article>
 
-     <article>
+     <article id="$label">
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
@@ -46,7 +46,7 @@ layout: default
        <p>This returns the label for this document.  See <a href="/#labels">labels</a>.
      </article>
 
-     <article>
+     <article id="$model">
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
@@ -54,7 +54,7 @@ layout: default
        <p>This is a reference to the collection of this document.  <u>this.$model</u> is equivalent to <u>this.constructor</u>.
      </article>
 
-     <article>
+     <article id="$populate">
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
@@ -67,20 +67,20 @@ layout: default
       </p>
      </article>
 
-     <article id="remove">
+     <article id="$remove">
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">$remove(): void</span>
+       <span class="sig">$remove(options?: <a href="collection#options">): void</span>
        <p>This removes the current document from the database.</p>
      </article>
 
-     <article>
+     <article id="$save">
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">$save(): <a href="document">Document</a></span>
+       <span class="sig">$save(options?: <a href="collection#options">): <a href="document">Document</a></span>
        <p>
          This method will either update or insert the object based on whether it has an _id.
          When updating, only fields present in the updating doc are altered. Existing properties that are not present
@@ -89,7 +89,7 @@ layout: default
        <p>If the document ends up being inserted, the document returned by this method will have its <u>_id</u> set.
      </article>
 
-     <article>
+     <article id="$toClient">
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">$toClient(): object</span>
@@ -98,7 +98,7 @@ layout: default
        </p>
      </article>
 
-     <article>
+     <article id="$uid">
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
@@ -106,14 +106,14 @@ layout: default
        <p>This returns the <a href="/#uids">UID</a> for this document.</p>
      </article>
 
-     <article>
+     <article id="$update">
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">$update()</span>
+       <span class="sig">$update(options?: <a href="collection#options">)</span>
      </article>
 
-     <article>
+     <article id="$validate">
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">$validate(): <a href="validationError">ValidationError</a>[]</span>

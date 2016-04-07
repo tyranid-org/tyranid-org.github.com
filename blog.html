@@ -12,6 +12,22 @@ layout: default
     <div style="clear:both;"></div>
 
     <article>
+      <div class="date">2016.4.6</div>
+      <div class="version">0.0.156</div>
+      <h1>UID, security, database options improvements</h1>
+      <ul>
+        <li><a href="tyr#byUid"><u>Tyr.byUid()</u></a> is now available on the client
+        <li><a href="collection#secureQuery"><u><i>Collection</i>.secureQuery()</u></a> added
+        <li><a href="collection#secureFindQuery"><u><i>Collection</i>.secureFindQuery()</u></a> added
+        <li>support for a standardized <a href="collection#options">Options</a> object in collection methods
+            (including many Document methods (like <a href="document#$insert"><u><i>Document</i>.$insert</u></a>, ...) added,
+           including the new <u>auth</u> and <u>perm</u> options.
+        <li><a href="collection#isUid"><u><i>collection</i>.isUid()</u></a> added
+
+      </ul>
+    </article>
+
+    <article>
       <div class="date">2016.3.29</div>
       <div class="version">0.0.151</div>
       <h1>Switch to Native MongoDB Library</h1>
