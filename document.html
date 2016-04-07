@@ -35,7 +35,7 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">$insert(options?: <a href="collection#options">): <a href="document">Document</a></span>
+       <span class="sig">$insert(options: <a href="collection#options">Options</a>?): <a href="document">Document</a></span>
      </article>
 
      <article id="$label">
@@ -71,7 +71,7 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">$remove(options?: <a href="collection#options">): void</span>
+       <span class="sig">$remove(options: <a href="collection#options">Options</a>?): void</span>
        <p>This removes the current document from the database.</p>
      </article>
 
@@ -80,7 +80,7 @@ layout: default
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">$save(options?: <a href="collection#options">): <a href="document">Document</a></span>
+       <span class="sig">$save(options: <a href="collection#options">Options</a>?): <a href="document">Document</a></span>
        <p>
          This method will either update or insert the object based on whether it has an _id.
          When updating, only fields present in the updating doc are altered. Existing properties that are not present
@@ -110,7 +110,7 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">$update(options?: <a href="collection#options">)</span>
+       <span class="sig">$update(options: <a href="collection#options">Options</a>?)</span>
      </article>
 
      <article id="$validate">

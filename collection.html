@@ -14,16 +14,24 @@ layout: default
            <tr><th>Option<th>Type<th>Notes
          <tbody>
            <tr><td>{</td>
+           <tr><td colspan="3" class="subtitle">Query (<u>find*()</u>, <u>update()</u>, <u>remove()</u>)</td>
            <tr><td>  query:<td>MongoDB query<td>The standard MongoDB-style query object.
+           <tr><td colspan="3" class="subtitle">Projection & Population (<u>find*()</u>, <u>by*()</u>)</td>
            <tr><td>  fields:<td>MongoDB fields<td>The standard MongoDB-style fields object that specifies the projection.
+           <tr><td>  populate:<td><a href="#populationFields">Population Fields</a><td>The population fields to populate.
+           <tr><td colspan="3" class="subtitle">Windowing (<u>find()</u>, <u>findAll()</u>)</td>
            <tr><td>  limit:<td><u>integer</u><td>The maximum number of documents to retrieve.
            <tr><td>  skip:<td><u>integer</u><td>The number of documents to skip.
+           <tr><td colspan="3" class="subtitle">Sorting (<u>find()</u>, <u>findAll()</u>, <u>byIds()</u>, <u>byUids()</u>)</td>
            <tr><td>  sort:<td>MongoDB sort<td>The standard MongoDB-style sort object.
-           <tr><td>  populate:<td><a href="#populationFields">Population Fields</a><td>The population fields to populate.
+           <tr><td colspan="3" class="subtitle">Deletions (<u>remove()</u>)</td>
+           <tr><td>  justOne:<td><u>boolean</u><td>Whether to remove at most one document.
+           <tr><td colspan="3" class="subtitle">Updates (<u>update()</u>, <u>$update()</u>)</td>
            <tr><td>  update:<td>MongoDB update<td>The standard MongoDB-style update object.
-           <tr><td>  auth:<td>Auth Object<td>An authorization object (a user, group, role, etc.) to pass to a <a href="secure">Secure</a> plug-in.  Can also be "true" to auto-detect the current user.
-           <tr><td>  perm:<td>string<td>The permission to use when an <u>auth</u> object is specified.  Usually <u>perm</u> is inferred ('view' for <i>finds</i>,
              'insert' for <i>inserts</i>, etc.) but you can override it with this option.
+           <tr><td colspan="3" class="subtitle">Security (<i>most methods</i>)</td>
+           <tr><td>  auth:<td>Auth Object<td>An authorization object (a user, group, role, etc.) to pass to a <a href="secure">Secure</a> plug-in.  Can also be "true" to auto-detect the current user.
+           <tr><td>  perm:<td>string<td>The permission to use when an <u>auth</u> object is specified.  Usually <u>perm</u> is inferred ('view' for <i>finds</i>, 'delete' for <i>removes</i>, ...)
            <tr><td>}</td>
        </table>
 
@@ -397,7 +405,7 @@ layout: default
       </p>
      </article>
 
-     <article>
+     <article id="remove">
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
@@ -408,7 +416,7 @@ layout: default
        </p>
      </article>
 
-     <article>
+     <article id="save">
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
@@ -447,7 +455,7 @@ layout: default
          to fail-fast (something like <u>{ _id: null }</u>).</p>
      </article>
 
-     <article>
+     <article id="toClient">
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">toClient(doc: <a href="document">Document</a>): object</span>
@@ -456,7 +464,7 @@ layout: default
        </p>
      </article>
 
-     <article>
+     <article id="update">
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
@@ -467,14 +475,14 @@ layout: default
       </p>
      </article>
 
-     <article>
+     <article id="updateDoc">
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">updateDoc(doc: <a href="document">Document</a> | object)</span>
+       <span class="sig">updateDoc(doc: <a href="document">Document</a> | object, opts: <a href="#options">Options</a>)</span>
      </article>
 
-     <article>
+     <article id="valuesFor">
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
