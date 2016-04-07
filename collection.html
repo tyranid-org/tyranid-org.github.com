@@ -9,22 +9,36 @@ layout: default
       <span class="sig">Options</span>
       <p>A lot of <u>Collection</u> methods take an <u>options</u> parameter.  The options available are:</p>
 
-
        <table class="def">
          <thead>
            <tr><th>Option<th>Type<th>Notes
          <tbody>
-           <tr><td>{
-           <tr><td>  query:<td>MongoDB query</td>The standard MongoDB-style query object.
+           <tr><td>{</td>
+           <tr><td>  query:<td>MongoDB query<td>The standard MongoDB-style query object.
            <tr><td>  fields:<td>MongoDB fields<td>The standard MongoDB-style fields object that specifies the projection.
            <tr><td>  limit:<td><u>integer</u><td>The maximum number of documents to retrieve.
            <tr><td>  skip:<td><u>integer</u><td>The number of documents to skip.
-           <tr><td>  sort:<td><u>MongoDB sort</u><td>The standard MongoDB-style sort object.
+           <tr><td>  sort:<td>MongoDB sort<td>The standard MongoDB-style sort object.
+           <tr><td>  populate:<td><a href="#populationFields">Population Fields</a><td>The population fields to populate.
+           <tr><td>  update:<td>MongoDB update<td>The standard MongoDB-style update object.
            <tr><td>  auth:<td>Auth Object<td>An authorization object (a user, group, role, etc.) to pass to a <a href="secure">Secure</a> plug-in.  Can also be "true" to auto-detect the current user.
            <tr><td>  perm:<td>string<td>The permission to use when an <u>auth</u> object is specified.  Usually <u>perm</u> is inferred ('view' for <i>finds</i>,
              'insert' for <i>inserts</i>, etc.) but you can override it with this option.
-           <tr><td>}
+           <tr><td>}</td>
        </table>
+
+       <p>Not all options are supported by all methods.  For example, <u>findOne()</u> uses a <u>limit</u> of 1 and <u>Tyr.byUid()</u> does not support the <u>query</u> option.</p>
+    </article>
+
+    <article id="populationFields">
+      <span class="sig">Population Fields</span>
+      <p>A population fields definition can take one of the following three forms:
+        <ul>
+         <li>string -- the name of a field to populate.
+         <li>string[] -- an array of names of fields to populate.
+         <li>object -- object population syntax (<a href="/#advancedPopulation">Advanced Population</a> syntax).
+        </ul>
+      </p>
     </article>
 
     <h2>instance</h2>
@@ -151,7 +165,7 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">find(...): Cursor&lt;<a href="document">Document</a>&gt;</span>
+       <span class="sig">find(query, projection, options: <a href="#options">Options</a>): Cursor&lt;<a href="document">Document</a>&gt;</span>
        <p>
         This behaves like the <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB driver</a>'s <u>find()</u> method with the addition that results are wrapped in this
         collection's document type.
@@ -167,7 +181,7 @@ layout: default
        <p>This behaves like <a href="#find"><u>find()</u></a> except that returns an array of <a href="document">Document</a>s instead of a cursor.</p>
        <p><u><i>opts</i></u> can be one of two styles:</p>
        <ul>
-         <li>the normal MongoDB find() parameters: <u>(query, projection, opts)</u>
+         <li>the normal MongoDB find() parameters: <u>(query, projection, options: <a href="#options">Options</a>)</u>
          <li>or a single <a href="#options">Options</a> object
        </ul>
      </article>
@@ -187,10 +201,10 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">findAndModify(...)</span>
+       <span class="sig">findAndModify(opts: <a href="#options">Options</a>)</span>
        <p>
-        This behaves like <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB</a>'s <u>findAndModify()</u> method except that the results are wrapped in this collection's
-        document type.
+        This behaves like <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB</a>'s <u>findAndModify()</u> method except the options are passed in a single
+        <a href="#options">Options</a> object and the results are wrapped in this collection's document type.
        </p>
      </article>
 
@@ -373,15 +387,7 @@ layout: default
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">populate(fields, documents: <a href="document">Document</a> | <a href="document">Document</a>[], <a href="/#denormalization">denormal</a>: boolean)</span>
-       <p>
-        Fields can take one of the following three forms:
-        <ul>
-         <li>string -- the name of a field to populate.
-         <li>string[] -- an array of names of fields to populate.
-         <li>object -- object population syntax (<a href="/#advancedPopulation">Advanced Population</a> syntax).
-        </ul>
-      </p>
+       <span class="sig">populate(fields: <a href="#populationFields">Population Fields</a>, documents: <a href="document">Document</a> | <a href="document">Document</a>[], <a href="/#denormalization">denormal</a>: boolean)</span>
       <p>
         If <b>documents</b> is not provided, this function will return a curried version of this function that takes a single array
         of documents.  This allows populate to be fed into a promise chain.
