@@ -100,6 +100,12 @@ layout: default
   consoleLogLevel: 'info',
   dbLogLevel: 'info',
   secure: <a href="secure">Secure</a>,
+  permissions: {
+    find: 'view',
+    insert: 'edit',
+    update: 'edit',
+    remove: 'delete'
+  },
   validate: <i>validateOpts</i>
 }</pre>
       <p>If the <u>validate</u> option is not used, be sure to call <u>Tyr.validate()</u> once all of the collections
@@ -107,7 +113,7 @@ layout: default
       </p>
       <p>See <a href="log"><u>Log</u></a> for an explanation of the log level options.</p>
 
-      <p>See <a href="secure"><u>Secure</u></a> for an explanation of the <u>secure</u> option.</p>
+      <p>See <a href="secure"><u>Secure</u></a> for an explanation of the <u>secure</u> and <u>permissions</u> option.</p>
      </article>
 
      <article>

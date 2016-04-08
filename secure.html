@@ -11,6 +11,23 @@ layout: default
 
     <p>Register your <u>Secure</u> implementation with Tyranid by passing it into the <a href="tyr#config"><u>Tyr.config()</u></a> call.</p>
 
+     <article id="permissions">
+       <span class="sig">permissions</span>
+       <p>By default Tyranid will use the following permissions automatically in its built-in methods.</p>
+<pre><code class="js">permissions: {
+    find: 'find',       <i>// find*(), by*() methods</i>
+    insert: 'insert',   <i>// insert(), save() when inserting, $insert() methods</i>
+    update: 'update',   <i>// update(), save() when updating, $update() methods</i>
+    remove: 'remove'    <i>// remove(), $remove() methods</i>
+  },</code></pre>
+
+       <p>If you would like to override the default permissions (for example, to rename 'remove' to 'delete' or to collapse insert/update into an 'edit' permission)
+         you can configure that using the <u>permissions</u> option on config.</p>
+
+     </article>
+
+    <h2>instance</h2>
+
      <article id="canInsert">
        <b class="async"></b>
        <b class="method"></b>
