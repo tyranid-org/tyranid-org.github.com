@@ -77,6 +77,17 @@ layout: default
        <p>This retrieves the first document it finds matching the given <u>label</u> using a case-insensitive search.</p>
      </article>
 
+     <article id="canInsert">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">canInsert(query: <i>MongoDB Query</i>, perm: string, auth: authObject): <i>MongoDB Query</i> | boolean</span>
+       <p>If a <a href="secure"><u>Secure</u></a> component is registered with Tyranid, this method will be used to determine if a document can
+         be inserted into a collection relative to the <u>authObject</u> (usually an instance of a user document).</p>
+       <p>Most Tyranid insert and save use <u>canInsert()</u> internally when an <u>auth</u> option is used and end-users will not normally need to
+         directly use this method.</p>
+     </article>
+
      <article>
       <b class="property"></b>
       <b class="server"></b>
