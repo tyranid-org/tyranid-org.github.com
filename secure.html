@@ -15,7 +15,7 @@ layout: default
        <span class="sig">permissions</span>
        <p>By default Tyranid will use the following permissions automatically in its built-in methods.</p>
 <pre><code class="js">permissions: {
-    find: 'find',       <i>// find*(), by*() methods</i>
+    find:   'find',     <i>// find*(), by*() methods</i>
     insert: 'insert',   <i>// insert(), save() when inserting, $insert() methods</i>
     update: 'update',   <i>// update(), save() when updating, $update() methods</i>
     remove: 'remove'    <i>// remove(), $remove() methods</i>
@@ -34,9 +34,8 @@ layout: default
        <b class="server"></b>
        <span class="sig">canInsert(collection: <a href="collection">Collection</a>,<br>
           <div style="padding-left:180px;">document: <a href="document">Document</a> | object,</div>
-          <div style="padding-left:180px;">method: 'view' | 'update' | 'insert' | 'delete',</div>
-          <div style="padding-left:180px;">authObj: any):</div>
-          <div style="padding-left:80px;"><i>MongoDB query object</i></div></span>
+          <div style="padding-left:180px;">perm: <u>string</u>,</div>
+          <div style="padding-left:180px;">authObj: any): <u>boolean</u></div></span>
        <p>If a <u>Secure</u> component is registered with Tyranid, Tyranid will invoke the <u>canInsert()</u> method to determine whether
          a document can be inserted into the given collection.</p>
      </article>
@@ -46,9 +45,8 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">query(collection: <a href="collection">Collection</a>,<br>
-          <div style="padding-left:134px;">method: 'view' | 'update' | 'insert' | 'delete',</div>
-          <div style="padding-left:134px;">authObj: any):</div>
-          <div style="padding-left:80px;"><i>MongoDB query object</i></div></span>
+          <div style="padding-left:134px;">perm: <u>string</u>,</div>
+          <div style="padding-left:134px;">authObj: any): <i>MongoDB query object</i></div></span>
        <p>If a <u>Secure</u> component is registered with Tyranid, Tyranid will invoke the <u>query()</u> method to add additional
         restrictions to its find methods when working with data.</p>
      </article>

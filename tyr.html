@@ -308,7 +308,7 @@ layout: default
        <span class="sig"><a href="validationError">ValidationError</a></span>
      </article>
 
-     <article>
+     <article id="valuesBy">
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
@@ -316,6 +316,74 @@ layout: default
        <p>This returns a unique list of all values that appear in any collection in the database for any field that matches the filter.</p>
        <p>For example, the following returns a list of all of the strings that occur in the database in any string field in any collection.</p>
        <pre>Tyr.valuesFor(field => field.type.def.name === 'string')</pre>
+     </article>
+
+    <h2 id="asyncUtilities"><u>async</u> & <u>Promise</u> utilities</h2>
+
+     <article id="eachAsync">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">eachAsync&lt;A>(array: A[], visitor: async A => any): boolean</span>
+       <p>This is like <u><i>array</i>.forEach()</u> except that the predicate function is asynchronous.</p>
+       <p>The elements will be visited in sequence.</p>
+     </article>
+
+     <article id="everyAsync">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">everyAsync&lt;A>(array: A[], predicate: async A => boolean): boolean</span>
+       <p>This is like <u><i>array</i>.every()</u> except that the predicate function is asynchronous.</p>
+     </article>
+
+     <article id="filterAsync">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">filterAsync&lt;A>(array: A[], filter: async A => boolean): boolean</span>
+       <p>This is like <u><i>array</i>.filter()</u> except that the filter function is asynchronous.</p>
+     </article>
+
+     <article id="findAsync">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">findAsync&lt;A>(array: A[], predicate: async A => boolean): A</span>
+       <p>This is like <u><i>array</i>.find()</u> except that the predicate function is asynchronous.</p>
+     </article>
+
+     <article id="findIndexAsync">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">findIndexAsync&lt;A>(array: A[], predicate: async A => boolean): integer</span>
+       <p>This is like <u><i>array</i>.findIndex()</u> except that the predicate function is asynchronous.</p>
+     </article>
+
+     <article id="mapAsync">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">mapAsync&lt;A, B>(array: A[], mapFn: async A => B): B[]</span>
+       <p>This is like <u><i>array</i>.map()</u> except that the map function is asynchronous.</p>
+     </article>
+
+     <article id="mapAwait">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">mapAwait(value: Promise | any, fn: any => any): Promise<any> | any</span>
+       <p>This maps a value by the given function.  If the value is a promise, then the result will be a promise.</p>
+       <p>This method permits writing mapping functions that work with values that are conditionally asynchronous.</p>
+     </article>
+
+     <article id="someAsync">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">someAsync&lt;A>(array: A[], predicate: async A => boolean): boolean</span>
+       <p>This is like <u><i>array</i>.some()</u> except that the predicate function is asynchronous.</p>
      </article>
 
   </div>
