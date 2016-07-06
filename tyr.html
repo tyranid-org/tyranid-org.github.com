@@ -297,6 +297,12 @@ layout: default
        types have been imported and you want the entire metadata model compiled and linked (validated).  <u>dirOpts</u> are:
      </p>
 <pre>{
+  <i>// <b>dirOpts</b> supports two styles:</i>
+
+  <i>// (1) globs:</i>
+  glob: './**/model/*.js',    <i>// All model files in a model subdirectory</i>
+
+  <i>// (2) directory with regex:</i>
   dir: './app/models',        <i>// All files in directory.</i>
   fileMatch<em>?</em>: '^tyr.*'       <i>// Provides a regex that files in the dir need to match.</i>
 }</pre>
