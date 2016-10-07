@@ -88,19 +88,24 @@ layout: default
      </article>
 
      <article id="config">
+       <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">config(opts: object): void</span>
        <p>This initializes Tyranid.  <u>opts</u> are as follows:</p>
        <pre>
 {
-  db: pmongo(myDatabaseUrl),
+  db: pmongo(<i>myDatabaseUrl</i>),
   logLevel: 'info',
   clientLogLevel: 'error',
   consoleLogLevel: 'info',
   dbLogLevel: 'info',
+  indexes: true, <i>// ensure indexes are created (invokes <u>createIndexes()</u>)</i>
   minify: false,
   secure: <a href="secure">Secure</a>,
+    <i>myServerName</i>: pmongo(<i>myServerDatabaseUrl</i>),
+    ...
+  },
   permissions: {
     find: 'view',
     insert: 'edit',
@@ -117,6 +122,14 @@ layout: default
       <p>See <a href="log"><u>Log</u></a> for an explanation of the log level options.</p>
 
       <p>See <a href="secure"><u>Secure</u></a> for an explanation of the <u>secure</u> and <u>permissions</u> option.</p>
+     </article>
+
+     <article id="createIndexes">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">createIndexes(): void</span>
+       <p>This will create any indexes defined on collections if they do not already exist.</p>
      </article>
 
      <article>

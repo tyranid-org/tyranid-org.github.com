@@ -1,7 +1,7 @@
 {
   "name": "headjs",
   "description": "HeadJS: Responsive Design, Feature Detections & Asset Loading. The only script in your <HEAD>",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "license" : "MIT",
   "authors": [
     {"name": "Tero Piirainen"},
