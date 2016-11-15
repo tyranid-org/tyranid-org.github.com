@@ -617,10 +617,20 @@ instead of "Name First".  This property can also be used to set abbreviated name
       values are kept.  The history of an object is stored on the document in a <a href="document#_history"><u>_history</u></a> property which contains an array of the changes.</p>
     <p>Historical data is enabled by specifying the <a href="collection#def"><u>historical</u></a> option on collections.</p>
     <p>Once it is enabled on a collection, you must also mark which fields should historical using the <a href="field#def"><u>historical</u></a> option on fields.</p>
+    <p><i>Note that only top-level fields can be marked <u>historical</u></i> -- anything contained beneath a top-level field is automatically assumed to also be historical.</p>
 
-    <h4>Warning</h4>
+    <h4>Workflow Example</h4>
 
-    <p>If you modify data directly in the database, these changes will not get reflected in the historical data that is kept on each object.</p>
+<pre><code class="js">const update = User.fromClient(req.body),
+        orig = await User.byId(update._id); // reading the original data on an update preserves the original values
+
+orig.$copy(update); // $copy() will not overwrite orig's $orig and _history properties
+await orig.$save(); // $save() will diff orig and the updates and update _history with a new snapshot entry
+</code></pre>
+
+    <h4 style="color: red">Warning</h4>
+
+    <p>If you bypass Tyranid calls and use the native MongoDB driver calls or modify database directly in the database, historical values will not be updated.</p>
 
 
 

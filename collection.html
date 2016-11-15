@@ -440,8 +440,7 @@ layout: default
          This method will either update or insert the object based on whether it has an _id.
        </p>
        <p>
-         When updating, only fields present in the updating <b>doc</b> are altered.  Existing properties that are not present in <thead>
-         update object will not be removed (i.e. save() does not do a replace).
+         When updating, the entire document is <b>replaced</b>.  Use <a href="document#updateDoc">updateDoc()</a> to only modify updated fields.
        </p>
      </article>
 
@@ -494,6 +493,8 @@ layout: default
        <b class="server"></b>
        <b class="async"></b>
        <span class="sig">updateDoc(doc: <a href="document">Document</a> | object, opts: <a href="#options">Options</a>)</span>
+       <p>This updates the server document with the values in this object.</p>
+       <p>Note that the document is <b><i>not</i> replaced</b>.  See <a href="collection#save"><u>save()</u></a> if you want to do a full replace.</p>
      </article>
 
      <article id="valuesFor">
