@@ -611,6 +611,16 @@ instead of "Name First".  This property can also be used to set abbreviated name
 
 </form>
 
+    <h3 id="historical">Historical Data</h3>
+
+    <p>Tyranid's Historical Data support modifies the built-in methods like <u>$save()</u> and so on to keep track of changes to documents so that historical
+      values are kept.  The history of an object is stored on the document in a <a href="document#_history"><u>_history</u></a> property which contains an array of the changes.</p>
+    <p>Historical data is enabled by specifying the <a href="collection#def"><u>historical</u></a> option on collections.</p>
+    <p>Once it is enabled on a collection, you must also mark which fields should historical using the <a href="field#def"><u>historical</u></a> option on fields.</p>
+
+    <h4>Warning</h4>
+
+    <p>If you modify data directly in the database, these changes will not get reflected in the historical data that is kept on each object.</p>
 
 
 

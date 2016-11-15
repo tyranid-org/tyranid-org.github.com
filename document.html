@@ -15,12 +15,46 @@ layout: default
       Document fields usually start with a "<u>$</u>" so that the Tyranid fields do not conflict with the underlying data being modeled.
     </div>
 
+     <article id="$asOf">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">$asOf(<i>date</i>): void</span>
+       <p>This rolls back the object in-place to the given date if its collection supports <a href="/#historical">historical data</a>.</p>
+       <p><u>date</u> can be either an instance of Date or the number of UTC milliseconds (<u><i>Date</i>.getTime()</u>).</p>
+     </article>
+
      <article id="$clone">
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">$clone(): <a href="document">Document</a></span>
        <p>This performs a deep in-memory clone of the current document that also retains the class into the cloned document.</p>
+     </article>
+
+     <article id="_history">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">_history: <i>snapshot</i>[]</span>
+       <p>If <a href="/#historical">historical data</a> is enabled for this collection, then this field will contain an array of historical snapshots
+         for this document.</p>
+       <p>
+         The format of each <i>snapshot</i> document is:
+
+       <table class="def">
+<thead>
+  <tr><th>Object Structure<th>Type<th>Notes
+</thead>
+<tr><td>{</td>
+<tr><td>  a:<td><a href="/#uids">UID</a><td>A UID referencing the author of the change.
+<tr><td>  c:<td>String<td>An optional comment about the change.
+<tr><td>  o:<td><i>Date in UTC ms</i><td>The date this snapshot was taken (from <i>Date</i>.getTime()).
+<tr><td>  p:<td><i>patch</i><td>The patch object containing the differences.
+<tr><td>}</td>
+</table>
+       </p>
+       <p>Users of Tyranid do not usually need to work with this history property directly.</p>
+       <p>Also, if you are using historical data, do not have a field named "history" as Tyranid will overwrite it with this array.</p>
      </article>
 
      <article id="$id">
@@ -52,6 +86,14 @@ layout: default
        <b class="client"></b>
        <span class="sig">$model: <a href="collection">Collection</a></span>
        <p>This is a reference to the collection of this document.  <u>this.$model</u> is equivalent to <u>this.constructor</u>.
+     </article>
+
+     <article id="$orig">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">$orig: <i>id type</i></span>
+       <p>This will contain all of the original values for the document if <a href="/#historical">historical data</a> is enabled for this collection.</p>
      </article>
 
      <article id="$populate">

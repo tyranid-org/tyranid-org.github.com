@@ -114,6 +114,7 @@ layout: default
 <tr><td>  label:<td>string<td>labelize(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this collection.
 <tr><td>  indexes:<td>array<td><i>none</i><td>If present contains an array of index definitions in the format specified by the <a href="https://docs.mongodb.com/manual/reference/command/createIndexes/">MongoDB createIndexes command</a></td>
 <tr><td>  help:<td>string<td>none<td>Contains brief user-facing documentation about this collection.
+<tr><td>  historical:<td>boolean<td>none<td>Indicates if this collection should have <a href="/#historical">historical</a> data support.
 <tr><td>  note:<td>string<td>none<td>Contains developer-facing documentation about this collection (only visible in the Tyranid console).
 <tr><td>  enum:<td>boolean<td>false<td>Generates <a href="/#staticData">enumeration</a> support for this collection.
 <tr><td>  client:<td>boolean<td>true<td>If this is false, client-side classes for this collection will not be generated.
@@ -504,6 +505,7 @@ layout: default
          This method returns all of the unique values that appear for the given fields in the collection.
        </p>
      </article>
+
 
      <h2>Hooks</h2>
 
