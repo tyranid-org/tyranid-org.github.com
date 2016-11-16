@@ -34,9 +34,15 @@ layout: default
      <article id="$copy">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">$copy(obj): void</span>
+       <span class="sig">$copy(obj, keys: (string[] | Tyr.$all)?): void</span>
        <p>This copies values from <u>obj</u> into the current object.  If the target object has <a href="/#historical">historical</a> properties like
          <a href="#_history"><u>_history</u></a> or <a href="#$orig"><u>$orig</u></a> these will not be copied.</p>
+       <p>If the <u>keys</u> parameter is:
+         <ul>
+           <li><b>a string array</b>, then only the properties specified in the array will be copied.  If a key is specified that exists
+               in the current document but not in <u>obj</u>, then it will be deleted from the current document.</p>
+           <li><b><u>Tyr.$all</u></b>, then all properties of this collection are expected to be contained in <u>obj</u>.  Any missing
+         will be deleted.  This is effectively a replace.  Also see <a href="#$replace"><u>$replace()</u></a>.
      </article>
 
      <article id="_history">
@@ -51,13 +57,13 @@ layout: default
 
        <table class="def">
 <thead>
-  <tr><th>Object Structure<th>Type<th>Notes
+  <tr><th>Object Structure<th>Note<th>Type<th>Notes
 </thead>
 <tr><td>{</td>
-<tr><td>  a:<td><a href="/#uids">UID</a><td>A UID referencing the author of the change.
-<tr><td>  c:<td>String<td>An optional comment about the change.
-<tr><td>  o:<td><i>Date in UTC ms</i><td>The date this snapshot was taken (from <i>Date</i>.getTime()).
-<tr><td>  p:<td><i>patch</i><td>The patch object containing the differences.
+<tr><td>  a:<td>Author<td><a href="/#uids">UID</a><td>A UID referencing the author of the change.
+<tr><td>  c:<td>Comment<td>String<td>An optional comment about the change.
+<tr><td>  o:<td>On<td><i>Date in UTC ms</i><td>The date this snapshot was taken (from <i>Date</i>.getTime()).
+<tr><td>  p:<td>Patch<td><i>patch</i><td>The patch object containing the differences.
 <tr><td>}</td>
 </table>
        </p>
@@ -122,6 +128,13 @@ layout: default
        <b class="async"></b>
        <span class="sig">$remove(options: <a href="collection#options">Options</a>?): void</span>
        <p>This removes the current document from the database.</p>
+     </article>
+
+     <article id="$replace">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">$replace(obj): void</span>
+       <p>This is a short-cut for <a href="#$copy"><u>$copy(obj, Tyr.$all)</u></a>.
      </article>
 
      <article id="$save">
