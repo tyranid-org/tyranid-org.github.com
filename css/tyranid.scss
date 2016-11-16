@@ -67,7 +67,7 @@ h1 {
   font-family: 'Megrim', arial, serif;
   text-shadow: 8px 8px #ddd;
   margin: 8px 0 0 0;
-  border-bottom: 5px solid #f70;
+  border-bottom: 5px solid #730;
 
   .extends {
     font-size: 20px;
@@ -80,23 +80,24 @@ h1 {
   }
 }
 h2 {
-  font-size:24px;
-  font-family: 'Megrim', arial, serif;
+  font-size:28px;
+  font-family: arial, serif;
   text-shadow: 2px 2px #bbb;
   border-left: 5px solid #f70;
   padding-left: 8px;
  }
 h3 {
-  font-size:20px;
-  font-family: 'Megrim', arial, serif;
-  color: #f70;//#6666aa;
+  font-size:24px;
+  font-family: arial, serif;
+  text-shadow: 2px 2px #ccc;
+  color: #d60;//#6666aa;
   //text-shadow: 2px 2px #bbb;
   margin: 42px 0 0;
-  border-top: 1px solid #830;
+  border-top: 2px solid #830;
  }
 h4 {
   font-size:18px;
-  font-family: 'Megrim', arial, serif;
+  font-family: arial, serif;
   color: #a50;//#6666aa;
   margin: 0;
 }

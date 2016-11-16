@@ -622,14 +622,20 @@ instead of "Name First".  This property can also be used to set abbreviated name
     <h4>Workflow Example</h4>
 
 <pre><code class="js">const update = User.fromClient(req.body),
-        orig = await User.byId(update._id); // reading the original data on an update preserves the original values
+        orig = await User.byId(update._id); // historical database reads will update the document's <a href="document#$orig">$orig</a> property
 
 orig.$copy(update); // $copy() will not overwrite orig's $orig and _history properties
-await orig.$save(); // $save() will diff orig and the updates and update _history with a new snapshot entry
+await orig.$save(); // $save() will diff orig.$orig and orig and update orig._history with a new snapshot entry
 </code></pre>
 
     <p>Also see <a href="document#$replace"><u>$replace()</u></a> as an alternative to <a href="document#$copy"><u>$copy()</u></a>.
 
+    <p>You can revert a document to older versions using the <a href="document#$asOf"><u>$asOf()</u></a> method:</p>
+
+<pre><code class="js">doc = await User.byId(myId);
+
+doc.$asOf(new Date('2016-05-03')); // revert doc to what it looked like on May 3, 2016.
+</code></pre>
     <h4 style="color: red">Warning</h4>
 
     <p>If you bypass Tyranid calls and use the native MongoDB driver calls or modify database directly in the database, historical values will not be updated.</p>
