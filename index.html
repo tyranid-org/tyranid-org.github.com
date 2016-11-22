@@ -619,7 +619,7 @@ instead of "Name First".  This property can also be used to set abbreviated name
     <p>Once it is enabled on a collection, you must also mark which fields should historical using the <a href="field#def"><u>historical</u></a> option on fields.</p>
     <p><i>Note that only top-level fields can be marked <u>historical</u></i> -- anything contained beneath a top-level field is automatically assumed to also be historical.</p>
 
-    <h4>Workflow Example</h4>
+    <h4>Example</h4>
 
 <pre><code class="js">const update = User.fromClient(req.body),
         orig = await User.byId(update._id); // historical database reads will update the document's <a href="document#$orig">$orig</a> property
@@ -636,10 +636,24 @@ await orig.$save(); // $save() will diff orig.$orig and orig and update orig._hi
 
 doc.$asOf(new Date('2016-05-03')); // revert doc to what it looked like on May 3, 2016.
 </code></pre>
+
+    <p>Documents reverted using <u>$asOf()</u> become read-only, as updating a document in the past does not make sense and these documents
+     will have a non-enumerable <a href="document#$historical">$historical</a> property added to them to indicate this state.</p>
+
+    <p>Also see <a href="collection#push"><u><i>Collection</i>.push()</u></a>.
+
     <h4 style="color: red">Warning</h4>
 
     <p>If you bypass Tyranid calls and use the native MongoDB driver calls or modify database directly in the database, historical values will not be updated.</p>
 
+    <p>The current historical-safe manipulation methods are:</p>
+
+    <ul>
+      <li><a href="collection#insert"><u><i>Collection</i>.insert()</u></a>
+      <li><a href="collection#push"><u><i>Collection</i>.push()</u></a>
+      <li><a href="collection#save"><u><i>Collection</i>.save()</u></a>
+      <li><a href="document#$save"><u><i>Document</i>.$save()</u></a>
+    </ul>
 
 
     <h3 id="staticData">Static Data</h3>

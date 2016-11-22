@@ -1,0 +1,106 @@
+---
+layout: default
+---
+
+  <div class="content">
+    <h1>Diff & Patch</h1>
+
+    <p>Tyranid supports a patch format that his used by <a href="/#historical">historical data</a> but is not limited to that use --
+      it can be used anytime you need a compact representation of the difference between two objects or arrays.</p>
+
+    <h2 id="patchFormat">patch format</h2>
+
+    <p>It is not normally necessary to understand the patch format, but in case you are doing advanced work with patches,
+     the patch format is documented here.  There are two different formats, one for objects and one for arrays:</p>
+
+    <h4>object patch format</h4>
+
+     <p>
+     <table class="def">
+       <thead>
+         <tr><th style="width:350px;">Object Format *<th>Indicates that the property <i>prop</i> (or <i><a href="/#paths">path</a></i>) ...
+       <tbody>
+         <tr><td>{</tr>
+         <tr><td>  <i>prop</i>: 0<td>should be deleted</tr>
+         <tr><td>  <i>path</i>: 1<td>is an array and its length should be truncated by 1</tr>
+         <tr><td>  <i>prop</i>: [ <i>inline value</i> ]<td>should be replaced with the inline value</tr>
+         <tr><td>  <i>prop</i>: [ 0, <i>array patch</i> ]<td>is an array and should be patched</tr>
+         <tr><td>  <i>prop</i>: [ 1, <i>object patch</i> ]<td>is an object and should be patched</tr>
+         <tr><td>}</tr>
+     </table>
+     <div style="text-align: right;">* <i>props</i> must be simple property names while <i>paths</i> can be either a simple property name or a <a href="/#paths">path</a>.</div>
+     </p>
+
+     <p>If there are no properties to patch (no differences), then the patch object will just be an empty object: <u>{}</u>.</p>
+
+    <h4>array patch format</h4>
+
+    <p>
+     <table class="def">
+       <thead>
+         <tr><th style="width:350px;">Array Format<th>Indicates that ...
+       <tbody>
+         <tr><td>{</tr>
+         <tr><td>  <i>index</i>: <i>sourceIndex</i><td>the value in the original array at <i>sourceIndex</i> should be copied to <i>index</i>.</tr>
+         <tr><td>  <i>index</i>: [ <i>value</i> ]<td><i>value</i> should be inserted at index <i>index</i>.</tr>
+         <tr><td>  <i>index</i>: [ <i>sourceOffset</i>, <i>runLength</i> ]<td><i>runLength</i> values in the original array starting at <i>index</i> + <i>sourceOffset</i> should be copied into the new array starting at <i>index</i>.</tr>
+         <tr><td>  n: <i>value</i><td>new array length should be <u>value</u> (array should be truncated)</tr>
+         <tr><td>}</tr>
+     </table>
+   </p>
+
+    <h4>examples</h4>
+
+   <pre><code class="js">const { diffObj, diffArr, patchObj, patchArr } = Tyr.diff;
+
+let patch = diffObj({ a: ['i','j'], b: 3 }, { a: ['j','i'] }) <i>returns</i> { a: [0, { 0: 1, 1: 0 }], b: 0 }
+patchObj({ a: ['i','j'], b: 3 }, { a: [0, { 0: 1, 1: 0 }], b: 0 }) <i>first object is modified in place to be</i> { a: ['j','i'] }
+
+patch = diffArr([2,3,4,5], [1,2,3,4,5]) <i>returns</i> { 0: [1], 1: [-1, 4] }
+patchArr([2,3,4,5], patch) <i>first array is modified in place to be</i> [1,2,3,4,5]
+
+patch = diffArr([1,2,3], [3,2,1]) <i>returns</i> { 0: 2, 2: 0 }
+patchArr([1,2,3], patch) <i>first array is modified in place to be</i> [3,2,1]
+</code></pre>
+
+    <h2>functions</h2>
+
+    <p>The functions below are available on the <a href="tyr#diff"><u>Tyr.diff</u></a> namespace object.</p>
+
+     <article id="diffArr">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">diffArr(a: array, b: array): <a href="#patchFormat">patch</a></span>
+       <p>Examines the differences between the arrays <u>a</u> and <u>b</u> and generates a <a href="#patchFormat">patch</a> that can
+         be applied to <u>a</u> to get <u>b</u>.</p>
+     </article>
+
+     <article id="diffObj">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">diffObj(a: object, b: object, props: object?): <a href="#patchFormat">patch</a></span>
+       <p>Examines the differences between the objects <u>a</u> and <u>b</u> and generates a <a href="#patchFormat">patch</a> that can
+         be applied to <u>a</u> to get <u>b</u>.</p>
+       <p>The <u>props</u> object can be used to indicate that only the given properties should be differenced.  For example:</p>
+
+   <pre><code class="js">Tyr.diff.diffObj({ a: 'i', b: 3 }, { a: 'i' }, { a: 1 })
+// returns {} ... no differences because it's only looking at <i>a</i> and <i>a</i> didn't change.
+</code></pre>
+       <p>If <u>props</u> is not given then the entire object is differenced.</p>
+     </article>
+
+     <article id="patchArr">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">patchArr(a: array, patch: <a href="#patchFormat">patch</a>): void</span>
+       <p>This applies the patch <u>patch</u> to the array <u>a</u> in place.</p>
+     </article>
+
+     <article id="patchObj">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">patchObj(a: object, patch: <a href="#patchFormat">patch</a>): void</span>
+       <p>This applies the patch <u>patch</u> to the object <u>a</u> in place.</p>
+     </article>
+
+  </div>

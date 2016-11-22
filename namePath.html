@@ -16,6 +16,27 @@ layout: default
      <p>See <a href="/#paths">paths</a> for more information.</p>
     </div>
 
+    <h3>static</h3>
+
+     <article id="decode">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">decode(path: string): string</span>
+       <p>This decodes a MongoDB-safe path string into a regular path string.</p>
+     </article>
+
+     <article id="encode">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">encode(path: string): string</span>
+       <p>This encodes a regular path into a MongoDB-safe path string.</p>
+       <p>MongoDB does not support periods appearing inside key names inside objects stored in MongoDB.  However, sometimes we need to store
+         Tyranid metadata inside the database that uses Tyranid paths.  This method encodes those values into something that MongoDB will store.</p>
+     </article>
+
+
+    <h3>instance</h3>
+
      <article id="detail">
        <b class="property"></b>
        <b class="server"></b>

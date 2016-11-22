@@ -290,11 +290,12 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">insert(doc: <a href="document">Document</a> | object)</span>
+       <span class="sig">insert(doc: <a href="document">Document</a> | object | <a href="document">Document</a>[] | object[])</span>
        <p>
         This behaves like <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB</a>'s <u>insert()</u> method but also
         does things like <a href="/#timestamps">timestamps</a>, <a href="/#denormalization">denormalization</a>, and so on.
        </p>
+       <p>If you pass in an array, then the array of documents/objects will be inserted in bulk.</p>
      </article>
 
      <article>
@@ -417,6 +418,16 @@ layout: default
       <p>
         See <a href="/#population">Population</a> for more information and examples.
       </p>
+     </article>
+
+     <article id="push">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">push(id: <i>id type</i>, <a href="/#paths">path</a>: string, value: any, opts: <a href="#options">Options</a>?)</span>
+      <p>This is a shortcut for:</p>
+      <quote><u><i>collection</i>.update({ _id: id }, { $push: { [path]: value } })</u></quote>
+      <p>However, this method will also atomically retain historical information for <a href="/#historical">historical documents</a>.
      </article>
 
      <article id="remove">
