@@ -29,6 +29,9 @@ layout: default
            <tr><td colspan="3" class="subtitle">Updates (<u>update()</u>, <b>but NOT</b> <u>$update()</u> or <u>updateDoc()</u>)</td>
            <tr><td>  update:<td>MongoDB update<td>The standard MongoDB-style update object.
              'insert' for <i>inserts</i>, etc.) but you can override it with this option.
+           <tr><td colspan="3" class="subtitle">Timestamps (<i>most saving/updating methods</i>)</td>
+           <tr><td>  timestamps:<td>boolean<td>Indicates if <a href="/#timestamps">timestamps</a> should be updated.  Defaults to the <a href="collection#def"><u>timestamps</u><a>
+             setting on the collection.</td>
            <tr><td colspan="3" class="subtitle">Security (<i>most methods</i>)</td>
            <tr><td>  auth:<td>Auth Object<td>An authorization object (a user, group, role, etc.) to pass to a <a href="secure">Secure</a> plug-in.  Can also be "true" to auto-detect the current user.
            <tr><td>  perm:<td>string<td>The permission to use when an <u>auth</u> object is specified.  Usually <u>perm</u> is inferred ('view' for <i>finds</i>, 'delete' for <i>removes</i>, ...)
@@ -418,6 +421,19 @@ layout: default
       <p>
         See <a href="/#population">Population</a> for more information and examples.
       </p>
+     </article>
+
+     <article id="pull">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">pull(id: <i>id type</i>, <a href="/#paths">path</a>: string, predicate: any => boolean, opts: <a href="#options">Options</a>?)</span>
+      <p>This method assumes that <u>path</u> points to an array inside the document.  This method will remove all elements of the array that match the
+        <u>predicate</u> function.</p>
+      <p>For example:</p>
+<pre><code class="js">User.pull(myId, 'name.suffices', suffix => suffix === 'Sr');
+</code></pre>
+      <p>This method will also retain historical information for <a href="/#historical">historical documents</a>.
      </article>
 
      <article id="push">

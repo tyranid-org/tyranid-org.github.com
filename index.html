@@ -488,6 +488,10 @@ you use Tyranid's update() methods.</p>
 });
 </code></pre>
 
+<p>Most Tyranid saving and update methods also support an <a href="collection#options">option</a> to disable updating timestamps for the specific call.  For example:</p>
+
+<pre><code class="js">myDoc.$update({ timestamps: false });
+</code></pre>
 
     <h3 id="maps">Maps</h3>
 <p>You can define your objects to be <i>maps</i> using the <a href="field#keys"><u>keys</u></a> and <a href="field#of"><u>of</u></a>
@@ -644,7 +648,8 @@ doc.age = 38;
 await doc.$update({ fields: { age: 1 } });
 </code></pre>
 
-    <p>If you just want to push data onto an array and maintain historical information, see <a href="collection#push"><u><i>Collection</i>.push()</u></a>.
+    <p>If you just want to push or pull data onto an array and maintain historical information, see
+     <a href="collection#push"><u><i>Collection</i>.push()</u> and <a href="collection#pull"><u><i>Collection</i>.pull()</u></a>.</p>
 
     <p>You can revert a document to older versions using the <a href="document#$asOf"><u>$asOf()</u></a> method:</p>
 
@@ -664,6 +669,7 @@ doc.$asOf(new Date('2016-05-03')); // revert doc to what it looked like on May 3
 
     <ul>
       <li><a href="collection#insert"><u><i>Collection</i>.insert()</u></a>
+      <li><a href="collection#pull"><u><i>Collection</i>.pull()</u></a>
       <li><a href="collection#push"><u><i>Collection</i>.push()</u></a>
       <li><a href="collection#save"><u><i>Collection</i>.save()</u></a>
       <li><a href="collection#updateDoc"><u><i>Collection</i>.updateDoc()</u></a>
