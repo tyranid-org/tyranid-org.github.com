@@ -29,8 +29,14 @@ layout: default
            <tr><td colspan="3" class="subtitle">Updates (<u>update()</u>, <b>but NOT</b> <u>$update()</u> or <u>updateDoc()</u>)</td>
            <tr><td>  update:<td>MongoDB update<td>The standard MongoDB-style update object.
              'insert' for <i>inserts</i>, etc.) but you can override it with this option.
+           <tr><td colspan="3" class="subtitle"><a href="/#historical">Historical</a> (<i>most saving/updating methods</i>)</td>
+           <tr><td>  author:<td>UID | <a href="document">Document</a><td>The author of the change that should be recorded in the historical snapshot.  If <u>author</u> is not specified
+             but <u>auth</u> is, and <u>auth</u> is a <a href="document">Document</a>, then its UID will be used instead.</td>
+           <tr><td>  comment:<td>string<td>A comment to record along with the historical update.</td>
+           <tr><td>  historical:<td>boolean<td>Normally historical-unsafe methods log a warning if you use them with historical collections.  If you set historical to false you can suppress
+            the warning indicating that you know what you are doing.</td>
            <tr><td colspan="3" class="subtitle">Timestamps (<i>most saving/updating methods</i>)</td>
-           <tr><td>  timestamps:<td>boolean<td>Indicates if <a href="/#timestamps">timestamps</a> should be updated.  Defaults to the <a href="collection#def"><u>timestamps</u><a>
+           <tr><td>  timestamps:<td>boolean<td>Indicates if <a href="/#timestamps">timestamps</a> should be updated.  Defaults to the <a href="collection#def"><u>timestamps</u></a>
              setting on the collection.</td>
            <tr><td colspan="3" class="subtitle">Security (<i>most methods</i>)</td>
            <tr><td>  auth:<td>Auth Object<td>An authorization object (a user, group, role, etc.) to pass to a <a href="secure">Secure</a> plug-in.  Can also be "true" to auto-detect the current user.
@@ -222,7 +228,7 @@ layout: default
        </p>
      </article>
 
-     <article>
+     <article id="findAndModify">
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>

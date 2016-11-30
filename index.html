@@ -648,6 +648,13 @@ doc.age = 38;
 await doc.$update({ fields: { age: 1 } });
 </code></pre>
 
+    <p>All historical-compatible methods also support specifying the author and comments:</p>
+
+<pre><code class="js">doc = await User.findOne({ query: { ssn: mySsn } });
+doc.age = 38;
+await doc.$update({ fields: { age: 37 }, author: req.currentUser, comment: 'The age had a typo' });
+</code></pre>
+
     <p>If you just want to push or pull data onto an array and maintain historical information, see
      <a href="collection#push"><u><i>Collection</i>.push()</u></a> and <a href="collection#pull"><u><i>Collection</i>.pull()</u></a>.</p>
 
@@ -676,6 +683,10 @@ doc.$asOf(new Date('2016-05-03')); // revert doc to what it looked like on May 3
       <li><a href="document#$save"><u><i>Document</i>.$save()</u></a>
       <li><a href="document#$update"><u><i>Document</i>.$update()</u></a>
     </ul>
+
+    <p>Historical-unsafe methods like <a href="collection#findAndModify"><u><i>Collection</i>.findAndModify()</u></a> will log a warning message if they
+     are used with historical collections.  You can suppress this warning by passing in "historical: false" in the <a href="collection#options">options</a>
+     object.</p>
 
     <h4>Other Approaches</h4>
 
