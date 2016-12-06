@@ -171,6 +171,8 @@ layout: default
          more changes and then do another <u>$snapshot()</u>.</p>
        <p>Historical options like <a href="collection#options"><u>author</u></a> and <a href="collection#options"><u>comment</u></a> are supported.</p>
        <p>This method does not update the database.</p>
+       <p>This method can be useful if you want to make a number of snapshots in memory and write them out at once (bulk updates for many documents,
+         single updates when importing history from another source, and so on).</p>
      </article>
 
      <article id="$toClient">
