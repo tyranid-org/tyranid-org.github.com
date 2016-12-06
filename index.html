@@ -658,6 +658,10 @@ await doc.$update({ fields: { age: 37 }, author: req.currentUser, comment: 'The 
     <p>If you just want to push or pull data onto an array and maintain historical information, see
      <a href="collection#push"><u><i>Collection</i>.push()</u></a> and <a href="collection#pull"><u><i>Collection</i>.pull()</u></a>.</p>
 
+    <p><a href="document#$snapshot"><u>$snapshot()</u></a> is also available to perform the differencing and create a snapshot in memory.  This can be useful
+     if you want to make a number of snapshots in memory and write them out at once (bulk updates for many documents, single updates when importing
+     history from another source, and so on).</p>
+
     <p>You can revert a document to older versions using the <a href="document#$asOf"><u>$asOf()</u></a> method:</p>
 
 <pre><code class="js">doc = await User.byId(myId);

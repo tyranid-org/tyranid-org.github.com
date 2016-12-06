@@ -60,10 +60,10 @@ layout: default
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">_history: <i>snapshot</i>[]</span>
+       <span class="sig">_history: <a href="#snapshot">snapshot</a>[]</span>
        <p>If <a href="/#historical">historical data</a> is enabled for this collection, then this field will contain an array of historical snapshots
          for this document.</p>
-       <p>
+       <p id="snapshot">
          The format of each <i>snapshot</i> document is:
 
        <table class="def">
@@ -159,6 +159,20 @@ layout: default
        <p>If the document ends up being inserted, the document returned by this method will have its <u>_id</u> set.
      </article>
 
+     <article id="$snapshot">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">$snapshot(updateHistory: boolean, options: <a href="collection#options">Options</a>?): <a href="#snapshot">snapshot</a></span>
+       <p>This <a href="/#historical">historical data</a> method compares the <a href="#$orig"><u>$orig</u></a> property and the current
+         state of the object and returns a <a href="#snapshot">snapshot</a> record.</p>
+       <p>If <u>updateHistory</u> is true, the <a href="#_history"><u>_history</u></a> property is expected to be present it will be updated in memory.
+         Otherwise you are expected to insert the <a href="#snapshot">snapshot</a> returned into the <u>_history</u> property yourself.</p>
+       <p>After the snapshot is taken, the object's current <u>$orig</u> property is updated to the current values of the object (so you can make
+         more changes and then do another <u>$snapshot()</u>.</p>
+       <p>Historical options like <a href="collection#options"><u>author</u></a> and <a href="collection#options"><u>comment</u></a> are supported.</p>
+       <p>This method does not update the database.</p>
+     </article>
+
      <article id="$toClient">
        <b class="method"></b>
        <b class="server"></b>
@@ -183,7 +197,7 @@ layout: default
        <span class="sig">$update(options: <a href="collection#options">Options</a>?)</span>
        <p>This updates the server document with the values in this object.  Note that the document is <i>not</i> replaced.  See
          <a href="document#$save"><u>$save()</u></a> if you want to do a full replace.</p>
-       <p>This method is a short-cut for <a href="collection#updateDoc"><u><i>Collection</i>.updateDoc()</u></a>.</p> 
+       <p>This method is a short-cut for <a href="collection#updateDoc"><u><i>Collection</i>.updateDoc()</u></a>.</p>
      </article>
 
      <article id="$validate">
