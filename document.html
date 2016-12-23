@@ -18,12 +18,18 @@ layout: default
      <article id="$asOf">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">$asOf(<i>date</i>): void</span>
+       <span class="sig">$asOf(<i>date</i>, fields: object?): void</span>
        <p>This rolls back the object in-place to the given date if its collection supports <a href="/#historical">historical data</a>.</p>
        <p><u>date</u> can be either an instance of Date or the number of UTC milliseconds (<u><i>Date</i>.getTime()</u>).</p>
        <p>Note that once a document is rolled back to an earlier date the document is essentially read-only as updating it in the past
          does not make sense.  Tyranid will mark the document as <a href="document#$historical"><u>$historical</u></a> which will prevent calls like
          <a href="#$save"><u>$save</u></a> from being used on it.</p>
+       <p>If the <u>fields</u> object is present, it indicates that only changes for the listed properties should be applied (by default
+         all properties are patched).  For example:</p>
+   <pre><code class="js">const fields = { name: 1, age: 1 };
+const myUser = User.byId(myId, { fields });
+doc.$asOf(new Date(...), fields);
+</code></pre>
      </article>
 
      <article id="$clone">

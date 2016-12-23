@@ -528,6 +528,7 @@ layout: default
        <span class="sig">updateDoc(doc: <a href="document">Document</a> | object, opts: <a href="#options">Options</a>)</span>
        <p>This updates the server document with the values in this object.</p>
        <p>Note that the document is <b><i>not</i> replaced</b>.  See <a href="collection#save"><u>save()</u></a> if you want to do a full replace.</p>
+       <p>If the document is new (it does not have an <u>_id</u>) then it will be <u>insert()</u>'ed and the new <u>_id</u> will be stored on the document.</p>
      </article>
 
      <article id="valuesFor">

@@ -202,15 +202,8 @@ layout: default
        <b class="server"></b>
        <span class="sig"><a href="/#paths">spath</a>: String</span>
        <p>This contains the <a href="/#paths">simplified path</a> of this field.</p>
-       <p>Simplified paths remove the array contents reference and are useful when working with MongoDB projections.
-        For example:</p>
-       <table>
-         <tr><th>Path</th><th>Simplified Path</th></tr>
-         <tr><td>siblings._.name</td><td>siblings.name</td></tr>
-         <tr><td>name.first</td><td>name.first</td></tr>
-         <tr><td>age</td><td>age</td></tr>
-       </table>
-       <p>See <a href="/#paths">Paths</a> for more information.</p>
+       <p>This is a short-cut for <a href="namePath#spath"><u>this.namePath.spath</u></a>.</p>
+       <p>Also see <a href="/#paths">Paths</a> for more information.</p>
      </article>
 
      <article>

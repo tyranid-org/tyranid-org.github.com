@@ -99,8 +99,10 @@ patchArr([1,2,3], patch) <i>first array is modified in place to be</i> [3,2,1]
      <article id="patchObj">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">patchObj(a: object, patch: <a href="#patchFormat">patch</a>): void</span>
+       <span class="sig">patchObj(a: object, patch: <a href="#patchFormat">patch</a>, props: object?): void</span>
        <p>This applies the patch <u>patch</u> to the object <u>a</u> in place.</p>
+       <p>If the <u>props</u> object is present, it indicates that only changes for the listed properties should be applied (by default
+         the entire patch is applied).</p>
      </article>
 
   </div>

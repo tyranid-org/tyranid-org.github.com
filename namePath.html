@@ -113,6 +113,22 @@ layout: default
        <p>This returns a verbose description of the path at position <u>idx</u> along the path.  This is useful for error messages in parsing.</p>
      </article>
 
+     <article id="spath">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig"><a href="/#paths">spath</a>: String</span>
+       <p>This contains the <a href="/#paths">simplified path</a> of this field.</p>
+       <p>Simplified paths remove the array contents reference and are useful when working with MongoDB projections.
+        For example:</p>
+       <table>
+         <tr><th>Path</th><th>Simplified Path</th></tr>
+         <tr><td>siblings._.name</td><td>siblings.name</td></tr>
+         <tr><td>name.first</td><td>name.first</td></tr>
+         <tr><td>age</td><td>age</td></tr>
+       </table>
+       <p>See <a href="/#paths">Paths</a> for more information.</p>
+     </article>
+
      <article id="tail">
        <b class="property"></b>
        <b class="server"></b>
