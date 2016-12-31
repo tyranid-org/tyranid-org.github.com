@@ -139,6 +139,49 @@ doc.$asOf(new Date(...), fields);
       </p>
      </article>
 
+     <article id="$slice">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">$slice(path, options): void</span>
+       <p>
+       <p>This reads in a slice of values into an embedded array.  This can be useful if a document contains large arrays
+         and you want to read in the array values separately and/or page them down to the client.</p>
+
+       <p><u>options</u> are:</p>
+
+       <table class="def">
+         <thead>
+           <tr><th>Option<th>Type<th>Notes
+         <tbody>
+           <tr><td>{</td>
+           <tr><td>  limit:<td>integer<td>How many elements to slice.
+           <tr><td>  where:<td>any => boolean<td>A predicate function that can be used to filter the array.  Is applied before skip/limit.
+           <tr><td>  populate:<td><i>population object</i><td>A <a href="index#population">population</a> object.
+           <tr><td>  skip:<td>integer<td>Where to start slicing the array.
+           <tr><td>  sort:<td><i>MongoDB-style sort object</i><td>Specifies how to sort the array.  Is applied before skip/limit.
+           <tr><td>}</td>
+       </table>
+
+       <p>The array values are stored in the local object's array at the given <u>skip</u> and <u>offset</u> positions
+         in the given <u>sort</u> order.  For this reason, do not call <u>$slice()</u> multiple times with different
+         <u>sort</u> values.
+       </p>
+
+       <p>Example:</p>
+
+       <pre><code class="js">const myDoc = Tyr.byId(myKey, { fields: { hugeArray: 0 } });
+myDoc.$slice('hugeArray', {
+  where: v => v.myActiveField,
+  population: { myLinkPropInHugeArray: $all, myOtherPropInHugeArray: 1 },
+  skip: 10,
+  limit: 10,
+  sort: { myField: -1, myOtherField: 1 }
+});
+</code></pre>
+     </article>
+
      <article id="$remove">
        <b class="method"></b>
        <b class="server"></b>

@@ -21,6 +21,20 @@ layout: default
        </p>
      </article>
 
+     <article id="arraySort">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">arraySort(array: array, sortObj: object): number</span><br>
+       <p>This is similar to how <u>Array.sort()</u> works except that it takes a MongoDB-style sort definition object.</p>
+       <p>Like <u>Array.sort()</u>, the array is sorted in-place.</p>
+       <p>For example:</p>
+   <pre><code class="js">const myArray = [ { b: 1 }, { b: 'alpha' }, {}, { b: 'alpha', c: 2 } ];
+Tyr.arraySort(myArray, { b: 1, c: -1 });
+// myArray is now: [ {}, { b: 1 }, { b: 'alpha', c: 2 }, { b: 'alpha' } ]
+</code></pre>
+       <p>See also <a href="#mongoCompare"><u>Tyr.mongoCompare()</u></a>.</p>
+     </article>
+
      <article>
        <b class="method"></b>
        <b class="server"></b>
@@ -220,6 +234,16 @@ layout: default
        <b class="server"></b>
        <span class="sig">mixin(target: object, mixin: object): void</span><br>
        <p>This mixes in a <b>mixin</b> into a target object.  Both regular and prototype methods and properties are mixed.</p>
+     </article>
+
+     <article id="mongoCompare">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">mongoCompare(a: any, b: any): number</span><br>
+       <p>This is a comparator function that can be passed into methods like sort() that compares two values according
+         to how MongoDB's sort operation works.</p>
+       <p>If a < b, returns n such that n < 0; if a > b, returns n such that n > 0; if a === b, returns 0.</p>
+       <p>See also <a href="#arraySort"><u>Tyr.arraySort()</u></a>.</p>
      </article>
 
      <article>

@@ -37,6 +37,14 @@ layout: default
 
     <h3>instance</h3>
 
+     <article id="base">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">base: <a href="collection">Collection</a> | <a href="namePath">NamePath</a></span>
+       <p>This returns the object that this name path is relative to (usually a collection, but could be relative to another name path.</p>
+     </article>
+
      <article id="detail">
        <b class="property"></b>
        <b class="server"></b>
@@ -71,6 +79,15 @@ layout: default
        <b class="client"></b>
        <span class="sig">name: string</span>
        <p>This contains the full, unparsed path that was passed into the constructor.</p>
+     </article>
+
+     <article id="parsePath">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">parsePath(path: string): NamePath</span>
+       <p>This returns a new <u>NamePath</u> relative to the current name path.  Any objects passed into methods on this new <u>NamePath</u> like <u>get</u>,
+        <u>set</u>, and so on must also be relative in the same way.</p>
      </article>
 
      <article id="path">
@@ -111,6 +128,14 @@ layout: default
        <b class="client"></b>
        <span class="sig">pathName(idx: integer): string</span>
        <p>This returns a verbose description of the path at position <u>idx</u> along the path.  This is useful for error messages in parsing.</p>
+     </article>
+
+     <article id="set">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">set(obj: object, value: any): void</span>
+       <p>This walks the <u>obj</u> according to this path and sets the given <u>value</u> at that point in the path.</p>
      </article>
 
      <article id="spath">
