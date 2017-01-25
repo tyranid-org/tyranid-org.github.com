@@ -139,6 +139,32 @@ doc.$asOf(new Date(...), fields);
       </p>
      </article>
 
+     <article id="$remove">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">$remove(options: <a href="collection#options">Options</a>?): void</span>
+       <p>This removes the current document from the database.</p>
+     </article>
+
+     <article id="$replace">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">$replace(obj): void</span>
+       <p>This is a short-cut for <a href="#$copy"><u>$copy(obj, Tyr.$all)</u></a>.
+     </article>
+
+     <article id="$save">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">$save(options: <a href="collection#options">Options</a>?): <a href="document">Document</a></span>
+       <p>This method will either update or insert the object based on whether it has an _id.</p>
+       <p>When updating, the entire object is <b>replaced</b>.  See <a href="document#$update"><u>$update()</u></a> to only update instead of replace.</p>
+       <p>If the document ends up being inserted, the document returned by this method will have its <u>_id</u> set.
+     </article>
+
      <article id="$slice">
        <b class="method"></b>
        <b class="server"></b>
@@ -182,32 +208,6 @@ myDoc.$slice('hugeArray', {
 </code></pre>
      </article>
 
-     <article id="$remove">
-       <b class="method"></b>
-       <b class="server"></b>
-       <b class="async"></b>
-       <span class="sig">$remove(options: <a href="collection#options">Options</a>?): void</span>
-       <p>This removes the current document from the database.</p>
-     </article>
-
-     <article id="$replace">
-       <b class="method"></b>
-       <b class="server"></b>
-       <span class="sig">$replace(obj): void</span>
-       <p>This is a short-cut for <a href="#$copy"><u>$copy(obj, Tyr.$all)</u></a>.
-     </article>
-
-     <article id="$save">
-       <b class="method"></b>
-       <b class="server"></b>
-       <b class="client"></b>
-       <b class="async"></b>
-       <span class="sig">$save(options: <a href="collection#options">Options</a>?): <a href="document">Document</a></span>
-       <p>This method will either update or insert the object based on whether it has an _id.</p>
-       <p>When updating, the entire object is <b>replaced</b>.  See <a href="document#$update"><u>$update()</u></a> to only update instead of replace.</p>
-       <p>If the document ends up being inserted, the document returned by this method will have its <u>_id</u> set.
-     </article>
-
      <article id="$snapshot">
        <b class="method"></b>
        <b class="server"></b>
@@ -231,6 +231,14 @@ myDoc.$slice('hugeArray', {
        <p>
         This creates a new POJO out of this document.  Values are copied by reference (not deep-cloned!).
        </p>
+     </article>
+
+     <article id="$tyr">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">$tyr: <a href="tyr">Tyr</a></span>
+       <p>This is a reference to the tyranid namespace object <a href="tyr"><u>Tyr</u></a>.
      </article>
 
      <article id="$uid">

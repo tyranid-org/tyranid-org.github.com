@@ -12,9 +12,23 @@ layout: default
     <div style="clear:both;"></div>
 
     <article>
+      <div class="date">2017.1.24</div>
+      <div class="version">0.1.25</div>
+      <h1><u>$tyr</u> property on documents</h1>
+      <p>
+        <ul>
+          <li><a href="document#$tyr"><u><i>Document</i>.$tyr()</u></a> added
+        </ul>
+      </p>
+    </article>
+
+    <article>
       <div class="date">2016.12.30</div>
       <div class="version">0.1.14</div>
       <h1>Support Array Paging and Relative <u>NamePath</u>s</h1>
+      <p>Array paging (using the new <a href="document#$slice"><u><i>Document</i>.$slice()</u></a> method) provides a way to page large
+        embedded arrays inside large documents down to the client without having to send down the entire document.  You can sort, filter,
+        skip, limit, and populate the embedded array just like querying top-level documents.</p>
       <p>
         <ul>
           <li><a href="document#$slice"><u><i>Document</i>.$slice()</u></a> added
