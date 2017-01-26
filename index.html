@@ -408,6 +408,7 @@ property.  For example:</p>
 <pre><code class="js">var User = new Tyr.Collection({
   <i>...</i>
   projections: {
+    <i>...</i>
     myProjection: {
       name: 1,
       age: 1
@@ -425,6 +426,27 @@ const u = User.byId(myId, { fields: 'myProjection' });
 
 <pre><code class="js">// The following projection is equivalent to:  { fields: { name: 1, age: 1, ssn: 1 } }
 const u = User.byId(myId, { fields: ['myProjection', { ssn: 1 }] });
+</code></pre>
+
+ <h4 id="clientViews">Client Views</h4>
+
+ <p>Pre-defined projections can also be used to define common client-side views.</p>
+
+<pre><code class="js">var User = new Tyr.Collection({
+  <i>...</i>
+  projections: {
+    mainTableView: {
+      name: 1,
+      job: 1,
+      organization: 1
+    },
+    <i>...</i>
+  },
+  <i>...</i>
+});
+<i>...</i>
+const myUser = await User.byId(myId, { fields: 'mainTableView' });
+res.json(myUser.$toClient({ fields: 'mainTableView' }));
 </code></pre>
 
     <h3 id="population">Population</h3>

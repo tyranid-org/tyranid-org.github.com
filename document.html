@@ -227,10 +227,10 @@ myDoc.$slice('hugeArray', {
      <article id="$toClient">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">$toClient(): object</span>
-       <p>
-        This creates a new POJO out of this document.  Values are copied by reference (not deep-cloned!).
-       </p>
+       <span class="sig">$toClient(opts: object?): object</span>
+       <p>This creates a new POJO out of this document.  Values are copied by reference (not deep-cloned!).</p>
+       <p>This method passes through to <a href="collection#toClient"><u><i>Collection</i>.toClient()</u></a>, so see that method for a description of
+        <u>opts</u> and a more detailed explanation of how this method works.</p>
      </article>
 
      <article id="$tyr">

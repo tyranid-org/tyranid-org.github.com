@@ -159,6 +159,7 @@ layout: default
 <tr><td>    <i>projectionName</i>:<td><i>MongoDB-style projection</i><td><td>Define standard projections.  See <a href="/#projection">projections</a>.</td>
 <tr><td>    <i>...</i></td>
 <tr><td>  },</td>
+<tr><td>  toClient:<td>opts => void<td><td>Specifies a <a href="collection#toClient"><u><i>Collection</i>.toClient()</u></a> post-processing hook that will be applied for this collection.</p>
 <tr><td>}</td>
 </table>
      </article>
@@ -508,10 +509,25 @@ layout: default
      <article id="toClient">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">toClient(doc: <a href="document">Document</a>): object</span>
-       <p>
-        This creates a new POJO out of a document instance.  Values are copied by reference (not deep-cloned!).
-       </p>
+       <span class="sig">toClient(doc: <a href="document">Document</a>, opts: object?): object</span>
+       <p>This creates a new POJO out of a document instance.  Values are copied by reference (not deep-cloned!).</p>
+       <p><u>opts</u> can contain the following:</p>
+       <table class="def">
+         <thead>
+           <tr><th>Option<th>Type<th>Notes
+         <tbody>
+           <tr><td>{</td>
+           <tr><td>  auth:<td>Auth Object<td>An authorization object (a user, group, role, etc.).  This value is also accessible to hook functions like <u>Collection.def.toClient</u> and <u>post</u> below.</td>
+           <tr><td>  fields:<td>MongoDB fields<td>The standard MongoDB-style fields object that specifies the projection.  Also supports <a href="/#projection">extended projection</a> syntax.
+             Any field not in this projection will not be copied to the resulting <u>toClient()</u> object.
+           <tr><td>  post:<td>opts => void<td>This provides a hook to perform any post-processing on the resulting document.  <u>this</u> is bound to the current document when this function is invoked.
+             Note that this function is also invoked for any embedded documents as well (in this case <u>this</u> will be bound to the specific embedded document), so your function should be
+             prepared to deal with potentially different types of data.</td>
+           <tr><td>}</td>
+       </table>
+       <p>Any <u>toClient</u> function defined for a collection in its <a href="collection#def"><u><i>Collection</i>.def</u></a> will also be invoked during <u>toClient</u> processing.  This provides
+        a standard place where fields can be removed for security and other reasons.  As with <u>post()</u>, <u>this</u> is bound to the current document inside a collection's <u>toClient()</u>
+        post-processing function.</p>
      </article>
 
      <article id="update">
