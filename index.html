@@ -428,6 +428,8 @@ const u = User.byId(myId, { fields: 'myProjection' });
 const u = User.byId(myId, { fields: ['myProjection', { ssn: 1 }] });
 </code></pre>
 
+<p>Note that <u>_id</u> is included by default in all projections unless <u>_id: 0</u> appears.</p>
+
  <h4 id="clientViews">Client Views</h4>
 
  <p>Pre-defined projections can also be used to define common client-side views.</p>
