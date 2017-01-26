@@ -396,6 +396,36 @@ on the server you can use <u>getServer</u> instead.  You can also optionally spe
 <p>By default <u>fn</u> methods are isomorphic if <a href="#client">client-side functionality</a> is enabled.  If you want the method to only appear
 on the server you can use <u>fnServer</u> instead.  You can also optionally specify a client-specific version using <u>fnClient</u>.
 
+    <h3 id="projection">Projection</h3>
+
+<p>All <u>fields</u> options on <a href="collection#options"><u>options</u></a> support an extended syntax besides standard MongoDB projections.</p>
+
+<p>If <u>fields</u> is given a <b>object</b>, then it should be a standard MongoDB-style projection.</p>
+
+<p>If <u>fields</u> is given a <b>string</b>, then this string should refer to the name of a predefined projection defined on a collection's <u>projections</u>
+property.  For example:</p>
+
+<pre><code class="js">var User = new Tyr.Collection({
+  <i>...</i>
+  projections: {
+    myProjection: {
+      name: 1,
+      age: 1
+    },
+    <i>...</i>
+  },
+  <i>...</i>
+});
+
+// The following projection is equivalent to:  { fields: { name: 1, age: 1 } }
+const u = User.byId(myId, { fields: 'myProjection' });
+</code></pre>
+
+<p>If <u>fields</u> is given an <b>array</b>, then the array should contain a list of projections that should be merged. For example:</p>
+
+<pre><code class="js">// The following projection is equivalent to:  { fields: { name: 1, age: 1, ssn: 1 } }
+const u = User.byId(myId, { fields: ['myProjection', { ssn: 1 }] });
+</code></pre>
 
     <h3 id="population">Population</h3>
 <pre><code class="js"><i>// Tyranid can traverse links and provide join-like functionality.</i>

@@ -17,7 +17,7 @@ layout: default
            <tr><td colspan="3" class="subtitle">Query (<u>find*()</u>, <u>update()</u>, <u>remove()</u>)</td>
            <tr><td>  query:<td>MongoDB query<td>The standard MongoDB-style query object.
            <tr><td colspan="3" class="subtitle">Projection & Population (<u>find*()</u>, <u>by*()</u>)</td>
-           <tr><td>  fields:<td>MongoDB fields<td>The standard MongoDB-style fields object that specifies the projection.
+           <tr><td>  fields:<td>MongoDB fields<td>The standard MongoDB-style fields object that specifies the projection.  Also supports <a href="/#projection">extended projection</a> syntax.
            <tr><td>  populate:<td><a href="#populationFields">Population Fields</a><td>The population fields to populate.
            <tr><td colspan="3" class="subtitle">Windowing (<u>find()</u>, <u>findAll()</u>)</td>
            <tr><td>  limit:<td><u>integer</u><td>The maximum number of documents to retrieve.
@@ -155,6 +155,10 @@ layout: default
 <tr><td>    [ <i>id1</i>,   <i>value1</i>,       ... ],<td><td><td>The following rows are data rows.</td>
 <tr><td>    ...</td>
 <tr><td>  }</td>
+<tr><td>  projections: {</td>
+<tr><td>    <i>projectionName</i>:<td><i>MongoDB-style projection</i><td><td>Define standard projections.  See <a href="/#projection">projections</a>.</td>
+<tr><td>    <i>...</i></td>
+<tr><td>  },</td>
 <tr><td>}</td>
 </table>
      </article>
