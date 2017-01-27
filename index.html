@@ -504,6 +504,13 @@ user.$populate({ 'roles.role': { $all, network: $all } });
 <p>In general, population will not query the same document more than once.  If the document shows up in multiple places
 with different projections all locations will contain the same document which will contain a superset of the projections.
 This also means that population can be used to populate relationships with cycles.</p>
+<p>Advanced population syntax also supports the <a href="#projection">predefined projection and projection merging</a> syntax.  For example:</p>
+<pre><code class="js"><i>// This populates the owner using the user collection's predefined 'nameAndTable' view.</i>
+job.$populate({ owner: 'nameAndTable' });
+
+<i>// Another example using projection merging:</i>
+job.$populate({ owner: ['nameAndTable', { ssn: 1 }] });
+</code></pre>
     <h4 id="denormalization">Denormalization</h4>
 <p>Tyranid can also store populations when a document is saved or updated.  For example, this can be useful for cases where
 you need a a few properties redundantly stored in a collection so you have more indexing options.</p>
