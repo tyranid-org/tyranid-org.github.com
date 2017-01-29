@@ -38,7 +38,7 @@ layout: default
 </thead>
 <tr><td>{</td>
 <tr><td>  is:<td>string<td><i>required</i>*<td>The name of the <a href="type">Type</a> of this Field.
-<tr><td>  client:<td>boolean<td>true**<td>Indicates if this field should be serialized in <u>toClient()</u>/<u>fromClient()</u> calls.
+<tr><td>  client:<td>boolean<td>true**<td>Indicates if this field should be serialized in <u>toClient()</u>/<u>fromClient()</u> calls.  See <a href="field#defClient">client</a> below.
 <tr><td>  db:<td>boolean<td>true**<td>Indicates if this field should be stored in the database.
 <tr><td>  label:<td>string<td>labelize(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this field.
 <tr><td>  pathLabel:<td>string<td><i>label</i><td>The label to use for this field when it is part of a <a href="/#pathLabels">path label</a>.
@@ -82,6 +82,22 @@ layout: default
       <div><u>**</u> <u>client</u> and <u>db</u> usually defaults to true except for <a href="/#computedProperties">computed properties</a>
         (you can still set <u>client: true</u> and/or <u>db: true</u> for computed properties, they just don't default to true).</div>
       <div><u>***</u> <u>of</u> is required if <u>keys</u> is specified.</div>
+
+      <h4 id="defClient" style="margin-top:32px;"><u>client</u> option</h4>
+
+      <p>The <u>client</u> option indicates if this field should be serialized in <u>toClient()</u>/<u>fromClient()</u> calls.  It can take on the following values:</p>
+      <table>
+        <thead>
+          <tr><th>Value<th>Serialize in <u>toClient()</u> ?
+        <tbody>
+          <tr><td><u>true</u>, <u>1</u>, <u>'default'</u><td>Yes by default.
+          <tr><td><u>false</u>, <u>0</u>, <u>'never'</u><td>No, not even if requested in a projection.
+          <tr><td><u>'conditional'</u><td>No, unless requested in a projection.
+          <tr><td><u>undefined</u><td>Yes by default if not a computed value; no by default if a computer value (can be requested in a projection).
+          <tr><td><u>function</u><td>If <u>client</u> is a function the function will be invoked and the result should be one of the values in this table.  It will be invoked as follows:<br>
+           <i>client function</i><u>.call(</u><i>document</i><u>,</u> <i>value to be serialized</i><u>,</u> <i>opts passed to toClient()</i><u>,</u> <i>final merged projection</i><u>)</u>
+      </table>
+
      </article>
 
      <article id="fields">
