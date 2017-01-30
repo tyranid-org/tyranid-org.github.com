@@ -461,6 +461,25 @@ layout: default
       <p>However, this method will also atomically retain historical information for <a href="/#historical">historical documents</a>.
      </article>
 
+     <article id="references">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">references(opts): <a href="document">Document</a>[]</span>
+       <p>This finds all the documents that link to the given id(s) in the database.</p>
+       <table class="def">
+<thead>
+  <tr><th>Option<th>Type<th>Notes
+</thead>
+<tr><td>{</td>
+<tr><td>  id:<td><i>id type</i> | <i>id type</i>[]<td>Contains an id or an array of ids to find references to.
+<tr><td>  ids:<td><i>id type</i> | <i>id type</i>[]<td>Alias for "id"
+<tr><td>  idsOnly:<td>boolean<td>By default the full documents are returned.  If this is returned, the documents only contain their id.
+<tr><td>  exclude:<td><a href="collection">Collection</a> | <a href="collection">Collection</a>[]<td>Contains a list of collections to exclude from the search.
+<tr><td>}</td>
+</table>
+     </article>
+
      <article id="remove">
        <b class="method"></b>
        <b class="server"></b>
