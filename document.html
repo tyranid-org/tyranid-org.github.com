@@ -30,6 +30,7 @@ layout: default
 const myUser = User.byId(myId, { fields });
 doc.$asOf(new Date(...), fields);
 </code></pre>
+       <p>Be sure to include the <a href="#_history"><u>_history</u></a> in your projection on any object you plan to use <u>$asOf()</u> on.</p>
      </article>
 
      <article id="$clone">
