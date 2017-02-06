@@ -19,6 +19,7 @@ layout: default
            <tr><td colspan="3" class="subtitle">Projection & Population (<u>find*()</u>, <u>by*()</u>)</td>
            <tr><td>  fields:<td>MongoDB fields<td>The standard MongoDB-style fields object that specifies the projection.  Also supports <a href="/#projection">extended projection</a> syntax.
            <tr><td>  populate:<td><a href="#populationFields">Population Fields</a><td>The population fields to populate.
+           <tr><td>  asOf:<td>date<td>Indicates that any <a href="/#historical">historical</a> documents (including populated documents) should be <a href="document#$asOf"><u>$asOf()</u></a>'d the given date.
            <tr><td colspan="3" class="subtitle">Windowing (<u>find()</u>, <u>findAll()</u>)</td>
            <tr><td>  limit:<td><u>integer</u><td>The maximum number of documents to retrieve.
            <tr><td>  skip:<td><u>integer</u><td>The number of documents to skip.

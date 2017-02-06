@@ -733,6 +733,16 @@ doc.$asOf(new Date('2016-05-03')); // revert doc to what it looked like on May 3
     <p>Documents reverted using <u>$asOf()</u> become read-only, as updating a document in the past does not make sense and these documents
      will have a non-enumerable <a href="document#$historical">$historical</a> property added to them to indicate this state.</p>
 
+    <p><u>asOf</u> can also be passed into most query methods and works with population so that a hierarchy of historical documents can be
+     retrieved as of a particular date.  In the following example, populated department records are also as of the given date:</p>
+
+<pre><code class="js">doc = await User.findAll({
+  query: { ssn: mySsn },
+  asOf: new Date('2016-05-03'),
+  populate: { department: $all }
+});
+</code></pre>
+
     <h4 style="color: red">Warning</h4>
 
     <p>If you bypass Tyranid calls and use the native MongoDB driver calls or modify database directly in the database, historical values will not be updated.</p>
