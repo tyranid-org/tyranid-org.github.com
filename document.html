@@ -38,7 +38,17 @@ doc.$asOf(new Date(...), fields);
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">$clone(): <a href="document">Document</a></span>
+       <p>This performs a shallow in-memory clone of the current document that also retains the class into the cloned document.</p>
+       <p>See also <a href="#$cloneDeep"><u>$cloneDeep()</u></a>.
+     </article>
+
+     <article id="$cloneDeep">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">$cloneDeep(): <a href="document">Document</a></span>
        <p>This performs a deep in-memory clone of the current document that also retains the class into the cloned document.</p>
+       <p>See also <a href="#$clone"><u>$clone()</u></a>.
      </article>
 
      <article id="$copy">
