@@ -5,13 +5,15 @@ layout: default
   <div class="content">
     <h1>Event</h1>
 
-     <p>Events are sent in response to changes to a database and can be used to implement lifestyle hooks and workflow rules.</p>
+     <p>Events are sent in response to changes to a database and can be used to implement lifecycle hooks and workflow rules.</p>
 
      <h2 id="type">types</h2>
 
      <table>
        <tr><th>Name<th>Action<th>Effect of Cancelation
+       <tr><td><u>insert</u><td>A document is inserted/created<td>The document is not updated or created
        <tr><td><u>remove</u><td>A document is removed<td>The document is not removed
+       <tr><td><u>update</u><td>A document is updated<td>The document is not updated
      </table>
 
      <h2 id="handler">handlers</h2>
