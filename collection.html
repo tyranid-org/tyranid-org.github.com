@@ -407,6 +407,16 @@ layout: default
          Tyranid or third-party collections.  See <a href="index#mixinSchemas">Mixins</a> for more information.</p>
      </article>
 
+     <article id="on">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">on(eventType: <a href="event#type">event name</a>, handler: async? <a href="event">Event</a> => boolean): () => void</span>
+       <p>This method allows you to define a new event handler for a specified event.</p>
+       <p>See <a href="event#handler">event handlers</a> for more information on event handlers.</p>
+       <p>This method returns a function that can be invoked to unregister this handler.</p>
+       <p>See <a href="event">Event</a> for more information.</p>
+     </article>
+
      <article id="parsePath">
        <b class="method"></b>
        <b class="server"></b>

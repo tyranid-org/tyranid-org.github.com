@@ -1,0 +1,51 @@
+---
+layout: default
+---
+
+  <div class="content">
+    <h1>Event</h1>
+
+     <p>Events are sent in response to changes to a database and can be used to implement lifestyle hooks and workflow rules.</p>
+
+     <h2 id="type">types</h2>
+
+     <table>
+       <tr><th>Name<th>Action<th>Effect of Cancelation
+       <tr><td><u>remove</u><td>A document is removed<td>The document is not removed
+     </table>
+
+     <h2 id="handler">handlers</h2>
+
+      <p>Event handlers can optionally be asynchronous by returning a promise.</p>
+
+      <p>If an event handler returns false, returns a promise of false, or calls <a href="event#preventDefault"><u><i>Event</i>.preventDefault()</u></a> then
+        the underlying action associated with the event will be canceled.</p>
+
+      <p>If an event handler throws an exception or returns a failed promise then the resulting exception or failed promise will be thrown to the client
+        in addition to the event being canceled.  For example, if you add a handler on the <u>remove</u> event type and throw an error inside the handler,
+        that error will be thrown to the calling function that executed the remove method and the remove will not be performed.</p>
+
+     <h2>instance</h2>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">doc: <a href="document"><u>Document</u></a></span>
+       <p>This contains the document associated with this event.</p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">preventDefault(): void</span>
+       <p>This cancels the event and prevents the default action associated with this event.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">type: string</span>
+       <p>This contains the type of the event.</p>
+     </article>
+
+  </div>
