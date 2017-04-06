@@ -40,6 +40,7 @@ layout: default
 <tr><td>  is:<td>string<td><i>required</i>*<td>The name of the <a href="type">Type</a> of this Field.
 <tr><td>  client:<td>boolean<td>true**<td>Indicates if this field should be serialized in <u>toClient()</u>/<u>fromClient()</u> calls.  See <a href="field#defClient">client</a> below.
 <tr><td>  db:<td>boolean<td>true**<td>Indicates if this field should be stored in the database.
+<tr><td>  deprecated:<td>string<td><td>Indicates that this field is deprecated; the string should include the reason why it is deprecated and alterate approaches to use.
 <tr><td>  label:<td>string<td>labelize(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this field.
 <tr><td>  pathLabel:<td>string<td><i>label</i><td>The label to use for this field when it is part of a <a href="/#pathLabels">path label</a>.
 <tr><td>  help:<td>string<td>none<td>Contains brief user-facing documentation about this field (suitable for a tooltip).

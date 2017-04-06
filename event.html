@@ -10,13 +10,35 @@ layout: default
      <h2 id="type">types</h2>
 
      <table>
-       <tr><th>Name<th>Action<th>Effect of Cancelation
+       <tr><th>Name<th>When<th>Effect of Cancelation
+       <tr><td><u>change</u><td>A document is changed (via insert, update, $update, findAndModify, etc.)<td>The document is not changed
        <tr><td><u>insert</u><td>A document is inserted/created<td>The document is not updated or created
        <tr><td><u>remove</u><td>A document is removed<td>The document is not removed
-       <tr><td><u>update</u><td>A document is updated<td>The document is not updated
      </table>
 
-     <h2 id="handler">handlers</h2>
+     <h2 id="handler">event handlers</h2>
+
+     <p>An event handler can be registered against an object using the following method (currently only collections can have event handlers
+       attached to them.</p>
+
+     <article id="on">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">on(options: <a href="#onOptions">object</a>): () => void</span>
+       <p>This method allows you to define a new event handler for a specified event.</p>
+       <p>This method returns a function that can be invoked to unregister this handler.</p>
+       <p>Event handler <u>options</u> are as follows:</p>
+       <table class="def" id="onOptions">
+<thead>
+  <tr><th>Object Structure<th width="180">Type<th>Default<th>Notes
+</thead>
+<tr><td>{</td>
+<tr><td>  type:<td>string<td><i>required</i><td>An <a href="#type">event type</a>.
+<tr><td>  field:<td>string<td><td>Used with <u>change</u> events, this is the path inside the document to the value changed.
+<tr><td>  handler:<td>async? <a href="event#eventObject">Event</a> => boolean</span><td><i>required</i><td>The event handling function.
+<tr><td>  when:<td><u>'pre'</u> | <u>'post'</u> | <u>'both'</u><td><u>'pre'</u><td>Should the handler be called before or after the underling action being listened to.
+<tr><td>}</td>
+</table>
 
       <p>Event handlers can optionally be asynchronous by returning a promise.</p>
 
@@ -27,23 +49,65 @@ layout: default
         in addition to the event being canceled.  For example, if you add a handler on the <u>remove</u> event type and throw an error inside the handler,
         that error will be thrown to the calling function that executed the remove method and the remove will not be performed.</p>
 
-     <h2>instance</h2>
+      <p>Note that actions can only be canceled in <u>when: 'pre'</u> (the default) handlers.</p>
 
-     <article>
+      <h3>example</h3>
+
+       <pre><code class="js">Tyr.byName.user.on({
+  type: 'change',
+  field: 'name.first',
+  handler: event => {
+    console.log('the first name was changed for these objects:', event.query);
+  }
+}
+</code></pre>
+     </article>
+
+     <h2 id="eventObject">event instance</h2>
+
+     <article id="doc">
        <b class="property"></b>
        <b class="server"></b>
        <span class="sig">doc: <a href="document"><u>Document</u></a></span>
        <p>This contains the document associated with this event.</p>
+       <p>If the event refers to multiple documents being affected, then document might not be populated.  In that case, you should work off of the
+         <a href="#query"><u>query</u></a> property.</p>
      </article>
 
-     <article>
+     <article id="fieldValue">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">fieldValue: any</span>
+       <p>Only valid on <u>change</u> events that have specified a <u>field</u>, this contains the value that the field is being changed to.</p>
+     </article>
+
+     <article id="preventDefault">
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">preventDefault(): void</span>
        <p>This cancels the event and prevents the default action associated with this event.</p>
      </article>
 
-     <article>
+     <article id="query">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">query: object</span>
+       <p>This contains the mongo query matching the event.</p>
+       <p>If there is no regular query and the event affects a single document then a query matching the <u>_id</u> will be created.  For example:</p>
+       <pre><code class="js">{
+  _id: <i>object id of the document</i>
+}
+</code></pre>
+     </article>
+
+     <article id="when">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">when: 'pre' | 'post'</span>
+       <p>Useful primarily for <u>when: 'both'</u> event handlers, this indicates whether the event is occuring before or after the action being listened to.</p>
+     </article>
+
+     <article id="type">
        <b class="property"></b>
        <b class="server"></b>
        <span class="sig">type: string</span>
