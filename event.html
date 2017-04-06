@@ -65,13 +65,22 @@ layout: default
 
      <h2 id="eventObject">event instance</h2>
 
-     <article id="doc">
+     <article id="document">
        <b class="property"></b>
        <b class="server"></b>
-       <span class="sig">doc: <a href="document"><u>Document</u></a></span>
+       <span class="sig">document: <a href="document"><u>Document</u></a></span>
        <p>This contains the document associated with this event.</p>
        <p>If the event refers to multiple documents being affected, then document might not be populated.  In that case, you should work off of the
-         <a href="#query"><u>query</u></a> property.</p>
+         <a href="#query"><u>query</u></a> property or the <a href="#documents"><u>documents</u></a> method.</p>
+     </article>
+
+     <article id="documents">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">documents: <a href="document">Document</a>[]</span>
+       <p>If <a href="#document"><u>document</u></a> is available this method will return an array containing that document.</p>
+       <p>Otherwise, the <a href="#query"><u>query</u></a> will be executed to retrieve back the list of documents.  This result is cached so only one
+        query will be executed even if multiple event handlers access this method.</p>
      </article>
 
      <article id="fieldValue">
