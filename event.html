@@ -35,6 +35,7 @@ layout: default
 <tr><td>{</td>
 <tr><td>  type:<td>string<td><i>required</i><td>An <a href="#type">event type</a>.
 <tr><td>  field:<td>string<td><td>Used with <u>change</u> events, this is the path inside the document to the value changed.
+<tr><td>  from:<td><a href="collection">Collection</a><td><td>Used with <a href="#linkHandlers">link event handlers</a> this defines which collection is adding the event.
 <tr><td>  handler:<td>async? <a href="event#eventObject">Event</a> => boolean</span><td><i>required</i><td>The event handling function.
 <tr><td>  when:<td><u>'pre'</u> | <u>'post'</u> | <u>'both'</u><td><u>'pre'</u><td>Should the handler be called before or after the underling action being listened to.
 <tr><td>}</td>
@@ -59,8 +60,25 @@ layout: default
   handler: event => {
     console.log('the first name was changed for these objects:', event.query);
   }
-}
 </code></pre>
+
+      <h3 id="linkHandlers">link event handlers</h3>
+
+      <p>If you want to recommend or require that collections that link to your collection implement lifecycle events you can define <i>link event handlers</i>.</p>
+
+      <p>An exception will be thrown when bootstrapping Tyranid if a collection links to a collection but does not implement its required link event handlers.</p>
+      
+       <table class="def" id="onOptions">
+<thead>
+  <tr><th>Object Structure<th width="180">Type<th>Default<th>Notes
+</thead>
+<tr><td>linkEvents: {</td>
+<tr><td>  type:<td>string<td><i>required</i><td>An <a href="#type">event type</a>.
+<tr><td>  field:<td>string<td><td>Used with <u>change</u> events, this is the path inside the document to the value changed.
+<tr><td>  required:<td>boolean<td><i>false</i><td>Whether clients linking to this collection need to have the appropriate event handler defined.
+<tr><td>}</td>
+</table>
+}
      </article>
 
      <h2 id="eventObject">event instance</h2>
