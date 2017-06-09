@@ -411,6 +411,15 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        </p>
      </article>
 
+     <article id="isCompliant">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">isCompliant(spec: any, value: any): boolean</span>
+       <p>This function performs similarly to <u>_.matches()</u> except that the left object is a specification of what
+        can appear on the right side.  For example, the left-hand side can specify an array of values and as long as the
+        right-hand side contains one of those values, it will still be considered to be compliant.
+     </article>
+
      <article id="isEqual">
        <b class="method"></b>
        <b class="server"></b>

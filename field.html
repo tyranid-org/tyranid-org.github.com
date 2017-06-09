@@ -39,6 +39,7 @@ layout: default
 <tr><td>{</td>
 <tr><td>  is:<td>string<td><i>required</i>*<td>The name of the <a href="type">Type</a> of this Field.
 <tr><td>  client:<td>boolean<td>true**<td>Indicates if this field should be serialized in <u>toClient()</u>/<u>fromClient()</u> calls.  See <a href="field#defClient">client</a> below.
+<tr><td>  custom:<td>boolean<td><td>Indicates if this field is a dynamic custom field that should have UI auto-generated for it.
 <tr><td>  db:<td>boolean<td>true**<td>Indicates if this field should be stored in the database.
 <tr><td>  deprecated:<td>string<td><td>Indicates that this field is deprecated; the string should include the reason why it is deprecated and alterate approaches to use.
 <tr><td>  label:<td>string<td>labelize(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this field.
