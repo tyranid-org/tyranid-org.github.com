@@ -86,6 +86,13 @@ layout: default
      <article id="document">
        <b class="property"></b>
        <b class="server"></b>
+       <span class="sig">collection: <a href="collection"><u>Collection</u></a></span>
+       <p>This contains the collection associated with this event.</p>
+     </article>
+
+     <article id="document">
+       <b class="property"></b>
+       <b class="server"></b>
        <span class="sig">document: <a href="document"><u>Document</u></a></span>
        <p>This contains the document associated with this event.</p>
        <p>If the event refers to multiple documents being affected, then document might not be populated.  In that case, you should work off of the
@@ -95,6 +102,7 @@ layout: default
      <article id="documents">
        <b class="property"></b>
        <b class="server"></b>
+       <b class="async"></b>
        <span class="sig">documents: <a href="document">Document</a>[]</span>
        <p>If <a href="#document"><u>document</u></a> is available this method will return an array containing that document.</p>
        <p>Otherwise, the <a href="#query"><u>query</u></a> will be executed to retrieve back the list of documents.  This result is cached so only one
@@ -112,7 +120,7 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">preventDefault(): void</span>
-       <p>This cancels the event and prevents the default action associated with this event.</p>
+       <p>This cancels the event and prevents the default action associated with this event and throws an <a href="eventCancelError"><u>EventCancelError</u></a>.</p>
      </article>
 
      <article id="query">
