@@ -538,6 +538,15 @@ layout: default
          to fail-fast (something like <u>{ _id: null }</u>).</p>
      </article>
 
+     <article id="subscribe">
+       <b class="method"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">subscribe(query: <i>MongoDB Query</i>): void</span>
+       <p>This subscribes the current client to the given <u>query</u>.  When changes that match the given query are made the client objects
+         will be updated automatically on the client with the changes.</p>
+     </article>
+
      <article id="toClient">
        <b class="method"></b>
        <b class="server"></b>

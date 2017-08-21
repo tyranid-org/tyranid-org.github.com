@@ -66,7 +66,7 @@ Tyr.arraySort(myArray, { b: 1, c: -1 });
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">byUids(uid: string[], options: <a href="collection#options">Options</a>): <a href="document">Document[]</a></span>
+       <span class="sig">byUids(uid: string[], options: <a href="collection#options">Options</a>): <a href="document">Document</a>[]</span>
        <p>
         This will find an array of documents by their <a href="/#uids">UID</a>.</p>
        <p>The UIDs do not need to be from the same collection and this method is optimized
@@ -138,6 +138,28 @@ Tyr.arraySort(myArray, { b: 1, c: -1 });
       <p>See <a href="secure"><u>Secure</u></a> for an explanation of the <u>secure</u> and <u>permissions</u> option.</p>
      </article>
 
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">connect(opts: object): void</span>
+       <p>
+         This method connects Tyranid to external services like <a href="https://expressjs.com/">express</a> (which enables Tyranid's routing functionality) and
+         <a href="https://nodejs.org/api/http.html#http_http">http</a> (which enables Tyranid's WebSocket support).  <u>opts</u> are as follows:</p>
+       <pre>
+{
+  app: <i>Express</i>,
+  auth: (req, res, next) => {}?): void
+  http: <i>Node http server</i>
+}</pre>
+       <p><u>app</u> is the instance of express to connect to returned by <u>express()</u>.</p>
+       <p><u>auth</u> is an optional callback that will be passed to all Tyranid routes via <u>.all(app)</u> before
+        Tyranid routes are processed.  You can do additional validation and authorization here.</p>
+       <p><u>http</u> is the instance of the http server (usually returned by <u>app.listen()</u>).  The HTTP server must be
+        connected in order for WebSocket push capabilities to be enabled.</p>
+       <p><u>connect()</u> can optionally be called multiple times.  For example, you could connect to express in one call and to http in another.</p>
+       <p>See <a href="/#client">Client</a> for more information.</p>
+     </article>
+
      <article id="createIndexes">
        <b class="async"></b>
        <b class="method"></b>
@@ -172,19 +194,6 @@ Tyr.arraySort(myArray, { b: 1, c: -1 });
        object that you want to be available on all document instances.  It's recommended that all fields added to this
        object start with a '<u>$</u>' character and are <u>Object.defineProperty()</u>'ed to be non-enumerable.
       </p>
-     </article>
-
-     <article>
-       <b class="method"></b>
-       <b class="server"></b>
-       <span class="sig">express(app: Express, auth: (req, res, next) => {}?): void</span>
-       <p>
-         This connects Tyranid to Express and enables Tyranid's routing functionality.
-       </p>
-       <p><u>app</u> is the instance of express to connect to returned by <u>express()</u>.</p>
-       <p><u>auth</u> is an optional callback that will be passed to all Tyranid routes via <u>.all(app)</u> before
-        Tyranid routes are processed.  You can do additional validation and authorization here.</p>
-       <p>See <a href="/#client">Client</a> for more information.</p>
      </article>
 
      <article>

@@ -338,7 +338,14 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
 <ol>
   <li>Initialize routing.  <u>express</u> is the instance returned by <u>express()</u>.  <u>auth</u> is a callback that will be placed ahead
     of all routes (you can do additional authorization in this function).
-<pre><code class="js">Tyr.express(express, auth);</code></pre>
+<pre><code class="js">const expressApp = require('express')(),
+      httpServer = expressApp.listen(80);
+
+Tyr.connect({
+  app: expressApp,
+  auth: (req, res, next) => { <i>...</i> },
+  http: httpServer
+});</code></pre>
   <li>Import client-side code into your browser session:
 <pre>&lt;script src="/api/tyranid">&lt;/script></pre>
 </ol>
