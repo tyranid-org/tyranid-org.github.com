@@ -7,7 +7,7 @@ layout: default
 
      <p>Events are sent in response to changes to a database and can be used to implement lifecycle hooks and workflow rules.</p>
 
-     <h2 id="type">types</h2>
+     <h2 id="types">types</h2>
 
      <table>
        <tr><th>Name<th>When<th>Effect of Cancelation
@@ -35,7 +35,7 @@ layout: default
   <tr><th>Object Structure<th width="180">Type<th>Default<th>Notes
 </thead>
 <tr><td>{</td>
-<tr><td>  type:<td>string<td><i>required</i><td>An <a href="#type">event type</a>.
+<tr><td>  type:<td>string<td><i>required</i><td>An <a href="#types">event type</a>.
 <tr><td>  field:<td>string<td><td>Used with <u>change</u> events, this is the path inside the document to the value changed.
 <tr><td>  from:<td><a href="collection">Collection</a><td><td>Used with <a href="#linkHandlers">link event handlers</a> this defines which collection is adding the event.
 <tr><td>  handler:<td>async? <a href="event#eventObject">Event</a> => boolean</span><td><i>required</i><td>The event handling function.
@@ -75,7 +75,7 @@ layout: default
   <tr><th>Object Structure<th width="180">Type<th>Default<th>Notes
 </thead>
 <tr><td>linkEvents: {</td>
-<tr><td>  type:<td>string<td><i>required</i><td>An <a href="#type">event type</a>.
+<tr><td>  type:<td>string<td><i>required</i><td>An <a href="#types">event type</a>.
 <tr><td>  field:<td>string<td><td>Used with <u>change</u> events, this is the path inside the document to the value changed.
 <tr><td>  required:<td>boolean<td><i>false</i><td>Whether clients linking to this collection need to have the appropriate event handler defined.
 <tr><td>}</td>
@@ -83,7 +83,7 @@ layout: default
 }
      </article>
 
-     <h2 id="eventStatic">event static</h2>
+     <h2 id="eventStatic">static</h2>
 
      <article id="fire">
        <b class="method"></b>
@@ -95,7 +95,7 @@ layout: default
        <p>If the <a href="#instanceId"><u>instanceId</u></a> property is set then the event will be sent to <b>only</b> that server (not the current server).</p>
        <p>If the <a href="#broadcast"><u>broadcast</u></a> property is set then the event will be sent to all Tyranid instance servers (including the current server).</p>
      </article>
-     <h2 id="eventObject">event instance</h2>
+     <h2 id="eventObject">instance</h2>
 
      <article id="broadcast">
        <b class="property"></b>
@@ -105,11 +105,34 @@ layout: default
         it should be sent to all Tyranid server instances in the cluster, not just the current server.</p>
      </article>
 
+     <article id="collectionId">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">collectionId: string</span>
+       <p>The collection ID that this event is attached to.</p>
+     </article>
+
      <article id="collection">
        <b class="property"></b>
        <b class="server"></b>
        <span class="sig">collection: <a href="collection"><u>Collection</u></a></span>
        <p>This contains the collection associated with this event.</p>
+     </article>
+
+     <article id="dataCollectionId">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">dataCollectionId: string</span>
+       <p>The collection ID associated this event's data (the <u>document</u>/<u>s</u> and <u>query</u> properties.</p>
+       <p>If <u>dataCollectionId</u> is not specified it will default to <u>collectionId</u>.</p>
+     </article>
+
+     <article id="dataCollection">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">dataCollection: <a href="collection"><u>Collection</u></a></span>
+       <p>This contains the collection associated with this event's data.</p>
+       <p>This defaults to <u>collection</u> if <u>dataCollection</u>/<u>Id</u> is not specified.</p>
      </article>
 
      <article id="date">
@@ -149,8 +172,8 @@ layout: default
        <b class="property"></b>
        <b class="server"></b>
        <span class="sig">instanceId: string</span>
-       <p>If present and true this indicates that when this event is fired by the <a href="#fire"><u>Event.fire()</u></a> method
-         it should be sent to the specified Tyranid server instances in the cluster, not the current server.</p>
+       <p>If present this indicates that when this event is fired by the <a href="#fire"><u>Event.fire()</u></a> method
+         it should be sent to the specified Tyranid server instance in the cluster (and not the current server).</p>
        <p>The current server's instance ID is located at <a href="tyr#instanceId"><u>Tyr.instanceId</u></a>.</p>
        <p>A list of all instances is maintained in the Tyranid <u>tyrInstance</u> collection (the instance IDs are present in the <u>_id</u> property).</p>
      </article>
@@ -185,7 +208,7 @@ layout: default
        <b class="property"></b>
        <b class="server"></b>
        <span class="sig">type: string</span>
-       <p>This contains the type of the event.</p>
+       <p>This contains the <a href="#types">type</a> of the event.</p>
      </article>
 
   </div>

@@ -138,7 +138,7 @@ Tyr.arraySort(myArray, { b: 1, c: -1 });
       <p>See <a href="secure"><u>Secure</u></a> for an explanation of the <u>secure</u> and <u>permissions</u> option.</p>
      </article>
 
-     <article>
+     <article id="connect">
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">connect(opts: object): void</span>
@@ -546,6 +546,25 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <b class="server"></b>
        <span class="sig">someAsync&lt;A>(array: A[], predicate: async A => boolean): boolean</span>
        <p>This is like <u><i>array</i>.some()</u> except that the predicate function is asynchronous.</p>
+     </article>
+
+    <h2 id="socketIo">socket.io</h2>
+
+     <p>If <a href="https://socket.io"><u>socket.io</u></a> support has been enabled (see <a href="#connect"><u>connect()</u></a>) then the
+      following properties are also available:</p>
+
+     <article id="io">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">io: object</span>
+       <p>This contains a reference to the socket.io server.  You can use it to add your own events over the socket.io connection as well.</p>
+     </article>
+
+     <article id="socket">
+       <b class="property"></b>
+       <b class="client"></b>
+       <span class="sig">socket: object</span>
+       <p>This contains the socket.io client socket that Tyranid is using for the user.  You can use it to add your own events over the socket.io connection as well.</p>
      </article>
 
   </div>
