@@ -92,6 +92,17 @@ layout: default
        <p>This retrieves the first document it finds matching the given <u>label</u> using a case-insensitive search.</p>
      </article>
 
+     <article id="cache">
+       <b class="method"></b>
+       <b class="client"></b>
+       <span class="sig">cache(document: <a href="document">Document</a> | object): <a href="document">Document</a></span>
+       <p>This method can be used to manually cache a document into the local Tyranid offline cache.</p>
+       <p>This can be useful for when a document
+         comes back from a non-Tyranid server API call and you want to inform Tyranid about the updated document.</p>
+       <p>If Tyranid already had a local copy of the document then the existing document will be updated with the new information and the
+         existing document will be returned.</p>
+     </article>
+
      <article id="canInsert">
        <b class="method"></b>
        <b class="server"></b>
@@ -426,7 +437,8 @@ layout: default
      <article id="on">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">on(eventType: <a href="event#type">event name</a>, handler: async? <a href="event">Event</a> => boolean): () => void</span>
+       <b class="client"></b>
+       <span class="sig">on(eventType: <a href="event#types">event name</a>, handler: async? <a href="event">Event</a> => boolean): () => void</span>
        <p>Lets you add an event handler on this collection.  See <a href="event#on"><u>event handlers</u></a> for more information on how events work in Tyranid.</p>
      </article>
 
@@ -557,9 +569,11 @@ layout: default
        <b class="method"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">subscribe(query: <i>MongoDB Query</i>): void</span>
+       <span class="sig">subscribe(query: <i>MongoDB Query</i>, cancel?: boolean): void</span>
        <p>This subscribes the current client to the given <u>query</u>.  When changes that match the given query are made the client objects
          will be updated automatically on the client with the changes.</p>
+       <p>If the <u>cancel</u> parameter is passed in as true, then the given subscription will be canceled.</p>
+       <p>If <u>cancel</u> is true and <u>query</u> is undefined, then all subscriptions will be canceled.</p>
      </article>
 
      <article id="toClient">
@@ -605,6 +619,13 @@ layout: default
        <p>This updates the server document with the values in this object.</p>
        <p>Note that the document is <b><i>not</i> replaced</b>.  See <a href="collection#save"><u>save()</u></a> if you want to do a full replace.</p>
        <p>If the document is new (it does not have an <u>_id</u>) then it will be <u>insert()</u>'ed and the new <u>_id</u> will be stored on the document.</p>
+     </article>
+
+     <article id="values">
+       <b class="property"></b>
+       <b class="client"></b>
+       <span class="sig">values: <a href="document">Document</a>[]</span>
+       <p>This contains a list of all documents that are cached locally on a client for off-line use.</p>
      </article>
 
      <article id="valuesFor">

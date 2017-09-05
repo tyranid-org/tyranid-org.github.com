@@ -12,6 +12,20 @@ layout: default
     <div style="clear:both;"></div>
 
     <article>
+      <div class="date">2017.9.4</div>
+      <div class="version">0.2.26</div>
+      <h1>Subscriptions</h1>
+      <p>Added support for clients to subscribe to updates in data to support live updating of data on clients. See <a href="index#subscriptions">Subscriptions</a>.</p>
+      <ul>
+        <li>socket.io functionality added to <a href="tyr#connect"><u>connect()</u></a>
+        <li>added <a href="collection#subscribe"><i>Collection</i><u>.subscribe()</u></a>
+        <li>added <a href="collection#values"><i>Collection</i><u>.values</u></a>
+        <li>added <a href="collection#cache"><i>Collection</i><u>.cache()</u></a>
+        <li>added <a href="tyr#socket"><u>Tyr.socket</u></a> and <a href="tyr#io"><u>Tyr.io</u></a>
+      </ul>
+    </article>
+
+    <article>
       <div class="date">2017.9.3</div>
       <div class="version">0.2.24</div>
       <h1><u>datetime</u> and <u>time</u> types added</h1>
@@ -29,14 +43,19 @@ layout: default
       <div class="date">2017.7.8</div>
       <div class="version">0.1.64</div>
       <h1>Events and Tyranid Instances</h1>
-      <p>Added <a href="tyr#instanceId"><u>Tyr.instanceId</u></a> property</p>
+      <p>Tyranid instances will now auto-join a local Tyranid cluster and Tyranid events can now be sent cluster-wide.</p>
+      <ul>
+        <li>Added <a href="tyr#instanceId"><u>Tyr.instanceId</u></a> property
+      </ul>
     </article>
 
     <article>
       <div class="date">2017.6.9</div>
       <div class="version">0.1.58</div>
       <h1>isCompliant()</h1>
-      <p>Added <a href="tyr#isCompliant"><u>Tyr.isCompliant</u></a> method.</p>
+      <ul>
+        <li>Added <a href="tyr#isCompliant"><u>Tyr.isCompliant</u></a> method.
+      </ul>
     </article>
 
     <article>

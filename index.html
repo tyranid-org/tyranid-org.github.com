@@ -683,6 +683,23 @@ instead of "Name First".  This property can also be used to set abbreviated name
 
 </form>
 
+    <h3 id="subscriptions">Subscriptions</h3>
+
+    <p>If socket.io functionality has been enabled by <a href="tyr#connect"><u>connect()</u></a>ing an express http server to Tyranid, then <i>client subscription</i>
+     functionality is enabled.</p>
+
+    <p>Each client can issue a <a href="collection#subscribe"><i>Collection</i><u>.subscribe()</u></a> call to express interest in a query of data that they would
+      like to be kept live.  As this data is updated by Tyranid calls on servers, any documents matching the subscribed query will be pushed down to the client
+      via WebSocket connections.</p>
+
+    <p>Clients can listen to updates on a collection by using <a href="collection#on"><i>Collection</i><u>.on()</u></a>.</p>
+
+    <p>The data that Tyranid is currently keeping live is kept at <a href="collection#values"><i>Collection</i><u>.values</u></a>.</p>
+
+    <p>Often times you will have server calls that bypass Tyranid client methods that will return data to the client.  You can update Tyranid's local copy of data with
+      this new information using the <a href="collection#cache"><i>Collection</i><u>.cache()</u></a> method.
+
+
     <h3 id="historical">Historical Data</h3>
 
     <p>Tyranid's Historical Data support modifies the built-in methods like <u>$save()</u> and so on to keep track of changes to documents so that historical
