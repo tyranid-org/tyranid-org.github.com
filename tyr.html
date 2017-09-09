@@ -148,14 +148,17 @@ Tyr.arraySort(myArray, { b: 1, c: -1 });
        <pre>
 {
   app: <i>Express</i>,
-  auth: (req, res, next) => {}?): void
-  http: <i>Node http server</i>
+  auth: (req, res, next) => {}?): void,
+  http: <i>Node http server</i>,
+  store: <i>Express Session Store</i>
 }</pre>
        <p><u>app</u> is the instance of express to connect to returned by <u>express()</u>.</p>
        <p><u>auth</u> is an optional callback that will be passed to all Tyranid routes via <u>.all(app)</u> before
         Tyranid routes are processed.  You can do additional validation and authorization here.</p>
        <p><u>http</u> is the instance of the http server (usually returned by <u>app.listen()</u>).  The HTTP server must be
         connected in order for WebSocket push capabilities to be enabled.</p>
+       <p><u>store</u> is the instance of the <a href="https://github.com/expressjs/session">express-session</a> store passed into express (for example, connect-redis or connect-mongo).  This must be enabled
+        for authentication capabilities to be available inside WebSocket requests.</p>
        <p><u>connect()</u> can optionally be called multiple times.  For example, you could connect to express in one call and to http in another.</p>
        <p>See <a href="/#client">Client</a> for more information.</p>
      </article>

@@ -167,25 +167,43 @@ td {
 table.def {
   width: 100%;
 }
-table.def tr td:nth-child(1) {
-  white-space: pre;
-  font-family: 'Lekton', courier, serif;
-}
-table.def td {
-  padding: 0 8px;
-}
-table.def tr {
-  td.subtitle {
-    font-family: 'Metrophobic', arial, serif;
-    background: #eee;
+table.def {
+
+  & > tbody > tr > td:nth-child(1) {
+    white-space: pre;
+    font-family: 'Lekton', courier, serif;
   }
 
-  td.subtype {
-    font-family: 'Metrophobic', arial, serif;
-    font-size: 14px;
-    background: #e4e4e4;
-    padding-left: 24px;
-    text-transform: smallcaps;
+  & > tbody > tr {
+      td {
+      padding: 0 8px;
+    }
+
+    & > td.subtitle {
+      padding-top: 24px;
+      border-bottom: 2px solid #000;
+      font-family: 'Metrophobic', arial, serif;
+      background: #eee;
+    }
+
+    & > td.subtype {
+      padding-top: 12px;
+      border-bottom: 1px solid #444;
+      font-family: 'Metrophobic', arial, serif;
+      font-size: 14px;
+      background: #e4e4e4;
+      padding-left: 24px;
+      text-transform: smallcaps;
+    }
+  }
+}
+
+table.vanilla {
+  background: transparent;
+  box-shadow: none;
+
+  tr {
+    background: transparent;
   }
 }
 

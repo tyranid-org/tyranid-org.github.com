@@ -49,8 +49,10 @@ layout: default
 <tr><td>  note:<td>string<td>none<td>Contains developer-facing documentation about this field (only visible in the Tyranid console).
 <tr><td>  required:<td>boolean<td>false<td>Indicates that this field is required.
 <tr><td>  defaultValue:<td>any<td>none<td>Default value for this field.  If a function, the default will be the return value of the function.
+<tr><td>  placeholder:<td>string<td>none<td>Sets the default placeholder for this field to be used in input fields.
 <tr><td colspan="4" class="subtitle">Arrays (<u>is == 'array'</u>)
 <tr><td>  of:<td><a href="field#def">Field Def</a><td>none<td>Indicates the type of the array.
+<tr><td>  cardinality:<td>integer <u>..</u> integer | <u>'*'</u><td>0..*<td>Indicates the cardinality of the array.  For example, "1..3" means the array can have between 1 and 3 entries.
 <tr><td colspan="4" class="subtitle">Objects (<u>is == 'object'</u>)
 <tr><td colspan="4" class="subtype">Structured Object</td>
 <tr><td>  fields: {</td><td><td><td>Specifies the structure of a nested object.
@@ -63,12 +65,23 @@ layout: default
 <tr><td colspan="4" class="subtitle"><a href="/#links">Links</a> (<u>is == 'link'</u>)
 <tr><td>  denormal:<td>object<td>none<td>A <a href="/#denormalization">Denormalization</a> expression to populate when saving this field.
 <tr><td>  link:<td><i>collection name</i><td>none<td>Indicates that this field contains foreign keys to the given collection.
-<tr><td>  relate:<td>'owns' | 'ownedBy' | 'associate'<td>'associate'<td>Indicates the relationship conveyed by the link.
+<tr><td>  relate:<td><u>'owns'</u> | <u>'ownedBy'</u> | <u>'associate'</u><td><u>'associate'</u><td>Indicates the relationship conveyed by the link.
 <tr><td>  where:<td>object<td>none<td>Contains additional constraints on the links -- see <a href="/#links">links</a>.
 <tr><td colspan="4" class="subtitle">Numbers (<u>is == 'double' || is == 'integer'</u>)
-<tr><td>  in:<td>string<td>none<td>Sets the units for this field (i.e. <u>in: 'km'</u>)  See <a href="units#parse"><u>Units.parse</u></a>.
+<tr><td>  in:<td>string<td>none<td>Sets the units for this field (i.e. <u>in: 'km'</u>).  See <a href="units#parse"><u>Units.parse</u></a>.
+<tr><td>  min:<td>number<td>none<td>Sets the minimum value for this numeric field.
+<tr><td>  max:<td>number<td>none<td>Sets the maximum value for this numeric field.
+<tr><td>  step:<td>number<td>none<td>Indicates the step-size for this numeric field.  This can be a non-integer value for double types (i.e. <u>0.001</u>).
 <tr><td colspan="4" class="subtitle">Strings (<u>is == 'string'</u>)
 <tr><td>  labelField:<td>boolean<td>false<td>Set to true if this field contains the <a href="/#labels">label</a> for this collection.
+<tr><td>  pattern:<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp</a><td>none<td>Set this to a regular expression that the string must match.
+<tr><td>  minlength:<td>integer<td>none<td>Sets the minimum length of this string.
+<tr><td>  maxlength:<td>integer<td>none<td>Sets the maximum length of this string.
+<tr><td colspan="4" class="subtitle">Time (<u>is == 'date' || is == 'datetime'</u>)
+<tr><td>  granularity:<td><table class="vanilla"><tr><td>integer?<td><u>'year'</u> |<br><u>'month'</u> |<br><u>'day'</u> |<br><u>'hour'</u> |<br><u>'minute'</u> |<br><u>'second'</u> |<br><u>'millisecond'</u></table><td>none<td>Sets the granularity for this time field.
+                    The optional number indicates the multiple of the granularity (the default multiple is 1).
+                    For example, "30 minutes" would mean that the user can select, say 2:00, or 2:30, but not 2:35.
+                    <p>Granularities are restricted by the underlying type.  For example, <u>datetime</u> can have <u>minute</u> granularity but <u>date</u> cannot.
 <tr><td colspan="4" class="subtitle"><a href="/#uids">UIDs</a> (<u>is == 'uid'</u>)
 <tr><td>  of:<td><i>collection names</i><td><td>Constrains the type of <a href="/#uids">UIDs</a> that can be stored in this UID field.  Collection names can be an array of names or a single name.
 <tr><td colspan="4" class="subtitle"><a href="/#computedProperties">Computed Properties</a>
