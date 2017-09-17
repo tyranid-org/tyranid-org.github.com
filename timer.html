@@ -1,0 +1,97 @@
+---
+layout: default
+---
+
+  <div class="content">
+    <h1>Timer</h1>
+
+     <p>Timer is a utility class to time events.  It is available both on the server and the client.</p>
+
+     <p>A timer instance can be used in two ways:
+
+      <ul>
+
+        <li>Regular Timer
+
+   <pre><code class="js">const timer = new Timer();
+
+timer.start('initialize database');
+<i>... initialize database ...</i>
+timer.stop('initialize database');
+
+<i>...</i>
+
+timer.log();
+</code></pre>
+
+        <li>Stopwatch Timer
+
+   <pre><code class="js">const timer = new Timer();
+
+<i>... task a ....</i>
+timer.lap('task a');
+
+<i>... task b ...</i>
+timer.lap('task b');
+
+<i>... task c ...</i>
+timer.lap('task c');
+
+<i>...</i>
+
+timer.log();
+</code></pre>
+</ul>
+     </article>
+
+     <h2 id="eventObject">instance</h2>
+
+     <article id="elapsed">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">elapsed(name?: string): number in milliseconds</span>
+       <p>This returns the total elapsed time for the given timer, or the default total timer if no timer name is given.
+     </article>
+
+     <article id="lap">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">lap(name: string): void</span>
+       <p>This stops the given timer.  If the timer was not started, the timer is considered to have been started when the last
+         call to <u>lap()</u> was made (or when the timer was created if this is the first <u>lap()</u> call).
+     </article>
+
+     <article id="log">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">report(): void</span>
+       <p>This logs the current timer status to the console.</p>
+     </article>
+
+     <article id="start">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">start(name?: string): void</span>
+       <p>This starts a timer with the given name, or if no name is provided, the default total timer.
+     </article>
+
+     <article id="stop">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">stop(name?: string): void</span>
+       <p>This stops a timer with the given name, or if no name is provided, the default total timer.
+     </article>
+
+     <article id="toString">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">toString(): void</span>
+       <p>This returns a summary of the current timers.</p>
+     </article>
+  </div>
