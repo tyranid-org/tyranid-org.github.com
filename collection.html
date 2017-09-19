@@ -25,8 +25,10 @@ layout: default
            <tr><td>  skip:<td><u>integer</u><td>The number of documents to skip.
            <tr><td colspan="3" class="subtitle">Sorting (<u>find()</u>, <u>findAll()</u>, <u>byIds()</u>, <u>byUids()</u>)</td>
            <tr><td>  sort:<td>MongoDB sort<td>The standard MongoDB-style sort object.
+           <tr><td colspan="3" class="subtitle">Parallel Arrays (<u>byIds()</u>, <u>byUids()</u>)</td>
+           <tr><td>  parallel:<td>boolean<td>If true, then the returning array will be parallel to the input array of IDs/UIDs.
            <tr><td colspan="3" class="subtitle">Deletions (<u>remove()</u>)</td>
-           <tr><td>  justOne:<td><u>boolean</u><td>Whether to remove at most one document.
+           <tr><td>  justOne:<td>boolean<td>Whether to remove at most one document.
            <tr><td colspan="3" class="subtitle">Updates (<u>update()</u>, <b>but NOT</b> <u>$update()</u> or <u>updateDoc()</u>)</td>
            <tr><td>  update:<td>MongoDB update<td>The standard MongoDB-style update object.
              'insert' for <i>inserts</i>, etc.) but you can override it with this option.
@@ -81,6 +83,10 @@ layout: default
        <b class="async"></b>
        <span class="sig">byIds(ids: <i>id type</i>[], options: <a href="#options">Options</a>): <a href="document">Document</a>[]</span>
        <p>This retrieves a list of documents by their ids.</p>
+       <p><b>The returned array is <i>parallel</i> to the given <u>ids</u> array if the <u>parallel</u> option is passed as in options.</b>
+         If the same id shows up multiple times in the input query, then the returned array will also have multiple instances, but the
+         instances will be shared.  If a given id does not exist in the database, then the corresponding entry will still be present, but
+         it will contain <u>null</u>.</p>
      </article>
 
      <article>
