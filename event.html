@@ -10,9 +10,10 @@ layout: default
      <h2 id="types">types</h2>
 
      <table>
-       <tr><th>Name<th>When<th>Effect of Cancelation
-       <tr><td><u>change</u><td>A document is changed (via insert, update, $update, findAndModify, etc.)<td>The document is not changed
-       <tr><td><u>remove</u><td>A document is removed<td>The document is not removed
+       <tr><th>Name<th>Notes<th>When<th>Effect of Cancelation<br>(<u>pre</u> only)
+       <tr><td><u>change</u><td>A document is changed (via insert, update, $update, findAndModify, etc.)<td><u>pre</u>, <u>post</u><td>The document is not changed
+       <tr><td><u>find</u><td>A document is read (via find*(), byId*(), byUid*(), etc.).  The documents can be mutated inside the handler.<td><u>post</u>
+       <tr><td><u>remove</u><td>A document is removed<td><u>pre</u>, <u>post</u><td>The document is not removed
      </table>
 
      <p>You can also use your own custom types of events as well with the <a href="#fire"><u>Event.fire()</u></a> method.</p>
@@ -38,7 +39,8 @@ layout: default
 <tr><td>  field:<td>string<td><td>Used with <u>change</u> events, this is the path inside the document to the value changed.
 <tr><td>  from:<td><a href="collection">Collection</a><td><td>Used with <a href="#linkHandlers">link event handlers</a> this defines which collection is adding the event.
 <tr><td>  handler:<td>async? <a href="event#eventObject">Event</a> => boolean</span><td><i>required</i><td>The event handling function.
-<tr><td>  when:<td><u>'pre'</u> | <u>'post'</u> | <u>'both'</u><td><u>'pre'</u><td>Should the handler be called before or after the underling action being listened to.
+<tr><td>  when:<td><u>'pre'</u> | <u>'post'</u> | <u>'both'</u><td><u>'pre'</u><p>(or <u>'post'</u> if only <u>'post'</u> is supported)<td>Should the handler be called before or after the underling action being listened to.
+  <p>If the event type only supports one type or the other (for example, <u>find</u> events only support <u>post</u>) then this does not need to be specified.
 <tr><td>}</td>
 </table>
 
@@ -53,15 +55,35 @@ layout: default
 
       <p>Note that actions can only be canceled in <u>when: 'pre'</u> (the default) handlers.</p>
 
-      <h3>example</h3>
+      <h3>example 1</h3>
 
-       <pre><code class="js">Tyr.byName.user.on({
+      <p>Watching when an object is updated:</p>
+
+       <pre><code class="js">const dereg = Tyr.byName.user.on({
   type: 'change',
   field: 'name.first',
-  handler: event => {
+  handler(event) {
     console.log('the first name was changed for these objects:', event.query);
   }
+
+  <i>...</i>
+
+  dereg(); <i>// deregister the event handler</i>
 }); </code></pre>
+
+      <h3 id="example2">example 2</h3>
+
+      <p>Modifying documents when they are read from the database:</p>
+
+       <pre><code class="js">Tyr.byName.user.on({
+  type: 'find',
+  async handler(event) {
+    for (const doc of await event.documents) {
+      doc['manufacturedId'] = 'ID' + doc._id;
+    }
+  }
+}); </code></pre>
+
 
       <h3 id="linkHandlers">link event handlers</h3>
 

@@ -23,6 +23,8 @@ layout: default
            <tr><td colspan="3" class="subtitle">Windowing (<u>find()</u>, <u>findAll()</u>)</td>
            <tr><td>  limit:<td><u>integer</u><td>The maximum number of documents to retrieve.
            <tr><td>  skip:<td><u>integer</u><td>The number of documents to skip.
+           <tr><td>  count:<td><u>boolean</u><td>If set on <u>findAll()</u> calls then the returned documents array will have a <u>count</u> property indicating the total number of
+             documents matching the query (ignoring any <u>skip</u> and <u>limit</u>).
            <tr><td colspan="3" class="subtitle">Sorting (<u>find()</u>, <u>findAll()</u>, <u>byIds()</u>, <u>byUids()</u>)</td>
            <tr><td>  sort:<td>MongoDB sort<td>The standard MongoDB-style sort object.
            <tr><td colspan="3" class="subtitle">Parallel Arrays (<u>byIds()</u>, <u>byUids()</u>)</td>
@@ -118,6 +120,15 @@ layout: default
          be inserted into a collection relative to the <u>authObject</u> (usually an instance of a user document).</p>
        <p>Most Tyranid insert and save use <u>canInsert()</u> internally when an <u>auth</u> option is used and end-users will not normally need to
          directly use this method.</p>
+     </article>
+
+     <article id="count">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">count(<i>opts</i>): number</span>
+       <p>This returns a count of the documents that match the given <u>opts.query</u>.
      </article>
 
      <article>
