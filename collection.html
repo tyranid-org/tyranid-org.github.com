@@ -24,7 +24,7 @@ layout: default
            <tr><td>  limit:<td><u>integer</u><td>The maximum number of documents to retrieve.
            <tr><td>  skip:<td><u>integer</u><td>The number of documents to skip.
            <tr><td>  count:<td><u>boolean</u><td>If set on <u>findAll()</u> calls then the returned documents array will have a <u>count</u> property indicating the total number of
-             documents matching the query (ignoring any <u>skip</u> and <u>limit</u>).
+             documents matching the query (ignoring any <u>skip</u> and <u>limit</u>). See <a href="index#counting">Counting</a>.
            <tr><td colspan="3" class="subtitle">Sorting (<u>find()</u>, <u>findAll()</u>, <u>byIds()</u>, <u>byUids()</u>)</td>
            <tr><td>  sort:<td>MongoDB sort<td>The standard MongoDB-style sort object.
            <tr><td colspan="3" class="subtitle">Parallel Arrays (<u>byIds()</u>, <u>byUids()</u>)</td>
@@ -75,7 +75,7 @@ layout: default
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">byId(id: <i>id type</i>, options: <a href="#options">Options</a>): <a href="document">Document</a></span>
+       <span class="sig">byId(id: <i>id type</i>, options: <a href="#options">options object</a>): <a href="document">Document</a></span>
        <p>This retrieves a document by its id.</p>
      </article>
 
@@ -83,7 +83,7 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">byIds(ids: <i>id type</i>[], options: <a href="#options">Options</a>): <a href="document">Document</a>[]</span>
+       <span class="sig">byIds(ids: <i>id type</i>[], options: <a href="#options">options object</a>): <a href="document">Document</a>[]</span>
        <p>This retrieves a list of documents by their ids.</p>
        <p><b>The returned array is <i>parallel</i> to the given <u>ids</u> array if the <u>parallel</u> option is passed as in options.</b>
          If the same id shows up multiple times in the input query, then the returned array will also have multiple instances, but the
@@ -127,8 +127,9 @@ layout: default
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">count(<i>opts</i>): number</span>
+       <span class="sig">count(<i>options</i>: <a href="#options">options object</a>): number</span>
        <p>This returns a count of the documents that match the given <u>opts.query</u>.
+       <p>See also <a href="index#counting">Counting</a> and also <a href="#exists">exists()</a>.
      </article>
 
      <article>
@@ -200,6 +201,16 @@ layout: default
 </table>
      </article>
 
+     <article id="exists">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">exists(<i>options</i>: <a href="#options">options object</a>): boolean</span>
+       <p>This returns true if any documents that match the given <u>opts.query</u> (and permission checks).
+       <p>See also <a href="#count">count()</a>.
+     </article>
+
      <article>
        <b class="async"></b>
        <b class="method"></b>
@@ -237,7 +248,7 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">find(query, projection, options: <a href="#options">Options</a>): Cursor&lt;<a href="document">Document</a>&gt;</span>
+       <span class="sig">find(options: <a href="#options">options object</a>): Cursor&lt;<a href="document">Document</a>&gt;</span>
        <p>
         This behaves like the <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB driver</a>'s <u>find()</u> method with the addition that results are wrapped in this
         collection's document type.
@@ -249,13 +260,9 @@ layout: default
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">findAll(<i>opts</i>): <a href="document">Document</a>[]</span>
-       <p>This behaves like <a href="#find"><u>find()</u></a> except that returns an array of <a href="document">Document</a>s instead of a cursor.</p>
-       <p><u><i>opts</i></u> can be one of two styles:</p>
-       <ul>
-         <li>the normal MongoDB find() parameters: <u>(query, projection, options: <a href="#options">Options</a>)</u>
-         <li>or a single <a href="#options">Options</a> object
-       </ul>
+       <span class="sig">findAll(options: <a href="#options">options object</a>): <a href="document">Document</a>[]</span>
+       <p>This behaves like <a href="#find"><u>find()</u></a> except that it returns an array of <a href="document">Document</a>s instead of a cursor.</p>
+       <p><u>findAll()</u> also supports the <a href="index#counting"><u>count</u></a> option.</p>
      </article>
 
      <article>
@@ -263,7 +270,7 @@ layout: default
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">findOne(options: <a href="#options">Options</a>): <a href="document">Document</a></span>
+       <span class="sig">findOne(options: <a href="#options">options object</a>): <a href="document">Document</a></span>
        <p>
         This behaves like <a href="http://mongodb.github.io/node-mongodb-native">native MongoDB</a>'s <u>findOne()</u> method except that the results are wrapped in this collection's
         document type.  You can also just pass in a single options object and specify the query on the options object directory.
@@ -274,10 +281,10 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">findAndModify(opts: <a href="#options">Options</a>)</span>
+       <span class="sig">findAndModify(options: <a href="#options">options object</a>)</span>
        <p>
         This behaves like <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB</a>'s <u>findAndModify()</u> method except the options are passed in a single
-        <a href="#options">Options</a> object and the results are wrapped in this collection's document type.
+        <a href="#options">options</a> object and the results are wrapped in this collection's document type.
        </p>
      </article>
 
@@ -496,7 +503,7 @@ layout: default
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">pull(id: <i>id type</i>, <a href="/#paths">path</a>: string, predicate: any => boolean, opts: <a href="#options">Options</a>?)</span>
+       <span class="sig">pull(id: <i>id type</i>, <a href="/#paths">path</a>: string, predicate: any => boolean, options: <a href="#options">options object</a>?)</span>
       <p>This method assumes that <u>path</u> points to an array inside the document.  This method will remove all elements of the array that match the
         <u>predicate</u> function.</p>
       <p>For example:</p>
@@ -509,7 +516,7 @@ layout: default
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">push(id: <i>id type</i>, <a href="/#paths">path</a>: string, value: any, opts: <a href="#options">Options</a>?)</span>
+       <span class="sig">push(id: <i>id type</i>, <a href="/#paths">path</a>: string, value: any, options: <a href="#options">options object</a>?)</span>
       <p>This is a shortcut for:</p>
       <quote><u><i>collection</i>.update({ _id: id }, { $push: { [path]: value } })</u></quote>
       <p>However, this method will also atomically retain historical information for <a href="/#historical">historical documents</a>.
@@ -633,7 +640,7 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="async"></b>
-       <span class="sig">updateDoc(doc: <a href="document">Document</a> | object, opts: <a href="#options">Options</a>)</span>
+       <span class="sig">updateDoc(doc: <a href="document">Document</a> | object, options: <a href="#options">options object</a>)</span>
        <p>This updates the server document with the values in this object.</p>
        <p>Note that the document is <b><i>not</i> replaced</b>.  See <a href="collection#save"><u>save()</u></a> if you want to do a full replace.</p>
        <p>If the document is new (it does not have an <u>_id</u>) then it will be <u>insert()</u>'ed and the new <u>_id</u> will be stored on the document.</p>

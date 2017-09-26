@@ -41,18 +41,28 @@ layout: default
 <tr><td>  client:<td>boolean<td>true**<td>Indicates if this field should be serialized in <u>toClient()</u>/<u>fromClient()</u> calls.  See <a href="field#defClient">client</a> below.
 <tr><td>  custom:<td>boolean<td><td>Indicates if this field is a dynamic custom field that should have UI auto-generated for it.
 <tr><td>  db:<td>boolean<td>true**<td>Indicates if this field should be stored in the database.
-<tr><td>  deprecated:<td>string<td><td>Indicates that this field is deprecated; the string should include the reason why it is deprecated and alterate approaches to use.
+<tr><td>  historical:<td>boolean<td>none<td>Indicates that this field is <a href="/#historical">historical</a>.  Must also be set on the collection to take effect.
+<tr><td>  defaultValue:<td>any<td>none<td>Default value for this field.  If a function, the default will be the return value of the function.
+
+<tr><td colspan="4" class="subtitle">User Documentation
 <tr><td>  label:<td>string<td>labelize(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this field.
 <tr><td>  pathLabel:<td>string<td><i>label</i><td>The label to use for this field when it is part of a <a href="/#pathLabels">path label</a>.
 <tr><td>  help:<td>string<td>none<td>Contains brief user-facing documentation about this field (suitable for a tooltip).
-<tr><td>  historical:<td>boolean<td>none<td>Indicates that this field is <a href="/#historical">historical</a>.  Must also be set on the collection to take effect.
-<tr><td>  note:<td>string<td>none<td>Contains developer-facing documentation about this field (only visible in the Tyranid console).
-<tr><td>  required:<td>boolean<td>false<td>Indicates that this field is required.
-<tr><td>  defaultValue:<td>any<td>none<td>Default value for this field.  If a function, the default will be the return value of the function.
 <tr><td>  placeholder:<td>string<td>none<td>Sets the default placeholder for this field to be used in input fields.
+
+<tr><td colspan="4" class="subtitle">Developer Documentation
+<tr><td>  deprecated:<td>string<td><td>Indicates that this field is deprecated; the string should include the reason why it is deprecated and alterate approaches to use.
+<tr><td>  note:<td>string<td>none<td>Contains developer-facing documentation about this field (only visible in the Tyranid console).
+
+<tr><td colspan="4" class="subtitle">Validation
+<tr><td>  required:<td>boolean<td>false<td>Indicates that this field is required.
+<tr><td>  validate:<td>async? field: <a href="field">Field</a> => string?****<td>none<td>Specifies a function that can perform custom validation.  If a validation error occurs,
+  the function should return a string with a human-readable explanation for the message.  Alternatively the function can throw a <a href="validationError">ValidationError</a>.
+
 <tr><td colspan="4" class="subtitle">Arrays (<u>is == 'array'</u>)
 <tr><td>  of:<td><a href="field#def">Field Def</a><td>none<td>Indicates the type of the array.
 <tr><td>  cardinality:<td>integer <u>..</u> integer | <u>'*'</u><td>0..*<td>Indicates the cardinality of the array.  For example, "1..3" means the array can have between 1 and 3 entries.
+
 <tr><td colspan="4" class="subtitle">Objects (<u>is == 'object'</u>)
 <tr><td colspan="4" class="subtype">Structured Object</td>
 <tr><td>  fields: {</td><td><td><td>Specifies the structure of a nested object.
@@ -62,41 +72,48 @@ layout: default
 <tr><td colspan="4" class="subtype"><a href="index#maps">Map Object</a></td>
 <tr><td>  keys:<td><a href="field#def">Field Def</a><td><td>Specifies the type of the keys for this <a href="index#maps">map</a>.
 <tr><td>  of:<td><a href="field#def">Field Def</a><td><i>required</i>***<td>Indicates the type of the object's contents.
+
 <tr><td colspan="4" class="subtitle"><a href="/#links">Links</a> (<u>is == 'link'</u>)
 <tr><td>  denormal:<td>object<td>none<td>A <a href="/#denormalization">Denormalization</a> expression to populate when saving this field.
 <tr><td>  link:<td><i>collection name</i><td>none<td>Indicates that this field contains foreign keys to the given collection.
 <tr><td>  relate:<td><u>'owns'</u> | <u>'ownedBy'</u> | <u>'associate'</u><td><u>'associate'</u><td>Indicates the relationship conveyed by the link.
-<tr><td>  where:<td>object<td>none<td>Contains additional constraints on the links -- see <a href="/#links">links</a>.
+<tr><td>  where:<td>object | async? () => object****<td>none<td>Contains additional constraints on the links -- see <a href="/#links">links</a>.
+
 <tr><td colspan="4" class="subtitle">Numbers (<u>is == 'double' || is == 'integer'</u>)
 <tr><td>  in:<td>string<td>none<td>Sets the units for this field (i.e. <u>in: 'km'</u>).  See <a href="units#parse"><u>Units.parse</u></a>.
 <tr><td>  min:<td>number<td>none<td>Sets the minimum value for this numeric field.
 <tr><td>  max:<td>number<td>none<td>Sets the maximum value for this numeric field.
 <tr><td>  step:<td>number<td>none<td>Indicates the step-size for this numeric field.  This can be a non-integer value for double types (i.e. <u>0.001</u>).
+
 <tr><td colspan="4" class="subtitle">Strings (<u>is == 'string'</u>)
 <tr><td>  labelField:<td>boolean<td>false<td>Set to true if this field contains the <a href="/#labels">label</a> for this collection.
 <tr><td>  pattern:<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp</a><td>none<td>Set this to a regular expression that the string must match.
 <tr><td>  minlength:<td>integer<td>none<td>Sets the minimum length of this string.
 <tr><td>  maxlength:<td>integer<td>none<td>Sets the maximum length of this string.
+
 <tr><td colspan="4" class="subtitle">Time (<u>is == 'date' || is == 'datetime'</u>)
 <tr><td>  granularity:<td><table class="vanilla"><tr><td>integer?<td><u>'year'</u> |<br><u>'month'</u> |<br><u>'day'</u> |<br><u>'hour'</u> |<br><u>'minute'</u> |<br><u>'second'</u> |<br><u>'millisecond'</u></table><td>none<td>Sets the granularity for this time field.
                     The optional number indicates the multiple of the granularity (the default multiple is 1).
                     For example, "30 minutes" would mean that the user can select, say 2:00, or 2:30, but not 2:35.
                     <p>Granularities are restricted by the underlying type.  For example, <u>datetime</u> can have <u>minute</u> granularity but <u>date</u> cannot.
+
 <tr><td colspan="4" class="subtitle"><a href="/#uids">UIDs</a> (<u>is == 'uid'</u>)
 <tr><td>  of:<td><i>collection names</i><td><td>Constrains the type of <a href="/#uids">UIDs</a> that can be stored in this UID field.  Collection names can be an array of names or a single name.
+
 <tr><td colspan="4" class="subtitle"><a href="/#computedProperties">Computed Properties</a>
-<tr><td>  get:<td>function<td>none<td>Indicates this is a <a href="/#computedProperties">computed property</a>.  Isomorphic <u>get</u>.
-<tr><td>  getClient:<td>function<td>none<td>A client-specific <u>get</u> function.
-<tr><td>  getServer:<td>function<td>none<td>A server-specific <u>get</u> function.
-<tr><td>  set:<td>function<td>none<td>Specifies a <u>set</u> function for this field.  Isomorphic <u>set</u>.
-<tr><td>  setClient:<td>function<td>none<td>A client-specific <u>set</u> function.
-<tr><td>  setServer:<td>function<td>none<td>A server-specific <u>set</u> function.
+<tr><td>  get:<td>() => any (based on <i>is</i>)****<td>none<td>Indicates this is a <a href="/#computedProperties">computed property</a>.  Isomorphic <u>get</u>.
+<tr><td>  getClient:<td>() => any (based on <i>is</i>)****<td>none<td>A client-specific <u>get</u> function.
+<tr><td>  getServer:<td>() => any (based on <i>is</i>)****<td>none<td>A server-specific <u>get</u> function.
+<tr><td>  set:<td>() => void****<td>none<td>Specifies a <u>set</u> function for this field.  Isomorphic <u>set</u>.
+<tr><td>  setClient:<td>() => void****<td>none<td>A client-specific <u>set</u> function.
+<tr><td>  setServer:<td>() => void****<td>none<td>A server-specific <u>set</u> function.
 <tr><td>}</td>
 </table>
       <div><u>*</u> <u>is</u> is not required if <u>link</u> is specified -- the type is inferred to be <u>link</u> in that case.</div>
       <div><u>**</u> <u>client</u> and <u>db</u> usually defaults to true except for <a href="/#computedProperties">computed properties</a>
         (you can still set <u>client: true</u> and/or <u>db: true</u> for computed properties, they just don't default to true).</div>
       <div><u>***</u> <u>of</u> is required if <u>keys</u> is specified.</div>
+      <div><u>****</u> The current document is passed as <u>this</u>.
 
       <h4 id="defClient" style="margin-top:32px;"><u>client</u> option</h4>
 
@@ -159,7 +176,7 @@ layout: default
        <b class="async"></b>
        <b class="method"></b>
        <b class="client"></b>
-       <span class="sig">labels(text: String?): { <i>_id</i>: <i>id type</i>, <i>label field</i>: String }[]</span>
+       <span class="sig">labels(doc: <a href="document">Document</a>, text: String?): { <i>_id</i>: <i>id type</i>, <i>label field</i>: String }[]</span>
        <p>This generates a list of label objects that can be used to populate a typeahead dropdown.  This method is only available when the field is a <b>link</b>
        field.</p>
        <p>This method also takes into account the <u>where</u> property on links when generating the list of labels.</p>
@@ -243,6 +260,16 @@ layout: default
        <b class="client"></b>
        <span class="sig">type: <a href="type">Type</a></span>
        <p>This returns the <a href="type">Type</a> for this field.</p>
+     </article>
+
+     <article>
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">validate(doc: <a href="document">Document</a>): void throws <a href="validationError">ValidationError</a></span>
+       <p>This applies any <u>validate</u> function defined in the <a href="#def"><i>Field</i>.<u>def</u></a> and throws
+         a <a href="validationError">ValidationError</a> if a validation error occurred.
      </article>
 
   </div>

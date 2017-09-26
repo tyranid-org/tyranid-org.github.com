@@ -281,7 +281,7 @@ article h1 {
   top: 4px;
 }
 
-.async::after, .class::after, .mixin::after, .method::after, .property::after, .client::after, .server::after {
+.async::after, .class::after, .mixin::after, .constructor::after, .method::after, .property::after, .client::after, .server::after {
   display: block;
   float: right;
   margin: 4px 0 0 8px;
@@ -291,8 +291,6 @@ article h1 {
   border-radius: 4px;
 }
 
-.async {
-}
 .async::after {
   content: 'async';
   background: #800;
@@ -301,43 +299,36 @@ article h1 {
   margin-right: 8px;
 }
 
-.method {
+.constructor::after {
+  content: 'constructor';
+  background: #844;
 }
+
 .method::after {
   content: 'method';
   background: #808;
 }
 
-.class {
-}
 .class::after {
   content: 'class';
   background: #C08;
 }
 
-.mixin {
-}
 .mixin::after {
   content: 'mixin';
   background: #80C;
 }
 
-.property {
-}
 .property::after {
   content: 'property';
   background: #880;
 }
 
-.client {
-}
 .client::after {
   content: 'client';
   background: #088;
 }
 
-.server {
-}
 .server::after {
   content: 'server';
   background: #008;

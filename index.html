@@ -238,6 +238,24 @@ User.remove({ _id: id });
 
 
 
+    <h3 id="counting">Counting</h3>
+
+<p>Tyranid supports counting operations to make implementing things like paging easier.</p>
+
+<pre><code class="js">const childCount = await User.count({ query: { age: { $lt: 18 } } });
+
+<i>...</i>
+
+const page = Document.findAll({
+  query: { myAttribute: false },
+  skip: 30,    <i>// page 4</i>
+  limit: 10,   <i>// 10 rows per page</i>
+  count: true
+});
+
+page.length <i>// 10 (or less if on the last page)</i>
+page.count  <i>// n where n equals the total number of documents in the collection with <u>myAttribute === false</u></i>
+</code></pre>
 
 
     <h3 id="labels">Labels</h3>
@@ -322,6 +340,26 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
     <i>...</i>
     <i>// Managers have to be in the same organization as the user.</i>
     manager:   { link: 'user', where: { organizationId: $this.organizationId } },
+    <i>...</i>
+  }
+});
+</code></pre>
+
+<p>The <u>link</u>'s <u>where</u> property can also be an (optionally asynchronous) function.  For example:</p>
+
+<pre><code class="js">var User = new Tyr.Collection({
+  id : 'u00',
+  name: 'user',
+  fields: {
+    <i>...</i>
+    <i>// Managers have to be in the same organization as the user.</i>
+    manager:   { link: 'user',
+                 async where() {
+                   return {
+                     organizationId: { $in: await determineAvailableManagersByRole(this.role) }
+                   };
+                 }
+               }
     <i>...</i>
   }
 });

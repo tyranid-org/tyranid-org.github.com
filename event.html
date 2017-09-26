@@ -11,8 +11,11 @@ layout: default
 
      <table>
        <tr><th>Name<th>Notes<th>When<th>Effect of Cancelation<br>(<u>pre</u> only)
-       <tr><td><u>change</u><td>A document is changed (via insert, update, $update, findAndModify, etc.)<td><u>pre</u>, <u>post</u><td>The document is not changed
-       <tr><td><u>find</u><td>A document is read (via find*(), byId*(), byUid*(), etc.).  The documents can be mutated inside the handler.<td><u>post</u>
+       <tr><td><u>insert</u><td>A document is inserted (via insert, etc.)<td><u>pre</u>, <u>post</u><td>The document is not inserted
+       <tr><td><u>update</u><td>A document is updated (via update, $update, findAndModify, etc.)<td><u>pre</u>, <u>post</u><td>The document is not updated
+       <tr><td><u>change</u><td>A document is inserted OR updated<td><u>pre</u>, <u>post</u><td>The document is not changed
+       <tr><td><u>find</u><td>A document is read (via find*(), byId*(), byUid*(), etc.).  The handler is invoked after historical and population operations have been performed.
+         The documents can be mutated inside the handler.<td><u>post</u>
        <tr><td><u>remove</u><td>A document is removed<td><u>pre</u>, <u>post</u><td>The document is not removed
      </table>
 
@@ -199,6 +202,14 @@ layout: default
        <p>A list of all instances is maintained in the Tyranid <u>tyrInstance</u> collection (the instance IDs are present in the <u>_id</u> property).</p>
      </article>
 
+     <article id="opts">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">opts: <a href="collection#opts">options object</a></span>
+       <p>This contains the options object that was passed to the underlying operation the event is in response to.  This options object can be used
+         to access things like <u>auth</u> (to get the user who made the request).</p>
+     </article>
+
      <article id="preventDefault">
        <b class="method"></b>
        <b class="server"></b>
@@ -216,6 +227,13 @@ layout: default
   _id: <i>object id of the document</i>
 }
 </code></pre>
+     </article>
+
+     <article id="update">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">update: object</span>
+       <p>Valid on <a href="collection#findAndModify"><u>findAndModify()</u></a> events, this contains the findAndModify() <u>update</u> clause.</p>
      </article>
 
      <article id="when">
