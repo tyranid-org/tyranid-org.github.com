@@ -307,6 +307,10 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
 
     <h3 id="links">Links</h3>
 
+<p>Links are fields that connect collections together.  Links are also known as <i>foreign keys</i>.
+
+    <h4 id="linkRelationships">Link Relationships</h4>
+
 <p>Fields of type <u>link</u> support a <u>relate</u> property.  The valid values for relate are:</p>
 <table>
   <thead>
@@ -330,6 +334,8 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
   }
 });
 </code></pre>
+
+    <h4 id="linkConstraints">Link Constraints</h4>
 
 <p><u>link</u> Fields also support a <u>where</u> property.  For example:</p>
 
@@ -364,6 +370,28 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
   }
 });
 </code></pre>
+
+    <h4 id="optionalLinks">Optional Links</h4>
+
+<p><u>link</u> Fields can also be <i>optional</i>.  In the following example, if the project collection does not exist
+then the link <u>project</u> will be pruned from the schema for <u>User</u> at runtime:</p>
+
+<pre><code class="js">var User = new Tyr.Collection({
+  id : 'u00',
+  name: 'user',
+  fields: {
+    <i>...</i>
+    project: { link: 'project?' }
+    <i>...</i>
+  }
+});
+</code></pre>
+
+<p>Optional links are useful for when you want to define generic code that gets additional capabilities
+if certain collections are present.  For example, Tyranid's logging system has an optional link to "user".  If a user collection
+is present, it will be used, but if not, then the user link will be pruned from the log schema at run-time.</p>
+
+    <h4 id="linkMethods">Link Methods</h4>
 
 <p>Collections support a <a href="collection#links"><u>Collection.links()</u></a> method to search for incoming and outgoing links.</p>
 
