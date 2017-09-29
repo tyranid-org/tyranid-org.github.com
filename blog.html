@@ -11,6 +11,21 @@ layout: default
 
     <div style="clear:both;"></div>
 
+    <article id="0.2.55">
+      <div class="date">2017.9.28</div>
+      <div class="version">0.2.55</div>
+      <h1>Node 8 Support</h1>
+      <p>Tyranid has been updated to Node 8.
+      <p>Unfortunately we had to remove the plugin system since it was based on a library which was incompatible with Node 8's native async functions.  However, the
+        <a href="event">Event system</a> provides the same hooks for plugging into Tyranid.
+      <ul>
+        <li><div class="break">Removed <a href="collection"><i>Collection</i></a>.plugin()</div>
+        <li><div class="break">Removed <a href="collection"><i>Collection</i></a>.pre()</div>
+        <li><div class="break">Removed <a href="collection"><i>Collection</i></a>.post()</div>
+        <li><div class="break">Removed <a href="collection"><i>Collection</i></a>.unhook()</div>
+      </ul>
+    </article>
+
     <article id="0.2.52">
       <div class="date">2017.9.26</div>
       <div class="version">0.2.52</div>
@@ -18,7 +33,7 @@ layout: default
       <p>Links can now be <i>optional</i>.  See <a href="/#optionalLinks">optional links</a> for discussion and an example.
       <ul>
         <li>added support for optional links
-        <li>Tyranid logging now has an optional link to user meaning that a user collection is no longer required for tyranid to operate
+        <li>Tyranid logging now has an optional link to user meaning that a user collection is no longer required for Tyranid to operate
       </ul>
     </article>
 

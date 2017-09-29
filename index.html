@@ -167,7 +167,7 @@ The following adds a "westTotal" property to User:</p>
 });
 </code></pre>
      <h4 id="dynamicSchemas">Dynamic Schemas</h4>
-<p>Tyranid also supports <b>dynamic schemas</b> that can be added at runtime via storing metadata in the database.
+<p>Tyranid also supports <b>dynamic schemas</b> that can be added at run time via storing metadata in the database.
 Dynamic schemas differ from Mixin Schemas in that they are <i>conditionally applied</i> based on the match rules.</p>
 <p>The following adds a "westTotal" property to User but only for users that belong to Organization 1:</p>
 <pre><code class="js">Tyr.byName('tyrSchema').save({
@@ -374,7 +374,7 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
     <h4 id="optionalLinks">Optional Links</h4>
 
 <p><u>link</u> Fields can also be <i>optional</i>.  In the following example, if the project collection does not exist
-then the link <u>project</u> will be pruned from the schema for <u>User</u> at runtime:</p>
+then the link <u>project</u> will be pruned from the schema for <u>User</u> at run time:</p>
 
 <pre><code class="js">var User = new Tyr.Collection({
   id : 'u00',
@@ -389,7 +389,7 @@ then the link <u>project</u> will be pruned from the schema for <u>User</u> at r
 
 <p>Optional links are useful for when you want to define generic code that gets additional capabilities
 if certain collections are present.  For example, Tyranid's logging system has an optional link to "user".  If a user collection
-is present, it will be used, but if not, then the user link will be pruned from the log schema at run-time.</p>
+is present, it will be used, but if not, then the user link will be pruned from the log schema at run time.</p>
 
     <h4 id="linkMethods">Link Methods</h4>
 
