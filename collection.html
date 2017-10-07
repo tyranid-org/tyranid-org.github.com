@@ -51,6 +51,8 @@ layout: default
            <tr><td>  post:<td>opts => void<td>This provides a hook to perform any post-processing on the resulting document.  <u>this</u> is bound to the current document when this function is invoked.
              Note that this function is also invoked for any embedded documents as well (in this case <u>this</u> will be bound to the specific embedded document), so your function should be
              prepared to deal with potentially different types of data.</td>
+           <tr><td colspan="3" class="subtitle">Plain 'ole JavaScript Object (POJO) conversion (<i>find*()/by*()</i>)</td>
+           <tr><td>  plain:<td>opts => void<td>This indicates that returned documents should be raw POJO objects, not <a href="document">Document</a> instances.
            <tr><td>}</td>
        </table>
 
@@ -167,7 +169,7 @@ layout: default
 <tr><td>    defaultMatchIdOnInsert:<td>boolean<td>false
 <tr><td>  },</td>
 <tr><td>  timestamps:<td>boolean<td>false<td>Enables <a href="/#timestamps">timestamps</a> on this collection.
-<tr><td>  <span style="color:#ccc">express: {<td><td><td><span style="color:#f00">Under construction ... disregard for now.</span>
+<tr><td>  <span>express: {
 <tr><td>    rest:<td>boolean<td>false<td>Activates all REST API endpoints.</td>
 <tr><td>    get:<td>boolean<td>false
 <tr><td>    post:<td>boolean<td>false
@@ -463,13 +465,25 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">on(eventType: <a href="event#types">event name</a>, handler: async? <a href="event">Event</a> => boolean): () => void</span>
+       <span class="sig">on(opts: object): () => void</span>
        <p>Lets you add an event handler on this collection.  See <a href="event#on"><u>event handlers</u></a> for more information on how events work in Tyranid.</p>
+       <p><u>opts</u> can contain the following:</p>
+       <table class="def">
+         <thead>
+           <tr><th>Option<th>Type<th>Notes
+         <tbody>
+           <tr><td>{</td>
+           <tr><td>  type:<td>string<td>The type of the event.  See <a href="event#types">event types</a>.
+           <tr><td>  handler:<td>async? <a href="event">Event</a> => boolean<td>This is the handler that will be called when the event is triggered.
+           <tr><td>  when:<td>'pre' | 'post'<td>Whether the handler should be invoked before or after the event takes place.  Not all event types support both <u>pre</u> and <u>post</u>.
+           <tr><td>}</td>
+       </table>
      </article>
 
      <article id="parsePath">
        <b class="method"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">parsePath(text: string): <a href="namePath">NamePath</a></span>
        <p>This parses a <a href="/#paths">path</a> into a <a href="namePath">NamePath</a> object.</p>
      </article>

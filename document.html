@@ -245,6 +245,15 @@ myDoc.$slice('hugeArray', {
         <u>opts</u> and a more detailed explanation of how this method works.</p>
      </article>
 
+     <article id="$toRaw">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">$toPlain(): object</span>
+       <p>This creates a new Plain 'ole JavaScript Object (POJO) out of this document.  Values are copied by reference (not deep-cloned!).</p>
+       <p>Unlike <a href="#$toClient"><u>$toClient()</u></a>, client processing is not performed.  This version is also available on the client.</p>
+     </article>
+
      <article id="$tyr">
        <b class="property"></b>
        <b class="server"></b>
