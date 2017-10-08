@@ -118,16 +118,21 @@ Tyr.arraySort(myArray, { b: 1, c: -1 });
   consoleLogLevel: 'info',
   dbLogLevel: 'info',
   indexes: true, <i>// ensure indexes are created (invokes <u>createIndexes()</u>)</i>
-  minify: false,
-  secure: <a href="secure">Secure</a>,
-    <i>myServerName</i>: pmongo(<i>myServerDatabaseUrl</i>),
-    ...
+  migration: {
+    migrate: true, <i>// indicates migrations should be run as part of configuration</i>
+    dir: __dirname + '/path/to/migrations/directory',
+    list: ['migration1', 'migration2'] <i>// list of approved migrations to run and the order in which to run them</i>
   },
+  minify: false,
   permissions: {
     find: 'view',
     insert: 'edit',
     update: 'edit',
     remove: 'delete'
+  },
+  secure: <a href="secure">Secure</a>,
+    <i>myServerName</i>: pmongo(<i>myServerDatabaseUrl</i>),
+    ...
   },
   validate: <i>validateOpts</i>
 }</pre>
@@ -253,10 +258,18 @@ Tyr.arraySort(myArray, { b: 1, c: -1 });
        <p>This are aliases to the logging methods in <u>Log</u>, see <a href="log#log"><u>Log.log</u></a>.</p>
      </article>
 
-     <article id="config">
+     <article id="Log">
        <b class="class"></b>
        <b class="server"></b>
        <span class="sig"><a href="log">Log</a></span>
+     </article>
+
+     <article id="migrate">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">migrate(): void</span>
+       <p>This executes any migrations that are defined.  Use this method only when migrations are not run inside <a href="#config">config()</a> via <u>migrations.migrate = true</u>.</p>
      </article>
 
      <article id="mixin">

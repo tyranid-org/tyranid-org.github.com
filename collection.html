@@ -229,6 +229,19 @@ layout: default
        <p>This is a parallel hash to <u>def.fields</u> that contains the generated <a href="field"><u>Field</u></a> objects.</p>
      </article>
 
+     <article id="fire">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">fire(event: <a href="event#eventObject">Event</a>): void</span>
+       <p>This method fires off an event that is bound to this collection.</p>
+       <pre><i>MyCollection</i>.fire({ ... });</pre>
+       <p>is shorthand for:</p>
+       <pre>Tyr.Event.fire({ collection: <i>MyCollection</i>, ... });</pre>
+       <p>See <a href="event#fire"><u>Event.fire()</u></a> for more information.</p>
+     </article>
+     <h2 id="eventObject">instance</h2>
+
      <article>
        <b class="method"></b>
        <b class="server"></b>
