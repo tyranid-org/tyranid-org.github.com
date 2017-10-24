@@ -771,6 +771,33 @@ instead of "Name First".  This property can also be used to set abbreviated name
     <p>Often times you will have server calls that bypass Tyranid client methods that will return data to the client.  You can update Tyranid's local copy of data with
       this new information using the <a href="collection#cache"><i>Collection</i><u>.cache()</u></a> method.
 
+    <h4 id="validatingSubscriptions">Validating Subscriptions</h4>
+
+    <p>When a subscription is requested a <a href="event#types"><u>subscribe</u></a> event is sent to the collection being subscribed to.</p>
+    <p>The event's <u>query</u> field has the query of the subscription and the event's <u>opts.auth</u> property has the user making
+      the request.  The query and user can be examined and then a <a href="secureError"><u>SecureError</u></a> raised if the query is not allowed.</p>
+    <p>The event also has a <u>subscription</u> field which contains the pending subscription record.  Rather than raising an exception you can
+      also just modify this record in place (though note that the query needs to be <u>JSON.stringify()</u>'ed).</p>
+    <p>For example:</p>
+
+<pre><code class="js">MyCollection.on({
+  type: 'subscribe',
+  handler: event => {
+    console.log('The user making the subscription is: ', event.opts.auth);
+    console.log('The query the user is subscribing to is: ', event.query);
+    console.log('The pending subscription is at: ', event.subscription);
+    if (<i>... fails validation ...</i>) {
+      throw new Tyr.SecureError('This subscription is not allowed.');
+    }
+
+    <i>// mutate query example:</i>
+    event.query.user = event.opts.auth._id; <i>// user can only subscribe to stuff they own</i>
+    event.subscription.query = JSON.stringify(event.query);
+  }
+});
+</code></pre>
+
+    <p>Note that regular security checks also apply to subscriptions, so subscription validation as shown here is not always necessary.</p>
 
     <h3 id="historical">Historical Data</h3>
 

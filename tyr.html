@@ -232,11 +232,11 @@ Tyr.arraySort(myArray, { b: 1, c: -1 });
      <article>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">labelize(name: string): string</span>
+       <span class="sig">labelify(name: string): string</span>
        <p>This generates a humanized version of a camel-case name.  For example:<p>
        <table>
          <thead>
-           <tr><th><i>name</i><th>labelize(<i>name</i>)
+           <tr><th><i>name</i><th>labelify(<i>name</i>)
          </thead>
          <tr><td>age<td>Age
          <tr><td>firstName<td>First Name
@@ -494,6 +494,15 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <span class="sig">isObject(value): boolean</span>
        <p>
         This is similar to <u>_.isObject()</u> except that it considers <u>ObjectId</u>s to be primitive values.
+       </p>
+     </article>
+
+     <article id="isObjectId">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">isObjectId(value): boolean</span>
+       <p>
+        This returns true if the value is an <u>ObjectId</u>.
        </p>
      </article>
 

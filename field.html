@@ -45,7 +45,7 @@ layout: default
 <tr><td>  defaultValue:<td>any<td>none<td>Default value for this field.  If a function, the default will be the return value of the function.
 
 <tr><td colspan="4" class="subtitle">User Documentation
-<tr><td>  label:<td>string<td>labelize(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this field.
+<tr><td>  label:<td>string<td>labelify(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this field.
 <tr><td>  pathLabel:<td>string<td><i>label</i><td>The label to use for this field when it is part of a <a href="/#pathLabels">path label</a>.
 <tr><td>  help:<td>string<td>none<td>Contains brief user-facing documentation about this field (suitable for a tooltip).
 <tr><td>  placeholder:<td>string<td>none<td>Sets the default placeholder for this field to be used in input fields.
@@ -170,6 +170,16 @@ layout: default
        <b class="client"></b>
        <span class="sig">label: String</span>
        <p>This returns a label, or display name, for the field.</p>
+     </article>
+
+     <article>
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">labelify(value): any</span>
+       <p>If this field is a link and the value is a link value, then this method will return appropriate label.  Otherwise
+         the input value will be returned untouched.</p>
      </article>
 
      <article id="labels">
