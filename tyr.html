@@ -506,6 +506,18 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        </p>
      </article>
 
+     <article id="isSameId">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">isSameId(a: string | ObjectID, b: string | ObjectID): boolean</span>
+       <p>
+        This determines if two values reference the same ID even though either or both may be encoded as a string or as an ObjectID.  For example:
+       </p>
+      <pre><code class="js">Tyr.isSameId('a', new ObjectID('a')) <i>(is true)</i>
+</code></pre>
+
+     </article>
+
      <article id="pullAll">
        <b class="method"></b>
        <b class="server"></b>
