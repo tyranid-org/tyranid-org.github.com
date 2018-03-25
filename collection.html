@@ -163,6 +163,8 @@ layout: default
 <tr><td>  historical:<td>boolean<td>none<td>Indicates if this collection should have <a href="/#historical">historical</a> data support.
 <tr><td>  note:<td>string<td>none<td>Contains developer-facing documentation about this collection (only visible in the Tyranid console).
 <tr><td>  enum:<td>boolean<td>false<td>Generates <a href="/#staticData">enumeration</a> support for this collection.
+<tr><td>  internal:<td>boolean<td>false<td>Indicates that this is a collection used internally by Tyranid.
+<tr><td>  generated:<td>boolean<td>false<td>Indicates that this is a collection was generated automatically.
 <tr><td>  client:<td>boolean<td>true<td>If this is false, client-side classes for this collection will not be generated.
 <tr><td>  primaryKey: {<td><td>none
 <tr><td>    field:<td><i>fieldName</i><td><i>required</i>
@@ -433,7 +435,8 @@ layout: default
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">labels(text: string): { _id: <i>id type</i>, <i>label field</i>: string }[]</span>
+       <span class="sig">labels(text: string): { _id: <i>id type</i>, <i>label field</i>: string }[]</span><br>
+       <span class="sig">labels(ids: string[]): { _id: <i>id type</i>, <i>label field</i>: string }[]</span>
        <p>This generates a list of label objects that can be used to populate a typeahead dropdown.</p>
        <p>Generally prefer to use <a href="field#labels"><u>Field.labels()</u></a> over this as it can take advantage of the <u>where</u> property on link fields.</p>
      </article>
