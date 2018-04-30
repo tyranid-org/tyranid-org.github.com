@@ -258,7 +258,7 @@ layout: default
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">fieldsFor(obj): <a href="field">Field</a>[]</span>
+       <span class="sig">fieldsFor(obj): { <i>fieldName</i>: <a href="field">Field</a> }</span>
        <p>This is similar to <u>def.fields</u> except that it also returns all fields from <a href="/#dynamicSchemas">Dynamic Schemas</a> as well.</p>
      </article>
 
@@ -547,6 +547,7 @@ layout: default
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">push(id: <i>id type</i>, <a href="/#paths">path</a>: string, value: any, options: <a href="#options">options object</a>?)</span>
       <p>This is a shortcut for:</p>
       <quote><u><i>collection</i>.update({ _id: id }, { $push: { [path]: value } })</u></quote>
