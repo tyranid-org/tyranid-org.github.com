@@ -77,7 +77,7 @@ layout: default
 <tr><td>  denormal:<td>object<td>none<td>A <a href="/#denormalization">Denormalization</a> expression to populate when saving this field.
 <tr><td>  link:<td><i>collection name</i><td>none<td>Indicates that this field contains foreign keys to the given collection.
 <tr><td>  relate:<td><u>'owns'</u> | <u>'ownedBy'</u> | <u>'associate'</u><td><u>'associate'</u><td>Indicates the relationship conveyed by the link.
-<tr><td>  where:<td>object | async? () => object****<td>none<td>Contains additional constraints on the links -- see <a href="/#links">links</a>.
+<tr><td>  where:<td>object | async? opts => object****<td>none<td>Contains additional constraints on the links -- see <a href="/#links">links</a>.
 
 <tr><td colspan="4" class="subtitle">Numbers (<u>is == 'double' || is == 'integer'</u>)
 <tr><td>  in:<td>string<td>none<td>Sets the units for this field (i.e. <u>in: 'km'</u>).  See <a href="units#parse"><u>Units.parse</u></a>.

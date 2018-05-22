@@ -390,7 +390,7 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
     <i>...</i>
     <i>// Managers have to be in the same organization as the user.</i>
     manager:   { link: 'user',
-                 async where() {
+                 async where(opts) {
                    return {
                      organizationId: { $in: await determineAvailableManagersByRole(this.role) }
                    };
@@ -400,6 +400,18 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
   }
 });
 </code></pre>
+
+<p>
+  The <u>opts</u> parameter is populated with relevant contextual information that is available:
+<table>
+  <thead>
+    <tr><th>Value<th>Notes
+  <tbody>
+    <tr><td><u>auth</u><td>The currently logged-in user making the request.  Also available as <u>user</u>.
+    <tr><td><u>req</u><td>The express <a href="https://expressjs.com/en/api.html#req">Request</a> if the call originated from the client.
+    <tr><td><u>user</u><td>The currently logged-in user making the request.  Also available as <u>auth</u>.
+</table>
+</p>
 
     <h4 id="optionalLinks">Optional Links</h4>
 

@@ -591,6 +591,24 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <p>This method permits writing mapping functions that work with values that are conditionally asynchronous.</p>
      </article>
 
+
+     <article id="sleep">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">sleep(ms: number): void</span>
+       <p>This asynchronously sleeps <u>ms</u> milliseconds.</p>
+     </article>
+
+     <article id="sleepUntil">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">sleepUntil(fn: () => boolean | Promise<boolean>, maxMs = 5000, everyMs = 5): void;</span>
+       <p>This asynchronously the predicate <u>fn</u> for a truthy value initially and then every <u>everyMs</u> thereafter
+        up until a maximum of <u>maxMs</u> milliseconds whereupon it will throw an <u>Exception</u>.</p>
+     </article>
+
      <article id="someAsync">
        <b class="async"></b>
        <b class="method"></b>
