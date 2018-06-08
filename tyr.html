@@ -636,4 +636,13 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <p>This contains the socket.io client socket that Tyranid is using for the user.  You can use it to add your own events over the socket.io connection as well.</p>
      </article>
 
+     <article id="reconnectSocket">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="client"></b>
+       <span class="sig">reconnectSocket(): void;</span>
+       <p>This method establishes a new socket.io connection.  This should be called after a new login cookie has been established for the client
+         (for example, after a user logs in) so that the socket.io socket can be synchronized with the server-side mongo session.</p>
+     </article>
+
   </div>
