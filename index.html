@@ -188,38 +188,6 @@ Dynamic schemas differ from Mixin Schemas in that they are <i>conditionally appl
 </code></pre>
 
 
-     <h4 id="fieldGroups">Field Groups</h4>
-<p>Tyranid supports a concept called <b>field groups</b> that allow you to reduce repetitive schema definitions.</p>
-<p>The following:
-<pre><code class="js">const Widget = new Tyr.Collection({
-  <i>...</i>
-  fields: {
-    <i>...</i>,
-    super: { is: 'boolean' },
-    $super: {
-      $base: { if: { super: true }, note: 'Only super widgets have this field.' },
-
-      superName: { is: 'string' },
-      superAccess: { is: 'integer' }
-    }
-  },
-});
-</code></pre>
-<p>is equivalent to:</p>
-<pre><code class="js">const Widget = new Tyr.Collection({
-  <i>...</i>
-  fields: {
-    <i>...</i>,
-    super: { is: 'boolean' },
-    superName: { is: 'string', group: '$super', if: { super: true }, note: 'Only super widgets have this field.' },
-    superAccess: { is: 'integer', group: '$super', if: { super: true }, note: 'Only super widgets have this field.' }
-  },
-});
-</code></pre>
-<p>All properties present in the <u>$base</u> property are copied to all of the fields in the group and a <u>group</u> property is
- added to each field which contains the name of the group.</p>
-
-
     <h3>Finding & Saving</h3>
 <pre><code class="js">var user = new User();
 user.firstName = 'David';
@@ -361,7 +329,7 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
     type: { link: 'animalType' },
     legCount: { is: 'integer',
                 <i>// this function can return a promise</i>
-                if(opts) { returnawait determineIfHasLegTypes(this) }
+                if(opts) { return determineIfHasLegTypes(this) }
               }
     <i>...</i>
   }
@@ -382,6 +350,39 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
 
 <p>This feature is analogous to <a href="/#linkConstraints">link constraints</a>.</p>
 
+
+
+
+     <h4 id="fieldGroups">Field Groups</h4>
+<p>Tyranid supports a concept called <b>field groups</b> that allow you to reduce repetitive schema definitions.</p>
+<p>The following:
+<pre><code class="js">const Widget = new Tyr.Collection({
+  <i>...</i>
+  fields: {
+    <i>...</i>,
+    super: { is: 'boolean' },
+    $super: {
+      $base: { if: { super: true }, note: 'Only super widgets have this field.' },
+
+      superName: { is: 'string' },
+      superAccess: { is: 'integer' }
+    }
+  },
+});
+</code></pre>
+<p>is equivalent to:</p>
+<pre><code class="js">const Widget = new Tyr.Collection({
+  <i>...</i>
+  fields: {
+    <i>...</i>,
+    super: { is: 'boolean' },
+    superName: { is: 'string', group: '$super', if: { super: true }, note: 'Only super widgets have this field.' },
+    superAccess: { is: 'integer', group: '$super', if: { super: true }, note: 'Only super widgets have this field.' }
+  },
+});
+</code></pre>
+<p>All properties present in the <u>$base</u> property are copied to all of the fields in the group and a <u>group</u> property is
+ added to each field which contains the name of the group.</p>
 
 
 
