@@ -21,9 +21,9 @@ layout: default
            <tr><td>  populate:<td><a href="#populationFields">Population Fields</a><td>The population fields to populate.
            <tr><td>  asOf:<td>date<td>Indicates that any <a href="/#historical">historical</a> documents (including populated documents) should be <a href="document#$asOf"><u>$asOf()</u></a>'d the given date.
            <tr><td colspan="3" class="subtitle">Windowing (<u>find()</u>, <u>findAll()</u>)</td>
-           <tr><td>  limit:<td><u>integer</u><td>The maximum number of documents to retrieve.
-           <tr><td>  skip:<td><u>integer</u><td>The number of documents to skip.
-           <tr><td>  count:<td><u>boolean</u><td>If set on <u>findAll()</u> calls then the returned documents array will have a <u>count</u> property indicating the total number of
+           <tr><td>  limit:<td>integer<td>The maximum number of documents to retrieve.
+           <tr><td>  skip:<td>integer<td>The number of documents to skip.
+           <tr><td>  count:<td>boolean<td>If set on <u>findAll()</u> calls then the returned documents array will have a <u>count</u> property indicating the total number of
              documents matching the query (ignoring any <u>skip</u> and <u>limit</u>). See <a href="index#counting">Counting</a>.
            <tr><td colspan="3" class="subtitle">Sorting (<u>find()</u>, <u>findAll()</u>, <u>byIds()</u>, <u>byUids()</u>)</td>
            <tr><td>  sort:<td>MongoDB sort<td>The standard MongoDB-style sort object.
@@ -34,16 +34,23 @@ layout: default
            <tr><td colspan="3" class="subtitle">Updates (<u>update()</u>, <b>but NOT</b> <u>$update()</u> or <u>updateDoc()</u>)</td>
            <tr><td>  update:<td>MongoDB update<td>The standard MongoDB-style update object.
              'insert' for <i>inserts</i>, etc.) but you can override it with this option.
+
            <tr><td colspan="3" class="subtitle"><a href="/#historical">Historical</a> (<i>most saving/updating methods</i>)</td>
            <tr><td>  author:<td>UID | <a href="document">Document</a><td>The author of the change that should be recorded in the historical snapshot.  If <u>author</u> is not specified
              but <u>auth</u> is, and <u>auth</u> is a <a href="document">Document</a>, then its UID will be used instead.</td>
            <tr><td>  comment:<td>string<td>A comment to record along with the historical update.</td>
-           <tr><td>  historical:<td>boolean<td>Normally historical-unsafe methods log a warning if you use them with historical collections.  If you set historical to false you can suppress
-            the warning indicating that you know what you are doing.  Additionally, if this flag is passed on an operation that does support historical operations, this option will
-            suppress updating the history -- use with caution.</td>
+           <tr><td rowspan="3">  historical:<td><u>false</u><td>Normally historical-unsafe methods log a warning if you use them with historical collections.
+
+            If you set <u>historical</u> to false you can suppress the warning indicating that you know what you are doing.
+            Additionally, if this flag is passed on an operation that does support historical operations, this option will suppress updating the history --
+            use with caution.
+           <tr><td>true<td>Process history normally -- this is the default value.
+           <tr><td>'partial'<td>If <u>'partial'</u> is specified and the collection is a <a href="/#historical_document">using the historical document format</a>, then the smallest
+              possible historical snapshot will be saved instead of a full snapshot (i.e. <u>_partial</u> will be <u>true</u> if not all the fields changed).</td>
            <tr><td colspan="3" class="subtitle">Timestamps (<i>most saving/updating methods</i>)</td>
            <tr><td>  timestamps:<td>boolean<td>Indicates if <a href="/#timestamps">timestamps</a> should be updated.  Defaults to the <a href="collection#def"><u>timestamps</u></a>
              setting on the collection.</td>
+
            <tr><td colspan="3" class="subtitle">Security (<i>most methods</i>)</td>
            <tr><td>  auth:<td>Auth Object<td>An authorization object (a user, group, role, etc.) to pass to a <a href="secure">Secure</a> plug-in.  Can also be "true" to auto-detect the current user.
            <tr><td>  perm:<td>string<td>The permission to use when an <u>auth</u> object is specified.  Usually <u>perm</u> is inferred ('view' for <i>finds</i>, 'delete' for <i>removes</i>, ...)
@@ -160,7 +167,7 @@ layout: default
 <tr><td>  label:<td>string<td>labelify(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this collection.
 <tr><td>  indexes:<td>array<td><i>none</i><td>If present contains an array of index definitions in the format specified by the <a href="https://docs.mongodb.com/manual/reference/command/createIndexes/">MongoDB createIndexes command</a></td>
 <tr><td>  help:<td>string<td>none<td>Contains brief user-facing documentation about this collection.
-<tr><td>  historical:<td>boolean<td>none<td>Indicates if this collection should have <a href="/#historical">historical</a> data support.
+<tr><td>  historical:<td>'document' | 'patch'<td>none<td>Indicates if this collection should have <a href="/#historical">historical</a> data support.
 <tr><td>  preserveInitialValues:<td><a href="document">Document</a> => boolean | boolean<td>none<td>This function is invoked on a document, if it returns true then a copy of the initial values is preserved in a <u>$orig</u> value.
 <tr><td>  note:<td>string<td>none<td>Contains developer-facing documentation about this collection (only visible in the Tyranid console).
 <tr><td>  enum:<td>boolean<td>false<td>Generates <a href="/#staticData">enumeration</a> support for this collection.

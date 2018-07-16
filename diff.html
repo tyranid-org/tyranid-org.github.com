@@ -89,6 +89,19 @@ patchArr([1,2,3], patch) <i>first array is modified in place to be</i> [3,2,1]
        <p>If <u>props</u> is not given then the entire object is differenced.</p>
      </article>
 
+     <article id="diffPropsObj">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">diffPropsObj(a: object, b: object, props: object?): string[]</span>
+       <p>Returns a list of which properties are different between the two objects.</p>
+       <p>The <u>props</u> object can be used to indicate that only the given properties should be differenced.  For example:</p>
+
+   <pre><code class="js">Tyr.diff.diffPropsObj({ a: 'i', b: 3 }, { a: 'i' }, { a: 1 })
+// returns [] ... no differences because it's only looking at <i>a</i> and <i>a</i> didn't change.
+</code></pre>
+       <p>If <u>props</u> is not given then the entire object is differenced.</p>
+     </article>
+
      <article id="patchArr">
        <b class="method"></b>
        <b class="server"></b>

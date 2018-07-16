@@ -42,7 +42,9 @@ layout: default
 <tr><td>  custom:<td>boolean<td><td>Indicates if this field is a dynamic custom field that should have UI auto-generated for it.
 <tr><td>  db:<td>boolean<td>true**<td>Indicates if this field should be stored in the database.
 <tr><td>  historical:<td>boolean<td>none<td>Indicates that this field is <a href="/#historical">historical</a>.  Must also be set on the collection to take effect.
+  Only valid for top-level fields.
 <tr><td>  defaultValue:<td>any<td>none<td>Default value for this field.  If a function, the default will be the return value of the function.
+<tr><td>  if:<td>object | async? opts => (object | boolean)****<td>none<td>Indicates this is a <a href="/#conditionalFields">conditional field</a>.
 
 <tr><td colspan="4" class="subtitle">User Documentation
 <tr><td>  label:<td>string<td>labelify(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this field.

@@ -11,6 +11,35 @@ layout: default
 
     <div style="clear:both;"></div>
 
+    <article id="0.5.25">
+      <div class="date">2018.7.15</div>
+      <div class="version">0.5.25</div>
+      <h1>Conditional Fields</h1>
+      <p>Added support for <a href="/#conditionalFields">conditional fields</a>.</p>
+    </article>
+
+    <article id="0.5.24">
+      <div class="date">2018.7.15</div>
+      <div class="version">0.5.24</div>
+      <h1>Collection Destructuring</h1>
+      <p>Added support for capitalized names in <a href="tyr#collections"><u>Tyr.collections</u></a> permitting use of destructuring assignment.</p>
+       <p>For example, you can now write</p>
+       <pre>const { Depot, Train } = Tyr.collections;</pre>
+       <p>instead of</p>
+       <pre>const Depot = Tyr.byName.depot;
+const Train = Tyr.byName.train;</pre>
+       <p>This works on both the client and the server.  The existing syntax is also still supported.</p>
+    </article>
+
+    <article id="0.5.22">
+      <div class="date">2018.7.11</div>
+      <div class="version">0.5.22</div>
+      <h1>Add support for document vs. patch history storage</h1>
+      <ul>
+        <li>added <a href="/#historical_document"><u>document</u></a> historical storage type
+      </ul>
+    </article>
+
     <article id="0.5.13">
       <div class="date">2018.5.22</div>
       <div class="version">0.5.13</div>

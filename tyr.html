@@ -93,8 +93,13 @@ Tyr.arraySort(myArray, { b: 1, c: -1 });
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">collections: <a href="collection">Collection</a>[]</span>
+       <span class="sig">collections: <a href="collection">Collection</a>[] & { <i>collection name</i>: <a href="collection">Collection</a> }</span>
        <p>This is a list of all the collections that Tyranid knows about.</p>
+       <p>This also has a hash of the collections by their capitalized names to make destructuring easier, allowing you to write:</p>
+       <pre>const { Depot, Train } = Tyr.collections;</pre>
+       <p>instead of</p>
+       <pre>const Depot = Tyr.byName.depot;
+const Train = Tyr.byName.train;</pre>
      </article>
 
      <article>
@@ -489,6 +494,25 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <span class="sig">isEqual(a, b): boolean</span>
        <p>
         This is similar to <u>_.isEqual()</u> except that it can handle <u>ObjectId</u>s from different versions of the MongoDB native driver.
+       </p>
+     </article>
+
+     <article id="isEqual">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">isEqual(a, b): boolean</span>
+       <p>
+        This is similar to <u>_.isEqual()</u> except that it can handle <u>ObjectId</u>s from different versions of the MongoDB native driver.
+       </p>
+     </article>
+
+     <article id="isEqualInBson">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">isEqualInBson(a, b): boolean</span>
+       <p>
+        This is similar to <u>Tyr.isEqual()</u> except that it considers <u>undefined</u> to be equal to <u>null</u>.  This method can be useful because
+        the BSON specification has deprecated <u>undefined</u> and properties containing undefined are implicitly converted to <u>null</u>.
        </p>
      </article>
 

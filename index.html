@@ -149,7 +149,7 @@ User.prototype.fullName = function {
 };
 
 <i>// Tyranid can fetch collections by name.</i>
-(Tyr.byName('user') instanceof Tyr.Collection) === true
+(Tyr.byName['user'] instanceof Tyr.Collection) === true
 </code></pre>
 
      <h4 id="mixinSchemas">Mixin Schemas</h4>
@@ -170,12 +170,12 @@ The following adds a "westTotal" property to User:</p>
 <p>Tyranid also supports <b>dynamic schemas</b> that can be added at run time via storing metadata in the database.
 Dynamic schemas differ from Mixin Schemas in that they are <i>conditionally applied</i> based on the match rules.</p>
 <p>The following adds a "westTotal" property to User but only for users that belong to Organization 1:</p>
-<pre><code class="js">Tyr.byName('tyrSchema').save({
+<pre><code class="js">Tyr.byName.tyrSchema.save({
   collection: User.id,
   match: {
     org: 1
   },
-  type: Tyr.byName('tyrSchemaType').PARTIAL._id,
+  type: Tyr.byName.tyrSchemaType.PARTIAL._id,
   def: {
     fields: {
       westTotal: { is: 'integer' }
@@ -325,12 +325,62 @@ User.def.fields.email.label   <i>=> 'Email'</i>
 
 
     <h3>Fields</h3>
+
+<p>Fields support a lot of properties -- see <a href="field">Field</a> for a complete list.</p>
 <pre><code class="js"><i>// Fields support a <b>name</b> property.</i>
 User.def.fields.email.name <i>=> 'email'</i>
 
 <i>// Fields also support a <b>path</b> property.</i>
 User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
 </code></pre>
+
+    <h4 id="conditionalFields">Conditional Fields</h4>
+
+<p>All Fields also support a <u>if</u> property which can help model things like unions.  For example:</p>
+
+<pre><code class="js">const Animal = new Tyr.Collection({
+  name: 'animal',
+  <i>...</i>,
+  fields: {
+    <i>...</i>
+    hasLegs: { is: 'boolean' },
+    <i>// The legCount property only exists if hasLegs is true.</i>
+    legCount: { is: 'integer', if: { hasLegs: true } },
+    <i>...</i>
+  }
+});
+</code></pre>
+
+<p>A field's <u>if</u> property can also be an (optionally asynchronous) function that returns either a matching criteria or a boolean.  For example:</p>
+
+<pre><code class="js">var User = new Tyr.Collection({
+  id : 'u00',
+  name: 'user',
+  fields: {
+    <i>...</i>
+    type: { link: 'animalType' },
+    legCount: { is: 'integer',
+                <i>// this function can return a promise</i>
+                if(opts) { returnawait determineIfHasLegTypes(this) }
+              }
+    <i>...</i>
+  }
+});
+</code></pre>
+
+<p>
+  The <u>opts</u> parameter is populated with relevant contextual information that is available:
+<table>
+  <thead>
+    <tr><th>Value<th>Notes
+  <tbody>
+    <tr><td><u>auth</u><td>The currently logged-in user making the request.  Also available as <u>user</u>.
+    <tr><td><u>req</u><td>The express <a href="https://expressjs.com/en/api.html#req">Request</a> if the call originated from the client.
+    <tr><td><u>user</u><td>The currently logged-in user making the request.  Also available as <u>auth</u>.
+</table>
+</p>
+
+<p>This feature is analogous to <a href="/#linkConstraints">link constraints</a>.</p>
 
 
 
@@ -412,6 +462,8 @@ User.def.fields.roles.def.of.def.fields.network.path <i>=> 'roles.network'</i>
     <tr><td><u>user</u><td>The currently logged-in user making the request.  Also available as <u>auth</u>.
 </table>
 </p>
+
+<p>This feature is analogous to <a href="/#conditionalFields">conditional fields</a>.</p>
 
     <h4 id="optionalLinks">Optional Links</h4>
 
@@ -844,18 +896,67 @@ instead of "Name First".  This property can also be used to set abbreviated name
     <h3 id="historical">Historical Data</h3>
 
     <p>Tyranid's Historical Data support modifies the built-in methods like <u>$save()</u> and so on to keep track of changes to documents so that historical
-      values are kept.  The history of an object is stored on the document in a <a href="document#_history"><u>_history</u></a> property which contains an array of the changes.</p>
+      values are kept.</p>
     <p>Historical data is enabled by specifying the <a href="collection#def"><u>historical</u></a> option on collections.</p>
     <p>Once it is enabled on a collection, you must also mark which fields should historical using the <a href="field#def"><u>historical</u></a> option on fields.</p>
     <p><i>Note that only top-level fields can be marked <u>historical</u></i> -- anything contained beneath a top-level field is automatically assumed to also be historical.</p>
+
+    <h4 id="historical_formats">Formats</h4>
+
+    <p>There are two formats that historical data can be stored in -- <a href="#historical_document"><u>document</u></a>
+      and <a href="#historical_patch"><u>patch</u></a>.  The two formats have the following tradeoffs:</p>
+    <p>
+     <table>
+      <tr>
+       <th>Type
+       <th>Storage of History
+       <th>Document Size
+       <th>Database Size
+       <th>Searchable via Database queries
+      <tr>
+       <td>document
+       <td>copies of the document as it appeared at different times stored in the separate <u><i>collectionDatabaseName</i>_history</u> collection
+       <td>Small
+       <td>Large
+       <td>Yes<sup><u>*</u></sup>
+      <tr>
+       <td>patch
+       <td>array of <a href="diff#patchFormat">patches</a> stored on the document itself in its <u>_history</u> property
+       <td>Large
+       <td>Small
+       <td>No
+     </table>
+     <span style="position: relative; left: 4px;"><u>*</u> The queries must take into account <u>_partial</u> snapshots.</span>
+   </p>
+    <h5 id="historical_document">Document Format</h5>
+    <p>The <i>document</i> format stores history in a separate collection named <u><i>collectionDatabaseName</i>_history</u>.</p>
+    <p>The format of the <u><i>collectionDatabaseName</i>_history</u> collection is identical to the format of the underlying collection with the two
+      differences:
+     <ul>
+      <li>only fields that have the <a href="field#def"><u>historical</u></a> property set to true are stored in the snapshot
+      <li>the following fields are added:
+       <table>
+        <tr><th>Name<th>Contains<th>Optional
+        <tr><td>__id<td>the <u>_id</u> of document this is a snapshot of<td>No
+        <tr><td>_on<td>the <u>date</u> of this snapshot in history<td>No
+        <tr><td>_author<td>the ID of the author of this change<td>Yes
+        <tr><td>_comment<td>notes made about this change<td>Yes
+        <tr><td>_partial<td>whether this is a partial update (i.e. does not contain the full document)<td>Yes
+       </table>
+     </ul>
+
+    <h5 id="historical_patch">Patch Format</h5>
+    <p>The <i>patch</i> format stores history on the document itself in a <a href="document#_history"><u>_history</u></a> property which contains an array of the changes.</p>
 
     <h4>Example</h4>
 
 <pre><code class="js">const update = User.fromClient(req.body),
         orig = await User.byId(update._id); // historical database reads will update the document's <a href="document#$orig">$orig</a> property
 
-orig.$copy(update); // $copy() will not overwrite orig's $orig and _history properties
-await orig.$save(); // $save() will diff orig.$orig and orig and update orig._history with a new snapshot entry
+orig.$copy(update); // $copy() will not overwrite orig's $orig (and _history if patching) properties
+await orig.$save(); // $save() will diff orig.$orig and orig and either
+                    //   update orig._history with a new snapshot entry (patch) or
+                    //   insert a record into the <u><i>collectionDatabaseName</i>_history</u> (document)
 </code></pre>
 
     <p>Also see <a href="document#$replace"><u>$replace()</u></a> as an alternative to <a href="document#$copy"><u>$copy()</u></a>.
@@ -881,6 +982,18 @@ doc.age = 38;
 await doc.$update({ fields: { age: 37 }, author: req.currentUser, comment: 'The age had a typo' });
 </code></pre>
 
+    <p>Most query methods support an <u>asOf</u> option that also works with population so that a hierarchy of historical documents can be
+     retrieved as of a particular date.  In the following example, populated department records are also as of the given date:</p>
+
+<pre><code class="js">doc = await User.findAll({
+  query: { ssn: mySsn },
+  asOf: new Date('2016-05-03'),
+  populate: { department: $all }
+});
+</code></pre>
+
+    <h5>Patch-specific Methods</h5>
+
     <p>If you just want to push or pull data onto an array and maintain historical information, see
      <a href="collection#push"><u><i>Collection</i>.push()</u></a> and <a href="collection#pull"><u><i>Collection</i>.pull()</u></a>.</p>
 
@@ -897,16 +1010,6 @@ doc.$asOf(new Date('2016-05-03')); // revert doc to what it looked like on May 3
 
     <p>Documents reverted using <u>$asOf()</u> become read-only, as updating a document in the past does not make sense and these documents
      will have a non-enumerable <a href="document#$historical">$historical</a> property added to them to indicate this state.</p>
-
-    <p><u>asOf</u> can also be passed into most query methods and works with population so that a hierarchy of historical documents can be
-     retrieved as of a particular date.  In the following example, populated department records are also as of the given date:</p>
-
-<pre><code class="js">doc = await User.findAll({
-  query: { ssn: mySsn },
-  asOf: new Date('2016-05-03'),
-  populate: { department: $all }
-});
-</code></pre>
 
     <h4 style="color: red">Warning</h4>
 
