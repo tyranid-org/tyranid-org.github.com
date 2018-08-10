@@ -478,6 +478,17 @@ layout: default
        </ul>
      </article>
 
+     <article id="migratePatchToDocument">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">migratePatchToDocument(progress?: (count: number) => void): void</span>
+       <p>This function will migrate a collection with patch-format historical data to one with document-format historical data.</p>
+       <p>The <u>progress</u> parameter is a callback that will be called periodically with the number of documents that have
+        been converted.  For example:</p>
+       <pre><code class="js">Widget.migratePatchToDocument(count => console.log(`converted ${count} documents`))</code></pre>
+     </article>
+
      <article id="mixin">
        <b class="method"></b>
        <b class="server"></b>
