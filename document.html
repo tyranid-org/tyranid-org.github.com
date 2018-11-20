@@ -49,7 +49,7 @@ doc.$asOf(new Date(...), fields);
        <span class="sig">$checkAccess(perm: string,</br>
           <div style="padding-left:216px;">authObj: any,</div>
           <div style="padding-left:216px;">opts: <a href="collection#options">Options</a>): <i>MongoDB query object</i></div></span>
-       <p>If a <u>Secure</u> component is registered with Tyranid, Tyranid will invoke its <a href="secure#checkAccess"><u>checkAccess()</u> method to
+       <p>If a <u>Secure</u> component is registered with Tyranid, Tyranid will invoke its <a href="secure#checkAccess"><u>checkAccess()</u></a> method to
         populate the <a href="#$access"><u>$access</u></a> object on this document.</p>
        <p>Use <a href="#$redact"><u>$redact()</u></a> to process the <u>$access</u> object and remove fields that users do not have access to.  <u>$redact()</u>
         is separate from <u>$checkAccess</u> so that server methods can access hidden properties to create computed visible data.</p>
