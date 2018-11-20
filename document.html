@@ -46,13 +46,15 @@ doc.$asOf(new Date(...), fields);
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">$checkAccess(perm: string,</br>
-          <div style="padding-left:216px;">authObj: any,</div>
-          <div style="padding-left:216px;">opts: <a href="collection#options">Options</a>): <i>MongoDB query object</i></div></span>
+       <span class="sig">$checkAccess(opts: <a href="collection#options">Options</a>): <i>MongoDB query object</i></span>
+       <p><u>opts</u> should contain a <u>perm</u> and <u>auth</u> option otherwise this method is likely a no-op (depending on how the <a href="secure"><u>Secure</u></a>
+        is written).</p>
        <p>If a <u>Secure</u> component is registered with Tyranid, Tyranid will invoke its <a href="secure#checkAccess"><u>checkAccess()</u></a> method to
         populate the <a href="#$access"><u>$access</u></a> object on this document.</p>
        <p>Use <a href="#$redact"><u>$redact()</u></a> to process the <u>$access</u> object and remove fields that users do not have access to.  <u>$redact()</u>
         is separate from <u>$checkAccess</u> so that server methods can access hidden properties to create computed visible data.</p>
+       <p><u>$checkAccess()</u> is invoked automatically by <u>find*()</u> and <u>byId*</u> methods automatically if an <u>auth</u> is passed in.  Furthermore,
+        <u>toClient</u> methods also automatically invoke <a href="#$redact"><u>$redact()</u></a>.  So you usually do not need to manually invoke either method.</p>
      </article>
 
      <article id="$clone">
