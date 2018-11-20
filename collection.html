@@ -54,6 +54,7 @@ layout: default
            <tr><td colspan="3" class="subtitle">Security (<i>most methods</i>)</td>
            <tr><td>  auth:<td>Auth Object<td>An authorization object (a user, group, role, etc.) to pass to a <a href="secure">Secure</a> plug-in.  Can also be "true" to auto-detect the current user.
            <tr><td>  perm:<td>string<td>The permission to use when an <u>auth</u> object is specified.  Usually <u>perm</u> is inferred ('view' for <i>finds</i>, 'delete' for <i>removes</i>, ...)
+           <tr><td>  keepNonAccessible:<td>boolean<td>If present this means to <i>not</i> filter the documents when querying and only to call <a href="document#$checkAccess()"><u>Document.$checkAccess()</u></a> on the documents.
            <tr><td colspan="3" class="subtitle">Post-processing (<i>toClient()/$toClient()</i>)</td>
            <tr><td>  post:<td>opts => void<td>This provides a hook to perform any post-processing on the resulting document.  <u>this</u> is bound to the current document when this function is invoked.
              Note that this function is also invoked for any embedded documents as well (in this case <u>this</u> will be bound to the specific embedded document), so your function should be
@@ -680,6 +681,7 @@ layout: default
        <p>Any <u>toClient</u> function defined for a collection in its <a href="collection#def"><u><i>Collection</i>.def</u></a> will also be invoked during <u>toClient</u> processing.  This provides
         a standard place where fields can be removed for security and other reasons.  As with <u>post()</u>, <u>this</u> is bound to the current document inside a collection's <u>toClient()</u>
         post-processing function.</p>
+       <p><u>$toClient()</u> will also invoke the <a href="document#$redact"><u>Document.$redact()</u></a> method on documents.</p>
      </article>
 
      <article id="update">

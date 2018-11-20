@@ -15,6 +15,13 @@ layout: default
       Document fields usually start with a "<u>$</u>" so that the Tyranid fields do not conflict with the underlying data being modeled.
     </div>
 
+     <article id="$access">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">$access: <a href="secure#accessResult">AccessResult</a></span>
+       <p>This contains the result of a <a href="#$checkAccess"><u>$checkAccess()</u></a> call.</p>
+     </article>
+
      <article id="$asOf">
        <b class="method"></b>
        <b class="server"></b>
@@ -33,6 +40,19 @@ const myUser = User.byId(myId, { fields });
 doc.$asOf(new Date(...), fields);
 </code></pre>
        <p>Be sure to include the <a href="#_history"><u>_history</u></a> in your projection on any object you plan to use <u>$asOf()</u> on.</p>
+     </article>
+
+     <article id="$checkAccess">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">$checkAccess(perm: string,</br>
+          <div style="padding-left:216px;">authObj: any,</div>
+          <div style="padding-left:216px;">opts: <a href="collection#options">Options</a>): <i>MongoDB query object</i></div></span>
+       <p>If a <u>Secure</u> component is registered with Tyranid, Tyranid will invoke its <a href="secure#checkAccess"><u>checkAccess()</u> method to
+        populate the <a href="#$access"><u>$access</u></a> object on this document.</p>
+       <p>Use <a href="#$redact"><u>$redact()</u></a> to process the <u>$access</u> object and remove fields that users do not have access to.  <u>$redact()</u>
+        is separate from <u>$checkAccess</u> so that server methods can access hidden properties to create computed visible data.</p>
      </article>
 
      <article id="$clone">
@@ -150,6 +170,15 @@ doc.$asOf(new Date(...), fields);
        <p>
         Also see <a href="/#population">Population</a> for more information and examples.
       </p>
+     </article>
+
+     <article id="$redact">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">$redact(): void</span>
+       <p>If an <a href="#$access"><u>$access</u></a> property is present on this document, <u>$redact()</u> will process that object and remove
+        fields that the end-user does not have access to.</p>
+       <p><u>$redact</u> is called automatically by <a href="#$toClient"><u>$toClient()</u></a> and <a href="collection#toClient"><u>Collection.toClient()</u></a>.
      </article>
 
      <article id="$remove">

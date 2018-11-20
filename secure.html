@@ -26,6 +26,24 @@ layout: default
 
      </article>
 
+    <h2 id="accessResult">AccessResult</h2>
+
+    <p>This result is returned by <a href="#checkAccess"><u>checkAccess()</u></a> and stored on <a href="document"><u>Document</u>'s</a>
+      <a href="document#$access"><u>$access</u></a> property.
+
+       <table class="def">
+         <thead>
+           <tr><th>Option<th>Type<th>Notes
+         <tbody>
+           <tr><td>{</td>
+           <tr><td>  allowed:<td>boolean<td>Indicates whether the end-user has query-level access to this document.
+           <tr><td>  fields: {<td>
+           <tr><td>    effect:<td>'allow' | 'deny'<td>Indicates whether the following fields are specifically allowed or denied.
+           <tr><td>    names:<td>string[]<td>An array of field names that are either to be allowed or denied.
+           <tr><td>  }</td>
+           <tr><td>  reason?:<td>string<td>Contains any human-readable explanation for access denial.
+           <tr><td>}</td>
+       </table>
     <h2>instance</h2>
 
      <article id="canInsert">
@@ -38,6 +56,18 @@ layout: default
           <div style="padding-left:180px;">authObj: any): <u>boolean</u></div></span>
        <p>If a <u>Secure</u> component is registered with Tyranid, Tyranid will invoke the <u>canInsert()</u> method to determine whether
          a document can be inserted into the given collection.</p>
+     </article>
+
+     <article id="checkAccess">
+       <b class="async"></b>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">checkAccess(document: <a href="document">Document</a>,</br>
+          <div style="padding-left:204px;">perm: string,</div>
+          <div style="padding-left:204px;">authObj: any),</div>
+          <div style="padding-left:204px;">opts: <a href="collection#options">Options</a>): <i>MongoDB query object</i></div></span>
+       <p>If a <u>Secure</u> component is registered with Tyranid, Tyranid will invoke the <u>projection()</u> method to add additional
+        restrictions to its methods when working with data.</p>
      </article>
 
      <article id="query">
