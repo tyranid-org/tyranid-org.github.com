@@ -117,7 +117,8 @@ const Train = Tyr.byName.train;</pre>
        <p>This initializes Tyranid.  <u>opts</u> are as follows:</p>
        <pre>
 {
-  db: pmongo(<i>myDatabaseUrl</i>),
+  mongoClient: myMongoClient,
+  db: myMongoClient.db(<i>optional database name here if not specified in your initial connect string</i>),
   logLevel: 'info',
   clientLogLevel: 'error',
   consoleLogLevel: 'info',
@@ -145,6 +146,9 @@ const Train = Tyr.byName.train;</pre>
   },
   validate: <i>validateOpts</i>
 }</pre>
+      <p>If you specify <u>db</u> you must also specify <u>mongoClient</u>.  If you leave off both, then Tyranid will function in
+       a "database-less" mode which is not usually useful, but <i>can</i> be useful certain things like library code which is just
+       working with the metadata for example.</p>
       <p>If the <u>validate</u> option is not used, be sure to call <u>Tyr.validate()</u> once all of the collections
         have been imported.  See <a href="tyr#validate">Tyr.validate()</a> for an explanation of <u>validateOpts</u>.
       </p>
@@ -188,7 +192,7 @@ const Train = Tyr.byName.train;</pre>
        <p>This will create any indexes defined on collections if they do not already exist.</p>
      </article>
 
-     <article>
+     <article id="db">
       <b class="property"></b>
       <b class="server"></b>
       <span class="sig">db: <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB database (<u>Db</u>)</a></span>
@@ -286,6 +290,14 @@ const Train = Tyr.byName.train;</pre>
        <b class="server"></b>
        <span class="sig">mixin(target: object, mixin: object): void</span><br>
        <p>This mixes in a <b>mixin</b> into a target object.  Both regular and prototype methods and properties are mixed.</p>
+     </article>
+
+     <article id="mongoClient">
+      <b class="property"></b>
+      <b class="server"></b>
+      <span class="sig">mongoClient: <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB client (<u>MongoClient</u>)</a></span>
+
+      <p>This contains a reference to the underlying native MongoDB <u>MongoClient</u> object.</p>
      </article>
 
      <article id="mongoCompare">

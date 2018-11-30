@@ -17,8 +17,8 @@ layout: default
            <tr><td colspan="3" class="subtitle">Query (<u>find*()</u>, <u>update()</u>, <u>remove()</u>)</td>
            <tr><td>  query:<td>MongoDB query<td>The standard MongoDB-style query object.
            <tr><td colspan="3" class="subtitle">Projection & Population (<u>find*()</u>, <u>by*()</u>)</td>
-           <tr><td>  fields:<td>MongoDB fields<td>The standard MongoDB-style fields object that specifies the projection.  Also supports <a href="/#projection">extended projection</a> syntax.
-           <tr><td>  populate:<td><a href="#populationFields">Population Fields</a><td>The population fields to populate.
+           <tr><td>  projection:<td>MongoDB fields<td>The standard MongoDB-style fields projection that specifies the projection.  Also supports <a href="/#projection">extended projection</a> syntax.  This also can be called "fields", but this is deprecated.
+           <tr><td>  populate:<td><a href="#populationProjection">Population Projection</a><td>The population fields to populate.
            <tr><td>  asOf:<td>date<td>Indicates that any <a href="/#historical">historical</a> documents (including populated documents) should be <a href="document#$asOf"><u>$asOf()</u></a>'d the given date.
            <tr><td colspan="3" class="subtitle">Windowing (<u>find()</u>, <u>findAll()</u>)</td>
            <tr><td>  limit:<td>integer<td>The maximum number of documents to retrieve.
@@ -67,9 +67,9 @@ layout: default
        <p>Not all options are supported by all methods.  For example, <u>findOne()</u> uses a <u>limit</u> of 1 and <u>Tyr.byUid()</u> does not support the <u>query</u> option.</p>
     </article>
 
-    <article id="populationFields">
-      <span class="sig">Population Fields</span>
-      <p>A population fields definition can take one of the following three forms:
+    <article id="populationProjection">
+      <span class="sig">Population Projection</span>
+      <p>A population projection definition can take one of the following three forms:
         <ul>
          <li>string -- the name of a field to populate.
          <li>string[] -- an array of names of fields to populate.
@@ -546,7 +546,7 @@ layout: default
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">populate(fields: <a href="#populationFields">Population Fields</a>, documents: <a href="document">Document</a> | <a href="document">Document</a>[], <a href="/#denormalization">denormal</a>: boolean)</span>
+       <span class="sig">populate(projection: <a href="#populationProjection">Population Projection</a>, documents: <a href="document">Document</a> | <a href="document">Document</a>[], <a href="/#denormalization">denormal</a>: boolean)</span>
       <p>
         If <b>documents</b> is not provided, this function will return a curried version of this function that takes a single array
         of documents.  This allows populate to be fed into a promise chain.
