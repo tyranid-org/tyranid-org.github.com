@@ -31,9 +31,13 @@ layout: default
            <tr><td>  parallel:<td>boolean<td>If true, then the returning array will be parallel to the input array of IDs/UIDs.
            <tr><td colspan="3" class="subtitle">Deletions (<u>remove()</u>)</td>
            <tr><td>  justOne:<td>boolean<td>Whether to remove at most one document.
-           <tr><td colspan="3" class="subtitle">Updates (<u>update()</u>, <b>but NOT</b> <u>$update()</u> or <u>updateDoc()</u>)</td>
+
+           <tr><td colspan="3" class="subtitle">Updates - Query (<u>update()</u>, <b>but NOT</b> <u>$update()</u> or <u>updateDoc()</u>)</td>
            <tr><td>  update:<td>MongoDB update<td>The standard MongoDB-style update object.
              'insert' for <i>inserts</i>, etc.) but you can override it with this option.
+
+           <tr><td colspan="3" class="subtitle">Updates - Document (<u>$update()</u> and <u>updateDoc()</u>, <b>but NOT</b> <u>update()</u>)</td>
+           <tr><td>  upsert:<td>boolean<td>Indicates if the document should be <i>insert()</i>'ed if no ID field is present.  (Default <u>false</u>.)
 
            <tr><td colspan="3" class="subtitle"><a href="/#historical">Historical</a> (<i>most saving/updating methods</i>)</td>
            <tr><td>  author:<td>UID | <a href="document">Document</a><td>The author of the change that should be recorded in the historical snapshot.  If <u>author</u> is not specified
@@ -441,7 +445,7 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">labelFor(doc: <a href="document">Document</a> | object)</span>
+       <span class="sig">labelFor(doc: <a href="document">Document</a> | object): string</span>
        <p>This returns the label for the specified document.  If <b>doc</b> is a Document, then this is equivalent to <u>doc.$label</u>.
         This method is mostly useful for when you have a raw object that you want to get the label for.</p>
      </article>
@@ -702,8 +706,8 @@ layout: default
        <b class="async"></b>
        <span class="sig">updateDoc(doc: <a href="document">Document</a> | object, options: <a href="#options">options object</a>)</span>
        <p>This updates the server document with the values in this object.</p>
-       <p>Note that the document is <b><i>not</i> replaced</b>.  See <a href="collection#save"><u>save()</u></a> if you want to do a full replace.</p>
-       <p>If the document is new (it does not have an <u>_id</u>) then it will be <u>insert()</u>'ed and the new <u>_id</u> will be stored on the document.</p>
+       <p>Note that the document is <b><i>not</i> replaced</b>.  See <a href="collection#save">Collection<u>.save()</u></a> if you want to do a full replace.</p>
+       <p>If the document is new (it does not have an <u>_id</u>) then an exception will be thrown unless the <u>upsert</u> option is set to <u>true</u>.</p>
      </article>
 
      <article id="values">

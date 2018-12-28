@@ -312,6 +312,7 @@ myDoc.$slice('hugeArray', {
        <p>This updates the server document with the values in this object.  Note that the document is <i>not</i> replaced.  See
          <a href="document#$save"><u>$save()</u></a> if you want to do a full replace.</p>
        <p>This method is a short-cut for <a href="collection#updateDoc"><u><i>Collection</i>.updateDoc()</u></a>.</p>
+       <p>If the document is new (it does not have an <u>_id</u>) then an exception will be thrown unless the <u>upsert</u> option is set to <u>true</u>.</p>
      </article>
 
      <article id="$validate">
