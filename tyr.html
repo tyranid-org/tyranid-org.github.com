@@ -128,6 +128,13 @@ const Train = Tyr.byName.train;</pre>
     every: 8 * 60 * 60, <i>// how often api exchange rates will be queried in seconds, default every 8 hours</i>
   },
   indexes: true, <i>// ensure indexes are created (invokes <u>createIndexes()</u>)</i>
+  meta: { <i>// allows you to define additional custom metadata on Tyranid objects</i>
+    collection: { <i>// allows you to define additional custom metadata on Tyranid collections</i>
+      <i>fieldName</i>: { <i>// the name of the custom metadata field name (should not conflict with built-in Tyranid metadata fields)</i>
+        client?: boolean; <i>// indicates if this custom collection metadata should be sent down to the client</i>
+      }
+    }
+  },
   migration: {
     migrate: true, <i>// indicates migrations should be run as part of configuration</i>
     dir: __dirname + '/path/to/migrations/directory',
@@ -141,9 +148,6 @@ const Train = Tyr.byName.train;</pre>
     remove: 'delete'
   },
   secure: <a href="secure">Secure</a>,
-    <i>myServerName</i>: pmongo(<i>myServerDatabaseUrl</i>),
-    ...
-  },
   validate: <i>validateOpts</i>
 }</pre>
       <p>If you specify <u>db</u> you must also specify <u>mongoClient</u>.  If you leave off both, then Tyranid will function in
@@ -320,7 +324,6 @@ const Train = Tyr.byName.train;</pre>
      <article id="parseBson">
        <b class="method"></b>
        <b class="server"></b>
-       <b class="client"></b>
        <span class="sig">parseBson(value): any</span>
        <p>This will translate BSON-style objects into their "native" values.  For example:</p>
    <pre><code class="js">Tyr.parseBson(3) <i>=> 3</i>
