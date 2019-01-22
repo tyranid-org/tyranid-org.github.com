@@ -117,6 +117,49 @@ layout: default
       <div><u>***</u> <u>of</u> is required if <u>keys</u> is specified.</div>
       <div><u>****</u> The current document is passed as <u>this</u>.
 
+      <h4 id="fieldShorthandSyntax" style="margin-top:32px;">Field Shorthand Syntax</h4>
+
+      <p>A field shortcut syntax is available.  For example,</p>
+
+      <table style="width:100%;">
+        <tr><td style="width:50%;">the following:<td>is equivalent to:
+
+        <tr><td><u>name: 'string'<u>
+
+        <td><u>name: { is: 'string' }</u>
+
+        </table>
+
+      <h4 id="linkShorthandSyntax" style="margin-top:32px;">Link Shorthand Syntax</h4>
+
+      <p>If you pass in a <a href="collection"><u>Collection</u></a> instance in various places in a <i>field definition</i> it will infer that a link to that
+        collection should be assumed.  For example,
+        
+      <table style="width:100%;">
+        <tr><td style="width:50%;">the following:<td>are all equivalent to:
+
+        <tr><td><u>job: Job<br>
+job: { is: Job }<br>
+job: { is: { link: Job } }</u>
+
+        <td><u>job: { is: { link: 'job' } }</u>
+
+        </table>
+
+      <p>Similarly,</p>
+
+      <table style="width:100%;">
+        <tr><td style="width:50%;">the following:<td>are all equivalent to:
+
+        <tr><td><u>jobs: { is: 'array', of: Job }<br>
+jobs: { is: 'array', of: { link: Job } }<br></u>
+
+        <td><u>jobs: { is: 'array', of: { link: 'job' } }</u>
+
+        </table>
+
+      <p>and so on.  Be careful when using this syntax with cyclic imports as it can result in bootstrapping error about an undefined field.</p>
+
       <h4 id="defClient" style="margin-top:32px;"><u>client</u> option</h4>
 
       <p>The <u>client</u> option indicates if this field should be serialized in <u>toClient()</u>/<u>fromClient()</u> calls.  It can take on the following values:</p>
