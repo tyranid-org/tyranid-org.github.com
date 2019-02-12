@@ -238,10 +238,11 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
      <article id="labels">
        <b class="async"></b>
        <b class="method"></b>
+       <b class="server"></b>
        <b class="client"></b>
        <span class="sig">labels(doc: <a href="document">Document</a>, text: String?): { <i>_id</i>: <i>id type</i>, <i>label field</i>: String }[]</span>
        <p>This generates a list of label objects that can be used to populate a typeahead dropdown.  This method is only available when the field is a <b>link</b>
-       field.</p>
+       or <b>uid</b> field.</p>
        <p>This method also takes into account the <u>where</u> property on links when generating the list of labels.</p>
      </article>
 
@@ -273,8 +274,10 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">of: <a href="field">Field</a></span>
-       <p>This returns the <a href="field"><u>Field</u></a> for the contents of this array or <a href="index#maps">map object</a>.</p>
+       <span class="sig">of: <a href="field">Field</a></span> (arrays and maps)<br>
+       <span class="sig">of: <a href="field">Collection</a>[]</span> (UIDs)
+       <p>This returns the link <a href="field"><u>Field</u></a> for the contents of this array or <a href="index#maps">map object</a>.</p>
+       <p>If this field is of type "uid", then this will contain an array of collections that this <a href="/#uids">UID</a> must be constrained to.</p>
      </article>
 
      <article>
