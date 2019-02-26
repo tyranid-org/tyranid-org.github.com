@@ -11,6 +11,22 @@ layout: default
 
     <div style="clear:both;"></div>
 
+    <article id="0.6.0">
+
+      <div class="date">2019.2.23</div>
+      <div class="version">0.6.0</div>
+      <h1><u>$options</u> functionality and Media Type (MIME Type) Metadata</h1>
+
+      <ul>
+        <li>Added <a href="document#$options"><u></i>Document</i>.$options</u></a> property
+        <li><a href="document#save"><u><i>Document</i>.$save()</u></a> and
+          <a href="document#update"><u><i>Document</i>.$update()</u></a> will use <a href="document#$options"><u><i>Document</i>.$options</u></a>
+          as the default set of options.  This means that, for example, when you use an <u>auth</u> option when finding a document, if you
+          later then save or update that document that the <u>auth</u> parameter will be carried forward to the updating call.
+        <li>Added <a href="mediaType">Media Type metadata</a>
+      </ul>
+    </article>
+
     <article id="0.5.59">
 
       <div class="date">2019.1.22</div>

@@ -87,6 +87,11 @@ layout: default
 <tr><td>  max:<td>number<td>none<td>Sets the maximum value for this numeric field.
 <tr><td>  step:<td>number<td>none<td>Indicates the step-size for this numeric field.  This can be a non-integer value for double types (i.e. <u>0.001</u>).
 
+<tr><td colspan="4" class="subtitle">S3 (<u>is == 's3'</u>)
+<tr><td>  of:<td>array of <a href="./mediaType">media types</a><td>*<td>Set this to the list of valid media types that can be stored in this field.
+  Specify "<u>*</u>" to indicate all media types are valid or "<u><i>registry</i>/*</u>" where <u><i>registry</i></u> is a valid media type registry tree
+  (i.e. <u>'application'</u>, <u>'audio'</u>, <u>'font'</u>, <u>'text'</u>, <u>'video'</u>, ...)
+
 <tr><td colspan="4" class="subtitle">Strings (<u>is == 'string'</u>)
 <tr><td>  labelField:<td>boolean<td>false<td>Set to true if this field contains the <a href="/#labels">label</a> for this collection.
 <tr><td>  pattern:<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp</a><td>none<td>Set this to a regular expression that the string must match.

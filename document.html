@@ -154,6 +154,13 @@ doc.$asOf(new Date(...), fields);
        <p>This is a reference to the collection of this document.  <u>this.$model</u> is equivalent to <u>this.constructor</u>.
      </article>
 
+     <article id="$options">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">$options: object</span>
+       <p>This read-only property contains a reference to the <a href="collection#options">Options</a> instance that was used to find this object.</p>
+     </article>
+
      <article id="$orig">
        <b class="property"></b>
        <b class="server"></b>
@@ -205,9 +212,10 @@ doc.$asOf(new Date(...), fields);
        <b class="client"></b>
        <b class="async"></b>
        <span class="sig">$save(options: <a href="collection#options">Options</a>?): <a href="document">Document</a></span>
-       <p>This method will either update or insert the object based on whether it has an _id.</p>
-       <p>When updating, the entire object is <b>replaced</b>.  See <a href="document#$update"><u>$update()</u></a> to only update instead of replace.</p>
+       <p>This method will either update or insert the object based on whether it has an _id.
+       <p>When updating, the entire object is <b>replaced</b>.  See <a href="document#$update"><u>$update()</u></a> to only update instead of replace.
        <p>If the document ends up being inserted, the document returned by this method will have its <u>_id</u> set.
+       <p>This method will use <a href="#$options"><u>$options()</u></a> as a default set of options.
      </article>
 
      <article id="$slice">
@@ -313,6 +321,7 @@ myDoc.$slice('hugeArray', {
          <a href="document#$save"><u>$save()</u></a> if you want to do a full replace.</p>
        <p>This method is a short-cut for <a href="collection#updateDoc"><u><i>Collection</i>.updateDoc()</u></a>.</p>
        <p>If the document is new (it does not have an <u>_id</u>) then an exception will be thrown unless the <u>upsert</u> option is set to <u>true</u>.</p>
+       <p>This method will use <a href="#$options"><u>$options()</u></a> as a default set of options.
      </article>
 
      <article id="$validate">

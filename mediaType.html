@@ -1,0 +1,82 @@
+---
+layout: default
+---
+
+  <div class="content">
+    <h1>MediaType <span class="extends">extends <a href="collection">Collection</a></h1>
+
+     <div>
+       <p>This collection provides metadata around media types (formerly known as MIME Types).</p>
+
+       <p>The format of a media type is a <u><i>tree</i> / <i>subtype</i></u>.
+
+       <p>The source for media type data is at <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">IANA Media Types</a>.
+
+       {% include mediaType-table.html %}
+
+     </div>
+
+    <h2>static</h2>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">isValid(mediaType: string): boolean</span>
+       <p>This checks to see if the given <u>mediaType</u> is a valid media type.<p>
+       <p>The <u>mediaType</u> can have a wildcard specified for the subtype, i.e.:  <u>'image/*'</u>.
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">matches(validMediaTypes: string[], mediaType: string): boolean</span>
+       <p>This checks to see if the given <u>mediaType</u> matches an existing media type.<p>
+       <p>Any of the <u>validMediaType</u> can also have a wildcard specified for the subtype.  For example, <u>['image/*', 'video/*']</u>
+        will match all audio and video media types.
+     </article>
+
+    <h2>instance</h2>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">_id: string</span>
+       <p>Contains the official media type name for this media type.  Contains both the tree/type and the subtype.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">extensions: string[]</span>
+       <p>This contains an array of valid extensions for this media type.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">name: string</span>
+       <p>This contains a short name for this media type.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">notes: string</span>
+       <p>This contains any additional notes about this media type.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">obsolete: string</span>
+       <p>This indicates that this is an obsolete media type and this values contains the new value to use.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig">unsafe: boolean</span>
+       <p>This indicates that this file is not safe to download as a link.</p>
+     </article>
+
+  </div>
