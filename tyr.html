@@ -123,9 +123,12 @@ const Train = Tyr.byName.train;</pre>
   clientLogLevel: 'error',
   consoleLogLevel: 'info',
   dbLogLevel: 'info',
-  fixer: { <i>// optional, if present will be used for currency conversions</i>
+  fixer?: { <i>// if present will be used for currency conversions</i>
     accessKey: '<i>fixer.io API key</i>',
     every: 8 * 60 * 60, <i>// how often api exchange rates will be queried in seconds, default every 8 hours</i>
+  },
+  formats?: {
+    [typeName: string]: string <i>// contains date/time and other custom formats for each <a href="type"><u>Type</u></a></i>
   },
   indexes: true, <i>// ensure indexes are created (invokes <u>createIndexes()</u>)</i>
   meta: { <i>// allows you to define additional custom metadata on Tyranid objects</i>
