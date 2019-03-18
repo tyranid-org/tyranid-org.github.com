@@ -113,6 +113,7 @@ pre, code {
   color: #000;
 }
 pre {
+  clear: left;
   background:#f8f8f8;
   padding: 4px;
   -webkit-box-shadow:2px 2px 2px #aaa;
@@ -355,4 +356,24 @@ article h1 {
   border-top-right-radius: 4px;
   margin: 2px 0;
   border-bottom: 2px solid #f00;
+}
+
+.tyreant-logo {
+  float: left;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #730;
+  box-shadow: none;
+  font-size: 24px;
+  margin: 16px 16px 16px 0;
+
+  span {
+    color: #f70;
+  }
+}
+
+.guiding-principles {
+  i {
+    color: #f70;
+  }
 }

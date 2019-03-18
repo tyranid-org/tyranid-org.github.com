@@ -1,0 +1,70 @@
+---
+layout: default
+---
+
+  <div class="content">
+    <h1>Tyreant</h1>
+
+    <pre class="tyreant-logo">
+tyreant =
+<span>tyr</span>anid +
+  <span>rea</span>ct +
+    <span>ant</span></pre>
+
+    <p>Tyreant is a UI Toolkit library built on top of <a href="/">Tyranid</a>, <a href="https://reactjs.org">React</a>, and <a href="https://ant.design">Ant</a>.
+
+    <p>The primary goal behind Tyreant is to create metadata-enabled data-driven UI components.</p>
+
+    <p>For example, the following creates a data-driven table that can do its own paging, searching, and so on using the Tyranid metadata and client-side API,
+      along with an edit form:</p>
+
+    <pre><code class="jsx">export const UserTable = () =&gt; (
+  &lt;TyrTable
+    opts=&#123;{
+      collection: User,
+      query: {
+        status: {
+          $ne: UserStatus.DELETED._id,
+        },
+      },
+      columns: [
+        { field: 'fullName', defaultSort: 'ascend' },
+        { field: 'organizationId' },
+        { field: 'email', width: '270px' },
+        { field: 'updatedAt', width: '200px' },
+        { field: 'status', width: '200px' },
+      ],
+      route: RouterPath.ADMIN_USERS,
+      actions: [
+        &lt;TyrFormModal
+          opts=&#123;{
+            fields: [
+              { field: 'firstName' },
+              { field: 'lastName' },
+              { field: 'email' },
+              { field: 'dateOfBirth' },
+              { field: 'status' },
+            ],
+          }}
+        />,
+      ],
+    }}
+  />
+);</code></pre>
+
+<h2>Guiding Principles</h2>
+
+<ul class="guiding-principles">
+  <li><i>Intelligent</i> - <b>Components should leverage metadata as much as possible to increase DRYness.</b>
+  <li><i>Interoperable</i> - <b>Components should be usable on their own alongside non-Tyreant components.</b>
+  <li><i>Composable</i> - <b>Multiple components should be able to infer context from other components.</b>  For example, a form control nested inside a table control
+    should infer the collection and/or fields from the table and allow the form to be used as an edit form for the table.  As another example, Tyreant date fields
+    nested inside a Tyreant form should be able to infer the document they are editing from the form.
+  <li><i>Scaleable</i> - <b>Components should be able to have automatic behavior but fallback to more manual react code so that there are no limits to custom behavior.</b>
+    For example, you should be able to specify a form using just a collection and field names or by specifically detailing the field-level components yourself.
+  <li><i>Skinnable</i> - <b>component should be fully skinnable and styleable and should not lock clients into a particular appearance or style of application.</b>
+  <li><i>Extensible</i> - <b>Users should be able to write their own Tyreant-compatible, metadata-driven components to extend the component library.</b>
+</ul>
+
+
+  </div>

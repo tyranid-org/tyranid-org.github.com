@@ -218,7 +218,9 @@ layout: default
 <tr><td>    <i>projectionName</i>:<td><i>MongoDB-style projection</i><td><td>Define standard projections.  See <a href="/#projection">projections</a>.</td>
 <tr><td>    <i>...</i></td>
 <tr><td>  },</td>
-<tr><td>  fromClient:<td>opts => void<td><td>Specifies a <a href="collection#fromClient"><u><i>Collection</i>.fromClient()</u></a> post-processing hook that will be applied for this collection.</p>
+<tr><td>  fromClient:<td>async? opts => void<td>
+  <td>Specifies a <a href="collection#fromClient"><u><i>Collection</i>.fromClient()</u></a> post-processing hook that will be applied for this collection.
+  <p>This callback can be asynchronous.
 <tr><td>  toClient:<td>opts => void<td><td>Specifies a <a href="collection#toClient"><u><i>Collection</i>.toClient()</u></a> post-processing hook that will be applied for this collection.</p>
 <tr><td>  linkEvents:<td><a href="event#linkHandlers">object</a><td>none<td>Defines <a href="event#linkHandlers">link event handlers</a> recommended or required by this collection.  See <a href="event">Event</a> for more information.</p>
 <tr><td>}</td>
@@ -324,7 +326,8 @@ layout: default
        </p>
      </article>
 
-     <article>
+     <article id="fromClient">
+       <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
        <span class="sig">fromClient(doc: object, <a href="/#paths">path</a>: string?, opts: object?): <a href="document">Document</a></span>
