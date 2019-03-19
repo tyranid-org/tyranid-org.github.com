@@ -63,9 +63,10 @@ tyreant =
     should infer the collection and/or fields from the table and allow the form to be used as an edit form for the table.  As another example, Tyreant date fields
     nested inside a Tyreant form should be able to infer the document they are editing from the form.
   <li><i>Extensible</i> - <b>Users should be able to write their own Tyreant-compatible, metadata-driven components to extend the component library.</b>
-  <li><i>Intelligent</i> - <b>Components should leverage metadata as much as possible to increase DRYness.</b>
+  <li><i>Intelligent</i> - <b>Components should leverage metadata as much as possible to increase DRYness and provide richer controls.</b>
   <li><i>Interoperable</i> - <b>Components should be usable on their own alongside non-Tyreant components.</b>
   <li><i>Offline</i> - <b>Components should operate offline using Tyranid's client-side APIs.</b>
+  <li><i>Performant</i> - <b>Components should be as lightweight as possible and render efficiently.</b>
   <li><i>Responsive</i> - <b>Components should responsively scale from mobile to desktop.</b>
   <li><i>Scaleable</i> - <b>Components should be able to have automatic behavior but fallback to more manual react code so that there are no limits to custom behavior.</b>
     For example, you should be able to specify a form using just a collection and field names or by specifically detailing the field-level components yourself.
@@ -80,22 +81,39 @@ tyreant =
     <li>Router plug-in API
     <li>NPM
     <li>Update to latest Ant
+    <li>TyrBoolean
+      <ol>
+        <li>render as two option radio box
+        <li>render as checkbox
+      </ol>
+    <li>TyrInteger / TyrDouble
+      <ol>
+        <li>support validations
+      </ol>
+    <li>TyrString
+      <ol>
+        <li>support regex and length validations
+      </ol>
     <li>TyrLink enhancements
       <ol>
         <li>tags
         <li>array of links
         <li>allow to be nested inside a TyrForm
         <li>lift route requirement
+        <li>add "details functionality"
       </ol>
     <li>Tyr<i>Field</i> control enhancements
       <ol>
+        <li>placeholder support
         <li>infer document and form from parent TyrForm
+        <li>render computed fields dynamically in forms as read-only components
       </ol>
     <li>TyrForm enhancements
       <ol>
         <li>children support
       </ol>
     <li>TyrFormDrawer
+    <li>TyrArray control
     <li>TyrTable enhancements
       <ol>
         <li>pin columns on the left/right
@@ -128,8 +146,12 @@ tyreant =
         <li>pivot table
         <li>mass edit in-place
       </ol>
+    <li>TyrAddress/Location
+    <li>TyrUnit
+    <li>TyrTree
     <li>TyrForm
       <ol>
+        <li>multi-step / page forms
         <li>responsive support
       </ol>
   </ol>
