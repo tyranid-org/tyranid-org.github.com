@@ -24,35 +24,29 @@ tyreant =
 
     <pre><code class="jsx">export const UserTable = () =&gt; (
   &lt;TyrTable
-    opts=&#123;{
-      collection: User,
-      query: {
-        status: {
-          $ne: UserStatus.DELETED._id,
-        },
-      },
-      columns: [
-        { field: 'fullName', defaultSort: 'ascend' },
-        { field: 'organizationId' },
-        { field: 'email', width: '270px' },
-        { field: 'updatedAt', width: '200px' },
-        { field: 'status', width: '200px' },
-      ],
-      route: RouterPath.ADMIN_USERS,
-      actions: [
-        &lt;TyrFormModal
-          opts=&#123;{
-            fields: [
-              { field: 'firstName' },
-              { field: 'lastName' },
-              { field: 'email' },
-              { field: 'dateOfBirth' },
-              { field: 'status' },
-            ],
-          }}
-        />,
-      ],
-    }}
+    collection={User},
+    query=&#123;{
+      status: { $ne: UserStatus.DELETED._id }
+    }},
+    columns={[
+      { field: 'fullName', defaultSort: 'ascend' },
+      { field: 'organizationId' },
+      { field: 'email', width: '270px' },
+      { field: 'updatedAt', width: '200px' },
+      { field: 'status', width: '200px' },
+    ]},
+    route={'/users'},
+    actions={[
+      &lt;TyrFormModal
+        fields={[
+          { field: 'firstName' },
+          { field: 'lastName' },
+          { field: 'email' },
+          { field: 'dateOfBirth' },
+          { field: 'status' },
+        ]},
+      />,
+    ]}
   />
 );</code></pre>
 
@@ -70,7 +64,7 @@ tyreant =
   <li><i>Responsive</i> - <b>Components should responsively scale from mobile to desktop.</b>
   <li><i>Scaleable</i> - <b>Components should be able to have automatic behavior but fallback to more manual react code so that there are no limits to custom behavior.</b>
     For example, you should be able to specify a form using just a collection and field names or by specifically detailing the field-level components yourself.
-  <li><i>Skinnable</i> - <b>component should be fully skinnable and styleable and should not lock clients into a particular appearance or style of application.</b>
+  <li><i>Skinnable</i> - <b>Components should be fully skinnable and styleable and should not lock clients into a particular appearance or style of application.</b>
 </ul>
 
 <h2>Roadmap</h2>
@@ -82,6 +76,7 @@ tyreant =
     <li>TyrLink enhancements
       <ol>
         <li>array of links
+        <li>tags
       </ol>
   </ol>
 </strike>
@@ -107,9 +102,7 @@ tyreant =
       </ol>
     <li>TyrLink enhancements
       <ol>
-        <li>tags
         <li>allow to be nested inside a TyrForm
-        <li>lift route requirement
         <li>add "details functionality"
       </ol>
     <li>Tyr<i>Field</i> control enhancements
@@ -126,6 +119,7 @@ tyreant =
     <li>TyrArray control
     <li>TyrTable enhancements
       <ol>
+        <li>lift route requirement
         <li>pin columns on the left/right
         <li>show/hide columns
         <li>rearrange columns order

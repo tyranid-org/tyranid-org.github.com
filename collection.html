@@ -29,6 +29,9 @@ layout: default
            <tr><td>  sort:<td>MongoDB sort<td>The standard MongoDB-style sort object.
            <tr><td colspan="3" class="subtitle">Parallel Arrays (<u>byIds()</u>, <u>byUids()</u>)</td>
            <tr><td>  parallel:<td>boolean<td>If true, then the returning array will be parallel to the input array of IDs/UIDs.
+           <tr><td colspan="3" class="subtitle">Caching (<u>byIds()</u>, <u>byUids()</u>)</td>
+           <tr><td>  cached:<td>boolean<td>If true, then the returning array will return cached values if they are present to avoid a query.
+             (Currently only availabe in the client-side API.)
            <tr><td colspan="3" class="subtitle">Deletions (<u>remove()</u>)</td>
            <tr><td>  justOne:<td>boolean<td>Whether to remove at most one document.
 
