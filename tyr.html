@@ -122,6 +122,10 @@ const Train = Tyr.byName.train;</pre>
   logLevel: 'info',
   clientLogLevel: 'error',
   consoleLogLevel: 'info',
+  csrf?: { <i>// enables CSRF support in the Tyranid client API</i>
+    cookie: string; <i>// the name of a cookie containing the CSRF value</i>
+    header: string; <i>// the name of the header to place this cookie value in when making requests</i>
+  },
   dbLogLevel: 'info',
   fixer?: { <i>// if present will be used for currency conversions</i>
     accessKey: '<i>fixer.io API key</i>',
