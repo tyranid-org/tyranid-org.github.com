@@ -40,7 +40,6 @@ layout: default
 </thead>
 <tr><td>{</td>
 <tr><td>  type:<td>string<td><i>required</i><td>An <a href="#types">event type</a>.
-<tr><td>  field:<td>string<td><td>Used with <u>change</u> events, this is the path inside the document to the value changed.
 <tr><td>  from:<td><a href="collection">Collection</a><td><td>Used with <a href="#linkHandlers">link event handlers</a> this defines which collection is adding the event.
 <tr><td>  handler:<td>async? <a href="event#eventObject">Event</a> => boolean</span><td><i>required</i><td>The event handling function.
 <tr><td>  when:<td><u>'pre'</u> | <u>'post'</u> | <u>'both'</u><td><u>'pre'</u><p>(or <u>'post'</u> if only <u>'post'</u> is supported)<td>Should the handler be called before or after the underling action being listened to.
@@ -65,9 +64,8 @@ layout: default
 
        <pre><code class="js">const dereg = Tyr.byName.user.on({
   type: 'change',
-  field: 'name.first',
   handler(event) {
-    console.log('the first name was changed for these objects:', event.query);
+    console.log('user changed for these objects:', event.query);
   }
 
   <i>...</i>
@@ -101,7 +99,6 @@ layout: default
 </thead>
 <tr><td>linkEvents: {</td>
 <tr><td>  type:<td>string<td><i>required</i><td>An <a href="#types">event type</a>.
-<tr><td>  field:<td>string<td><td>Used with <u>change</u> events, this is the path inside the document to the value changed.
 <tr><td>  required:<td>boolean<td><i>false</i><td>Whether clients linking to this collection need to have the appropriate event handler defined.
 <tr><td>}</td>
 </table>
@@ -185,13 +182,6 @@ layout: default
        <p>If <a href="#document"><u>document</u></a> is available this method will return an array containing that document.</p>
        <p>Otherwise, the <a href="#query"><u>query</u></a> will be executed to retrieve back the list of documents.  This result is cached so only one
         query will be executed even if multiple event handlers access this method.</p>
-     </article>
-
-     <article id="fieldValue">
-       <b class="property"></b>
-       <b class="server"></b>
-       <span class="sig">fieldValue: any</span>
-      <p>Only valid on <u>change</u> events that have specified a <u>field</u>, this contains the value that the field is being changed to.</p>ct
      </article>
 
      <article id="instanceId">
