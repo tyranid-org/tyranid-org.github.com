@@ -308,6 +308,36 @@ myDoc.$slice('hugeArray', {
        <b class="client"></b>
        <span class="sig">$tyr: <a href="tyr">Tyr</a></span>
        <p>This is a reference to the tyranid namespace object <a href="tyr"><u>Tyr</u></a>.
+       <p>This property can be essential if you are writing isomorphic properties or methods inside tyranid since this
+         value will not be name-mangled.  For example, if your code is being uglified (or some equivalent), then in a
+         production build the "Tyr" <i>inside the getter</i> will get name mangled:
+
+       <pre><code class="js"><i>...</i> = new Tyr.Collection({
+  <i>...</i>,
+  fields: {
+    <i>...</i>,
+    myPredicateProperty: {
+      is: 'boolean',
+      get() { return this.myStatus === Tyr.byName.myEnum.MY_VALUE._id; }
+    },
+    <i>...</i>
+  },
+  <i>...</i>
+</code></pre>
+
+    <p>The following getter will be fine even under name-mangling:</p>
+       <pre><code class="js"><i>...</i> = new Tyr.Collection({
+  <i>...</i>,
+  fields: {
+    <i>...</i>,
+    myPredicateProperty: {
+      is: 'boolean',
+      get() { return this.myStatus === this.$tyr.byName.myEnum.MY_VALUE._id; }
+    },
+    <i>...</i>
+  },
+  <i>...</i>
+</code></pre>
      </article>
 
      <article id="$uid">

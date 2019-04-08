@@ -34,6 +34,19 @@ layout: default
          Tyranid metadata inside the database that uses Tyranid paths.  This method encodes those values into something that MongoDB will store.</p>
      </article>
 
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">populateNameFor(name: string, denormal: boolean): string</span>
+       <p>This returns the name for the populated field the given path.</p>
+       <table>
+         <tr><th><u>name</u><th><u>populateNameFor(denormal: false)/u><th><u>populateNameFor(denormal: true)</u>
+         <tr><td><u>'customer'</u><td><u>'customer$'</u><td><u>'customer_'</u>
+         <tr><td><u>'customerId'</u><td><u>'customer'</u><td><u>'customer_'</u>
+       </table>
+     </article>
+
 
     <h3>instance</h3>
 
