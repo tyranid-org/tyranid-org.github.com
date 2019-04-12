@@ -1,0 +1,70 @@
+---
+layout: default
+---
+
+<div class="content">
+  <h1>Roadmap</h1>
+
+
+  <ul>
+    <li><strike>Improve typing for event handlers</strike><i>DONE</i>
+
+    <li>Improve documentation <i>(2 hours)</i>
+      <ul>
+        <li>Client-side security explanation
+        <li>Explanation of broadcast vs. local events
+        <li>Explain how to write handlers efficiently/easily
+        <li>Clearly document which operations will <i>not</i> trigger Tyranid events
+      </ul>
+
+    <li>TODO:  show an example of imperative vs. event handler / i.e. around org-creation / project/plans transition around participants
+
+    <li>Increase context inside event handlers
+      <ul>
+        <li>access to current user
+          <ul>
+            <li>option 1 -- investigate continuation-local-storage / update <a href="local"><u>Tyr.local</u></a>
+              <br>(it used to be that this was not well-supported, but later versions of node.js added support
+              for async hooks which might / might not make this a performant solution now)<br><i>(4 hours to investigate feasibility + ? hours
+            to implement)</i>
+            <li>option 2 -- ensure people are specifying auth on all tyranid requests
+          </ul>
+
+        <li>access to what was changed / <a href="document#$orig"><u>$orig</u></a> support<br>
+          We already support this on historical collections, one solution would be
+          to enable this automatically if
+          <ol>
+            <li>the collection is historical <i>or</i>
+            <li>the collection has event handlers <i>(4 hours)</i>.
+          </ol>
+      </ul>
+
+    <li>Client-side cache invalidation ... ability to specify force querying a fresh copy in certain circumstances
+
+    <li>Multiple Event Handlers
+      <ul>
+        <li>Improve understanding how errors handled/propagated
+        <li>Event transactions ... run all the handlers in a transaction when we go to mongo 4.0 <i>(2 days)</i>
+        <li>Event sequencing -- monad, programmable-semicolon, sequencing
+      </ul>
+
+    <li>Create Tyranid developer's document for people who would like to contribute to Tyranid
+      <br>investigate https://help.github.com/en/articles/setting-guidelines-for-repository-contributors
+
+    <li>Client-side Projection Management <i>(3 days)</i><br>
+      Includes determining when a cache is missing needed fields.
+
+    <li>devtools for Tyranid
+
+    <li>Unify projection and population syntax
+
+    <li>Use MongoDB 3.6+ aggregations to perform queries that have population in one database operation.  This would
+      <ol>
+        <li>reduce the number of queries but also, more importantly, would
+        <li>allow you to do searching/filtering on populated values when doing a paged query.
+      </ol>
+
+    <li>First class support for node.js mongodb driver bulk operations
+  </ul>
+
+</div>
