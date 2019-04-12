@@ -58,6 +58,13 @@ layout: default
 
       <p>Note that actions can only be canceled in <u>when: 'pre'</u> (the default) handlers.</p>
 
+  <div class="best-practice"><b>It's recommended to define event handlers alongside the main model definition
+  when possible.</b>  This makes it easier to understand what events will get fired when a collection is updated
+  if they are centrally located. It also provides a basis for dealing with the case where one event handler might
+  depend on a previous one running -- in this case, if both handlers are in the same file their logic can be merged
+  into one handler that exposes the dependency inside the function.
+  </div>
+
       <h3>example 1</h3>
 
       <p>Watching when an object is updated:</p>

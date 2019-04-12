@@ -384,3 +384,26 @@ article h1 {
     color: #f70;
   }
 }
+
+.best-practice {
+  display: inline-block;
+  background: #fff;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  &::before {
+    content: 'Best Practice';
+    background: #f8f8f8;
+    color: #f70;
+    font-style: italic;
+    position: relative;
+    top: -12px;
+    left: -12px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    padding: 4px;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+}
