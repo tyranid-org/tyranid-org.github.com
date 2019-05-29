@@ -147,8 +147,18 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">set(obj: object, value: any): void</span>
+       <span class="sig">set(obj: object, value: any, opts: object): void</span>
        <p>This walks the <u>obj</u> according to this path and sets the given <u>value</u> at that point in the path.</p>
+       <p><u>opts</u> is as follows:</p>
+       <table class="def">
+         <thead>
+           <tr><th>Option<th>Type<th>Notes
+         <tbody>
+           <tr><td>{</td>
+           <tr><td>  create:<td>boolean<td>If true, <u>set()</u> will create any missing ancestor objects or arrays as needed.</a>.
+           <tr><td>  ignore:<td>boolean<td>If true, <u>set()</u> will silently fail if ancestor objects or arrays are missing.</a>.
+           <tr><td>}</td>
+       </table>
      </article>
 
      <article id="spath">
