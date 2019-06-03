@@ -625,6 +625,41 @@ const myUser = await User.byId(myId, { fields: 'mainTableView' });
 res.json(myUser.$toClient({ fields: 'mainTableView' }));
 </code></pre>
 
+ <h4 id="minimalProjection">Minimal Projections</h4>
+
+ <p>There is a special named collection called <u>$minimal</u>.  If this named projection is present then these fields will always be included
+in the projection even if they are not directly requested.  You can override this behavior by passing in <u>$minimal: <i>falsey value</i></u>
+into your projection.</p>
+
+<p>The <u>$minimal</u> projection is applied first, then the manually specified projection is merged on top of it, so any fields mentioned
+in the manual projection override the corresponding fields in the <u>$minimal</u> projection.</p>
+
+<p>For example, given:</p>
+
+<pre><code class="js">var User = new Tyr.Collection({
+  <i>...</i>
+  projections: {
+    <i>...</i>
+    $minimal: {
+      name: 1,
+      age: 1
+    },
+    <i>...</i>
+  },
+  <i>...</i>
+});
+</code></pre>
+
+<p>The following query:</p>
+
+<pre><code class="js">User.find({ query: { job: 1 } })</code></pre>
+
+<p>would have an effective projection of <u>{ name: 1, age: 1, job: 1 }</u>, while the following query:</p>
+
+<pre><code class="js">User.find({ query: { job: 1, $minimal: false } })</code></pre>
+
+<p>would have an effective projection of just <u>{ job: 1 }</u>.</p>
+
     <h3 id="population">Population</h3>
 <pre><code class="js"><i>// Tyranid can traverse links and provide join-like functionality.</i>
 User.populate('org', users).then(function(users) {
