@@ -15,6 +15,19 @@ layout: default
       Document fields usually start with a "<u>$</u>" so that the Tyranid fields do not conflict with the underlying data being modeled.
     </div>
 
+     <article id="$">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">$: TaggedTemplateLiteral => any</span>
+       <p>This is a short-cut for <a href="#$get"><u>$get()</u></a> using
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">tagged template literals</a>.</p>
+       <p>For example:</p>
+       <pre><code class="js">myDoc.$`organization.name`</code></pre>
+       <p>is equivalent to:</p>
+       <pre><code class="js">myDoc.$get('organization.name')</code></pre>
+     </article>
+
      <article id="$access">
        <b class="property"></b>
        <b class="server"></b>
@@ -94,6 +107,24 @@ doc.$asOf(new Date(...), fields);
                in the current document but not in <u>obj</u>, then it will be deleted from the current document.</p>
            <li><b><u>Tyr.$all</u></b>, then all properties of this collection are expected to be contained in <u>obj</u>.  Any missing
          will be deleted.  This is effectively a replace.  Also see <a href="#$replace"><u>$replace()</u></a>.
+     </article>
+
+     <article id="$get">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">$get(path: string): any</span>
+       <p>This method returns a value from the current object according to the given path.</p>
+       <p>This is shorthand for:</p>
+       <pre><code class="js">return this.$model.parsePath(path).get(this);</code></pre>
+       <p>This method is analogous to <a href="https://lodash.com">Lodash</a>'s <u>_.get()</u>.</p>
+       <p>Because this method uses <a href="namePath"><u>NamePath</u></a> to parse the data, it will also deal with embedded arrays and populated/denormalized
+        values. For example, if <u>organization</u> is a link, then:</p>
+       <pre><code class="js">$get('myDoc.organization.name')</code></pre>
+       <p>is equivalent to</p>
+       <pre><code class="js">$get('myDoc.$organization.name')</code></pre>
+       <p>Like Lodash's <u>_.get</u>, <u>$get()</u> handles the case where <u>organization$</u> is <u>undefined</u>.</p>
+       <p>A tagged template literal short-cut for this method is available as <a href="#$"><u>$</u></a>.</p>
      </article>
 
      <article id="$historical">
