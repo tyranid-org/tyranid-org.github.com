@@ -17,6 +17,16 @@ layout: default
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
+       <span class="sig">computed: boolean</span>
+       <p>This property is true if the field is computed.  For example, if it has a getter defined but no setter.</p>
+       <p>A field might also be computed even if it does not have a getter defined.  A field can be marked computed manually
+         if the field is managed by code rather than via user-input.</p>
+     </article>
+
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">db: boolean</span>
        <p>This returns true if this field is persisted in the database.</p>
      </article>
@@ -45,6 +55,8 @@ layout: default
   Only valid for top-level fields.
 <tr><td>  defaultValue:<td>any<td>none<td>Default value for this field.  If a function, the default will be the return value of the function.
 <tr><td>  if:<td>object | async? opts => (object | boolean)****<td>none<td>Indicates this is a <a href="/#conditionalFields">conditional field</a>.
+<tr><td>  computed:<td>boolean<td>true if <i>get...()</i> is defined but not <i>set...()</i><td>Indicates this is a computed field.
+<tr><td>  readonly:<td>boolean<td>true if <i>computed</i><td>Indicates this is readonly field.
 
 <tr><td colspan="4" class="subtitle">User Documentation
 <tr><td>  label:<td>string<td>labelify(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this field.
@@ -314,12 +326,13 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">readonly: boolean</span>
-       <p>This property is true if the field is readonly.  For example, if it has a getter defined but no setter.</p>
+       <p>This property is true if the field is readonly.  For example, if it is <a href="#computed">computed</a>.</p>
      </article>
 
      <article id="relate">
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">relate: 'associate' | 'owns' | 'ownedBy'</span>
        <p>This returns the relationship of a <u>link</u> field.</p>
      </article>

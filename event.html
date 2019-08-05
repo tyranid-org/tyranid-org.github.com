@@ -9,6 +9,8 @@ layout: default
 
      <h2 id="types">types</h2>
 
+     <p>Tyranid supports the following built-in event types:</p>
+
      <table>
        <tr><th>Name<th>Notes<th>When<th>Effect of Cancelation<br>(<u>pre</u> only)
        <tr><td><u>insert</u><td>A document is inserted (via insert, etc.)<td><u>pre</u>, <u>post</u><td>The document is not inserted
@@ -44,6 +46,8 @@ layout: default
 <tr><td>  handler:<td>async? <a href="event#eventObject">Event</a> => boolean</span><td><i>required</i><td>The event handling function.
 <tr><td>  when:<td><u>'pre'</u> | <u>'post'</u> | <u>'both'</u><td><u>'pre'</u><p>(or <u>'post'</u> if only <u>'post'</u> is supported)<td>Should the handler be called before or after the underling action being listened to.
   <p>If the event type only supports one type or the other (for example, <u>find</u> events only support <u>post</u>) then this does not need to be specified.
+<tr><td>  order:<td>number<td><u>Number.POSITIVE_INFINITY</u><td>Handlers are called in increasing order or by the order in when they were encountered if the
+  orders are the same.  If no order is given, the order defaults to +infinity, so that handlers with no order are called after handlers with an order.
 <tr><td>}</td>
 </table>
 
