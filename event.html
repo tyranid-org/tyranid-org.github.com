@@ -69,6 +69,62 @@ layout: default
   into one handler that exposes the dependency inside the function.
   </div>
 
+      <h3>High-level vs. Low-level interface</h3>
+
+      <p>There are two styles of writing an event handler: the (1) high-level interface and the (2) low-level interface.
+
+      <h4>High-level interface</h4>
+
+      <p>The high-level interface centers around the <a href="#documents"><u>documents</u></a> property:</p>
+
+       <pre><code class="js">const dereg = Tyr.byName.user.on({
+  type: 'change',
+  handler(event) {
+    for (const document in await event.documents) {
+      <i>// handle processing of this document</i>
+    }
+  }</code></pre>
+
+      <p>The high-level interface will also do things like minimize extraneous queries. For example, say a <u>findAndModify()</u> happens,
+        and there are three event handlers on that collection -- the <u>await event.documents</u> will have to do a
+        <u>findAll()</u> to grab the documents since it was a <u>findAndModify()</u> <i>but it will only do one find call despite
+          there being three handlers</i>.  If those three handlers were all using the low-level interface, and all needed to
+        access the data, the data would be queried three times.</p>
+
+      <h4>Low-level interface</h4>
+
+      <p>The low-level interface is more complicated, but gives you more insights into what database operation was
+       performed.</p>
+
+       <pre><code class="js">const dereg = Tyr.byName.user.on({
+  type: 'change',
+  handler(event) {
+    if (event.document) {
+      <i>// a single-document insert/update/save operation was performed, handle this document.</i>
+    } else if (event.update) {
+      <i>// something like an update() or findAndModify() was performed, examine the event.query and event.update</i>
+      <i>// properties to determine what you need to do.  Note you do not have access to the actual Document objects</i>
+      <i>// in this case.</i>
+    }
+  }</code></pre>
+
+ <p>The low level interface is primarily intended for situations where:
+   <ul>
+     <li><b>You do not need access to the underlying document</b><br>
+        For example, you want to write out a record everytime data is changed by a user but do not care about what was actually
+        changed.  In this example, by avoiding the `await event.documents` operation, you are not doing any secondary reads.
+        (Though if other high-level handlers exist the reads will still be done -- this benefit only applies if all handlers
+        for the collection are low-level.)
+     <li><b>You want extra insights around what actual database operation was performed</b><br>
+        For example, say you wanted to implement a transactional log of everything done to the collection
+        in that cased you might want to know when findAndModify’s/updates/etc. vs. single document saves were done.
+   </ul>
+
+
+  <div class="best-practice"><b>In general, prefer the high-level interface unless you know why you need the low-level interface.</b>
+    The handlers are much easier to write and easier to understand and more efficient in the typical use cases where you
+    would want an event handler.</div>
+
       <h3>example 1</h3>
 
       <p>Watching when an object is updated:</p>
