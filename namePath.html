@@ -47,6 +47,16 @@ layout: default
        </table>
      </article>
 
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">resolve(collection: <a href="collection">Collection</a>,<br>
+          <div style="margin-left:98px">parentPath?: <a href="namePath">NamePath</a> | string,</div>
+          <div style="margin-left:98px">path?: <a href="namePath">NamePath</a> | string): <a href="namePath">NamePath</a> | undefined</div></span>
+       <p>This resolves a new <a href="namePath"><u>NamePath</u></a> instance from a parent path and a child path.</p>
+       <p>If both the parent path and child path are missing, this will return <u>undefined</u>.</p>
+     </article>
 
     <h3>instance</h3>
 
@@ -70,13 +80,28 @@ layout: default
          at the contents of the array -- i.e. the string field.</p>
      </article>
 
-     <article>
+     <article id="get">
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">get(obj: object): any</span>
        <p>This walks the <u>obj</u> according to this path and returns the values at this path.  (There can be multiple values if the path crosses
        any arrays.  If so, this method will return duplicate values if values occur more than once.  See <a href="namePath#uniq"><u><i>NamePath</i>.uniq()</u></a>.)</p>
+     </article>
+
+     <article id="identifier">
+       <b class="property"></b>
+       <b class="server"></b>
+       <span class="sig"><a href="/#paths">identifier</a>: string</span>
+       <p>This returns a simple identifier for this field that does not have periods (.) in it.</p>
+       <p>This can be useful for some libraries which don't deal with with embedded periods like <u>getFieldDecorator</u>.</p>
+       <p>For example:</p>
+       <table>
+         <tr><th>Path</th><th>Identifier</th></tr>
+         <tr><td>siblings._.name</td><td>siblings___name</td></tr>
+         <tr><td>name.first</td><td>name_first</td></tr>
+         <tr><td>age</td><td>age</td></tr>
+       </table>
      </article>
 
      <article id="isHistorical">
@@ -131,7 +156,7 @@ layout: default
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig"><a href="/#paths">pathLabel</a>: String</span>
+       <span class="sig"><a href="/#paths">pathLabel</a>: string</span>
        <p>This contains the full <a href="/#pathLabels">path label</a> for this name path.
      </article>
 
@@ -164,7 +189,7 @@ layout: default
      <article id="spath">
        <b class="property"></b>
        <b class="server"></b>
-       <span class="sig"><a href="/#paths">spath</a>: String</span>
+       <span class="sig"><a href="/#paths">spath</a>: string</span>
        <p>This contains the <a href="/#paths">simplified path</a> of this field.</p>
        <p>Simplified paths remove the array contents reference and are useful when working with MongoDB projections.
         For example:</p>
@@ -195,6 +220,15 @@ layout: default
        <span class="sig">uniq(obj: object): any[]</span>
        <p>This walks the <u>obj</u> according to this path and returns the uniq values at this path it finds.  (There can be multiple
        values if the path crosses any arrays.)</p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">walk(path?: <a href="namePath">NamePath</a> | string): <a href="namePath">NamePath</a></span>
+       <p>This resolves a new <a href="namePath"><u>NamePath</u></a> instance that is relative to the current
+        <a href="namePath"><u>NamePath</u></a>.</p>
      </article>
 
   </div>

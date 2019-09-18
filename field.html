@@ -105,7 +105,12 @@ layout: default
   (i.e. <u>'application'</u>, <u>'audio'</u>, <u>'font'</u>, <u>'text'</u>, <u>'video'</u>, ...)
 
 <tr><td colspan="4" class="subtitle">Strings (<u>is == 'string'</u>)
-<tr><td>  labelField:<td>boolean<td>false<td>Set to true if this field contains the <a href="/#labels">label</a> for this collection.
+<tr><td>  labelField:<td><u>boolean</u> |<br><u>{ uses: string[] }</u><td>false<td>Set to true if this field contains
+  the <a href="/#labels">label</a> for this collection.<p>If the <u>uses</u> options object is specified, then
+  the array of strings should contain a list of fields that are needed to properly display labels.  A common example
+  would be if you want an image URL to show for a portrait next to labels -- you could indicate that the label uses
+  the image field.  This would cause methods like <a href="collection#labels"><u>labels()</u></a> and so on to also query
+  in the image field.</p>
 <tr><td>  pattern:<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp</a><td>none<td>Set this to a regular expression that the string must match.
 <tr><td>  minlength:<td>integer<td>none<td>Sets the minimum length of this string.
 <tr><td>  maxlength:<td>integer<td>none<td>Sets the maximum length of this string.

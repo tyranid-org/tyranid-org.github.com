@@ -202,9 +202,11 @@ doc.$asOf(new Date(...), fields);
      <article id="$orig">
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">$orig: object</span>
        <p>This will contain all of the original values for the document if <a href="/#historical">historical data</a> is enabled for this collection
         or if the <a href="collection#def"><u>preserveInitialValues</u></a> property is set for the collection.</p>
+       <p>This property is also available on the client if <a href="#$snapshot"><u>$snapshot()</u></a> has been called.<p>
      </article>
 
      <article id="$populate">
@@ -243,6 +245,14 @@ doc.$asOf(new Date(...), fields);
        <b class="server"></b>
        <span class="sig">$replace(obj): void</span>
        <p>This is a short-cut for <a href="#$copy"><u>$copy(obj, Tyr.$all)</u></a>.
+     </article>
+
+     <article id="$revert">
+       <b class="method"></b>
+       <b class="client"></b>
+       <span class="sig">$revert(): void</span>
+       <p>If an object has an <a href="#$orig"><u>$orig</u></a> property available then this method will revert the
+        contents of this document to those values.</p>
      </article>
 
      <article id="$save">
@@ -303,6 +313,7 @@ myDoc.$slice('hugeArray', {
      <article id="$snapshot">
        <b class="method"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">$snapshot(updateHistory: boolean, options: <a href="collection#options">Options</a>?): <a href="#snapshot">snapshot</a></span>
        <p>This <a href="/#historical">historical data</a> method compares the <a href="#$orig"><u>$orig</u></a> property and the current
          state of the object and returns a <a href="#snapshot">snapshot</a> record.</p>
@@ -314,6 +325,7 @@ myDoc.$slice('hugeArray', {
        <p>This method does not update the database.</p>
        <p>This method can be useful if you want to make a number of snapshots in memory and write them out at once (bulk updates for many documents,
          single updates when importing history from another source, and so on).</p>
+       <p>This method is also available in the client-side API but the client-side API does not take any arguments.</p>
      </article>
 
      <article id="$toClient">
