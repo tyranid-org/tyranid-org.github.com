@@ -212,15 +212,27 @@ layout: default
 <tr><td>    },</td>
 <tr><td>    <i>...</i></td>
 <tr><td>  },</td>
+<tr><td>  projections: {</td>
+<tr><td>    <i>projectionName</i>:<td><i>MongoDB-style projection</i><td><td>Define standard projections.  See <a href="/#projection">projections</a>.</td>
+<tr><td>    <i>...</i></td>
+<tr><td>  },</td>
+<tr><td>  service: {<td><td><td>Define a <a href="services">service</a> for this collection.
+<tr><td>    <i>serviceMethodName</i>: {</td>
+<tr><td>      help:<td>string<td>none<td>Contains brief user-facing documentation about this service method.
+<tr><td>      note:<td>string<td>none<td>Contains developer-facing documentation about this service method (only visible in the Tyranid console or in IDEs).
+<tr><td>      params: {<td><td><td>Define parameters for this service method.
+<tr><td>        <i>paramName</i>:<td><a href="field#def">Field Def</a></td>
+<tr><td>      },</td>
+<tr><td>      return:<td><a href="field#def">Field Def</a><td><td>Defines the return type.
+  All result types are automatically wrapped in a <u>Promise</u>. If not specified, this will return <u>Promise<void></u>.
+<tr><td>      route:<td>string<td>/api/<i>collection name</i>/<i>service method name</i><td>This defines the HTTP route for this service.  This does not usually need to be manually specified.
+<tr><td>    },</td>
+<tr><td>  },</td>
 <tr><td>  values: {<td><td>none<td>This allows you to define <a href="/#staticData">static data</a> in a tabular format.</td>
 <tr><td>    [ '_id', '<i>fieldName1</i>', ... ],<td><td><td>The first row is a header row which contains field names.</td>
 <tr><td>    [ <i>id1</i>,   <i>value1</i>,       ... ],<td><td><td>The following rows are data rows.</td>
 <tr><td>    ...</td>
 <tr><td>  }</td>
-<tr><td>  projections: {</td>
-<tr><td>    <i>projectionName</i>:<td><i>MongoDB-style projection</i><td><td>Define standard projections.  See <a href="/#projection">projections</a>.</td>
-<tr><td>    <i>...</i></td>
-<tr><td>  },</td>
 <tr><td>  fromClient:<td>async? opts => void<td>
   <td>Specifies a <a href="collection#fromClient"><u><i>Collection</i>.fromClient()</u></a> post-processing hook that will be applied for this collection.
   <p>This callback can be asynchronous.

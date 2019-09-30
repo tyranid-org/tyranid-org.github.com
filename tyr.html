@@ -253,23 +253,6 @@ const Train = Tyr.byName.train;</pre>
         <i>instance id</i> that is available in this property.</p>
      </article>
 
-     <article>
-       <b class="method"></b>
-       <b class="server"></b>
-       <b class="client"></b>
-       <span class="sig">labelize(name: string): string</span>
-       <p>This generates a humanized version of a camel-case name.  For example:<p>
-       <table>
-         <thead>
-           <tr><th><i>name</i><th>labelize(<i>name</i>)
-         </thead>
-         <tr><td>count<td>Count
-         <tr><td>totalValue<td>Total Value
-         <tr><td>userId<td>User
-         <tr><td>groupIds<td>Groups
-       </table>
-     </article>
-
      <article id="local">
        <b class="property"></b>
        <b class="server"></b>
@@ -350,22 +333,6 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <p>
         This will parse a <a href="/#uids">UID</a> into the collection and id that the uid refers to.
        </p>
-     </article>
-
-     <article>
-       <b class="method"></b>
-       <b class="server"></b>
-       <b class="client"></b>
-       <span class="sig">pluralize(name: string): string</span>
-       <p>This generates a plural form of a singular word.  For example:<p>
-       <table>
-         <thead>
-           <tr><th><i>name</i><th>pluralize(<i>name</i>)
-         </thead>
-         <tr><td>boss<td>bosses
-         <tr><td>day<td>days
-         <tr><td>daisy<td>daisies
-       </table>
      </article>
 
      <article>
@@ -475,6 +442,76 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <p>This returns a unique list of all values that appear in any collection in the database for any field that matches the filter.</p>
        <p>For example, the following returns a list of all of the strings that occur in the database in any string field in any collection.</p>
        <pre>Tyr.valuesFor(field => field.type.def.name === 'string')</pre>
+     </article>
+
+    <h2 id="stringUtilities"><u>string</u> utilities</h2>
+
+    <p>The following string functions can be useful when writing metadata-driven code.</p>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">labelize(name: string): string</span>
+       <p>This generates a humanized version of a camel-case name.  For example:<p>
+       <table>
+         <thead>
+           <tr><th><i>name</i><th>labelize(<i>name</i>)
+         </thead>
+         <tr><td>count<td>Count
+         <tr><td>totalValue<td>Total Value
+         <tr><td>userId<td>User
+         <tr><td>groupIds<td>Groups
+       </table>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">ordinalize(integerValue: number): string</span>
+       <p>This generates a ordinalized form of number.  For example:<p>
+       <table>
+         <thead>
+           <tr><th><i>integerValue</i><th>ordinalize(<i>integerValue</i>)
+         </thead>
+         <tr><td>1<td>1st
+         <tr><td>12<td>12th
+         <tr><td>22<td>22nd
+         <tr><td>103<td>103rd
+       </table>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">pluralize(name: string): string</span>
+       <p>This generates a plural form of a singular word.  For example:<p>
+       <table>
+         <thead>
+           <tr><th><i>name</i><th>pluralize(<i>name</i>)
+         </thead>
+         <tr><td>boss<td>bosses
+         <tr><td>day<td>days
+         <tr><td>daisy<td>daisies
+       </table>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">singularize(name: string): string</span>
+       <p>This generates a singular form of a plural word.  For example:<p>
+       <table>
+         <thead>
+           <tr><th><i>name</i><th>singularize(<i>name</i>)
+         </thead>
+         <tr><td>bosses<td>boss
+         <tr><td>days<td>day
+         <tr><td>daisies<td>daisy
+       </table>
      </article>
 
     <h2 id="lodashUtilities"><u>ObjectId</u>-aware <u>lodash</u>-like utilities</h2>

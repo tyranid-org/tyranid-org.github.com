@@ -207,6 +207,14 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <p>This is a parallel hash to <u>def.fields</u> that contains the generated <a href="field"><u>Field</u></a> objects if this is of <u>type === 'object'</u>.</p>
      </article>
 
+     <article id="fromClient">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">fromClient(value: any): any</span>
+       <p>This method will be used by Tyranid to convert incoming data from the client into server objects.  For example, MongoId types will
+         convert client-side MongoID strings into server-side <u>ObjectId</u> objects.</p>
+     </article>
+
      <article id="group">
        <b class="property"></b>
        <b class="server"></b>
@@ -326,7 +334,7 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <p>This contains the full <a href="/#pathLabels">path label</a> for this field.
      </article>
 
-     <article>
+     <article id="readonly">
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
@@ -349,6 +357,14 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <p>This contains the <a href="/#paths">simplified path</a> of this field.</p>
        <p>This is a short-cut for <a href="namePath#spath"><u>this.namePath.spath</u></a>.</p>
        <p>Also see <a href="/#paths">Paths</a> for more information.</p>
+     </article>
+
+     <article id="toClient">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">toClient(value: any): any</span>
+       <p>This method will be used by Tyranid to convert server data into JSON suitable for the client.  For example, MongoId types will
+         convert server-side <u>ObjectId</u>s into client-side MongoID strings.</p>
      </article>
 
      <article>
