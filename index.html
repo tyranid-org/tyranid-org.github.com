@@ -194,7 +194,7 @@ Dynamic schemas differ from Mixin Schemas in that they are <i>conditionally appl
 });
 </code></pre>
 <p>You can get a list of fields that apply to a specific document using <b>fieldsFor</b>:</p>
-<pre><code class="js">const fields = await User.fieldsFor({ org: 1 });
+<pre><code class="js">const fields = await User.fieldsFor({ match: { org: 1 } });
 </code></pre>
 
 

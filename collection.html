@@ -293,8 +293,22 @@ layout: default
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">fieldsFor(obj): { <i>fieldName</i>: <a href="field">Field</a> }</span>
-       <p>This is similar to <u>def.fields</u> except that it also returns all fields from <a href="/#dynamicSchemas">Dynamic Schemas</a> as well.</p>
+       <b class="client"></b>
+       <span class="sig">fieldsFor(opts: { match: MongoDocument | <a href="document">Document</a>,
+         <div style="margin-left:274px;">query?: MongoQuery,</div>
+         <div style="margin-left:274px;">custom?: boolean,</div>
+         <div style="margin-left:274px">static?: boolean }): { <i>fieldName</i>: <a href="field">Field</a> }</div></span>
+       <p>This is similar to <u>def.fields</u> except that it returns dynamic fields defined in <a href="/#dynamicSchemas">Dynamic Schemas</a>.</p>
+       <p>Only one of <u>match</u> and <u>query</u> should be provided.</p>
+       <p>If
+         <ul>
+           <li><b>match</b> is given, then it should be a document that will be matched against the schema match values.
+           <li><b>query</b> is given, then it should be a mongo-style query that will be executed against the schema match values for
+            a match.
+         </ul>
+       </p>
+       <p>If <u>static</u> is specified, then all statically defined fields will also be returned -- by default only dynamic fields are returned.</p>
+       <p>If <u>custom</u> is specified, then only dynamic fields which have <u>custom: true</u> set on them will be returned.</p>
      </article>
 
      <article>
