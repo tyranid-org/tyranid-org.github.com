@@ -618,6 +618,17 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        </p>
      </article>
 
+     <article id="stringify">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">stringify(value: any,
+         <div style="margin-left:120px;">replacer?: (key: string | symbol, value: any),</div>
+         <div style="margin-left:120px;">space?: string | number): string</div></span>
+       <p>
+        This is similar to <u>JSON.stringify()</u> except that it stringifies <u>ObjectId</u>s as strings.
+       </p>
+     </article>
+
     <h2 id="asyncUtilities"><u>async</u> & <u>Promise</u> utilities</h2>
 
      <article id="eachAsync">
