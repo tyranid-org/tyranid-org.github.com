@@ -89,6 +89,17 @@ layout: default
 
      <article>
        <b class="method"></b>
+       <b class="client"></b>
+       <b class="async"></b>
+       <span class="sig">ajax(url: string, opts: <i>options</i>): <i>data</i></span>
+       <p>This is a method used by Tyranid internally to make its AJAX calls but which is also available as part of Tyranid's public API.</p>
+       <p>The API is essentially the same as <a href="https://api.jquery.com/jquery.ajax/">jQuery's <u>$.ajax()</u> method</a> which is currently
+        used for the underlying implementation.</p>
+       <p>If the <u>csrf</u> option is enabled in <a href="tyr#config"><u>Tyr.config()</u></a>, then CSRF will be applied to all <u>Tyr.ajax</u> calls automatically.</p>
+     </article>
+
+     <article>
+       <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
