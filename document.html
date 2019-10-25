@@ -176,6 +176,14 @@ doc.$asOf(new Date(...), fields);
        <span class="sig">$insert(options: <a href="collection#options">Options</a>?): <a href="document">Document</a></span>
      </article>
 
+     <article id="$isNew">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">$isNew: boolean</span>
+       <p>This returns true if this is a new document that has not been saved to the database yet.
+     </article>
+
      <article id="$label">
        <b class="property"></b>
        <b class="server"></b>
@@ -408,7 +416,7 @@ myDoc.$slice('hugeArray', {
      <article id="$validate">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">$validate(): <a href="validationError">ValidationError</a>[]</span>
+       <span class="sig">$validate(): <a href="userError">UserError</a>[]</span>
        <p>This validates the current document according to the validation rules specified by the metadata for this collection.</p>
      </article>
 

@@ -29,6 +29,13 @@ layout: default
       </ul>
     </p>
 
+  <p><a href="exceptions">Rethrowable exceptions</a> thrown from inside services will be caught and rethrown in the client to ensure that
+    error handling is also done isomorphically. 
+    
+    <div class="best-practice">Because exceptions are caught and rethrown in the client, this means you should generally not
+    return error codes or error messages from your services -- throw <a href="appError"><u>AppError</u></a> or <a href="userError"><u>UserError</u></a>
+    exceptions instead.</div>
+
   <h2>API</h2>
 
   <p>To implement a service:<p>

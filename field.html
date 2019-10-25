@@ -71,7 +71,7 @@ layout: default
 <tr><td colspan="4" class="subtitle">Validation
 <tr><td>  required:<td>boolean<td>false<td>Indicates that this field is required.
 <tr><td>  validate:<td>async? field: <a href="field">Field</a> => string?****<td>none<td>Specifies a function that can perform custom validation.  If a validation error occurs,
-  the function should return a string with a human-readable explanation for the message.  Alternatively the function can throw a <a href="validationError">ValidationError</a>.
+  the function should return a string with a human-readable explanation for the message.  Alternatively the function can throw a <a href="userError">UserError</a>.
 
 <tr><td colspan="4" class="subtitle">Arrays (<u>is == 'array'</u>)
 <tr><td>  of:<td><a href="field#def">Field Def</a><td>none<td>Indicates the type of the array.
@@ -389,9 +389,9 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">validate(doc: <a href="document">Document</a>): void throws <a href="validationError">ValidationError</a></span>
+       <span class="sig">validate(doc: <a href="document">Document</a>): void throws <a href="userError">UserError</a></span>
        <p>This applies any <u>validate</u> function defined in the <a href="#def"><i>Field</i>.<u>def</u></a> and throws
-         a <a href="validationError">ValidationError</a> if a validation error occurred.
+         a <a href="userError">UserError</a> if a validation error occurred.
      </article>
 
   </div>

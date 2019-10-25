@@ -92,7 +92,7 @@ Tyr.config({
   client: false,
   validate: function(path, field, value) {
     if (!!value.match(/^\d{3}-\d{2}-\d{4}$/)) {
-      return new Tyr.ValidationError(path, 'is not a valid SSN.');
+      return new Tyr.UserError({ field: path, suffix: 'is not a valid SSN.' });
     }
   }
 });
@@ -751,7 +751,7 @@ be available as "user.org" while the denormalized name would be available as "us
 
 
     <h3>Validation</h3>
-<p>The following will run validations on the object and return an array of <a href="validationError">ValidationError</a>s:</p>
+<p>The following will run validations on the object and return an array of <a href="userError">UserError</a>s:</p>
 <pre><code class="js">user.$validate();
 </code></pre>
 

@@ -56,10 +56,6 @@ layout: default
       <p>If an event handler returns false, returns a promise of false, or calls <a href="event#preventDefault"><u><i>Event</i>.preventDefault()</u></a> then
         the underlying action associated with the event will be canceled.</p>
 
-      <p>If an event handler throws an exception or returns a failed promise then the resulting exception or failed promise will be thrown to the client
-        in addition to the event being canceled.  For example, if you add a handler on the <u>remove</u> event type and throw an error inside the handler,
-        that error will be thrown to the calling function that executed the remove method and the remove will not be performed.</p>
-
       <p>Note that actions can only be canceled in <u>when: 'pre'</u> (the default) handlers.</p>
 
   <div class="best-practice"><b>It's recommended to define event handlers alongside the main model definition
@@ -68,6 +64,20 @@ layout: default
   depend on a previous one running -- in this case, if both handlers are in the same file their logic can be merged
   into one handler that exposes the dependency inside the function.
   </div>
+
+      <h3 id="exceptions">Exceptions</h3>
+
+      <p>If an event handler throws an exception or returns a failed promise then the resulting exception or failed promise will be thrown to the client
+        in addition to the event being canceled.  For example, if you add a handler on the <u>remove</u> event type and throw an error inside the handler,
+        that error will be thrown to the calling function that executed the remove method and the remove will not be performed.</p>
+
+      <p>If the call originated on the client, then the exception will be rethrown on the client as well.</p>
+
+      <p>Throw an <a href="appError"><u>AppError</u></a> if the error is unexpected and not due to user the users actions, throw a
+        <a href="secureError"><u>SecureError</u></a> if there is a problem with security, or throw a <a href="userError"><u>UserError</u></a>
+        if the problem is due to bad user input or data.</p>
+
+      <p>See <a href="exceptions">Exceptions</a> for more information.</p>
 
       <h3 id="high-vs-low-level-interface">High-level vs. Low-level interface</h3>
 
