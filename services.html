@@ -33,8 +33,8 @@ layout: default
     error handling is also done isomorphically. 
     
     <div class="best-practice">Because exceptions are caught and rethrown in the client, this means you should generally not
-    return error codes or error messages from your services -- throw <a href="appError"><u>AppError</u></a> or <a href="userError"><u>UserError</u></a>
-    exceptions instead.</div>
+    return error codes or error messages from your services -- throw <a href="appError"><u>AppError</u></a>, <a href="secureError"><u>SecureError</u></a>,
+    or <a href="userError"><u>UserError</u></a> exceptions instead.</div>
 
   <h2>API</h2>
 
