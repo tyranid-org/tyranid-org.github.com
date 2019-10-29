@@ -10,7 +10,7 @@ layout: default
   <table>
     <thead>
       <tr>
-        <th>Exception<th>Usage<th>HTTP Code<th>Example Reporting
+        <th>Exception<th>Usage<th>HTTP Code<a href="#httpCode"><super>*</super></a><th>Example Reporting
     <tbody>
       <tr>
         <td><a href="appError">AppError</a><td>Use for any sort of application-level exception that is unexpected.<td>500<td>Bugsnag
@@ -18,11 +18,13 @@ layout: default
         <td><a href="eventCancelError">EventCancelError</a><td>Generally should not be used manually, sent when an event handler calls "preventDefault()".<td>Not rethrown
           <td>Not reported since this indicates that an event should not be propagated for non-error reasons.
       <tr>
-        <td><a href="secureError">SecureError</a><td>Use for any sort of security violations like access denied.<td>401<td>Security log
+        <td><a href="secureError">SecureError</a><td>Use for any sort of security violations like access denied.<td>403<td>Security log
       <tr>
         <td><a href="userError">UserError</a><td>Use for any sort of user errors where the problem lies with bad input or data from the user.<td>400
           <td>Not logged, reported inline in the user interface (for example, below form fields, or as toast messages, depending on the context)
   </table>
+
+  <div id="httpCode"><super>*</super> The HTTP codes can be overridden in the <a href="tyr#config"><u>Tyr.config()</u></a> call.</div>
 
   <p>Exceptions that have an HTTP Code defined indicate that the exception will be rethrown in the <i>calling context</i>.  For example, if a 
     call is made in the web browser to a server via a <a href="services">service</a>, and the service throws a rethrowable exception, then the exception thrown on

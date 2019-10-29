@@ -133,6 +133,11 @@ const Train = Tyr.byName.train;</pre>
     header: string; <i>// the name of the header to place this cookie value in when making requests</i>
   },
   dbLogLevel: 'info',
+  exceptions?: {
+    app?: { httpCode?: number, defaultMessage?: string },    <i>// default message and HTTP code for <a href="appError">AppError</a></i>
+    secure?: { httpCode?: number, defaultMessage?: string }, <i>// default message and HTTP code for <a href="secureError">SecureError</a></i>
+    user?: { httpCode?: number, defaultMessage?: string },   <i>// default message and HTTP code for <a href="userError">UserError</a></i>
+  },
   fixer?: { <i>// if present will be used for currency conversions</i>
     accessKey: '<i>fixer.io API key</i>',
     every: 8 * 60 * 60, <i>// how often api exchange rates will be queried in seconds, default every 8 hours</i>

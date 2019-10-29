@@ -16,7 +16,8 @@ layout: default
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">(opts: object | string)</span>
-       <p><u>opts</u> are:
+       <p>If <u>opts</u> is a string, then it contains the <i>message</i> description of the problem.  The <i>technical</i> will default to being <u>undefined</u>.
+       <p>If <u>opts</u> is an objec†, then:
    <pre><code class="js">{
   message: string;       <i>// This message contains an end-user-facing error message that can be displayed in the UI.</i>
   technical?: string;    <i>// If present, this should contain additional technical information that would be relevant to a software developer.</i>
