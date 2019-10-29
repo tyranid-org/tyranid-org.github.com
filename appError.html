@@ -1,0 +1,112 @@
+---
+layout: default
+---
+
+  <div class="content">
+    <h1>AppError <span class="extends">extends <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span></h1>
+
+    <p>This is an extension of the standard JavaScript <u>Error</u> object.</p>
+
+    <p>It should be used for system and application errors that were caused by internal failures of the application.</p>
+
+    <p>This is contrast to <a href="userError"><u>UserError</u></a> which indicates an error caused by bad user input or user data.</p>
+
+    <p>Typically <u>AppError</u>s will be logged to a log file or a bug-tracking service like <a href="https://bugsnag.com">Bugsnag</a> while <u>UserError</u>s
+      will not be logged and will instead be presented to the end-user either as a pop-up or inline in forms.</p>
+
+    <p>See <a href="exceptions">Exceptions</a> for more information.</p>
+
+    <h2>constructor</h2>
+
+     <article id="constructor">
+       <b class="constructor"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">(opts: object | string)</span>
+       <p><u>opts</u> are:
+   <pre><code class="js">{
+  message: string;       <i>// This message contains an end-user-facing error message that can be displayed in the UI.</i>
+  technical?: string;    <i>// If present, this should contain additional technical information that would be relevant to a software developer.</i>
+  field?: <a href="field">Field</a>;         <i>// This indicates an error is directly related to a given field.</i>
+  lineNumber?: number;   <i>// This indicates any line number that has to do with the error message.</i>
+  rowNumber?: number;    <i>// This indicates any row number that has to do with the error message.</i>
+  columnNumber?: number; <i>// This indicates any column number that has to do with the error message.</i>
+}
+</code></pre>
+     </article>
+
+    <h2>instance</h2>
+
+     <article id="columnNumber">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">columnNumber?: number</span>
+       <p>This indicates any column number that has to do with the error message.</p>
+     </article>
+
+     <article id="field">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">field?: <a href="field">Field</a></span>
+       <p>This indicates an error is directly related to a given field.</p>
+     </article>
+
+     <article id="lineNumber">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">lineNumber?: number</span>
+       <p>This indicates any line number that has to do with the error message.</p>
+     </article>
+
+     <article id="message">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">message: string</span>
+       <p>This message contains an end-user-facing error message that can be displayed in the UI.</p>
+     </article>
+
+     <article id="rowNumber">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">rowNumber?: number</span>
+       <p>This indicates any row number that has to do with the error message.</p>
+     </article>
+
+     <article id="stack">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">stack?: string</span>
+       <p>This contains the stack trace if available.</p>
+     </article>
+
+     <article id="technical">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">technical?: string</span>
+       <p>If present, this should contain additional technical information that would be relevant to a software developer.</p>
+     </article>
+
+     <article id="toPlain">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">toPlain(): object</span>
+       <p>This returns a "Plain old JavaScript object" representation of this exception that is suitable for stringifying to JSON.</p>
+     </article>
+
+     <article id="toString">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">toString(): string</span>
+       <p>This returns <u>message</u>.</p>
+     </article>
+
+  </div>
