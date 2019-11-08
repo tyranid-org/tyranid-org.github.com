@@ -275,6 +275,17 @@ doc.$asOf(new Date(...), fields);
        <p>This method will use <a href="#$options"><u>$options()</u></a> as a default set of options.
      </article>
 
+     <article id="$set">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">$set(path: string, value: any): any</span>
+       <p>This method sets a value on the current object according to the given path.</p>
+       <p>This is shorthand for:</p>
+       <pre><code class="js">return this.$model.parsePath(path).set(this, value, { create: true });</code></pre>
+       <p>This method is analogous to <a href="https://lodash.com">Lodash</a>'s <u>_.set()</u>.</p>
+     </article>
+
      <article id="$slice">
        <b class="method"></b>
        <b class="server"></b>

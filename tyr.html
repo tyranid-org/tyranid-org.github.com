@@ -531,6 +531,23 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        </table>
      </article>
 
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">unitize(count: number, unit: string): string</span>
+       <p>This generates a properly-pluralized unit description.  For example:<p>
+       <table>
+         <thead>
+           <tr><th><i>count</i><th><i>unit</i><th>unitize(<i>count</i>, <i>unit</i>)
+         </thead>
+         <tr><td>0<td>flower<td>0 flowers
+         <tr><td>1<td>mile<td>1 mile
+         <tr><td>2<td>daisy<td>2 daisies
+       </table>
+     </article>
+
+
     <h2 id="lodashUtilities"><u>ObjectId</u>-aware <u>lodash</u>-like utilities</h2>
 
      <article id="addToSet">
