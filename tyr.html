@@ -167,6 +167,8 @@ const Train = Tyr.byName.train;</pre>
   },
   secure: <a href="secure">Secure</a>,
   validate: <i>validateOpts</i>
+  whiteLabel: (metadata: <a href="collection">Collection</a> | <a href="field">Field</a> | <a href="namePath">NamePath</a>) => string; <i>// register a white label translation function</i>
+  whiteLabelClient: (metadata: <a href="collection">Collection</a> | <a href="field">Field</a> | <a href="namePath">NamePath</a>) => string; <i>// a client-side-specific ^</i>
 }</pre>
       <p>If you specify <u>db</u> you must also specify <u>mongoClient</u>.  If you leave off both, then Tyranid will function in
        a "database-less" mode which is not usually useful, but <i>can</i> be useful certain things like library code which is just
@@ -267,8 +269,10 @@ const Train = Tyr.byName.train;</pre>
      <article id="local">
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig"><a href="local">local</a></span>
-       <p>This provides access to Tyranid's <i>continuation local storage</i> capability.</p>
+       <p>This provides access to Tyranid's <i>continuation local storage</i> capability on the server and also to corresponding client session data on
+        the client.</p>
      </article>
 
      <article id="log">
@@ -558,9 +562,20 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <p>It can handle <u>ObjectId</u>s from different versions of the MongoDB native driver.</p>
      </article>
 
+     <article id="clone">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">cloneDeep(obj: object): object</span>
+       <p>
+        This is similar to <u>_.clone()</u> except that it can handle <u>ObjectId</u>s.
+       </p>
+     </article>
+
      <article id="cloneDeep">
        <b class="method"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">cloneDeep(obj: object): object</span>
        <p>
         This is similar to <u>_.cloneDeep()</u> except that it can handle <u>ObjectId</u>s.
@@ -718,6 +733,7 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">mapAwait(value: Promise | any, fn: any => any): Promise<any> | any</span>
        <p>This maps a value by the given function.  If the value is a promise, then the result will be a promise.</p>
        <p>This method permits writing mapping functions that work with values that are conditionally asynchronous.</p>

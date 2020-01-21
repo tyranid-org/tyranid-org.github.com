@@ -217,12 +217,24 @@ layout: default
 <tr><td>  },</td>
 <tr><td>  methods: {<td><td><td>Define <a href="document">Document</a> methods for this collection.  See <a href="/#methods">Methods</a>.
 <tr><td>    <i>methodName</i>: {</td>
+<tr><td>      help:<td>string<td>none<td>Contains brief user-facing documentation about this method.
+<tr><td>      note:<td>string<td>none<td>Contains developer-facing documentation about this method (only visible in the Tyranid console or in IDEs).
+<tr><td>      params: {<td><td><td>Define parameters for this method.
+<tr><td>        <i>paramName</i>:<td><a href="field#def">Field Def</a></td>
+<tr><td>      },</td>
+<tr><td>      return:<td><a href="field#def">Field Def</a><td><td>Defines the return type.
 <tr><td>      fn(<i>method parameters</i>) { <i>...</i> }<td>function<td>none<td>A single isomorphic function for both client and server.</td>
 <tr><td>      fnClient(<i>method parameters</i>) { <i>...</i> }<td>function<td>none<td>The function to use on the client.</td>
 <tr><td>      fnServer(<i>method parameters</i>) { <i>...</i> }<td>function<td>none<td>The function to use on the server.</td>
 <tr><td>    },</td>
 <tr><td>    <i>...</i></td>
 <tr><td>  },</td>
+  All result types are automatically wrapped in a <u>Promise</u>. If not specified, this will return <u>Promise<void></u>.
+<tr><td>  values: {<td><td>none<td>This allows you to define <a href="/#staticData">static data</a> in a tabular format.</td>
+<tr><td>    [ '_id', '<i>fieldName1</i>', ... ],<td><td><td>The first row is a header row which contains field names.</td>
+<tr><td>    [ <i>id1</i>,   <i>value1</i>,       ... ],<td><td><td>The following rows are data rows.</td>
+<tr><td>    ...</td>
+<tr><td>  }</td>
 <tr><td>  projections: {</td>
 <tr><td>    <i>projectionName</i>:<td><i>MongoDB-style projection</i><td><td>Define standard projections.  See <a href="/#projection">projections</a>.</td>
 <tr><td>    <i>...</i></td>
@@ -548,6 +560,14 @@ layout: default
                <tr><td>'outgoing'<td>Only look at outgoing links.
            </table>
        </ul>
+     </article>
+
+     <article id="metaType">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">metaType: 'collection'</span>
+       <p>This returns 'collection'.</p>
      </article>
 
      <article id="migratePatchToDocument">

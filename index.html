@@ -569,6 +569,12 @@ on the server you can use <u>getServer</u> instead.  You can also optionally spe
   <i>...</i>
   methods: {
     <i>methodName</i>: {
+      params: {
+        <i>param1</i>: <i>param field definition</i>,
+        <i>...</i>,
+        <i>paramN</i>: <i>param field definition</i>
+      },
+      return: <i>return field definition</i>,
       fn(<i>parameters</i>) { <i>...</i> },
     },
     <i>...</i>
@@ -579,6 +585,9 @@ on the server you can use <u>getServer</u> instead.  You can also optionally spe
 
 <p>By default <u>fn</u> methods are isomorphic if <a href="#client">client-side functionality</a> is enabled.  If you want the method to only appear
 on the server you can use <u>fnServer</u> instead.  You can also optionally specify a client-specific version using <u>fnClient</u>.
+
+<p>Methods allow you to run the same code on the server and the client.  If what you want to do is <i>run the code on the server</i>
+  but <i>call the code from the client</i> look at <a href="services">Services</a>.</p>
 
     <h3 id="projection">Projection</h3>
 

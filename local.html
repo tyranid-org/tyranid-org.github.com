@@ -28,6 +28,9 @@ layout: default
       <p><i>later on in some code that doesn't have access to the request:</i>
       <pre><code class="js">if (Tyr.local.onMobile) { ... }</code></pre>
 
+    <h2>Client-side Local</h2>
+
+    <p><u>Tyr.local</u> is also available on the client and contains data pertaining to the current session.</p>
 
     </div>
 
@@ -41,8 +44,19 @@ layout: default
      <article id="detail">
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
+
        <span class="sig">user: User</span>
-       <p>This returns a reference to the currently-logged-in user if you have a "user" collection defined.</p>
+       <p>This returns a reference to the currently-logged-in user if there is a "user" collection defined.</p>
+     </article>
+
+     <article id="detail">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+
+       <span class="sig">org: Organization</span>
+       <p>This returns a reference to the currently-logged-in user's organization if there is a "organization" collection defined.</p>
      </article>
 
      <article id="detail">

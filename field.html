@@ -77,15 +77,10 @@ layout: default
 <tr><td>  of:<td><a href="field#def">Field Def</a><td>none<td>Indicates the type of the array.
 <tr><td>  cardinality:<td>integer <u>..</u> integer | <u>'*'</u><td>0..*<td>Indicates the cardinality of the array.  For example, "1..3" means the array can have between 1 and 3 entries.
 
-<tr><td colspan="4" class="subtitle">Objects (<u>is == 'object'</u>)
-<tr><td colspan="4" class="subtype">Structured Object</td>
-<tr><td>  fields: {</td><td><td><td>Specifies the structure of a nested object.
-<tr><td>    <i>fieldName</i>:<td><a href="field#def">Field Def</a></td>
-<tr><td>    <i>...</i></td>
-<tr><td>  },</td>
-<tr><td colspan="4" class="subtype"><a href="index#maps">Map Object</a></td>
-<tr><td>  keys:<td><a href="field#def">Field Def</a><td><td>Specifies the type of the keys for this <a href="index#maps">map</a>.
-<tr><td>  of:<td><a href="field#def">Field Def</a><td><i>required</i>***<td>Indicates the type of the object's contents.
+<tr><td colspan="4" class="subtitle">Bitmasks (<u>is == 'bitmask'</u>)
+<tr><td>  link:<td><i>collection name</i><td>none<td>Indicates that this field contains foreign keys to the given collection.  This must be a static collection
+  not containing more than 53 entries (<u>Math.log2(Number.MAX_SAFE_INTEGER) == 53</u>).
+<tr><td>  inverse:<td>boolean<td>false<td>Indicates if the bitmask should be inversed when stored.
 
 <tr><td colspan="4" class="subtitle"><a href="/#links">Links</a> (<u>is == 'link'</u>)
 <tr><td>  denormal:<td>object<td>none<td>A <a href="/#denormalization">Denormalization</a> expression to populate when saving this field.
@@ -98,6 +93,20 @@ layout: default
 <tr><td>  min:<td>number<td>none<td>Sets the minimum value for this numeric field.
 <tr><td>  max:<td>number<td>none<td>Sets the maximum value for this numeric field.
 <tr><td>  step:<td>number<td>none<td>Indicates the step-size for this numeric field.  This can be a non-integer value for double types (i.e. <u>0.001</u>).
+
+<tr><td colspan="4" class="subtitle">Objects (<u>is == 'object'</u>)
+<tr><td colspan="4" class="subtype">Structured Object</td>
+<tr><td>  fields: {</td><td><td><td>Specifies the structure of a nested object.
+<tr><td>    <i>fieldName</i>:<td><a href="field#def">Field Def</a></td>
+<tr><td>    <i>...</i></td>
+<tr><td>  },</td>
+<tr><td colspan="4" class="subtype"><a href="index#maps">Map Object</a></td>
+<tr><td>  keys:<td><a href="field#def">Field Def</a><td><td>Specifies the type of the keys for this <a href="index#maps">map</a>.
+<tr><td>  of:<td><a href="field#def">Field Def</a><td><i>required</i>***<td>Indicates the type of the object's contents.
+
+<tr><td colspan="4" class="subtitle">Query (<u>is == 'query'</u>)
+<tr><td>  collection:<td><i>collection name</i><td>none<td>Indicates that this contains a query against the given collection.  If not specified this represents
+  a query against the current collection that this field is assigned to.
 
 <tr><td colspan="4" class="subtitle">S3 (<u>is == 's3'</u>)
 <tr><td>  of:<td>array of <a href="./mediaType">media types</a><td>*<td>Set this to the list of valid media types that can be stored in this field.
@@ -228,7 +237,7 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">group: String</span>
+       <span class="sig">group: string</span>
        <p>This contains the name of the group this field is in if it is part of a <a href="/#fieldGroups">field group</a>.</p>
      </article>
 
@@ -260,7 +269,7 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">label: String</span>
+       <span class="sig">label: string</span>
        <p>This returns a label, or display name, for the field.</p>
      </article>
 
@@ -279,7 +288,7 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">labels(doc: <a href="document">Document</a>, text: String?): { <i>_id</i>: <i>id type</i>, <i>label field</i>: String }[]</span>
+       <span class="sig">labels(doc: <a href="document">Document</a>, text: string?): { <i>_id</i>: <i>id type</i>, <i>label field</i>: string }[]</span>
        <p>This generates a list of label objects that can be used to populate a typeahead dropdown.  This method is only available when the field is a <b>link</b>
        or <b>uid</b> field.</p>
        <p>This method also takes into account the <u>where</u> property on links when generating the list of labels.</p>
@@ -293,11 +302,19 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <p>This returns the <a href="collection">Collection</a> for this field if it is of type link.</p>
      </article>
 
+     <article id="metaType">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">metaType: 'field'</span>
+       <p>This returns 'field'.</p>
+     </article>
+
      <article>
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">name: String</span>
+       <span class="sig">name: string</span>
        <p>This contains the name of this field.</p>
      </article>
 
@@ -331,7 +348,7 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig"><a href="/#paths">path</a>: String</span>
+       <span class="sig"><a href="/#paths">path</a>: string</span>
        <p>This contains the <a href="/#paths">path</a> of this field.</p>
      </article>
 
@@ -339,7 +356,7 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig"><a href="/#paths">pathLabel</a>: String</span>
+       <span class="sig"><a href="/#paths">pathLabel</a>: string</span>
        <p>This contains the full <a href="/#pathLabels">path label</a> for this field.
      </article>
 
@@ -362,7 +379,7 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
      <article id="spath">
        <b class="property"></b>
        <b class="server"></b>
-       <span class="sig"><a href="/#paths">spath</a>: String</span>
+       <span class="sig"><a href="/#paths">spath</a>: string</span>
        <p>This contains the <a href="/#paths">simplified path</a> of this field.</p>
        <p>This is a short-cut for <a href="namePath#spath"><u>this.namePath.spath</u></a>.</p>
        <p>Also see <a href="/#paths">Paths</a> for more information.</p>

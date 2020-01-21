@@ -93,6 +93,14 @@ layout: default
          convert client-side MongoID strings into server-side <u>ObjectId</u> objects.</p>
      </article>
 
+     <article id="fromClientQuery">
+       <b class="method"></b>
+       <b class="server"></b>
+       <span class="sig">fromClientQuery(field: <a href="field">Field</a>, value: any): any</span>
+       <p>This method will be used by Tyranid to convert incoming query data from the client into server query objects.  For example, MongoId types will
+         convert client-side MongoID strings into server-side <u>ObjectId</u> objects.</p>
+     </article>
+
      <article id="format">
        <b class="method"></b>
        <b class="server"></b>
