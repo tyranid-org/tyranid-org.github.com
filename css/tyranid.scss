@@ -118,6 +118,13 @@ pre {
   padding: 4px;
   -webkit-box-shadow:2px 2px 2px #aaa;
 }
+td pre {
+  clear: none;
+  padding: 0;
+  margin: -3px -8px;
+  -webkit-box-shadow: none;
+}
+
 pre em {
   font-weight: bold;
   color: #000;
