@@ -1,0 +1,127 @@
+---
+layout: default
+---
+
+  <div class="content">
+    <h1>Translations</h1>
+
+     <div class="desc">
+
+      <b>Tyranid Translations</b> provide the ability to perform both <i>white labeling</i>, <i>internationalization</i>, and <i>localization</i> of
+       various types of string data, including labels, names, data values, custom terms, and so on.
+
+      <h2>Built-in Translation</h2>
+
+      <p>Translations within Tyranid are designed to be supported without having to do any additional work on the part of the developer -- they are "built-in".
+        This is accomplished by having "language string codes" automatically generated based on metadata and IDs in the majority of cases.</p>
+        
+      <p>However, for cases where you need a translatable term that is not associated with a particular piece of data or metadata, this is handled
+        by <a href="translation#terms">Terms</a>.</p> 
+      <h2>Locale and White Labels</h2>
+
+      <p><a href="https://en.wikipedia.org/wiki/White-label_product"><i>White labeling</i></a> is translation process where application and data terms can be
+      modified to be specific for an organization.  For example, an application might by default want to label a field as "Manager" while some specific
+      organization might want to see that field show up as "Leader".</p>
+
+      <p>Tyranid enhances the concept of a local to also optionally include an organization.  This confers the ability to white label data by
+      providing an organization along with the locale when defining a translation.</p>
+
+      <p>This means that white labels can also be internationalized because both an organization <i>and</i> a locale can be provided in a context.</p>
+
+      <h2>Translations</h2>
+
+      <p>Translations are stored in the <u>tyrTranslation</u> collection. For example:</p>
+
+      <table>
+        <tr>
+          <th>Translation
+          <th>Description
+        <tr>
+          <td><pre><code class="js">TyrTranslation.insert({
+  _id: `${User.id}/name`,
+  locale: 'ko_KR',
+  value: '컴퓨터'
+});</code></pre></div></td>
+          <td>Inserts a Korean translation for the <u>name</u> field in the <u>User</u> collection.
+
+        <tr>
+          <td>
+      <pre><code class="js">TyrTranslation.insert({
+  _id: `${User.id}/name`,
+  organization: currentUser.organization,
+  locale: 'ko_KR',
+  value: 'Thinking Machine'
+});</code></pre></div>
+          <td>Inserts a white label in the default language.
+
+        <tr>
+          <td>
+      <pre><code class="js">TyrTranslation.insert({
+  _id: `${User.id}/name`,
+  organization: currentUser.organization,
+  value: '사고 기계'
+});</code></pre></div>
+          <td>Inserts a white label in the korean language.
+          </table>
+
+      <h3>Translation IDs</h3>
+
+      <p>The format of the <u>tyrTranslation._id</u> field is:</p>
+
+      <p><i>UID</i>[/<i>path</i>]</p>
+
+      For example:
+
+      <table>
+        <tr><th>Translation ID<th>Means
+        <tr><td>u00<td>The label for the User collection.
+        <tr><td>u00/name<td>The label for the User collection's name field.
+        <tr><td>u00/name/help<td>The tooltip for the User collection's name field.
+        <tr><td>or3/orders.amount<td>The label for the Order collection's <u>amount</u> field that is embedded in an <u>orders</u> array.
+        <tr><td>u005567f2a5387fa974fc6f3a42/name<td>The value of the <u>name</u> field for the user with ID <u>5567f2a5387fa974fc6f3a42</u>.
+        <tr><td>_tmwidgetName<td>The value of the <u>widgetName</u> term (<u>_tm</u> is the UID for the Term collection).
+      </table>
+
+
+      <h2 id="terms">Terms</h2>
+
+      Terms are stored in the <u>tyrTerm</u> collection.
+
+      <p><a href="tyr#$"><u>Tyr.$</u></a> can be used to automatically translate the default string into another context.  For example:</p>
+
+      <pre><code class="js">TyrTerm.insert({
+  _id: 'applicationName',
+  value: 'My Default Application',
+  help: 'This contains the name of the default application.'
+});
+
+<i>...</i>
+        
+const value = Tyr.$`Welcome to $$applicationName!`;</code></pre></div>
+
+    <p>Default values provided in metadata automatically are processed by <u>Tyr.$</u>.  The following example shows how terms can be used in regular
+      metadata:</p>
+
+      <pre>
+<code class="js">new Tyr.Collection({
+  name: 'Widget',
+  label: 'A $$widgetName',
+  ...,
+  fields: {
+    ...,
+    name: {
+      is: 'string',
+      label: '$$widgetName Label', 
+      help: 'This contains the name of your $$widgetName.'
+  }
+});</code></pre>
+
+      <h2>Automatic Translations</h2>
+
+      <p>Access white-labelable fields will be automatically translated into the current user context if one is available on <a href="tyr#local"><u>Tyr.local</u></a>.
+
+      <p>For example, accessing <u>Tyr.collections.User.fields.name.label</u> will automatically return any translation relevant to the current user for the label for
+        User name field.</p>
+
+</div>
+  </div>
