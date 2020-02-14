@@ -572,6 +572,16 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <p>It can handle <u>ObjectId</u>s from different versions of the MongoDB native driver.</p>
      </article>
 
+     <article id="clear">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">clear(obj: object): void</span>
+       <p>
+        This removes all properties from an existing object.
+       </p>
+     </article>
+
      <article id="clone">
        <b class="method"></b>
        <b class="server"></b>
@@ -680,11 +690,13 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
      <article id="stringify">
        <b class="method"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">stringify(value: any,
          <div style="margin-left:120px;">replacer?: (key: string | symbol, value: any),</div>
          <div style="margin-left:120px;">space?: string | number): string</div></span>
        <p>
-        This is similar to <u>JSON.stringify()</u> except that it stringifies <u>ObjectId</u>s as strings.
+        This is similar to <u>JSON.stringify()</u> except that it stringifies <u>ObjectId</u>s as strings and also
+        stringifies regular expressions into MongoDB's format.
        </p>
      </article>
 
