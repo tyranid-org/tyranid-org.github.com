@@ -18,9 +18,9 @@ layout: default
   ...,
   aux: true,
   fields: {
-      ...,
-      someFieldOnATransientCollection: { is: 'string' },
-      ...
+    ...,
+    someFieldOnATransientCollection: { is: 'string' },
+    ...
   },
   ...,
 });</code></pre>
@@ -30,9 +30,9 @@ layout: default
 <pre><code class="js">new Tyr.Collection({
   ...,
   fields: {
-      ...,
-      someTransientField: { is: 'string', aux: true },
-      ...
+    ...,
+    someTransientField: { is: 'string', aux: true },
+    ...
   },
   ...,
 });</code></pre>
@@ -106,11 +106,14 @@ session data like application settings and other types of data that is "global" 
 </code></pre>
 {% endraw %}
 
-<p>Further, you can define them on the fly on actual field controls.  The follow is the same as the previous:</p>
+<p>Further, you can define them on the fly on actual field controls.  The following is the same as the previous:</p>
 
 <pre><code class="js">&lt;TyrForm>
   &lt;TyrString aux="myFormField" ... />
 &lt;/TyrForm>
 </code></pre>
 
-<p>In this case it infers the type of <u>myFormField</u> to be a <u>string</u> since it is being defined by a <u>TyrString</u> control.
+<p>In this case it infers the type of <u>myFormField</u> to be a <u>string</u> since it is being defined by a <u>TyrString</u> control.</p>
+
+<p>If you try to add auxiliary fields on a Tyreant component and there is no local document/collection in the local context, Tyreant will automatically
+  define a custom auxiliary collection and add the fields to that so that it will still work as expected in this case.</p>
