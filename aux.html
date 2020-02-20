@@ -1,0 +1,116 @@
+---
+layout: default
+---
+
+<div class="content">
+  <h1>Auxiliary Data</h1>
+
+  <p><i>Auxiliary data</i> refers to data that is not persisted in the database.  Also known as transient and ephemeral data.</p>
+
+
+  <h2>Server Auxiliary Data</h2>
+
+  <p>Auxiliary data can be specified in the main collection definition by specifying <u>aux: true</u> on collection or field definitions.  For example, 
+    the following defines an auxiliary collection:</p>
+</p>
+
+<pre><code class="js">new Tyr.Collection({
+  ...,
+  aux: true,
+  fields: {
+      ...,
+      someFieldOnATransientCollection: { is: 'string' },
+      ...
+  },
+  ...,
+});</code></pre>
+
+<p>while the following defines an auxiliary field on a non-auxiliary collection:</p>
+
+<pre><code class="js">new Tyr.Collection({
+  ...,
+  fields: {
+      ...,
+      someTransientField: { is: 'string', aux: true },
+      ...
+  },
+  ...,
+});</code></pre>
+
+
+
+  <p>Note that <u>aux: true</u> == <u>db: false</u> and <u>aux: false</u> == <u>db: true</u> -- the properties are tied to be inverses of each other ... i.e., if you
+specify <u>db: false</u> on a field, <u>aux: true</u> will be set automatically.  If you try to set both to true or both to false, it will generate an exception.</p>
+
+  <h2>Client Auxiliary Data</h2>
+
+  <p>Auxiliary data specified on the server will be automatically available on the client as well (assuming <u>client: false</u> is not set).</p>
+  
+  <p>Often though, it is useful to just define auxiliary data on the client to drive ephemeral UI elements and Tyranid and Tyreant provide a number of ways to do that.</p>
+
+
+<h3 id="collections">Auxiliary Collections</h3>
+
+<p>You can define an entire auxiliary collection using <a href="tyr#aux"><u>Tyr.aux()</u></a>, for example:</p>
+
+<pre><code class="js">const myCollection = Tyr.aux({
+  name: 'myFormData',
+  fields: {
+    re: { is: 'regexp', label: 'Regular Expression' },
+    testRe: { is: 'string', label: 'Test regular expression' }
+  }
+});</code></pre>
+
+<p>It is not necessary to come up with a collection ID when defining a collection on the client (though you can, if you need to) -- Tyranid will automatically generate one.
+Automatically generated collection IDs start with a tilde (~).</p>
+
+<h3 id="singleton">Singleton Auxiliary Collections</h3>
+
+<p>Tyranid also supports <i>singleton auxiliary collections</i>.  These are collections which only have a single, shared copy of data that can be useful for storing
+session data like application settings and other types of data that is "global" in the context of the client.</p>
+
+<pre><code class="js">const myCollection = Tyr.aux({
+  name: 'session',
+  singleton: true,
+  fields: {
+    darkMode: { is: 'boolean', label: 'Enable Dark Mode?' },
+    ...
+  }
+});</code></pre>
+
+<p>Singleton collections support a special <a href="#path">path</a> syntax to access them -- <u><i>collection name</i>:<i>path name</i></u>.  For example:</p>
+
+<pre><code class="js">&lt;TyrForm>
+  &lt;TyrString path="session:darkMode" />
+&lt;/TyrForm>
+</code></pre>
+
+<h3 id="fields">Auxiliary Fields</h3>
+
+<p>Auxiliary fields can be added to an existing collection on the client using <a href="collection#aux"><u><i>collection</i>.aux()</u></a>.
+
+<pre><code class="js">Work.aux({
+  myStringOnWork: { is: 'string' }
+});</code></pre>
+
+<p>Auxiliary fields can also be defined on tyreant components directly without needing a separate call:</p>
+
+{% raw %}
+<pre><code class="js">&lt;TyrForm
+   aux={{
+     myFormField: { is: 'string' }
+   }}
+>
+  &lt;TyrField path="myFormField" ... />
+&lt;/TyrForm>
+</code></pre>
+{% endraw %}
+
+<p>Further, you can define them on the fly on actual field controls.  The follow is the same as the previous:</p>
+
+<pre><code class="js">&lt;TyrForm>
+  &lt;TyrString aux="myFormField" ... />
+&lt;/TyrForm>
+</code></pre>
+
+<p>In this case it infers the type of <u>myFormField</u> to be a <u>string</u> since it is being defined by a <u>TyrString</u> control.

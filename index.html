@@ -883,6 +883,7 @@ res.json(User.toClient(obj))
 </table>
 </p>
 <p>Collections contain a <a href="collection#paths"><u>paths</u></a> hash which make it easier to work with paths.</p>
+
     <h4>Arrays and Maps</h4>
 <p>Arrays and <a href="index#maps">maps</a> have a special syntax.  When referring to the contents of an array or map in a generic sense, you use "<u>._</u>".
 When referring to a particular element you use "<u>.<i>array index | map key</i></u>".</p>
@@ -891,18 +892,19 @@ When referring to a particular element you use "<u>.<i>array index | map key</i>
 <p>This array syntax can be simplified (i.e. <u>siblings._.name</u> => <u>siblings.name</u>) in certain circumstances,
 for example when used inside MongoDB queries.  This is called a <i>simplified path</i> and is available as
 <a href="field#spath"><u>Field.spath</u></a>.</p>
+
     <h4><a href="namePath">NamePath</a></h4>
 <p>The <a href="collection#parsePath"><i>collection</i>.parsePath(<i>path</i>)</a> method can be used to create <a href="namePath">NamePath</a>
   objects which are useful for parsing paths.</p>
+
     <h4 id="pathLabels">Path Labels</h4>
 <p><a href="field">Field</a>s have a <a href="field#def"><u>pathLabel</u></a> property which can be used to specify an abbreviated label a
 field when it is used as part of a full-path label.  For example, if your path was <u>name.first</u>, you could set the <u>pathLabel</u> on <u>name</u>
 to be blank and set the <u>pathLabel</u> to "First Name" on <u>name.first</u>.  This would cause <u>name.first</u> to have a full path label of "First Name"
 instead of "Name First".  This property can also be used to set abbreviated names for path nodes so that the overall path label is not too long.</p>
 
-</form>
-
-</form>
+    <h4 id="pathLabels">Singleton Collections</h4>
+<p><a href="aux#singleton">Singleton collections</a> also have a special path syntax -- <u><i>collection name</i>:<i>path name</i></u>.</p>
 
     <h3 id="subscriptions">Subscriptions</h3>
 

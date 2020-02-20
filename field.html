@@ -58,6 +58,7 @@ layout: default
 <tr><td>  is:<td>string<td><i>required</i>*<td>The name of the <a href="type">Type</a> of this Field.
 <tr><td>  client:<td>boolean<td>true**<td>Indicates if this field should be serialized in <u>toClient()</u>/<u>fromClient()</u> calls.  See <a href="field#defClient">client</a> below.
 <tr><td>  custom:<td>boolean<td><td>Indicates if this field is a dynamic custom field that should have UI auto-generated for it.
+<tr><td>  aux:<td>boolean<td>false<td>Indicates if this field should not be stored in the database -- oppposite of <u>db</u>.  See <a href="aux">Auxiliary Data</a>.
 <tr><td>  db:<td>boolean<td>true**<td>Indicates if this field should be stored in the database.
 <tr><td>  historical:<td>boolean<td>none<td>Indicates that this field is <a href="/#historical">historical</a>.  Must also be set on the collection to take effect.
   Only valid for top-level fields.
@@ -254,6 +255,22 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <b class="server"></b>
        <span class="sig">in: <a href="units">Units</a></span>
        <p>This returns the <a href="units">Units</a> for this field if they were specified.</p>
+     </article>
+
+     <article id="isAux">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">isAux(): boolean</span>
+       <p>This returns true if this is an <a href="aux">auxiliary field</a> (i.e. not stored in the database).
+     </article>
+
+     <article id="isDb">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">isDb(): boolean</span>
+       <p>This returns true if this field is stored in the database.
      </article>
 
      <article id="keys">

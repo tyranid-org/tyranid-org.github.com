@@ -95,7 +95,7 @@ layout: default
        <p>This returns 'collection'.</p>
      </article>
 
-     <article>
+     <article id="ajax">
        <b class="method"></b>
        <b class="client"></b>
        <b class="async"></b>
@@ -104,6 +104,18 @@ layout: default
        <p>The API is essentially the same as <a href="https://api.jquery.com/jquery.ajax/">jQuery's <u>$.ajax()</u> method</a> which is currently
         used for the underlying implementation.</p>
        <p>If the <u>csrf</u> option is enabled in <a href="tyr#config"><u>Tyr.config()</u></a>, then CSRF will be applied to all <u>Tyr.ajax</u> calls automatically.</p>
+     </article>
+
+     <article id="aux">
+       <b class="method"></b>
+       <b class="client"></b>
+       <span class="sig">aux(def: { [fieldName: string]: FieldDefinition }): void</span>
+       <p>This method can be used to add new <a href="aux#fields">auxiliary fields</a> to an existing collection.  The syntax is the same as the values provided
+        to <u>fields</u> when defining a collection.  For example:</p>
+
+<pre><code class="js">User.aux({
+  someClientValue: { is: 'string' }
+});</code></pre>
      </article>
 
      <article>
@@ -196,6 +208,7 @@ layout: default
 <tr><td>  id:<td>string<td><i>required</i><td>3 character alphanumeric code, must be unique, see <a href="/#uids">UIDs</a>.
 <tr><td>  name:<td>string<td><i>required</i>
 <tr><td>  dbName:<td>string<td><i>name</i></td>
+<tr><td>  aux:<td>boolean<td>false<td>If this collection is auxiliary.
 <tr><td>  server:<td>string<td><i>default server</i><td>The server to use with this collection -- see<br><u>Tyr.config({ servers: ... })</u>.</td>
 <tr><td>  label:<td>string<td>labelify(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this collection.
 <tr><td>  indexes:<td>array<td><i>none</i><td>If present contains an array of index definitions in the format specified by the <a href="https://docs.mongodb.com/manual/reference/command/createIndexes/">MongoDB createIndexes command</a></td>
@@ -452,6 +465,7 @@ layout: default
        <b class="client"></b>
        <span class="sig">id: string</span>
        <p>This contains the 3-character ID for the collection.</p>
+       <p>IDs that start with <u>_</u> are reserved for Tyranid collections and IDs that start with <u>~</u> are reserved for <a href="aux">auxiliary collections</a>.</p>
      </article>
 
      <article id="idToLabel">
@@ -485,6 +499,31 @@ layout: default
         does things like <a href="/#timestamps">timestamps</a>, <a href="/#denormalization">denormalization</a>, and so on.
        </p>
        <p>If you pass in an array, then the array of documents/objects will be inserted in bulk.</p>
+     </article>
+
+     <article id="isAux">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">isAux(): boolean</span>
+       <p>This returns true if the collection's data is <a href="aux">auxiliary</a> (i.e. not presisted in the database).
+        This is the opposite of <a href="#isDb">isDb()</a>.</p>
+     </article>
+
+     <article id="isDb">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">isDb(): boolean</span>
+       <p>This returns true if the collection's data is stored in the database.  This is the opposite of <a href="#isAux">isAux()</a>.</p>
+     </article>
+
+     <article id="isSingleton">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">isSingleton(): boolean</span>
+       <p>This returns true if the collection is a <a href="aux#singleton">singleton collection</a>.
      </article>
 
      <article>

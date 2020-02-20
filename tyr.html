@@ -53,6 +53,24 @@ Tyr.arraySort(myArray, { b: 1, c: -1 });
 
      <article>
        <b class="method"></b>
+       <b class="client"></b>
+       <span class="sig">aux(def: CollectionDefinition)</span>
+       <p>This can be used to define a new <a href="aux">auxiliary collection</a> on the client.  The syntax of <u>def</u> is the same as when specifying a new
+        collection.  You do not need to specify <u>aux: true</u> and collection IDs can optionally be automatically generated.  For example:</p>
+        
+<pre><code class="js">const myCollection = Tyr.aux({
+  name: 'myFormData',
+  fields: {
+    re: { is: 'regexp', label: 'Regular Expression' },
+    testRe: { is: 'string', label: 'Test regular expression' }
+  }
+});</code></pre>
+
+       <p>See <a href="aux#collections">auxiliary collections</a> for more information.</p>
+     </article>
+
+     <article>
+       <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">byId: { <i>collection id</i>: <a href="collection">Collection</a> }</span>
@@ -599,6 +617,17 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <span class="sig">cloneDeep(obj: object): object</span>
        <p>
         This is similar to <u>_.cloneDeep()</u> except that it can handle <u>ObjectId</u>s.
+       </p>
+     </article>
+
+     <article id="compactMap">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">compactMap<A, B>(arr: A[], mapFn: A => B): B[]</span>
+       <p>
+        This applies <u>mapFn</u> to each element of the array and returns an array that only contains
+        the truthy values.
        </p>
      </article>
 
