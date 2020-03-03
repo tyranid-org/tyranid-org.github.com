@@ -501,6 +501,22 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
+       <span class="sig">capitalize(name: string): string</span>
+       <p>This capitalizes the initial character without touching the remaining characters.  For example:</p>
+       <table>
+         <thead>
+           <tr><th><i>name</i><th>capitalize(<i>name</i>)
+         </thead>
+         <tr><td>hello<td>Hello
+         <tr><td>totalValue<td>TotalValue
+         <tr><td>userId<td>UserId
+       </table>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">labelize(name: string): string</span>
        <p>This generates a humanized version of a camel-case name.  For example:<p>
        <table>
@@ -716,6 +732,20 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        </p>
      </article>
 
+     <article id="projectify">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">projectify(value: object): <i>projection object</i></span>
+       <p>This transforms an object containing data into the corresponding projection that would be needed to cover that data.  For example:</p>
+       <table>
+         <thead>
+           <tr><th><u>obj</u><th><u>Tyr.projectify(obj)</u>)
+         </thead>
+         <tr><td><u>{ name: 'Xi', age: 32 }</u><td><u>{ name: 1, age: 1 }</u>
+       </table>
+     </article>
+
      <article id="stringify">
        <b class="method"></b>
        <b class="server"></b>
@@ -787,6 +817,7 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <b class="client"></b>
        <span class="sig">mapAwait(value: Promise | any, fn: any => any): Promise<any> | any</span>
        <p>This maps a value by the given function.  If the value is a promise, then the result will be a promise.</p>
+       <p>If the value is an array which contains some promises, the elements will be resolved before applying the <u>fn</u>.</p>
        <p>This method permits writing mapping functions that work with values that are conditionally asynchronous.</p>
      </article>
 
