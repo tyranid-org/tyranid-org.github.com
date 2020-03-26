@@ -378,6 +378,21 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        </p>
      </article>
 
+     <article id="projectify">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">projectify(value: object | <a href="namePath">NamePath</a>[]): <i>projection object</i></span>
+       <p>If <u>value</u> is an object, this transforms the object into the corresponding projection that would be needed to cover that data.  For example:</p>
+       <table>
+         <thead>
+           <tr><th><u>obj</u><th><u>Tyr.projectify(obj)</u>)
+         </thead>
+         <tr><td><u>{ name: 'Xi', age: 32 }</u><td><u>{ name: 1, age: 1 }</u>
+       </table>
+       <p>If <u>value</u> is an array of paths, then this will return a minimal projection needed to access data at those paths.</p>
+     </article>
+
      <article>
        <b class="mixin"></b>
        <b class="server"></b>
@@ -730,20 +745,6 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <p>
         This is similar to <u>_.pullAll()</u> except that it can handle <u>ObjectId</u>s from different versions of the MongoDB native driver.
        </p>
-     </article>
-
-     <article id="projectify">
-       <b class="method"></b>
-       <b class="server"></b>
-       <b class="client"></b>
-       <span class="sig">projectify(value: object): <i>projection object</i></span>
-       <p>This transforms an object containing data into the corresponding projection that would be needed to cover that data.  For example:</p>
-       <table>
-         <thead>
-           <tr><th><u>obj</u><th><u>Tyr.projectify(obj)</u>)
-         </thead>
-         <tr><td><u>{ name: 'Xi', age: 32 }</u><td><u>{ name: 1, age: 1 }</u>
-       </table>
      </article>
 
      <article id="stringify">

@@ -225,6 +225,17 @@ doc.$asOf(new Date(...), fields);
        <p>This property is also available on the client if <a href="#$snapshot"><u>$snapshot()</u></a> has been called.<p>
      </article>
 
+     <article id="$parsePath">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">$parsePath(path: string): <a href="namePath"><u>NamePath</u></a></span>
+       <p>
+         This is equivalent to <a href="collection#parsePath"><u><i>Collection</i>.parsePath()</u></a> except that it also finds
+         <a href="/#dynamicSchemas">dynamic schema</a> paths using the current document as match criteria.
+       </p>
+     </article>
+
      <article id="$populate">
        <b class="method"></b>
        <b class="server"></b>
