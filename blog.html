@@ -11,6 +11,46 @@ layout: default
 
     <div style="clear:both;"></div>
 
+    <article id="0.6.160">
+
+      <div class="date">2020.3.31</div>
+      <div class="version">0.6.160</div>
+      <h1>NamePath renamed to Path</h1>
+
+      <p>Added support <a href="aux">auxiliary data</a>.</p>
+      <ul>
+        <li><div class="break"><a href="path"><u>NamePath</u></a> renamed to <u>Path</u>.</div>
+        <li><div class="break"><a href="field#path"><u></i>Field</i>.path</u></a> renamed to <u>pathName</u>.</div>
+        <li><div class="break"><a href="field#namePath"><u></i>Field</i>.path</u></a> renamed to <u>path</u>.</div>
+        </ul>
+    </article>
+
+    <article id="0.6.159">
+      <div class="date">2020.3.30</div>
+      <div class="version">0.6.159</div>
+      <h1>Added Numbering support</h1>
+
+      <p>Added numbering support so that array indices can be shown in a display format when generating labels.</p>
+      <ul>
+        <li>added <a href="field#numbering"><u><i>Field</i>.numbering</u></a>.
+        <li>added <a href="tyr#numberize"><u><i>Tyr</i>.numberize()</u></a>.
+      </ul>
+    </article>
+
+    <article id="0.6.158">
+
+      <div class="date">2020.3.28</div>
+      <div class="version">0.6.158</div>
+      <h1>Added group support to NamePath</h1>
+
+      <p>Added support <a href="aux">auxiliary data</a>.</p>
+      <ul>
+        <li>added <a href="path#groupCount"><u><i>NamePath</i>.groupCount</u></a>.
+        <li>added <a href="path#groupLabel"><u><i>NamePath</i>.groupLabel()</u></a>.
+        <li>added <a href="path#groupRange"><u><i>NamePath</i>.groupRange()</u></a>.
+      </ul>
+    </article>
+
     <article id="0.6.137">
 
       <div class="date">2020.2.20</div>
@@ -485,10 +525,10 @@ const Train = Tyr.byName.train;</pre>
       <p>
         <ul>
           <li><a href="document#$slice"><u><i>Document</i>.$slice()</u></a> added
-          <li><a href="namePath#base"><u><i>NamePath</i>.base</u></a> added
-          <li><a href="namePath#parse"><u><i>NamePath</i>.parse()</u></a> added
-          <li><a href="namePath"><u>NamePath</u></a> updated to work with relative paths from the new <u>parse</u> method
-          <li><a href="namePath#set"><u><i>NamePath</i>.set()</u></a> added
+          <li><a href="path#base"><u><i>NamePath</i>.base</u></a> added
+          <li><a href="path#parse"><u><i>NamePath</i>.parse()</u></a> added
+          <li><a href="path"><u>Path</u></a> updated to work with relative paths from the new <u>parse</u> method
+          <li><a href="path#set"><u><i>NamePath</i>.set()</u></a> added
           <li><a href="tyr#arraySort"><u>Tyr.arraySort()</u></a> added
           <li><a href="tyr#mongoCompare"><u>Tyr.mongoCompare()</u></a> added
         </ul>
@@ -502,7 +542,7 @@ const Train = Tyr.byName.train;</pre>
       <p>
         <a href="/#population">Advanced population</a> projection syntax is now supported (was silently ignored before).
         <ul>
-          <li><a href="namePath#spath"><u><i>NamePath</i>.spath</u></a> added
+          <li><a href="path#spath"><u><i>NamePath</i>.spath</u></a> added
         </ul>
       </p>
     </article>
@@ -525,9 +565,9 @@ const Train = Tyr.byName.train;</pre>
           <li><a href="document#$orig"><u><i>Document</i>.$orig</u></a> added
           <li><a href="document#$replace"><u><i>Document</i>.$replace()</u></a> added
           <li><a href="document#$snapshot"><u><i>Document</i>.$snapshot()</u></a> added
-          <li><a href="namePath#decode"><u><i>NamePath</i>.decode()</u></a> added
-          <li><a href="namePath#encode"><u><i>NamePath</i>.encode()</u></a> added
-          <li><a href="namePath#isHistorical"><u><i>NamePath</i>.isHistorical()</u></a> added
+          <li><a href="path#decode"><u><i>NamePath</i>.decode()</u></a> added
+          <li><a href="path#encode"><u><i>NamePath</i>.encode()</u></a> added
+          <li><a href="path#isHistorical"><u><i>Path</i>.isHistorical()</u></a> added
           <li><a href="tyr#addToSet"><u>Tyr.addToSet()</u></a> added
           <li><a href="tyr#cloneDeep"><u>Tyr.cloneDeep()</u></a> added
           <li><a href="tyr#diff"><u>Tyr.diff</u></a> added
@@ -771,7 +811,7 @@ const Train = Tyr.byName.train;</pre>
       <ul>
         <li>added <a href="field#keys"><u>Field.keys</u></a>
         <li><a href="field#of"><u>Field.of</u></a> is now supported on objects
-        <li><a href="namePath">NamePath</a>s updated to understand maps
+        <li><a href="path">NamePath</a>s updated to understand maps
       </ul>
     </article>
 
@@ -780,9 +820,9 @@ const Train = Tyr.byName.train;</pre>
       <div class="version">0.0.115</div>
       <h1>NamePath and Type enhancements</h1>
       <ul>
-        <li><a href="namePath"><u>NamePath</u></a> is now available on the client
+        <li><a href="path"><u>NamePath</u></a> is now available on the client
         <li><a href="type"><u>Type</u></a> is now available on the client
-        <li>added <a href="field#namePath"><u>Field.namePath</u></a>
+        <li>added <a href="field#path"><u>Field.namePath</u></a>
         <li>added <a href="type#format"><u>Type.format()</u></a>
         <li>added <a href="type#byName"><u>Type.byName</u></a>
         <li>added <a href="type#query"><u>Type.query()</u></a>
@@ -794,11 +834,11 @@ const Train = Tyr.byName.train;</pre>
     <article>
       <div class="date">2016.2.14</div>
       <div class="version">0.0.114</div>
-      <h1>NamePaths updated to deal with arrays better; document.$id</h1>
+      <h1>NamePath updated to deal with arrays better; document.$id</h1>
       <ul>
         <li>NamePath parsing now understands the <u>._</u> "contents of array syntax".
-        <li><div class="break"><u>namePath.tail</u> &#10140; <a href="namePath#detail"><u>namePath.detail</u></a></div>
-        <li><a href="namePath#tail"><u>namePath.tail</u></a> added
+        <li><div class="break"><u>namePath.tail</u> &#10140; <a href="path#detail"><u>namePath.detail</u></a></div>
+        <li><a href="path#tail"><u>namePath.tail</u></a> added
         <li><a href="document#$id"><u><i>document</i>.$id</u></a> added
       </ul>
 
@@ -846,7 +886,7 @@ const Train = Tyr.byName.train;</pre>
           <li>a <u>pathLabel</u> property that contains their <a href="/#pathLabels">path label</a>.</p>
         </ul>
       </p>
-      <p><a href="namePath">NamePath</a> objects now have
+      <p><a href="path">NamePath</a> objects now have
         <ul>
           <li>a <u>pathLabel</u> property that contains their <a href="/#pathLabels">path label</a>.</p>
         </ul>
@@ -879,8 +919,8 @@ const Train = Tyr.byName.train;</pre>
       <div class="date">2016.1.31</div>
       <div class="version">0.0.100</div>
       <h1>NamePath Support</h1>
-      <p><a href="namePath">NamePath</a> support added.</p>
-      <p>NamePaths can now also parse <a href="/#denormalization">denormalized</a> paths.
+      <p><a href="path">NamePath</a> support added.</p>
+      <p>NamePath can now also parse <a href="/#denormalization">denormalized</a> paths.
     </article>
 
   </div>

@@ -195,8 +195,8 @@ const Train = Tyr.byName.train;</pre>
   },
   secure: <a href="secure">Secure</a>,
   validate: <i>validateOpts</i>
-  whiteLabel: (metadata: <a href="collection">Collection</a> | <a href="field">Field</a> | <a href="namePath">NamePath</a>) => string; <i>// register a white label translation function</i>
-  whiteLabelClient: (metadata: <a href="collection">Collection</a> | <a href="field">Field</a> | <a href="namePath">NamePath</a>) => string; <i>// a client-side-specific ^</i>
+  whiteLabel: (metadata: <a href="collection">Collection</a> | <a href="field">Field</a> | <a href="path">Path</a>) => string; <i>// register a white label translation function</i>
+  whiteLabelClient: (metadata: <a href="collection">Collection</a> | <a href="field">Field</a> | <a href="path">Path</a>) => string; <i>// a client-side-specific ^</i>
 }</pre>
       <p>If you specify <u>db</u> you must also specify <u>mongoClient</u>.  If you leave off both, then Tyranid will function in
        a "database-less" mode which is not usually useful, but <i>can</i> be useful certain things like library code which is just
@@ -354,7 +354,7 @@ const Train = Tyr.byName.train;</pre>
        <b class="class"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig"><a href="namePath">NamePath</a></span>
+       <span class="sig"><a href="path">Path</a></span>
      </article>
 
      <article id="parseBson">
@@ -382,7 +382,7 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">projectify(value: object | <a href="namePath">NamePath</a>[]): <i>projection object</i></span>
+       <span class="sig">projectify(value: object | <a href="path">Path</a>[]): <i>projection object</i></span>
        <p>If <u>value</u> is an object, this transforms the object into the corresponding projection that would be needed to cover that data.  For example:</p>
        <table>
          <thead>
@@ -545,7 +545,38 @@ Tyr.parseBson({ _bsontype: 'ObjectId', id: '...' }) <i>=> ObjectID('...')</i>
        </table>
      </article>
 
-     <article>
+     <article id="numberize">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">numberize(numbering: <a href="#numbering">Numbering</a>, num: number): string</span>
+       <p>This formats a number according to a specific numbering system.</p>
+       <p><u>num</u> must be an integer that is >= 0.</p>
+
+        <p>For example:</p>
+
+      <pre><code class="js">Tyr.numberize('roman', 24) === 'XXIX'
+Tyr.numberize('uppercase', 10)  === 'K'</code></pre>
+
+       <h4 id="numbering">Numbering</h4>
+
+       <p><u>Numbering</u> can be one of the following strings:</p>
+
+       <table>
+         <thead>
+           <tr><th>Numbering<th>Meaning
+         </thead>
+         <tr><td><u>lowercase</u><td>Lowercase Letters: a, b, c, d, ...
+         <tr><td><u>uppercase</u><td>Uppercase Letters: A, B, C, D, ...
+         <tr><td><u>integer</u><td>Integers: 0, 1, 2, 3, ...
+         <tr><td><u>natural</u><td>Natural numbers: 1, 2, 3, 4, ...
+         <tr><td><u>ordinal</u><td>Ordinal numbers: 1st, 2nd, 3rd, 4th, ...
+         <tr><td><u>roman</u><td>Roman numerals: I, II, III, IV, ...
+         <tr><td><u>roman-lowercase</u><td>Lowercase Roman Numerals: i, ii, iii, iv, ...
+       </table>
+     </article>
+
+     <article id="ordinalize">
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>

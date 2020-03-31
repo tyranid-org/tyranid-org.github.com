@@ -13,6 +13,15 @@ layout: default
        <p>This returns 'field'.</p>
      </article>
 
+     <article id="aux">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">aux: boolean</span>
+       <p>This returns true if this is an <a href="aux">auxiliary field</a> (i.e. not stored in the database).</p>
+       <p>Not all fields not stored in the database are auxiliary.  Computed fields by default are not stored in the database and are not auxiliary.</p>
+     </article>
+
      <article>
        <b class="property"></b>
        <b class="server"></b>
@@ -26,9 +35,8 @@ layout: default
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">computed: boolean</span>
-       <p>This property is true if the field is computed.  For example, if it has a getter defined but no setter.</p>
-       <p>A field might also be computed even if it does not have a getter defined.  A field can be marked computed manually
-         if the field is managed by code rather than via user-input.</p>
+       <p>This property is true if the field has a getter defined but no setter.</p>
+       <p>For example, <u>_id</u> is <i>generated</i> but not <i>computed</i>.</p>
      </article>
 
      <article>
@@ -58,14 +66,15 @@ layout: default
 <tr><td>  is:<td>string<td><i>required</i>*<td>The name of the <a href="type">Type</a> of this Field.
 <tr><td>  client:<td>boolean<td>true**<td>Indicates if this field should be serialized in <u>toClient()</u>/<u>fromClient()</u> calls.  See <a href="field#defClient">client</a> below.
 <tr><td>  custom:<td>boolean<td><td>Indicates if this field is a dynamic custom field that should have UI auto-generated for it.
-<tr><td>  aux:<td>boolean<td>false<td>Indicates if this field should not be stored in the database -- oppposite of <u>db</u>.  See <a href="aux">Auxiliary Data</a>.
+<tr><td>  aux:<td>boolean<td>false<td>Indicates that this field is auxiliary and should not be stored in the database.  See <a href="aux">Auxiliary Data</a>.
 <tr><td>  db:<td>boolean<td>true**<td>Indicates if this field should be stored in the database.
 <tr><td>  historical:<td>boolean<td>none<td>Indicates that this field is <a href="/#historical">historical</a>.  Must also be set on the collection to take effect.
   Only valid for top-level fields.
 <tr><td>  defaultValue:<td>any<td>none<td>Default value for this field.  If a function, the default will be the return value of the function.
 <tr><td>  if:<td>object | async? opts => (object | boolean)****<td>none<td>Indicates this is a <a href="/#conditionalFields">conditional field</a>.
-<tr><td>  computed:<td>boolean<td>true if <i>get...()</i> is defined but not <i>set...()</i><td>Indicates this is a computed field.
-<tr><td>  readonly:<td>boolean<td>true if <i>computed</i><td>Indicates this is readonly field.
+<tr><td>  generated:<td>boolean<td>true if <i>get...()</i> is defined but not <i>set...()</i><td>Indicates this is a computed field.
+<tr><td>  readonly:<td>boolean<td>true if <i>generated</i><td>Indicates this is readonly field.
+<tr><td>  width:<td>integer<td><td>This provides the default width in pixels for this field when displayed in a table.
 
 <tr><td colspan="4" class="subtitle">User Documentation
 <tr><td>  label:<td>string<td>labelify(<i>name</i>)<td>The human-readable <a href="/#labels">label</a> for this field.
@@ -85,6 +94,7 @@ layout: default
 <tr><td colspan="4" class="subtitle">Arrays (<u>is == 'array'</u>)
 <tr><td>  of:<td><a href="field#def">Field Def</a><td>none<td>Indicates the type of the array.
 <tr><td>  cardinality:<td>integer <u>..</u> integer | <u>'*'</u><td>0..*<td>Indicates the cardinality of the array.  For example, "1..3" means the array can have between 1 and 3 entries.
+<tr><td>  numbering:<td><a href="tyr#numbering">Numbering</a><td>'uppercase'<td>Specifies how array indices should be displayed in user interfaces.
 
 <tr><td colspan="4" class="subtitle">Bitmasks (<u>is == 'bitmask'</u>)
 <tr><td>  link:<td><i>collection name</i><td>none<td>Indicates that this field contains foreign keys to the given collection.  This must be a static collection
@@ -102,6 +112,9 @@ layout: default
 <tr><td>  min:<td>number<td>none<td>Sets the minimum value for this numeric field.
 <tr><td>  max:<td>number<td>none<td>Sets the maximum value for this numeric field.
 <tr><td>  step:<td>number<td>none<td>Indicates the step-size for this numeric field.  This can be a non-integer value for double types (i.e. <u>0.001</u>).
+
+<tr><td colspan="4" class="subtitle">Integers (<u>is == 'integer'</u>)
+<tr><td>  numbering:<td><a href="tyr#numbering">Numbering</a><td>'integer'<td>Specifies the numbering system used to display positive integers.
 
 <tr><td colspan="4" class="subtitle">Objects (<u>is == 'object'</u>)
 <tr><td colspan="4" class="subtype">Structured Object</td>
@@ -251,6 +264,16 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
          convert client-side MongoID strings into server-side <u>ObjectId</u> objects.</p>
      </article>
 
+     <article>
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">generated: boolean</span>
+       <p>This property is true if the field is generated.  For example, if it has a getter defined but no setter.</p>
+       <p>A field might also be generated even if it does not have a getter defined.  A field can be marked generated manually
+         if the field is managed by code rather than via user-input.</p>
+     </article>
+
      <article id="group">
        <b class="property"></b>
        <b class="server"></b>
@@ -266,23 +289,6 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <p>This returns the <a href="units">Units</a> for this field if they were specified.</p>
      </article>
 
-     <article id="isAux">
-       <b class="property"></b>
-       <b class="server"></b>
-       <b class="client"></b>
-       <span class="sig">isAux(): boolean</span>
-       <p>This returns true if this is an <a href="aux">auxiliary field</a> (i.e. not stored in the database).
-     </article>
-
-     <article id="isDb">
-       <b class="property"></b>
-       <b class="server"></b>
-       <b class="client"></b>
-       <span class="sig">isDb(): boolean</span>
-       <p>This returns true if this field is stored in the database.
-     </article>
-
-     <article id="isMethod">
        <b class="property"></b>
        <b class="server"></b>
        <span class="sig">isMethod(): boolean</span>
@@ -358,12 +364,13 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <p>This contains the name of this field.</p>
      </article>
 
-     <article id="namePath">
+     <article id="numbering">
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">namePath: <a href="namePath">NamePath</a></span>
-       <p>This returns a NamePath for this field.</p>
+       <span class="sig">numbering: <a href="tyr#numbering">Numbering</a></span>
+       <p>This contains the numbering for this integer or array (indices) field when displayed in the user interface.  For example, should array indices be
+        numbered 0, 1, 2, 3 or I, II, III, IV, and so on.</p>
      </article>
 
      <article id="of">
@@ -376,7 +383,7 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <p>If this field is of type "uid", then this will contain an array of collections that this <a href="/#uids">UID</a> must be constrained to.</p>
      </article>
 
-     <article>
+     <article id="parent">
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
@@ -384,20 +391,28 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <p>This returns the parent field or <u>null</u> if this is a root field.</p>
      </article>
 
-     <article>
+     <article id="path">
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig"><a href="/#paths">path</a>: string</span>
-       <p>This contains the <a href="/#paths">path</a> of this field.</p>
+       <span class="sig">path: <a href="path">Path</a></span>
+       <p>This returns a Path for this field.</p>
      </article>
 
-     <article>
+     <article id="pathLabel">
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig"><a href="/#paths">pathLabel</a>: string</span>
        <p>This contains the full <a href="/#pathLabels">path label</a> for this field.
+     </article>
+
+     <article id="pathName">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig"><a href="/#paths">pathName</a>: string</span>
+       <p>This contains the <a href="/#paths">path</a> of this field.</p>
      </article>
 
      <article id="readonly">
@@ -421,7 +436,7 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <b class="server"></b>
        <span class="sig"><a href="/#paths">spath</a>: string</span>
        <p>This contains the <a href="/#paths">simplified path</a> of this field.</p>
-       <p>This is a short-cut for <a href="namePath#spath"><u>this.namePath.spath</u></a>.</p>
+       <p>This is a short-cut for <a href="path#spath"><u>this.path.spath</u></a>.</p>
        <p>Also see <a href="/#paths">Paths</a> for more information.</p>
      </article>
 
@@ -451,4 +466,11 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
          a <a href="userError">UserError</a> if a validation error occurred.
      </article>
 
+     <article id="width">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">width?: number</span>
+       <p>This returns the default with for this field when displayed in a table.</p>
+     </article>
   </div>

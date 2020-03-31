@@ -3,15 +3,15 @@ layout: default
 ---
 
   <div class="content">
-    <h1>NamePath</h1>
+    <h1>Path</h1>
 
      <div class="desc">
       <p>
-       NamePaths are returned by <a href="collection#parsePath"><i>collection</i>.parsePath(<i>path</i>)</a>.  They are used to make writing
+       Paths are returned by <a href="collection#parsePath"><i>collection</i>.parsePath(<i>path</i>)</a>.  They are used to make writing
        generic metadata-based code easier.
      </p>
      <p>
-       NamePath is also able to deal with <a href="/#denormalization">denormalized paths</a> as well.
+       Path is also able to deal with <a href="/#denormalization">denormalized paths</a> as well.
      </p>
      <p>See <a href="/#paths">paths</a> for more information.</p>
     </div>
@@ -21,6 +21,7 @@ layout: default
      <article id="decode">
        <b class="method"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">decode(path: string): string</span>
        <p>This decodes a MongoDB-safe path string into a regular path string.</p>
      </article>
@@ -28,6 +29,7 @@ layout: default
      <article id="encode">
        <b class="method"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">encode(path: string): string</span>
        <p>This encodes a regular path into a MongoDB-safe path string.</p>
        <p>MongoDB does not support periods appearing inside key names inside objects stored in MongoDB.  However, sometimes we need to store
@@ -52,9 +54,9 @@ layout: default
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">resolve(collection: <a href="collection">Collection</a>,<br>
-          <div style="margin-left:98px">parentPath?: <a href="namePath">NamePath</a> | string,</div>
-          <div style="margin-left:98px">path?: <a href="namePath">NamePath</a> | string): <a href="namePath">NamePath</a> | undefined</div></span>
-       <p>This resolves a new <a href="namePath"><u>NamePath</u></a> instance from a parent path and a child path.</p>
+          <div style="margin-left:98px">parentPath?: <a href="path">Path</a> | string,</div>
+          <div style="margin-left:98px">path?: <a href="path">Path</a> | string): <a href="path">Path</a> | undefined</div></span>
+       <p>This resolves a new <a href="path"><u>Path</u></a> instance from a parent path and a child path.</p>
        <p>If both the parent path and child path are missing, this will return <u>undefined</u>.</p>
      </article>
 
@@ -72,7 +74,7 @@ layout: default
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">base: <a href="collection">Collection</a> | <a href="namePath">NamePath</a></span>
+       <span class="sig">base: <a href="collection">Collection</a> | <a href="path">Path</a></span>
        <p>This returns the object that this name path is relative to (usually a collection, but it could be relative to another name path).</p>
      </article>
 
@@ -81,11 +83,21 @@ layout: default
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">detail: <a href="field">Field</a></span>
-       <p>This is a more detailed version of <a href="namePath#tail"><u>tail</u></a>.</p>
+       <p>This is a more detailed version of <a href="path#tail"><u>tail</u></a>.</p>
        <p>Often you are only interested in the end of the path which has the <a href="type">Type</a> of the path you are working with.</p>
        <p>This is a shortcut for <u><i>skipArrays</i>(this.pathFields[this.pathFields.length-1])</u>.</p>
        <p>If the path <u>parent.children</u> refers to a an array of string, the <u>tail</u> points at the array but <u>detail</u> points
          at the contents of the array -- i.e. the string field.</p>
+     </article>
+
+     <article id="fields">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">fields: <a href="field">Field</a>[]</span>
+       <p>
+         This array contains the <a href="field">Field</a> for each step along the path.  This is a parallel array to <a href="path#path">path</a>.
+       </p>
      </article>
 
      <article id="get">
@@ -94,12 +106,37 @@ layout: default
        <b class="client"></b>
        <span class="sig">get(obj: object): any</span>
        <p>This walks the <u>obj</u> according to this path and returns the values at this path.  (There can be multiple values if the path crosses
-       any arrays.  If so, this method will return duplicate values if values occur more than once.  See <a href="namePath#uniq"><u><i>NamePath</i>.uniq()</u></a>.)</p>
+       any arrays.  If so, this method will return duplicate values if values occur more than once.  See <a href="path#uniq"><u><i>Path</i>.uniq()</u></a>.)</p>
+     </article>
+
+     <article id="groupCount">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">groupCount: number</span>
+       <p>This returns the number of path groups inside this path.  Groups are created by using a '|' instead of a '.' as a separatror.</p>
+     </article>
+
+     <article id="groupLabel">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">groupLabel(groupNumber: number): string</span>
+       <p>This returns the label for the given group.  Groups are created by using a '|' instead of a '.' as a separatror.</p>
+     </article>
+
+     <article id="groupRange">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">groupRange(groupNumber: number): [number, number]</span>
+       <p>This returns the range of fields for the given group.  Groups are created by using a '|' instead of a '.' as a separatror.</p>
      </article>
 
      <article id="identifier">
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig"><a href="/#paths">identifier</a>: string</span>
        <p>This returns a simple identifier for this field that does not have periods (.) in it.</p>
        <p>This can be useful for some libraries which don't deal with with embedded periods like <u>getFieldDecorator</u>.</p>
@@ -115,6 +152,7 @@ layout: default
      <article id="isHistorical">
        <b class="method"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig">isHistorical(): boolean</span>
        <p>This returns true if this path represents a <a href="/#historical">historical</a> property.</p>
      </article>
@@ -131,8 +169,8 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">parsePath(path: string): NamePath</span>
-       <p>This returns a new <u>NamePath</u> relative to the current name path.  Any objects passed into methods on this new <u>NamePath</u> like <u>get</u>,
+       <span class="sig">parsePath(path: string): Path</span>
+       <p>This returns a new <u>Path</u> relative to the current name path.  Any objects passed into methods on this new <u>Path</u> like <u>get</u>,
         <u>set</u>, and so on must also be relative in the same way.</p>
      </article>
 
@@ -150,17 +188,7 @@ layout: default
        </table>
      </article>
 
-     <article>
-       <b class="property"></b>
-       <b class="server"></b>
-       <b class="client"></b>
-       <span class="sig">fields: <a href="field">Field</a>[]</span>
-       <p>
-         This array contains the <a href="field">Field</a> for each step along the path.  This is a parallel array to <a href="namePath#path">path</a>.
-       </p>
-     </article>
-
-     <article>
+     <article id="pathLabel">
        <b class="property"></b>
        <b class="server"></b>
        <b class="client"></b>
@@ -168,12 +196,22 @@ layout: default
        <p>This contains the full <a href="/#pathLabels">path label</a> for this name path.
      </article>
 
-     <article>
+     <article id="pathName">
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig">pathName(idx: integer): string</span>
        <p>This returns a verbose description of the path at position <u>idx</u> along the path.  This is useful for error messages in parsing.</p>
+     </article>
+
+     <article id="projectify">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">projectify(projection: <i>Mongo projection</i>): void</span>
+       <p>This adds the current path to the given projection.</p>
+       <p>If this path refers to a computed field, then all of the fields needed to perform the computation will be added to the projection
+         as well.</p>
      </article>
 
      <article id="set">
@@ -197,6 +235,7 @@ layout: default
      <article id="spath">
        <b class="property"></b>
        <b class="server"></b>
+       <b class="client"></b>
        <span class="sig"><a href="/#paths">spath</a>: string</span>
        <p>This contains the <a href="/#paths">simplified path</a> of this field.</p>
        <p>Simplified paths remove the array contents reference and are useful when working with MongoDB projections.
@@ -204,6 +243,25 @@ layout: default
        <table>
          <tr><th>Path</th><th>Simplified Path</th></tr>
          <tr><td>siblings._.name</td><td>siblings.name</td></tr>
+         <tr><td>siblings.0.name</td><td>siblings.name</td></tr>
+         <tr><td>name.first</td><td>name.first</td></tr>
+         <tr><td>age</td><td>age</td></tr>
+       </table>
+       <p>See <a href="/#paths">Paths</a> for more information.</p>
+     </article>
+
+     <article id="spathArr">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig"><a href="/#paths">spathArr</a>: string</span>
+       <p>This contains the <a href="/#paths">simplified path</a> of this field that includes array indices.</p>
+       <p>Simplified paths remove the array contents reference and are useful when working with MongoDB projections.
+        For example:</p>
+       <table>
+         <tr><th>Path</th><th>Simplified Path</th></tr>
+         <tr><td>siblings._.name</td><td>siblings.name</td></tr>
+         <tr><td>siblings.0.name</td><td>siblings.0.name</td></tr>
          <tr><td>name.first</td><td>name.first</td></tr>
          <tr><td>age</td><td>age</td></tr>
        </table>
@@ -217,7 +275,7 @@ layout: default
        <span class="sig">tail: <a href="field">Field</a></span>
        <p>This is a shortcut for <u>this.pathFields[this.pathFields.length-1]</u>.  Often you are only interested in the end of the path which has
          the <a href="type">Type</a> of the path you are working with.</p>
-       <p>This property is related to <a href="namePath#detail"><u>detail</u></a>.  If the path <u>parent.children</u> refers to a an array of string,
+       <p>This property is related to <a href="path#detail"><u>detail</u></a>.  If the path <u>parent.children</u> refers to a an array of string,
          the <u>tail</u> points at the array but <u>detail</u> points at the contents of the array -- i.e. the string field.</p>
      </article>
 
@@ -234,9 +292,9 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">walk(path?: <a href="namePath">NamePath</a> | string): <a href="namePath">NamePath</a></span>
-       <p>This resolves a new <a href="namePath"><u>NamePath</u></a> instance that is relative to the current
-        <a href="namePath"><u>NamePath</u></a>.</p>
+       <span class="sig">walk(path?: <a href="path">Path</a> | string): <a href="path">Path</a></span>
+       <p>This resolves a new <a href="path"><u>Path</u></a> instance that is relative to the current
+        <a href="path"><u>Path</u></a>.</p>
      </article>
 
   </div>

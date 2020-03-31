@@ -5,8 +5,8 @@ layout: default
 <div class="content">
   <h1>Auxiliary Data</h1>
 
-  <p><i>Auxiliary data</i> refers to data that is not persisted in the database.  Also known as transient and ephemeral data.</p>
-
+  <p><i>Auxiliary data</i> refers to data that is not considered part of the primary data of a collection.  For example, it can represent data that is
+    used in form calculations and workflow.  Auxiliary data is transient and ephemeral and is not stored in the database.</p>
 
   <h2>Server Auxiliary Data</h2>
 
@@ -38,9 +38,8 @@ layout: default
 });</code></pre>
 
 
-
-  <p>Note that <u>aux: true</u> == <u>db: false</u> and <u>aux: false</u> == <u>db: true</u> -- the properties are tied to be inverses of each other ... i.e., if you
-specify <u>db: false</u> on a field, <u>aux: true</u> will be set automatically.  If you try to set both to true or both to false, it will generate an exception.</p>
+  <p>Note that <u>aux: true</u> implies <u>db: false</u> but <u>aux: false</u> does not necessarily imply <u>db: true</u> -- computed fields are by default not
+stored in the database but are also not by default auxiliary.</p>
 
   <h2>Client Auxiliary Data</h2>
 

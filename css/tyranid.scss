@@ -188,6 +188,10 @@ table.def {
     font-family: 'Lekton', courier, serif;
   }
 
+  & > tbody > tr > td:nth-child(2) {
+    font-family: 'Lekton', courier, serif;
+  }
+
   & > tbody > tr {
       td {
       padding: 0 8px;

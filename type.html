@@ -78,6 +78,48 @@ layout: default
        <p>This can also be useful if a custom type needs to have a certain structure guaranteed to be present.</p>
      </article>
 
+     <article id="def">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">def</span>
+       <p>This defines the structure of a type and is the argument that is passed into the Type constructor when you want to define your own types.
+
+       <p>In the table below, <u>TType</u> refers to the TypeScript type for this Type.</p>
+       <table class="def">
+<thead>
+  <tr><th>Object Structure<th>Type<th>Default<th>Notes
+</thead>
+<tr><td>{</td>
+<tr><td>  compare:<td>(field: <a href="field">Field</a>, a: TType, b: TType) => number<td>
+  <td>Comparator to use for members of this type.  Must be isomorphic.
+<tr><td>  compile:<td>(compiler, field: <a href="field">Field</a>) => void<td>
+  <td>Callback called when parsing fields using your type.  This should be used to validate any properties that your type adds to <a href="field">Field</a>s.
+<tr><td>  fromClient:<td>(field: <a href="field">Field</a>, value: string) => TType<td>
+  <td>Method used to when reading values from the client onto the server.
+<tr><td>  fromString:<td>(s: string) => TType<td>
+  <td>Comparator to use for members of this type.  Must be isomorphic.
+<tr><td>  format:<td>(field: <a href="field">Field</a>, value: TType) => string<td>
+  <td>Method used to convert values of this Type to a display string.
+<tr><td>  matches:<td>(path: <a href="path">Path</a>, where, document: <a href="document">Document</a>) => boolean<td>
+  <td>Returns whether this type matches the given where clause.
+<tr><td>  name:<td>string<td><i>required</i>
+  <td>The name of this type.
+<tr><td>  query:<td>(path: <a href="path">Path</a>, where, query: <i>Mongo query</i>) => void<td>
+  <td>Applies any <u>where</u> clause set on a <a href="field">Field</a> for this type.
+<tr><td>  typescript:<td>string<td>
+  <td>The name of the TypeScript type to use for this type (this defines <u>TType<u>).
+<tr><td>  validate:<td>(field: <a href="field">Field</a>, value: string) => void<td>
+  <td>This method should throw a <a href="userError">UserError</a> if this field does not validate.
+<tr><td>  width:<td>integer<td>
+  <td>This provides the default width in pixels for fields of this type when displayed in a table.
+
+<tr><td colspan="4" class="subtitle">Developer Documentation
+<tr><td>  note:<td>string<td>none<td>Contains developer-facing documentation about this type (only visible in the Tyranid console).
+
+<tr><td>}</td>
+</table>
+
      <article>
        <b class="method"></b>
        <b class="server"></b>
@@ -112,8 +154,8 @@ layout: default
      <article id="matches">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">matches(namePath: <a href="namePath">NamePath</a>, where: any, doc: <a href="document">Document</a> | object): boolean</span>
-       <p>This returns true if the given <u>doc</u>'s property given by <u>namePath</u> matches the <u>where</u>.</p>
+       <span class="sig">matches(path: <a href="path">Path</a>, where: any, doc: <a href="document">Document</a> | object): boolean</span>
+       <p>This returns true if the given <u>doc</u>'s property given by <u>path</u> matches the <u>where</u>.</p>
      </article>
 
      <article>
@@ -128,14 +170,14 @@ layout: default
        <b class="async"></b>
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">query(namePath: <a href="namePath">NamePath</a>, where: any, query: object): void</span>
+       <span class="sig">query(path: <a href="path">Path</a>, where: any, query: object): void</span>
        <p>This updates the passed in MongoDB-style <u>query</u> with the given <u>where</u>.</p>
      </article>
 
      <article id="sortValue">
        <b class="method"></b>
        <b class="server"></b>
-       <span class="sig">sortValue(namePath: <a href="namePath">NamePath</a>, value: any): any</span>
+       <span class="sig">sortValue(path: <a href="path">Path</a>, value: any): any</span>
        <p>This returns the sortValue to use in sorting comparisons.</p>
      </article>
 
@@ -152,5 +194,13 @@ layout: default
        <b class="server"></b>
        <span class="sig">validate(field: <a href="field">Field</a>, value: any): <a href="userError">UserError</a></span>
        <p>This is used by Tyranid to validate fields of this type.</p>
+     </article>
+
+     <article id="width">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">width?: number</span>
+       <p>This returns the default with for this fields of this type when displayed in a table.</p>
      </article>
   </div>
