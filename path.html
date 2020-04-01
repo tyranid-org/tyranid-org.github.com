@@ -157,6 +157,22 @@ layout: default
        <p>This returns true if this path represents a <a href="/#historical">historical</a> property.</p>
      </article>
 
+     <article id="label">
+       <b class="property"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">label</a>: string</span>
+       <p>This contains the full <a href="/#pathLabels">path label</a> for this name path.  This includes both
+        the group and path portions.</p>
+       <p>For example, given a path of <u>orders.location|city.name</u>:
+       <table>
+         <tr><th>Method</th><th>Label</th></tr>
+         <tr><td><a href="#groupLabel">groupLabel(0)</a></td><td>Order Locations</td></tr>
+         <tr><td><a href="#pathLabel">pathLabel</a></td><td>City</td></tr>
+         <tr><td><a href="#label">label</a></td><td>Order Location City</td></tr>
+       </table>
+     </article>
+
      <article>
        <b class="property"></b>
        <b class="server"></b>
@@ -193,7 +209,8 @@ layout: default
        <b class="server"></b>
        <b class="client"></b>
        <span class="sig"><a href="/#paths">pathLabel</a>: string</span>
-       <p>This contains the full <a href="/#pathLabels">path label</a> for this name path.
+       <p>This contains the full <a href="/#pathLabels">path label</a> for this name path except for the
+        group portion of this path (if any).
      </article>
 
      <article id="pathName">
