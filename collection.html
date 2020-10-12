@@ -565,9 +565,11 @@ layout: default
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">labelFor(doc: <a href="document">Document</a> | object): string</span>
+       <span class="sig">labelFor(doc: <a href="document">Document</a> | object,
+        <div style="margin-left:110px;">opts?: { labelField?: string }): string</div></span>
        <p>This returns the label for the specified document.  If <b>doc</b> is a Document, then this is equivalent to <u>doc.$label</u>.
         This method is mostly useful for when you have a raw object that you want to get the label for.</p>
+       <p>If the <u>labelField</u> option is specified then the given field will be used as the label.</p>
      </article>
 
      <article id="labels">
@@ -575,10 +577,22 @@ layout: default
        <b class="server"></b>
        <b class="client"></b>
        <b class="async"></b>
-       <span class="sig">labels(text: string): { _id: <i>id type</i>, <i>label field</i>: string }[]</span><br>
-       <span class="sig">labels(ids: string[]): { _id: <i>id type</i>, <i>label field</i>: string }[]</span>
+       <span class="sig">labels(textOrIds: string | string[],
+         <div style="margin-left:144px;">opts?: { labelField?: string }):</div>
+         <div style="margin-left:90px;">{ _id: <i>id type</i>, <i>label field</i>: string }[]</div></span><br>
        <p>This generates a list of label objects that can be used to populate a typeahead dropdown.</p>
        <p>Generally prefer to use <a href="field#labels"><u>Field.labels()</u></a> over this as it can take advantage of the <u>where</u> property on link fields.</p>
+       <p>If the <u>labelField</u> option is specified then the given field will be used as the label.</p>
+     </article>
+
+     <article>
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="client"></b>
+       <span class="sig">labelProjection(labelField?: string): <i>MongoDB projection</i></span>
+       <p>This returns the projection needed to properly display the given label field.  This includes any <u>labelImageField</u> value,
+        dependent fields of the label is a computed field, and so on.
+       <p>If no <u>labelField</u> name is provided then the default label for the projection is used.
      </article>
 
      <article id="links">

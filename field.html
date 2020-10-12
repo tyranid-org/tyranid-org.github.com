@@ -335,10 +335,14 @@ jobs: { is: 'array', of: { link: Job } }<br></u>
        <b class="method"></b>
        <b class="server"></b>
        <b class="client"></b>
-       <span class="sig">labels(doc: <a href="document">Document</a>, text: string?): { <i>_id</i>: <i>id type</i>, <i>label field</i>: string }[]</span>
+       <span class="sig">labels(doc: <a href="document">Document</a>,
+          <div style="margin-left:144px;">text: string?,</div>
+          <div style="margin-left:144px;">opts?: { labelField?: string }):</div>
+          <div style="margin-left:90px">{ <i>_id</i>: <i>id type</i>, <i>label field</i>: string }[]</div></span>
        <p>This generates a list of label objects that can be used to populate a typeahead dropdown.  This method is only available when the field is a <b>link</b>
        or <b>uid</b> field.</p>
        <p>This method also takes into account the <u>where</u> property on links when generating the list of labels.</p>
+       <p>If the <u>labelField</u> option is specified then the given field will be used as the label.</p>
      </article>
 
      <article>

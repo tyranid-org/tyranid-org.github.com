@@ -350,7 +350,28 @@ const Train = Tyr.byName.train;</pre>
        <p>See also <a href="#arraySort"><u>Tyr.arraySort()</u></a>.</p>
      </article>
 
-     <article>
+     <article id="nextId">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">nextId(counterName: string): number</span><br>
+       <p>This returns the next number for the given counter name.  This is an atomic operation and can be used to generate
+         unique identifiers.</p>
+     </article>
+
+     <article id="nextIds">
+       <b class="method"></b>
+       <b class="server"></b>
+       <b class="async"></b>
+       <span class="sig">nextIds(counterName: string,
+                     <div style="margin-left: 156px;">fieldName: string,</div>
+                     <div style="margin-left: 156px;">documents: <a href="document">Document</a>[],</div>
+                     <div style="margin-left: 156px;">asString?: boolean): number</div></span>
+       <p>This returns the next set of numbers for the given counter name and assigns them to the fieldName for each document.
+         This is an atomic operation and can be used to generate unique identifiers.</p>
+     </article>
+
+     <article id="Path">
        <b class="class"></b>
        <b class="server"></b>
        <b class="client"></b>
